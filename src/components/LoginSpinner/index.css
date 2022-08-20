@@ -1,0 +1,19 @@
+
+.spinner {
+
+  width: 36px;
+  padding: 5px;
+  /* height: 52px; */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #0b9dd8;
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: s3 1s infinite linear;
+}
+@keyframes s3 {to{transform: rotate(1turn)}}

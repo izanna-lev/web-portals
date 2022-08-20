@@ -1,0 +1,159 @@
+@import "../../../styles/globals.scss";
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.MessagePage {
+  height: calc(92vh);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-data {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: row;
+  height: 64px;
+  margin-top: 16px;
+  gap: 16px;
+  align-items: center;
+  justify-items: center;
+}
+
+.itinerary-details {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  gap: 8px;
+  background-image: linear-gradient(to right, $theme_color_lime , $theme_color_light_blue);
+}
+
+.itinerary-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.itinerary-text {
+  padding: 2px;
+  font-size: 12px;
+}
+
+.date {
+  font-weight: 600;
+}
+
+.message-data {
+  display: flex;
+  height: calc(92vh - 128px);
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 8px;
+  overflow: auto;
+  scroll-behavior: smooth;
+  margin-left: 16px;
+  padding-right: 16px;
+  list-style: none;
+}
+
+.user-message {
+  margin-bottom: 20px;
+  max-width: 55%;
+  padding: 8px 8px;
+  background-color: $theme_color_light_blue_3x;
+  word-break: break-all;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: $theme_color_dark_grey;
+  line-height: 20px;
+  position: relative;
+}
+
+.message-date {
+  position: absolute;
+  font-size: 10px;
+  right: 0;
+  bottom: -24px;
+  font-weight: 600;
+}
+
+.other-user {
+  align-self: flex-end;
+  border-radius: 8px 8px 0px 8px;
+  background-color: #ffffff;
+  border: 2px solid $theme_color_light_blue_2x;
+}
+
+.socket {
+  display: flex;
+  width: calc(100% - 16px);
+  height: 64px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 16px;
+  padding-right: 16px;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-items: center;
+}
+
+.add-icon {
+  width: 6%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.img {
+  width: 40px;
+  height: 40px;
+  color: $theme_color_white;
+  background-color: $theme_color_light_blue;
+  border-radius: 50%;
+}
+
+.send-icon {
+  width: 6%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: $theme_color_light_blue;
+}
+
+.send-img {
+  width: 32px;
+  height: 32px;
+  color: $theme_color_white;
+}
+
+.socket-input {
+  height: 90%;
+  width: 88%;
+  padding: 4px 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  border: 2px solid $theme_color_light_blue;
+}
+
+input {
+  font-size: 14px;
+  color: $theme_color_dark_grey;
+
+  &:focus {
+    outline: none !important;
+  }
+}
+textarea {
+  &:focus {
+    outline: none !important;
+  }
+}

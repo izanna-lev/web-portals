@@ -1,0 +1,121 @@
+@import "../../../styles/globals.scss";
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.AddItineraryPage {
+  height: calc(92vh - 158px);
+  margin-top: 16px;
+  margin-left: 16px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.feild-heading {
+  margin-top: 8px;
+  height: 20px;
+  font-size: 12px;
+  padding: 4px 0px;
+  font-weight: 600;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $theme_color_blue !important;
+}
+
+
+.upload-image {
+  max-width: 200px;
+  max-height: 100px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 4px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.not-selected-preview {
+  background-color: $theme_color_light_blue_3x;
+  width: 200px;
+  height: 100px;
+}
+
+.image-placeholder {
+  width: 40px;
+  height: 40px;
+  margin: 24px 0px;
+  text-align: center;
+  flex: 1;
+  color: $theme_color_light_grey;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  resize:inherit ;
+}
+
+.create-itinerary-form {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  margin-top: 4px;
+  gap: 60px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.add-basic-details {
+  margin-top: 8px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-itinerary-details {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+
+.button-submit-itinerary {
+  width: 100%;
+  background-color: antiquewhite;
+}
+
+.button-submit-itinerary {
+  flex: 1 auto;
+  width: 80%;
+  display: grid;
+  margin-left: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 36px;
+  margin-bottom: 24px;
+  height: 52px;
+  border: none;
+  border-radius: 8px;
+  background-color: $theme_color_light_blue;
+  background-size: 120% auto;
+  background-image: $theme_color_blue;
+  color: white;
+  font-size: large;
+}
+
+.button-submit-itinerary:hover {
+  background-position: right center;
+  cursor: pointer;
+}

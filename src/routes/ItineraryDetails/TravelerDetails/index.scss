@@ -1,0 +1,163 @@
+@import "../../../styles/globals.scss";
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.itineraryDetailPage {
+  height: calc(92vh - 16px);
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.heading {
+  display: grid;
+  align-items: center;
+  grid-template-columns: max-content max-content;
+  font-size:x-large;
+  font-weight: 600;
+  display: grid;
+  height: 60px;
+  margin-bottom: 8px;
+}
+
+.heading-text {
+  padding-left: 8px;
+}
+
+.button {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 16px;
+  align-items: center;
+  height: 52px;
+  margin-bottom: 16px;
+}
+
+.button-text {
+  border-radius: 8px;
+  padding: 16px 16px;
+  font-weight: 500;
+  font-size: 12px;
+  text-align: center;
+  background-color: $theme_color_5;
+  color: #000000;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: $theme_color_blue;
+  color: $theme_color_white;
+}
+
+.status-chat {
+  display: grid;
+  grid-template-columns: max-content max-content auto;
+  gap: 16px;
+  align-items: center;
+  height: 48px;
+  margin-bottom: 20px;
+}
+
+.time-icon {
+  height: 100%;
+  width: 48px;
+  // font-size: 44px;
+  color: #ffffff;
+  background-color: #ef6000;
+  padding: 8px 8px;
+  border-radius: 50%;
+}
+
+.status-view {
+  display: grid;
+  align-items: center;
+  height: 100%;
+}
+
+.status {
+  font-size: 16px;
+  text-align:start;
+  // margin-top: 4px;
+  font-weight: 500;
+
+}
+
+.status-text {
+  font-size: 14px;
+  align-self: flex-end;
+  font-weight: 500;
+  padding-bottom: 4px;
+  color: $theme_color_3;
+}
+
+.chat {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  justify-self: end;
+  gap: 8px;
+  padding: 12px 44px;
+  justify-self: flex-end;
+  color: $theme_color_white;
+  border-radius: 8px;
+  background-color: $theme_color_blue;
+}
+
+.trip-details {
+  width: 100%;
+  max-height: 220px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background-color: $theme_color_light_blue_2x;
+}
+
+.trip-details-heading {
+  padding: 16px 16px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.trip-details-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-left: 16px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  justify-items: start;
+  align-items: center;
+}
+
+.key {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.value {
+  font-size: 12px;
+}
+.assigned-specialist {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-items: center;
+  align-self: center;
+}
+
+.specialist-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.specialist-details {
+  margin-left: 8px;
+  display: grid;
+  align-items: center;
+}
+
+.specialist-detail {
+  align-self: baseline;
+}
