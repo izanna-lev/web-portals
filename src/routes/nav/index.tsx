@@ -9,11 +9,12 @@ import { IoIosNotificationsOutline } from "react-icons/io"
 import { FiChevronDown } from "react-icons/fi"
 import NotificationPopup from '../../components/NotificationPopup/index'
 import { Modal } from '../../components/Portal'
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Props = {}
 const Nav = ({ }: Props) => {
   const [notificationvisibility, setNotificationvisibility] = useState(false);
+
 
   return (
     <section className={styles["navBar"]} id="navBar">
@@ -22,7 +23,7 @@ const Nav = ({ }: Props) => {
         <IoIosNotificationsOutline className={styles["notification-icon"]}
           onClick={() => setNotificationvisibility(!notificationvisibility)}
         />
-        {notificationvisibility && <NotificationPopup />}
+        {notificationvisibility && <NotificationPopup  onClickOutside={() => {setNotificationvisibility(false)}} />}
       </div>
 
 
@@ -51,3 +52,11 @@ const mapStateToProps = () => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+function useEffect(arg0: () => () => void, arg1: never[]) {
+  throw new Error("Function not implemented.");
+}
+
+function handleClickOutside(arg0: string, handleClickOutside: any, arg2: boolean) {
+  throw new Error("Function not implemented.");
+}
+
