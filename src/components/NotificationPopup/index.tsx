@@ -1,32 +1,24 @@
 import styles from "./index.module.scss";
-import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
-import InputForm from "../InputForm/index";
-import TextArea from "../TextArea/index";
-import { useRef, useEffect } from "react";
+import useComponentVisible from "../outsideClickHandler/index"
+import { useEffect } from "react";
 
 type InputProps = {
   onClickOutside: Function
 }
 
 const Form = ({ onClickOutside }: InputProps) => {
-  const ref = useRef(null);
+
+  const { ref, isComponentVisible } = useComponentVisible(true);
 
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      console.log(ref.current)
-      if (!ref.current) {
-        onClickOutside && onClickOutside();
-      }
-    };
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, [onClickOutside]);
-
+    if (!isComponentVisible) {
+      onClickOutside()
+    }
+  }, [isComponentVisible]);
+  console.log(isComponentVisible)
   return (
-    <div id="notification-popup" className={styles["notification-popup"]}>
+    <div ref={ref} id="notification-popup" className={styles["notification-popup"]}>
       <div className={`${styles.box} ${styles.arrow}`}>
         <div className={styles["notification-heading"]}>Notifications</div>
         <div className={styles["list-container"]}>
