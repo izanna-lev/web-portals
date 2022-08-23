@@ -92,7 +92,7 @@ const DashboardPage = ({
         <div className="experience-note">Note: Overall experience is evaluated through "Specialist, Value & Experience" rating and review.</div>
 
       </div>
-      <Modal modal={<Form/>} root={document.getElementById("overlay-root") as HTMLElement}/>
+      {/* <Modal modal={<Form/>} root={document.getElementById("overlay-root") as HTMLElement}/> */}
     </section>
   );
 };
