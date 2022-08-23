@@ -11,22 +11,27 @@ import NotificationPopup from '../../components/NotificationPopup/index'
 import { Modal } from '../../components/Portal'
 import { useRef, useState } from "react";
 
-type Props = {}
-const Nav = ({ }: Props) => {
+type Props = {
+  showUserData?: boolean
+}
+
+const Nav = ({ showUserData }: Props) => {
   const [notificationvisibility, setNotificationvisibility] = useState(false);
 
 
   return (
     <section className={styles["navBar"]} id="navBar">
       <div className={styles["nav-head"]}>Onsite Travel</div>
+
+
+      { showUserData && 
+      <>
       <div className={styles["notification"]}>
-        <IoIosNotificationsOutline className={styles["notification-icon"]}
-          onClick={() => setNotificationvisibility(!notificationvisibility)}
-        />
-        {notificationvisibility && <NotificationPopup  onClickOutside={() => {setNotificationvisibility(false)}} />}
-      </div>
-
-
+      <IoIosNotificationsOutline className={styles["notification-icon"]}
+        onClick={() => setNotificationvisibility(!notificationvisibility)}
+      />
+      {notificationvisibility && <NotificationPopup  onClickOutside={() => {setNotificationvisibility(false)}} />}
+    </div>
       <div className={styles["user-data"]}>
         <div className={styles["image-container"]}>
           <img src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223" className={styles["user-image"]} alt="profile" />
@@ -37,6 +42,8 @@ const Nav = ({ }: Props) => {
         </div>
         <FiChevronDown className={styles["down-icon"]} />
       </div>
+      </>}
+
     </section>
   );
 }

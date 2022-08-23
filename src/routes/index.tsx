@@ -97,12 +97,15 @@ const createItinerarySteps = [
   }
 ];
 
+
+
+
 export default () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-            <Route path="/login" element={<LandingPage />} />
+            <Route path="/login"  element={<LandingPage showUserData={false}/>} />
           <Route path="/" element={<SideNavigation navPaths={paths} />}>
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="/itineraries">

@@ -9,13 +9,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import LoginSpinner from "../../components/LoginSpinner";
 import Nav from "../nav/index";
-import logo from "../../images/signin.png";
 import { login } from "../../store/Actions/login";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import "./index.scss";
 import { ASSETS } from "../../constants";
 
-const LandingPage = () => {
+type Props = {
+  showUserData?: boolean
+}
+
+const LandingPage = ({showUserData}:Props) => {
   const navigate = useNavigate();
   const [passVisibleStatus, setPassVisibleStatus] = useState(false);
 
@@ -53,7 +56,7 @@ const LandingPage = () => {
         draggable
         pauseOnHover
       />
-      <Nav />
+      <Nav showUserData={showUserData}/>
       <div className="login">
         <img className="signin-image" src={ASSETS.SIGNIN} alt="signinImage" />
         <div className="login-form">

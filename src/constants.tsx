@@ -7,10 +7,10 @@ const S3_URL = process.env.S3_URL;
 const ASSET_URL = process.env.REACT_APP_ASSET_URL;
 
 
-export const SERVER_BASE_URL = "http://44.206.33.81:3000/api/";
+export const SERVER_BASE_URL = "http://44.209.25.93:3000/api/";
 
 export const APPLICATION_ROUTES = {
-  USER_LOGIN: `${SERVER_BASE_URL}admin/authenticate`,
+  LOGIN: `${SERVER_BASE_URL}specialist/login`,
   DASHBOARD: `${SERVER_BASE_URL}admin/stats`,
   USERS: `${SERVER_BASE_URL}admin/userList`,
   EDIT_USER: `${SERVER_BASE_URL}admin/editUser`,
