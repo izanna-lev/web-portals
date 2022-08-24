@@ -55,7 +55,7 @@ const ProfilePage = ({
       </div>
 
       <div className="profile">
-        <img className="profile-image" src={logo} alt="signinImage" />
+        <img className="profile-image" src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223" alt="signinImage" />
         <div className="profile-details">
           <div className="profile-name">Steven Walter</div>
           <div className="profile-text">steven@gmail.com</div>

@@ -4,8 +4,7 @@
  */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import LoginSpinner from "../../components/LoginSpinner";
@@ -14,15 +13,15 @@ import logo from "../../images/signin.png";
 import { login } from "../../store/Actions/login";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import "./index.scss";
-
+import { ASSETS } from "../../constants";
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const [passVisibleStatus, setPassVisibleStatus] = useState(false);
 
   const dispatch = useAppDispatch();
-  const accessToken = useAppSelector((state) => state.login.accessToken);
-  const show = useAppSelector((state) => state.loader.value);
+  const accessToken = useAppSelector((state: { login: { accessToken: string; }; }) => state.login.accessToken);
+  const show = useAppSelector((state: { loader: { value: boolean; }; }) => state.loader.value);
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
@@ -56,7 +55,7 @@ const LandingPage = () => {
       />
       <Nav />
       <div className="login">
-        <img className="signin-image" src={logo} alt="signinImage" />
+        <img className="signin-image" src={ASSETS.SIGNIN} alt="signinImage" />
         <div className="login-form">
           <div className="heading">
             Welcome to <strong className="strong-heading">Onsite Travel</strong>
@@ -100,9 +99,9 @@ const LandingPage = () => {
                   }}
                 >
                   {passVisibleStatus ? (
-                    <VisibilityOutlinedIcon className="input-icon" />
+                    <RiEyeLine className="input-icon" />
                   ) : (
-                    <VisibilityOffOutlinedIcon className="input-icon" />
+                    <RiEyeCloseLine className="input-icon" />
                   )}
                 </div>
               </div>
