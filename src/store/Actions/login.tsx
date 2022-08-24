@@ -12,10 +12,16 @@ export const login = ({ email, password }: { email: string, password: string }):
         try {
             dispatch(setError({
                 data: {
-                    message: "yo",
+                    message: "UserName password Error",
                     type: "error"
                 }
             }))
+            // dispatch(setError({
+            //     data: {
+            //         message: "LoggedIn Successfully",
+            //         type: "success"
+            //     }
+            // }))
             dispatch(setLoader(true))
             // const response = await axios.post(APPLICATION_ROUTES.LOGIN, { email, password})
             // console.log(response.data)

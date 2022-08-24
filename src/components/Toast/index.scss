@@ -39,9 +39,6 @@ body {
     border-left: 3px solid #ff355b;
 }
 
-.error i {
-    color: #ff355b;
-}
 
 .toast:not(:last-child) {
     margin-bottom: 20px;
@@ -50,14 +47,24 @@ body {
 .outer-container,
 .inner-container {
     align-self: center;
+
 }
 
 .outer-container i {
     font-size: 35px;
 }
 
-.success i {
+.successicon  {
     color: #47D764;
+    svg {
+        fill: #47D764 !important;
+    }
+}
+
+.erroricon  {
+    svg {
+        fill: #ff355b !important;
+    }
 }
 
 .inner-container p:first-child {

@@ -33,11 +33,11 @@ const Toast = () => {
         show.type ?
             <div className="wrapper" id="wrapper">
                 <div className={`toast ${show.type}`}>
-                    <div className="outer-container">
+                    <div className={`outer-container ${show.type}icon`}>
                         {show.type === 'success' ? <MdDone className="fas done" /> : <IoMdClose className="fas" />}
                     </div>
                     <div className="inner-container">
-                        <p>{show.type}</p>
+                        <p>{show.type.charAt(0).toUpperCase() + show.type.slice(1)}</p>
                         <p>{show.message}</p>
                     </div>
                 </div>
