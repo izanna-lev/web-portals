@@ -4,7 +4,7 @@
 
 
 const S3_URL = process.env.S3_URL;
-const ASSET_URL = process.env.ASSET_URL;
+const ASSET_URL = process.env.REACT_APP_ASSET_URL;
 
 
 export const SERVER_BASE_URL = "http://44.206.33.81:3000/api/";
@@ -36,6 +36,7 @@ export const IMAGE_PREFIXES = {
 };
 
 export const ASSETS = {
+  SIGNIN: `${ASSET_URL}signin.png`,
   CROSS: `${ASSET_URL}cross.png`,
   LOGO_LOGIN: `${ASSET_URL}logo.png`,
   IMAGE_PLACEHOLDER: `${ASSET_URL}placeholder.png`,
