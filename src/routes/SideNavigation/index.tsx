@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 import Nav from "../nav/index";
 import { useAppSelector } from "../../store/hooks";
-import ErrorPage from "../ErrorPage/index"
+
 type Props = {
   navPaths: Array<{
     key: number;
@@ -19,13 +19,13 @@ type Props = {
     icon: JSX.Element;
   }>;
 };
+
 const SideNavigationPage = ({ navPaths }: Props) => {
   const show = useAppSelector(state => state.loader.value)
 
-  
   return (
     <div className="screen">
-      { show && <LoadingOverlay/>}
+      {show && <LoadingOverlay />}
       <Nav />
       <div className="container">
         <div className="nav-menu">

@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ErrorState {
-    value: String;
+    data: {
+      message: string,
+      type: string,
+    }
 }
 
 const initialState: ErrorState = {
-    value: ""
+    data: {
+      message: "",
+      type: "",
+    }
 };
 
 const toastError = createSlice({
@@ -13,7 +19,7 @@ const toastError = createSlice({
   initialState,
   reducers: {
     setError: (state, action) => {
-        state.value = action.payload;
+        state.data = action.payload.data;
     },
   },
 });

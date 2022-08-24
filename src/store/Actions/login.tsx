@@ -8,9 +8,14 @@ import { APPLICATION_ROUTES } from "../../constants";
 
 
 export const login = ({ email, password }: { email: string, password: string }): ThunkAction<void, RootState, unknown, AnyAction> => {
-    return async (dispatch, getState) => {
+    return async (dispatch: (arg0: { payload: any; type: string; }) => void, getState: any) => {
         try {
-            dispatch(setError("Invalid"))
+            dispatch(setError({
+                data: {
+                    message: "yo",
+                    type: "error"
+                }
+            }))
             dispatch(setLoader(true))
             // const response = await axios.post(APPLICATION_ROUTES.LOGIN, { email, password})
             // console.log(response.data)
@@ -23,7 +28,7 @@ export const login = ({ email, password }: { email: string, password: string }):
 
         } catch (err) {
             // console.log("----------", err)
-            dispatch(setError("Invalid"))
+            // dispatch(setError(true))
         }
     }
 }

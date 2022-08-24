@@ -14,7 +14,7 @@ const ItineraryDetailsPage = loadable(() => import("./ItineraryDetails/index"));
 const ProfilePage = loadable(() => import("./Profile/index"));
 const ChatPage = loadable(() => import("./Chat/index"));
 const Nav = loadable(() => import("./CreateItinerary/Nav/index"));
-const ErrorPage = loadable(() => import("./ErrorPage/index"));
+
 
 const AddItineraryPage = loadable(
   () => import("./CreateItinerary/AddItineraryDetails/index")
@@ -130,12 +130,11 @@ export default () => {
               <Route path=":channelId" element={<ChatPage />} />
             </Route>
             <Route path="profile" element={<ProfilePage />} />
-            {/* <Route
+            <Route
               path="*"
               element={<Navigate to="/dashboard" replace={true} />}
-            /> */}
+            />
           </Route>
-          <Route path="*" element={<ErrorPage/>} />
         </Routes>
       </BrowserRouter>
     </Provider>

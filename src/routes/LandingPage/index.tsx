@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import LoginSpinner from "../../components/LoginSpinner";
 import Nav from "../nav/index";
 import { login } from "../../store/Actions/login";
@@ -25,9 +24,6 @@ const LandingPage = ({showUserData}:Props) => {
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state: { login: { accessToken: string; }; }) => state.login.accessToken);
   const show = useAppSelector((state: { loader: { value: boolean; }; }) => state.loader.value);
-
-  const show1 = useAppSelector((state) => state.toastError.value);
-  console.log("SHow value oin landing page------->", show1)
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
@@ -48,17 +44,6 @@ const LandingPage = ({showUserData}:Props) => {
 
   return (
     <section className="loginPage" id="loginPage">
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <Nav showUserData={showUserData}/>
       <div className="login">
         <img className="signin-image" src={ASSETS.SIGNIN} alt="signinImage" />
@@ -114,7 +99,7 @@ const LandingPage = ({showUserData}:Props) => {
             </div>
 
             <div className="button-login">
-              { show ? <LoginSpinner/> : <button className="button">Log In</button> }
+              { false ? <LoginSpinner/> : <button className="button">Log In</button> }
             </div>
           </form>
         </div>
