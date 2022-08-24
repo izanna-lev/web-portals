@@ -21,7 +21,5 @@ const login = createSlice({
 
 export const { getAccessToken } = login.actions
 
-export const accessToken = (state: RootState) => state.login.accessToken
-
 export default login.reducer
 

@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { RootState } from '../index'
-interface LoginState {
+interface LoaderState {
     value: boolean;
 }
 
-const initialState: LoginState = {
+const initialState: LoaderState = {
     value: false
 };
 
@@ -19,8 +18,6 @@ const loader = createSlice({
 });
 
 export const { setLoader } = loader.actions
-
-export const loaderView = (state: RootState) => state.loader.value
 
 export default loader.reducer
 

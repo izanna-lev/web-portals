@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import login from "./Slice/login";
 import loader from "./Slice/loader";
+import toastError from "./Slice/error";
 
 export const store = configureStore({
-  reducer: { 
+  reducer: {
     login: login,
-    loader: loader
+    loader: loader,
+    toastError: toastError
   },
 });
 

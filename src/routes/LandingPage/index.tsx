@@ -26,6 +26,9 @@ const LandingPage = ({showUserData}:Props) => {
   const accessToken = useAppSelector((state: { login: { accessToken: string; }; }) => state.login.accessToken);
   const show = useAppSelector((state: { loader: { value: boolean; }; }) => state.loader.value);
 
+  const show1 = useAppSelector((state) => state.toastError.value);
+  console.log("SHow value oin landing page------->", show1)
+
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
       navigate("/dashboard");

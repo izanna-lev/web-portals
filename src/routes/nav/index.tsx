@@ -8,6 +8,7 @@ import { IoIosNotificationsOutline } from "react-icons/io"
 import { FiChevronDown } from "react-icons/fi"
 import { useState } from "react";
 import NotificationPopup from '../../components/NotificationPopup/index'
+import ErrorPage from "../ErrorPage/index";
 
 type Props = {
   showUserData?: boolean
@@ -20,10 +21,12 @@ const Nav = ({ showUserData = true }: Props) => {
   return (
     <section className={styles["navBar"]} id="navBar">
       <div className={styles["nav-head"]}>Onsite Travel</div>
-
+      {/* <ErrorPage/> */}
 
       {showUserData &&
         <>
+            
+
           <div className={styles["notification"]}>
             <IoIosNotificationsOutline className={styles["notification-icon"]}
               onClick={() => setNotificationvisibility(!notificationvisibility)}
