@@ -1,30 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface ErrorState {
+interface Popup {
     data: {
       message: string,
       type: string,
     }
 }
 
-const initialState: ErrorState = {
+const initialState: Popup = {
     data: {
       message: "",
       type: "",
     }
 };
 
-const toastError = createSlice({
-  name: "toastError",
+const popup = createSlice({
+  name: "popup",
   initialState,
   reducers: {
-    setError: (state, action) => {
+    setPopup: (state, action) => {
         state.data = action.payload.data;
     },
   },
 });
 
-export const { setError } = toastError.actions
+export const { setPopup } = popup.actions
 
-export default toastError.reducer
+export default popup.reducer
 

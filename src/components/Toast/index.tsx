@@ -3,15 +3,12 @@ import { MdDone } from "react-icons/md"
 import { IoMdClose } from "react-icons/io"
 import "./index.scss"
 import { useEffect } from "react";
+import { setPopup } from "../../store/Slice/popup";
 
 const Toast = () => {
-    const show = useAppSelector((state: {
-        toastError: {
-            data: {
-                message: string, type: string
-            };
-        };
-    }) => state.toastError.data);
+    const dispatch = useAppDispatch();
+
+    const show = useAppSelector((state) => state.popup.data);
 
     console.log("SHOW TOAST", show);
 
@@ -23,9 +20,14 @@ const Toast = () => {
 
             setTimeout(function () {
                 shand[0].style.display = "none";
+                dispatch(setPopup({
+                    data: {
+                        message: "",
+                        type: ""
+                    }
+                }))
             }, 2000);
         }
-
     }, [new Date().getTime()]);
 
 

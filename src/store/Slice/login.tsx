@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { RootState } from '../index'
+
 interface LoginState {
     accessToken: string;
 }
@@ -12,7 +12,7 @@ const login = createSlice({
   name: "login",
   initialState,
   reducers: {
-    getAccessToken: (state, action) => {
+    getAccessToken: (state: { accessToken: string; }, action: { payload: { accessToken: string; }; }) => {
       console.log(action)
         state.accessToken = action.payload.accessToken;
     },

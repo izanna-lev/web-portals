@@ -99,7 +99,7 @@ const LandingPage = ({showUserData}:Props) => {
             </div>
 
             <div className="button-login">
-              { false ? <LoginSpinner/> : <button className="button">Log In</button> }
+              { show ? <LoginSpinner/> : <button className="button">Log In</button> }
             </div>
           </form>
         </div>
