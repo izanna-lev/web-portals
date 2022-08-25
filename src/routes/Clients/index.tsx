@@ -2,13 +2,8 @@
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import "react-toastify/dist/ReactToastify.css";
 
-import { toast, ToastContainer } from "react-toastify";
+
 import React, { Dispatch, useLayoutEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import { connect } from "react-redux";
@@ -31,17 +26,7 @@ const LandingPage = ({ triggerLoginUser, fetching = false, login }: Props) => {
 
   return (
     <section className="clientPage" id="clientPage">
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+
       <div className="heading">Clients</div>
       
        <div className="client-row">

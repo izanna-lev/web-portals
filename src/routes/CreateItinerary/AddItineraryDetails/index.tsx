@@ -3,7 +3,7 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
+
 import { useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import InputForm from "../../../components/InputForm/index";

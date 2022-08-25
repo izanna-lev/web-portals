@@ -4,10 +4,9 @@
  */
 
 
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { profile } from "../../store/Actions/profile";
+import { useAppSelector } from "../../store/hooks";
 import { IMAGE_PREFIXES } from "../../constants";
-import { useEffect } from "react";
+
 import "./index.scss";
 
 const ProfilePage = () => {
@@ -24,15 +23,6 @@ const ProfilePage = () => {
       }
     }
   }) => state.profile.data);
-
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (!profileData._id) {
-      dispatch(profile({}))
-    }
-  }, []);
 
   return (
     <section className="profilePage" id="profilePage">

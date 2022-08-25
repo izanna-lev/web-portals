@@ -2,15 +2,16 @@
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
-import "react-toastify/dist/ReactToastify.css";
+
 import styles from "./index.module.scss";
 import { IoIosNotificationsOutline } from "react-icons/io"
 import { FiChevronDown } from "react-icons/fi"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NotificationPopup from '../../components/NotificationPopup/index'
 import Toast from "../../components/Toast/index"
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { IMAGE_PREFIXES } from "../../constants";
+import { profile } from "../../store/Actions/profile";
 type Props = {
   showUserData?: boolean
 }
@@ -28,7 +29,14 @@ const Nav = ({ showUserData = true }: Props) => {
     _id: string,
   }}}) => state.profile.data);
 
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (!profileData._id && showUserData) {
+      dispatch(profile({}))
+    }
+  }, []);
+  
   return (
     <section className={styles["navBar"]} id="navBar">
       <div className={styles["nav-head"]}>Onsite Travel</div>

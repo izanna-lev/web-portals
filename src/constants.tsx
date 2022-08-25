@@ -12,7 +12,7 @@ export const SERVER_BASE_URL = "http://44.209.25.93:3000/api/";
 export const APPLICATION_ROUTES = {
   LOGIN: `${SERVER_BASE_URL}specialist/login`,
   DETAILS: `${SERVER_BASE_URL}specialist/details`,
-  DASHBOARD: `${SERVER_BASE_URL}admin/stats`,
+  DASHBOARD: `${SERVER_BASE_URL}specialist/dashboard`,
   USERS: `${SERVER_BASE_URL}admin/userList`,
   EDIT_USER: `${SERVER_BASE_URL}admin/editUser`,
   EXPORT: `${SERVER_BASE_URL}admin/exportCsv`,
