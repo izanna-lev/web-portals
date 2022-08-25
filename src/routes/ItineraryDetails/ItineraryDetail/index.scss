@@ -1,11 +1,5 @@
 @import "../../../styles/globals.scss";
 
-* {
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
 .itinerary-details {
   width: 100%;
   max-height: 400px;
@@ -62,8 +56,7 @@
 }
 
 .create-itinerary {
-  padding: 16px 48px !important; 
+  padding: 16px 48px !important;
   background-color: $theme_color_blue !important;
   color: $theme_color_white !important;
 }
-

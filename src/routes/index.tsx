@@ -18,6 +18,9 @@ const Nav = loadable(() => import("./CreateItinerary/Nav/index"));
 const AddItineraryPage = loadable(
   () => import("./CreateItinerary/AddItineraryDetails/index")
 );
+const AddTransportationPage = loadable(
+  () => import("./CreateItinerary/AddTransportation/index")
+);
 const AddActivitiesPage = loadable(
   () => import("./CreateItinerary/AddActivities/index")
 );
@@ -94,7 +97,7 @@ const createItinerarySteps = [
     number: 7,
     name: "Trip Summary",
     path: "7",
-  }
+  },
 ];
 
 export default () => {
@@ -102,7 +105,7 @@ export default () => {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-            <Route path="/login" element={<LandingPage />} />
+          <Route path="/login" element={<LandingPage />} />
           <Route path="/" element={<SideNavigation navPaths={paths} />}>
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="/itineraries">
@@ -113,7 +116,7 @@ export default () => {
                 element={<Nav steps={createItinerarySteps} />}
               >
                 <Route path="1" element={<AddItineraryPage />} />
-                <Route path="2" element={<>hi</>} />
+                <Route path="2" element={<AddTransportationPage />} />
                 <Route path="3" element={<h1>hi</h1>} />
                 <Route path="4" element={<h1>hi</h1>} />
                 <Route path="5" element={<AddActivitiesPage />} />

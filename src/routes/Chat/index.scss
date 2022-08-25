@@ -1,10 +1,5 @@
 @import "../../styles/globals.scss";
 
-* {
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .ChatPage {
   height: calc(92vh);
   display: grid;
@@ -72,8 +67,8 @@
 .unseen-messages {
   width: 10px;
   height: 10px;
-  top: 0; 
-  right: 0; 
+  top: 0;
+  right: 0;
   background-color: $theme_color_blue;
   border-radius: 50%;
   position: absolute;
@@ -82,7 +77,7 @@
 .user-chat-data {
   display: grid;
   padding-top: 8px;
-  grid-template-columns:  minmax(0, 1fr) max-content;
+  grid-template-columns: minmax(0, 1fr) max-content;
 }
 
 .user-chat-name {

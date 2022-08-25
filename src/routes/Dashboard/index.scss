@@ -1,10 +1,5 @@
 @import "../../styles/globals.scss";
 
-* {
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .statsPage {
   height: calc(92vh - 16px);
   margin-top: 16px;
@@ -18,13 +13,12 @@
 }
 
 .heading {
-  font-size:x-large;
+  font-size: x-large;
   font-weight: 400;
   display: grid;
   align-items: center;
   height: 60px;
 }
-
 
 .stats {
   margin-top: 32px;
@@ -71,17 +65,19 @@
 
 .rating {
   height: 48px;
-  background-image: linear-gradient(to right, $theme_color_lime , $theme_color_light_blue);
+  background-image: linear-gradient(
+    to right,
+    $theme_color_lime,
+    $theme_color_light_blue
+  );
   border-radius: 8px;
   margin-bottom: 32px;
-
 }
 
 .rating-text {
   font-size: large;
   margin-left: 20px;
 }
-
 
 .overall-ratings {
   width: 80%;
@@ -107,7 +103,6 @@
     fill: #fcca00;
   }
 }
-
 
 .overall-experience {
   margin-top: 8px;
