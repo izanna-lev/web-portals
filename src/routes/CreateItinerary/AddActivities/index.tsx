@@ -5,7 +5,7 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
+
 import { useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { BiEdit } from "react-icons/bi";

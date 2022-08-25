@@ -8,7 +8,6 @@ import { IoSend } from "react-icons/io5";
 import { DUMMY } from "./dummy";
 
 import { BsPlus } from "react-icons/bs";
-import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 
 type Props = {

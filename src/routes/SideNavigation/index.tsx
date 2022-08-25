@@ -4,7 +4,6 @@
  */
 import { Outlet, NavLink } from "react-router-dom";
 import LoadingOverlay from "../../components/LoadingOverlay";
-import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 import Nav from "../nav/index";
 import { useAppSelector } from "../../store/hooks";

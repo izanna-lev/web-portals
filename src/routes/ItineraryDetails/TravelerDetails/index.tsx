@@ -3,7 +3,6 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
 import { GiSandsOfTime } from "react-icons/gi";
 
 import { BsChevronLeft, BsHourglassTop, BsChatRightDots } from "react-icons/bs";

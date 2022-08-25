@@ -6,7 +6,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { DUMMY } from "./dummy";
 import MessagesPage from "./MessageList/index";
 
-import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 import Nav from "../nav/index";
 

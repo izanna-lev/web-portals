@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
-import "react-toastify/dist/ReactToastify.css";
+
 import LoginSpinner from "../../components/LoginSpinner";
 import Nav from "../nav/index";
 import { login } from "../../store/Actions/login";

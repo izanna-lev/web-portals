@@ -3,12 +3,11 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
+
 import { APPLICATION_ROUTES } from "../../constants";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
-import { ToastContainer } from "react-toastify";
 import { Dispatch, useEffect } from "react";
 import { connect } from "react-redux";
 
@@ -42,17 +41,7 @@ const ItineraryPage = ({
 
   return (
     <section className="itenaryPage" id="itenaryPage">
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+
 
       <div className="yo">
         <div className="dashboard">

@@ -3,55 +3,31 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
+
 import { APPLICATION_ROUTES } from "../../constants";
-import { FaStar } from 'react-icons/fa';
-
-import { ToastContainer } from "react-toastify";
-import { Dispatch, useEffect } from "react";
-import { connect } from "react-redux";
-
-import {Modal} from '../../components/Portal'
-import Form from '../../components/Form/index'
-import { fetchEntity } from "../../redux/actions";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { dashboard } from "../../store/Actions/dashboard";
 import "./index.scss";
+import { useEffect } from "react";
 
-type Props = {
-  triggerFetchEntity: (endpoint: string) => void;
-  fetching: boolean;
-  dashboard: {
-    active: number;
-    blocked: number;
-    deleted: number;
-    pActive: number;
-    pBlocked: number;
-    pDeleted: number;
-    totalClicksOnAds: number;
-  };
-};
-const DashboardPage = ({
-  triggerFetchEntity,
-  fetching = false,
-  dashboard,
-}: Props) => {
+
+const DashboardPage = () => {
+  const dispatch = useAppDispatch();
+  const dashboardData = useAppSelector((state: { dashboard: { data : {
+    overallExperience: number,
+    pending: number,
+    approved: number,
+    completed: number
+  }}}) => state.dashboard.data);
+
+  console.log("dashboardData----",dashboardData)
   useEffect(() => {
-    triggerFetchEntity(APPLICATION_ROUTES.DASHBOARD);
+      dispatch(dashboard({}))
   }, []);
+
 
   return (
     <section className="statsPage" id="statsPage">
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-
       <div className="dashboard">
         <div className="heading">
           <div className="heading-text">Dashboard</div>
@@ -60,17 +36,17 @@ const DashboardPage = ({
 
       <div className="stats">
         <div className="stat-box pending">
-          <div className="feild-number">15</div>
+          <div className="feild-number">{dashboardData.pending}</div>
           <div className="feild-name">Pending Itinerary</div>
         </div>
 
         <div className="stat-box approved">
-          <div className="feild-number">20</div>
+          <div className="feild-number">{dashboardData.approved}</div>
           <div className="feild-name">Approved Itinerary</div>
         </div>
 
         <div className="stat-box completed">
-          <div className="feild-number">05</div>
+          <div className="feild-number">{dashboardData.completed}</div>
           <div className="feild-name">Completed Itinerary</div>
         </div>
       </div>
@@ -81,34 +57,49 @@ const DashboardPage = ({
 
       <div className="overall-ratings">
         <div className="stars">
-          <div className="star-icon"><FaStar/></div>
-          <div className="star-icon"><FaStar/></div>
-          <div className="star-icon"><FaStar/></div>
-          <div className="star-icon"><FaStar/></div>
-          <div className="star-icon"><FaStar/></div>
+          {
+            [...Array(5)].map((elementInArray, index) => {
+              const percentage = dashboardData.overallExperience - (index) > 0 ? dashboardData.overallExperience - (index) < 1 ? dashboardData.overallExperience - (index) : 1 : 0; 
+              return (
+                <div className="star-icon" key={index}>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 576 512"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <defs>
+                      <linearGradient id={`grad${index}`}>
+                        <stop offset="0%" stopColor="#fcca00" />
+                        <stop offset={`${percentage * 100}%`} stopColor="#fcca00" />
+                        <stop offset={`${percentage * 100}%`} stopColor="#484848" />
+                        <stop offset="100%" stopColor="#484848" />
+                      </linearGradient>
+                    </defs>
+                    <path fill={"url(#grad" + index + ")"} d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                    </path>
+                  </svg>
+
+                </div>
+              )
+            }
+
+            )
+          }
+
+
+
 
         </div>
         <div className="overall-experience">Overall Experience</div>
         <div className="experience-note">Note: Overall experience is evaluated through "Specialist, Value & Experience" rating and review.</div>
 
       </div>
-      {/* <Modal modal={<Form/>} root={document.getElementById("overlay-root") as HTMLElement}/> */}
     </section>
   );
 };
 
-// handles the outgoing dispatches
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    triggerFetchEntity: (endpoint: string) =>
-      dispatch(fetchEntity({ endpoint, payload: {}, page: 1, limit: 10 })),
-  };
-};
-
-// handles incoming state changes
-const mapStateToProps = (state: any) => {
-  const { fetching, dashboard } = state;
-  return { fetching, dashboard };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);
+export default DashboardPage;

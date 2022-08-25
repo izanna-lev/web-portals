@@ -3,7 +3,7 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
+
 import { GiSandsOfTime } from "react-icons/gi";
 import logo from "../../../images/placeholder.png";
 
