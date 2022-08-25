@@ -7,13 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { APPLICATION_ROUTES } from "../../constants";
 import { FaStar } from 'react-icons/fa';
 
-import { ToastContainer } from "react-toastify";
 import { Dispatch, useEffect } from "react";
 import { connect } from "react-redux";
-
-import {Modal} from '../../components/Portal'
-import Form from '../../components/Form/index'
 import { fetchEntity } from "../../redux/actions";
+import LoadingOverlay from "../../components/LoadingOverlay";
 import "./index.scss";
 
 type Props = {
@@ -40,17 +37,7 @@ const DashboardPage = ({
 
   return (
     <section className="statsPage" id="statsPage">
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+<LoadingOverlay/>
 
       <div className="dashboard">
         <div className="heading">
@@ -92,7 +79,6 @@ const DashboardPage = ({
         <div className="experience-note">Note: Overall experience is evaluated through "Specialist, Value & Experience" rating and review.</div>
 
       </div>
-      {/* <Modal modal={<Form/>} root={document.getElementById("overlay-root") as HTMLElement}/> */}
     </section>
   );
 };

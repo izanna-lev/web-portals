@@ -5,6 +5,7 @@
 
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { profile } from "../../store/Actions/profile";
 import { IMAGE_PREFIXES } from "../../constants";
 import { useEffect } from "react";
 import "./index.scss";
@@ -29,9 +30,10 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (!profileData._id) {
+      dispatch(profile({}))
     }
   }, []);
-  
+
   return (
     <section className="profilePage" id="profilePage">
       <div className="dashboard">

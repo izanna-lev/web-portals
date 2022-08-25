@@ -4,7 +4,7 @@
  * @author gaurav sharma
  * @since 9th january 2018
  */
-import "./index.css";
+import "./index.scss";
 
 export default () => {
   return (
@@ -12,17 +12,10 @@ export default () => {
       style={{ display: true ? "block" : "none" }}
       className="loader-container"
     >
-      <div className="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        
-      </div>
+<div className="blocks">
+  <div className="block orange"></div>
+  <div className="block blue"></div>
+</div>
     </section>
   );
 };
