@@ -3,51 +3,37 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
-import { APPLICATION_ROUTES } from "../../constants";
-import logo from  "../../images/249911.jpg";
-import { ToastContainer } from "react-toastify";
-import { Dispatch, useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchEntity } from "../../redux/actions";
+
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { IMAGE_PREFIXES } from "../../constants";
+import { useEffect } from "react";
 import "./index.scss";
 
-type Props = {
-  triggerFetchEntity: (endpoint: string) => void;
-  fetching: boolean;
-  dashboard: {
-    active: number;
-    blocked: number;
-    deleted: number;
-    pActive: number;
-    pBlocked: number;
-    pDeleted: number;
-    totalClicksOnAds: number;
-  };
-};
-const ProfilePage = ({
-  triggerFetchEntity,
-  fetching = false,
-  dashboard,
-}: Props) => {
-  useEffect(() => {
-    triggerFetchEntity(APPLICATION_ROUTES.DASHBOARD);
-  }, []);
+const ProfilePage = () => {
+  const profileData = useAppSelector((state: {
+    profile: {
+      data: {
+        name: string,
+        email: string,
+        phoneNumber: string,
+        picture: string,
+        device: string,
+        fcmToken: string,
+        _id: string,
+      }
+    }
+  }) => state.profile.data);
 
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!profileData._id) {
+    }
+  }, []);
+  
   return (
     <section className="profilePage" id="profilePage">
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-
       <div className="dashboard">
         <div className="heading">
           <div className="heading-text">Profile</div>
@@ -55,29 +41,16 @@ const ProfilePage = ({
       </div>
 
       <div className="profile">
-        <img className="profile-image" src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223" alt="signinImage" />
+        <img className="profile-image" src={IMAGE_PREFIXES.IMAGE_AVERAGE + profileData.picture} alt="signinImage" />
         <div className="profile-details">
-          <div className="profile-name">Steven Walter</div>
-          <div className="profile-text">steven@gmail.com</div>
-          <div className="profile-text">+91-8375927593</div>
+          <div className="profile-name">{profileData.name}</div>
+          <div className="profile-text">{profileData.email}</div>
+          <div className="profile-text">{profileData.phoneNumber}</div>
         </div>
       </div>
     </section>
   );
 };
 
-// handles the outgoing dispatches
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    triggerFetchEntity: (endpoint: string) =>
-      dispatch(fetchEntity({ endpoint, payload: {}, page: 1, limit: 10 })),
-  };
-};
 
-// handles incoming state changes
-const mapStateToProps = (state: any) => {
-  const { fetching, dashboard } = state;
-  return { fetching, dashboard };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+export default ProfilePage;

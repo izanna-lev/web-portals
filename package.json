@@ -32,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "REACT_APP_ASSET_URL=https://app-onsite.s3.amazonaws.com/assets/ react-scripts start",
+    "start": "REACT_APP_ASSET_URL=https://app-onsite.s3.amazonaws.com/assets/ REACT_APP_S3_URL=https://app-onsite.s3.amazonaws.com/development/images/ react-scripts start",
     "build": "REACT_APP_ASSET_URL=https://app-onsite.s3.amazonaws.com/assets/ GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -3,7 +3,7 @@
  */
 
 
-const S3_URL = process.env.S3_URL;
+const S3_URL = process.env.REACT_APP_S3_URL;
 const ASSET_URL = process.env.REACT_APP_ASSET_URL;
 
 
