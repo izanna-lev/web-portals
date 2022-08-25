@@ -8,14 +8,19 @@ import { setPopup } from "../../store/Slice/popup";
 const Toast = () => {
     const dispatch = useAppDispatch();
 
-    const show = useAppSelector((state) => state.popup.data);
-
-    console.log("SHOW TOAST", show);
+    const show = useAppSelector((state: {
+        popup: {
+            data: {
+                message: string,
+                type: string,
+            }
+        }
+    }) => state.popup.data);
 
     useEffect(() => {
         let shand = document.getElementsByClassName('wrapper') as HTMLCollectionOf<HTMLElement>;
 
-        if (show.type && shand.length != 0) {
+        if (show.type && shand.length !== 0) {
             shand[0].style.display = "";
 
             setTimeout(function () {
