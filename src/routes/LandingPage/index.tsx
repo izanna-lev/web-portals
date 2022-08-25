@@ -6,16 +6,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import LoginSpinner from "../../components/LoginSpinner";
 import Nav from "../nav/index";
-import logo from "../../images/signin.png";
 import { login } from "../../store/Actions/login";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import "./index.scss";
 import { ASSETS } from "../../constants";
 
-const LandingPage = () => {
+type Props = {
+  showUserData?: boolean
+}
+
+const LandingPage = ({showUserData}:Props) => {
   const navigate = useNavigate();
   const [passVisibleStatus, setPassVisibleStatus] = useState(false);
 
@@ -42,18 +44,7 @@ const LandingPage = () => {
 
   return (
     <section className="loginPage" id="loginPage">
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <Nav />
+      <Nav showUserData={showUserData}/>
       <div className="login">
         <img className="signin-image" src={ASSETS.SIGNIN} alt="signinImage" />
         <div className="login-form">

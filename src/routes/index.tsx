@@ -15,6 +15,7 @@ const ProfilePage = loadable(() => import("./Profile/index"));
 const ChatPage = loadable(() => import("./Chat/index"));
 const Nav = loadable(() => import("./CreateItinerary/Nav/index"));
 
+
 const AddItineraryPage = loadable(
   () => import("./CreateItinerary/AddItineraryDetails/index")
 );
@@ -97,12 +98,15 @@ const createItinerarySteps = [
   }
 ];
 
+
+
+
 export default () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-            <Route path="/login" element={<LandingPage />} />
+          <Route path="/login" element={<LandingPage showUserData={false} />} />
           <Route path="/" element={<SideNavigation navPaths={paths} />}>
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="/itineraries">

@@ -19,13 +19,13 @@ type Props = {
     icon: JSX.Element;
   }>;
 };
+
 const SideNavigationPage = ({ navPaths }: Props) => {
   const show = useAppSelector(state => state.loader.value)
 
-  
   return (
     <div className="screen">
-      { show && <LoadingOverlay/>}
+      {show && <LoadingOverlay />}
       <Nav />
       <div className="container">
         <div className="nav-menu">
