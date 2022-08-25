@@ -37,8 +37,6 @@ const DashboardPage = ({
 
   return (
     <section className="statsPage" id="statsPage">
-<LoadingOverlay/>
-
       <div className="dashboard">
         <div className="heading">
           <div className="heading-text">Dashboard</div>
