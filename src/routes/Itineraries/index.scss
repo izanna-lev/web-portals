@@ -66,9 +66,9 @@
   margin-top: 12px;
   overflow-y: auto;
   height: calc(92vh - 124px);
-
+  display: flex;
+  flex-direction: column;
 }
-
 
 .itenary-list thead  {
   background-image: linear-gradient(to right, $theme_color_lime , $theme_color_light_blue);
@@ -82,7 +82,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   overflow-y: auto;
-  height: calc(92vh - 164px);
+  max-height: calc(92vh - 164px);
 }
 
 table th:first-child{

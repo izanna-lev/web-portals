@@ -13,7 +13,8 @@ export const APPLICATION_ROUTES = {
   LOGIN: `${SERVER_BASE_URL}specialist/login`,
   DETAILS: `${SERVER_BASE_URL}specialist/details`,
   DASHBOARD: `${SERVER_BASE_URL}specialist/dashboard`,
-  USERS: `${SERVER_BASE_URL}admin/userList`,
+
+  ITINERARIES: `${SERVER_BASE_URL}itinerary/list`,
   EDIT_USER: `${SERVER_BASE_URL}admin/editUser`,
   EXPORT: `${SERVER_BASE_URL}admin/exportCsv`,
   REPORTED_USERS: `${SERVER_BASE_URL}admin/reportList`,
@@ -54,36 +55,6 @@ export const navigationIndexer = {
   settings: 6,
 };
 
-// ////////// SETTINGS CONSTANT ///////////
-
-export const settingsIndexer = {
-  aboutUs: 1,
-  faq: 2,
-  termConditions: 3,
-  privacyPolicy: 4,
-};
-
-// ///////// MODEL CONSTANT ////////////
-
-export const MODAL_STATE = {
-  NONE: 0,
-};
-
-// //////// NOTIFICATION LIST TYPE ///////
-
-export const NOTIFICATION_LIST = {
-  ALL: 0,
-  SELECTED: 1,
-  NONE: 2,
-};
-
-export const ADMIN_USER_ACTIONS = {
-  VERIFIED: 1,
-  BLOCKED: 2,
-  UNBLOCKED: 3,
-  DELETED: 4,
-};
-
 export const TRAVELER_ITINERARY_DETAILS = {
   TRAVELER: 1,
   ITINERARY: 2,
@@ -101,3 +72,15 @@ export const ITINERARY_TYPE = [{
   value: 1
 }]
 
+
+type tplotOptions = {
+  [key: number]: string
+}
+
+export const ITINERARY_STATUS: tplotOptions = {
+	1: "ongoing",
+	2: "upcoming",
+	3: "cancelled",
+	4: "pending",
+	5: "completed",
+};
