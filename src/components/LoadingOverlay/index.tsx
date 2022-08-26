@@ -12,10 +12,10 @@ export default () => {
       style={{ display: true ? "block" : "none" }}
       className="loader-container"
     >
-<div className="blocks">
-  <div className="block orange"></div>
-  <div className="block blue"></div>
-</div>
+      <div className="blocks">
+        <div className="block orange"></div>
+        <div className="block blue"></div>
+      </div>
     </section>
   );
 };
