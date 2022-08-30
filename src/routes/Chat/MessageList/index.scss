@@ -29,6 +29,7 @@
   align-items: center;
   padding-left: 16px;
   gap: 8px;
+  position: relative;
   background-image: linear-gradient(to right, $theme_color_lime , $theme_color_light_blue);
 }
 
@@ -55,6 +56,7 @@
   overflow: auto;
   scroll-behavior: smooth;
   margin-left: 16px;
+  padding-top: 4px;
   padding-right: 16px;
   list-style: none;
 }

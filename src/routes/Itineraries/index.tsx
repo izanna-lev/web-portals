@@ -4,40 +4,31 @@
  */
 
 
-import { APPLICATION_ROUTES } from "../../constants";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-
-import { Dispatch, useEffect } from "react";
-import { connect } from "react-redux";
-
-
-import { fetchEntity } from "../../redux/actions";
+import moment from "moment";
+import { useEffect } from "react";
 import "./index.scss";
 
-import { DUMMY } from "./dummy";
-type Props = {
-  triggerFetchEntity: (endpoint: string) => void;
-  fetching: boolean;
-  dashboard: {
-    active: number;
-    blocked: number;
-    deleted: number;
-    pActive: number;
-    pBlocked: number;
-    pDeleted: number;
-    totalClicksOnAds: number;
-  };
-};
-const ItineraryPage = ({
-  triggerFetchEntity,
-  fetching = false,
-  dashboard,
-}: Props) => {
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { itineraries } from "../../store/Actions/itineraries";
+import { IMAGE_PREFIXES, ITINERARY_STATUS } from "../../constants";
+import { setItineraryDetails } from "../../store/Slice/itineraryDetails";
+
+const ItineraryPage = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const itinerariesData = useAppSelector((state) => state.itineraries);
+
+  function updateItineraryDetails(data: any) {
+    dispatch(setItineraryDetails(data));
+  }
+
   useEffect(() => {
-    triggerFetchEntity(APPLICATION_ROUTES.DASHBOARD);
+    dispatch(itineraries({}))
   }, []);
+
 
   return (
     <section className="itenaryPage" id="itenaryPage">
@@ -57,7 +48,7 @@ const ItineraryPage = ({
         </div>
       </div>
       <div className="itenary-list">
-        <table>
+        <table className="itinerary-table">
           <thead className="table-head">
             <tr className="table-row">
               <th className="table-head" scope="col">
@@ -84,30 +75,30 @@ const ItineraryPage = ({
             </tr>
           </thead>
           <tbody>
-            {DUMMY.map((element, index) => {
+            {itinerariesData.list.map((element, index) => {
               return (
-                <tr className="table-data-row">
+                <tr className="table-data-row" key={element._id}>
                   <td className="table-data">{index + 1}</td>
                   <td className="table-data name">
                     <img
                       className="table-user-image"
-                      src={element.image}
+                      src={IMAGE_PREFIXES.IMAGE_SMALL + element.image}
                       alt="user"
                     />
                     <div className="table-user-name">{element.name}</div>
                   </td>
-                  <td className="table-data">{element.days}</td>
-                  <td className="table-data">{element.guest}</td>
-                  <td className="table-data">{element.date}</td>
+                  <td className="table-data">{element.duration}</td>
+                  <td className="table-data">{element.guests}</td>
+                  <td className="table-data">{moment(element.fromDate).format("D-MMM-YYYY")}</td>
                   <td className="table-data">
-                    <div className="table-data-status">{element.status}</div>
+                    <div className="table-data-status">{ITINERARY_STATUS[element.itineraryStatus]}</div>
                   </td>
                   <td className="table-data">
                     <b
                       className="table-data-details"
-
                       onClick={() => {
-                        let path = `/itineraries/${index}`;
+                        updateItineraryDetails(element)
+                        let path = `/itineraries/${element._id}`;
                         navigate(path);
                       }}
                     >
@@ -124,18 +115,5 @@ const ItineraryPage = ({
   );
 };
 
-// handles the outgoing dispatches
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    triggerFetchEntity: (endpoint: string) =>
-      dispatch(fetchEntity({ endpoint, payload: {}, page: 1, limit: 10 })),
-  };
-};
 
-// handles incoming state changes
-const mapStateToProps = (state: any) => {
-  const { fetching, dashboard } = state;
-  return { fetching, dashboard };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ItineraryPage);
+export default ItineraryPage;

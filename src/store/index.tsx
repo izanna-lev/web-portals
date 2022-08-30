@@ -4,6 +4,8 @@ import loader from "./Slice/loader";
 import popup from "./Slice/popup";
 import profile from "./Slice/profile";
 import dashboard from "./Slice/dashboard";
+import itineraries from "./Slice/itineraries";
+import itineraryDetails from "./Slice/itineraryDetails";
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +13,9 @@ export const store = configureStore({
     loader: loader,
     popup: popup,
     profile: profile,
-    dashboard: dashboard
+    dashboard: dashboard,
+    itineraries: itineraries,
+    itineraryDetails: itineraryDetails,
   },
 });
 

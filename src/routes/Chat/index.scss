@@ -33,9 +33,10 @@
 }
 
 .chat-user-list {
-  height: calc(100% - 60px);
+  max-height: calc(100% - 60px);
   overflow: scroll;
   display: flex;
+  overflow-x: hidden;
   flex-direction: column;
 }
 
