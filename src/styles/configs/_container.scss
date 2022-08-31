@@ -62,3 +62,8 @@
 .content-center {
   @include flexAlignCenter();
 }
+
+.heading-text {
+  font-size:x-large;
+  font-weight: 400;
+}

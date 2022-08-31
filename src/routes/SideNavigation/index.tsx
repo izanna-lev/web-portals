@@ -4,7 +4,6 @@
  */
 import { Outlet, NavLink } from "react-router-dom";
 import LoadingOverlay from "../../components/LoadingOverlay";
-import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 import Nav from "../nav/index";
 import { useAppSelector } from "../../store/hooks";
@@ -19,13 +18,13 @@ type Props = {
     icon: JSX.Element;
   }>;
 };
+
 const SideNavigationPage = ({ navPaths }: Props) => {
   const show = useAppSelector(state => state.loader.value)
 
-  
   return (
     <div className="screen">
-      { show && <LoadingOverlay/>}
+      {show && <LoadingOverlay />}
       <Nav />
       <div className="container">
         <div className="nav-menu">

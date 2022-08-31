@@ -2,13 +2,12 @@
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DUMMY } from "./dummy";
 import MessagesPage from "./MessageList/index";
 
-import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
-import Nav from "../nav/index";
+import { useRef } from "react";
 
 type Props = {
   navPaths: Array<{
@@ -22,15 +21,28 @@ type Props = {
 };
 const ChatPage = () => {
   const navigate = useNavigate();
+  const listInnerRef = useRef(null);
+
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+      console.log(scrollTop, scrollHeight, clientHeight)
+      if (scrollTop + clientHeight === scrollHeight) {
+        // This will be triggered after hitting the last element.
+        // API call should be made here while implementing pagination.
+      }
+    }
+  };
 
   return (
     <section className="ChatPage" id="ChatPage">
-      <div className="chat-list">
+      <div className="chat-list" >
         <div className="heading">
           <div className="heading-text">Chat</div>
         </div>
 
-        <ul className="chat-user-list">
+        <ul className="chat-user-list" onScroll={onScroll}
+          ref={listInnerRef}>
           {DUMMY.map((element, index) => {
             return (
               <li
@@ -56,8 +68,10 @@ const ChatPage = () => {
             );
           })}
         </ul>
+        
+
       </div>
-      <MessagesPage/>
+      <MessagesPage />
     </section>
   );
 };

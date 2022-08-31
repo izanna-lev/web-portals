@@ -3,7 +3,7 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
+
 import { BsChevronLeft } from "react-icons/bs";
 import "./index.scss";
 import { NavLink, Outlet } from "react-router-dom";

@@ -1,9 +1,10 @@
 
 .spinner {
-
   width: 36px;
   padding: 5px;
+  height: 36px;
   /* height: 52px; */
+
   aspect-ratio: 1;
   border-radius: 50%;
   background: #0b9dd8;
@@ -16,4 +17,10 @@
           mask-composite: subtract;
   animation: s3 1s infinite linear;
 }
+.relative{
+  position: absolute;
+  right: 50%;
+  top: 100%;
+}
 @keyframes s3 {to{transform: rotate(1turn)}}
+

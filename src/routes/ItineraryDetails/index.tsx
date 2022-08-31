@@ -3,7 +3,7 @@
  * @author Jagmohan Singh
  */
 
-import "react-toastify/dist/ReactToastify.css";
+
 import { TRAVELER_ITINERARY_DETAILS } from "../../constants";
 import DetailsPage  from './TravelerDetails/index'
 import ItineraryDetail from './ItineraryDetail/index'

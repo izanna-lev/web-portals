@@ -12,6 +12,7 @@
   font-weight: 400;
   display: flex;
   padding-top: 16px;
+  padding-left: 16px;
   flex-direction: column;
   overflow: auto;
   height: 100%;
@@ -27,9 +28,10 @@
 }
 
 .chat-user-list {
-  height: calc(100% - 60px);
+  max-height: calc(100% - 60px);
   overflow: scroll;
   display: flex;
+  overflow-x: hidden;
   flex-direction: column;
 }
 
@@ -45,8 +47,7 @@
   height: 64px;
   display: grid;
   flex: 0 0 auto;
-  padding-left: 16px;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 15% 85%;
 }
 
 .user-chat:hover {

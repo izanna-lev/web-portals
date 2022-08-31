@@ -4,25 +4,26 @@
  */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
+
 import LoginSpinner from "../../components/LoginSpinner";
 import Nav from "../nav/index";
-import logo from "../../images/signin.png";
 import { login } from "../../store/Actions/login";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import "./index.scss";
+import { ASSETS } from "../../constants";
 
+type Props = {
+  showUserData?: boolean
+}
 
-const LandingPage = () => {
+const LandingPage = ({showUserData}:Props) => {
   const navigate = useNavigate();
   const [passVisibleStatus, setPassVisibleStatus] = useState(false);
 
   const dispatch = useAppDispatch();
-  const accessToken = useAppSelector((state) => state.login.accessToken);
-  const show = useAppSelector((state) => state.loader.value);
+  const accessToken = useAppSelector((state: { login: { accessToken: string; }; }) => state.login.accessToken);
+  const show = useAppSelector((state: { loader: { value: boolean; }; }) => state.loader.value);
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
@@ -43,20 +44,9 @@ const LandingPage = () => {
 
   return (
     <section className="loginPage" id="loginPage">
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <Nav />
+      <Nav showUserData={showUserData}/>
       <div className="login">
-        <img className="signin-image" src={logo} alt="signinImage" />
+        <img className="signin-image" src={ASSETS.SIGNIN} alt="signinImage" />
         <div className="login-form">
           <div className="heading">
             Welcome to <strong className="strong-heading">Onsite Travel</strong>
@@ -100,9 +90,9 @@ const LandingPage = () => {
                   }}
                 >
                   {passVisibleStatus ? (
-                    <VisibilityOutlinedIcon className="input-icon" />
+                    <RiEyeLine className="input-icon" />
                   ) : (
-                    <VisibilityOffOutlinedIcon className="input-icon" />
+                    <RiEyeCloseLine className="input-icon" />
                   )}
                 </div>
               </div>

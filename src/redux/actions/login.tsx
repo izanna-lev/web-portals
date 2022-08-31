@@ -17,7 +17,7 @@ export const userLogin =
     dispatch(FETCHING({ fetching: true }));
 
     axios
-      .post(APPLICATION_ROUTES.USER_LOGIN, body, { headers: {} })
+      .post(APPLICATION_ROUTES.LOGIN, body, { headers: {} })
       .then((response) => {
         // handle the server success response
         console.log("-----------", response)

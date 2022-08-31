@@ -3,16 +3,18 @@
  */
 
 
-const S3_URL = process.env.S3_URL;
-const ASSET_URL = process.env.ASSET_URL;
+const S3_URL = process.env.REACT_APP_S3_URL;
+const ASSET_URL = process.env.REACT_APP_ASSET_URL;
 
 
-export const SERVER_BASE_URL = "http://44.206.33.81:3000/api/";
+export const SERVER_BASE_URL = "http://44.209.25.93:3000/api/";
 
 export const APPLICATION_ROUTES = {
-  USER_LOGIN: `${SERVER_BASE_URL}admin/authenticate`,
-  DASHBOARD: `${SERVER_BASE_URL}admin/stats`,
-  USERS: `${SERVER_BASE_URL}admin/userList`,
+  LOGIN: `${SERVER_BASE_URL}specialist/login`,
+  DETAILS: `${SERVER_BASE_URL}specialist/details`,
+  DASHBOARD: `${SERVER_BASE_URL}specialist/dashboard`,
+
+  ITINERARIES: `${SERVER_BASE_URL}itinerary/list`,
   EDIT_USER: `${SERVER_BASE_URL}admin/editUser`,
   EXPORT: `${SERVER_BASE_URL}admin/exportCsv`,
   REPORTED_USERS: `${SERVER_BASE_URL}admin/reportList`,
@@ -36,6 +38,7 @@ export const IMAGE_PREFIXES = {
 };
 
 export const ASSETS = {
+  SIGNIN: `${ASSET_URL}signin.png`,
   CROSS: `${ASSET_URL}cross.png`,
   LOGO_LOGIN: `${ASSET_URL}logo.png`,
   IMAGE_PLACEHOLDER: `${ASSET_URL}placeholder.png`,
@@ -50,36 +53,6 @@ export const navigationIndexer = {
   reportedUsers: 4,
   notifications: 5,
   settings: 6,
-};
-
-// ////////// SETTINGS CONSTANT ///////////
-
-export const settingsIndexer = {
-  aboutUs: 1,
-  faq: 2,
-  termConditions: 3,
-  privacyPolicy: 4,
-};
-
-// ///////// MODEL CONSTANT ////////////
-
-export const MODAL_STATE = {
-  NONE: 0,
-};
-
-// //////// NOTIFICATION LIST TYPE ///////
-
-export const NOTIFICATION_LIST = {
-  ALL: 0,
-  SELECTED: 1,
-  NONE: 2,
-};
-
-export const ADMIN_USER_ACTIONS = {
-  VERIFIED: 1,
-  BLOCKED: 2,
-  UNBLOCKED: 3,
-  DELETED: 4,
 };
 
 export const TRAVELER_ITINERARY_DETAILS = {
@@ -99,3 +72,15 @@ export const ITINERARY_TYPE = [{
   value: 1
 }]
 
+
+type tplotOptions = {
+  [key: number]: string
+}
+
+export const ITINERARY_STATUS: tplotOptions = {
+	1: "ongoing",
+	2: "upcoming",
+	3: "cancelled",
+	4: "pending",
+	5: "completed",
+};
