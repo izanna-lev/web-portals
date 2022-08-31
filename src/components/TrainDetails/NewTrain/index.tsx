@@ -3,8 +3,8 @@ import { MdZoomOutMap } from "react-icons/md";
 import InputForm from "../../InputForm/index";
 import TextArea from "../../TextArea/index";
 import styles from "./index.module.scss";
-import { Modal } from "../../../components/Portal";
-import ImagePopup from "../../../components/ImagePopup";
+import { Modal } from "../../Portal";
+import ImagePopup from "../../ImagePopup";
 import React, { useState, useEffect } from "react";
 
 interface InputProps {
@@ -19,7 +19,7 @@ interface InputProps {
 
 interface props {
   cancelAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  addFlight: Function;
+  addTrain: Function;
 }
 
 interface Tickets {}
@@ -125,7 +125,7 @@ const NewTransportationForm = (props: props) => {
     setshowImage(false);
   };
 
-  const { cancelAdd, addFlight } = props;
+  const { cancelAdd, addTrain } = props;
 
   return (
     <div className={styles["add-itinerary-data-form"]}>
@@ -146,24 +146,16 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFeilds={{
-                  name: "Airline",
-                  id: "airline",
+                  name: "Train Class",
+                  id: "trainClass",
                   maxlength: 70,
                   type: "text",
                 }}
               />
               <InputForm
                 inputFeilds={{
-                  name: "Flight Class",
-                  id: "flight class",
-                  maxlength: 360,
-                  type: "text",
-                }}
-              />
-              <InputForm
-                inputFeilds={{
-                  name: "Depart",
-                  id: "depart",
+                  name: "Arrival Station",
+                  id: "arrivalStation",
                   maxlength: 360,
                   type: "text",
                 }}
@@ -171,7 +163,7 @@ const NewTransportationForm = (props: props) => {
 
               <InputForm
                 inputFeilds={{
-                  name: "Depart Date",
+                  name: "Arrival Date",
                   id: "date",
                   maxlength: 30,
                   type: "date",
@@ -181,7 +173,7 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFeilds={{
-                  name: "Depart Time",
+                  name: "Arrival Time",
                   id: "time",
                   maxlength: 30,
                   type: "time",
@@ -189,15 +181,15 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFeilds={{
-                  name: "Arrival",
-                  id: "arrival",
+                  name: "Depart Station",
+                  id: "departStation",
                   maxlength: 70,
                   type: "text",
                 }}
               />
               <InputForm
                 inputFeilds={{
-                  name: "Arrival Time",
+                  name: "Depart Time",
                   id: "time",
                   maxlength: 30,
                   type: "time",
@@ -214,7 +206,7 @@ const NewTransportationForm = (props: props) => {
             </div>
           </div>
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
-            User Flight Details
+            User Train Details
           </div>
           <div
             className={styles["form-required-feilds"]}

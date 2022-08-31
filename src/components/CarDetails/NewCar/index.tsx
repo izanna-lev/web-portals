@@ -3,8 +3,8 @@ import { MdZoomOutMap } from "react-icons/md";
 import InputForm from "../../InputForm/index";
 import TextArea from "../../TextArea/index";
 import styles from "./index.module.scss";
-import { Modal } from "../../../components/Portal";
-import ImagePopup from "../../../components/ImagePopup";
+import { Modal } from "../../Portal";
+import ImagePopup from "../../ImagePopup";
 import React, { useState, useEffect } from "react";
 
 interface InputProps {
@@ -19,7 +19,7 @@ interface InputProps {
 
 interface props {
   cancelAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  addFlight: Function;
+  addCar: Function;
 }
 
 interface Tickets {}
@@ -46,7 +46,7 @@ const UserTicket = (
   };
   return (
     <React.Fragment>
-      <div className={`${styles["form-heading"]}`}>Upload Ticket Image</div>
+      <div className={`${styles["form-heading"]}`}>Upload Car Image</div>
       <div style={{ display: "flex" }}>
         <div className={styles["form-image"]} id={`bg-img-${length}`}>
           <input
@@ -83,8 +83,8 @@ const UserTicket = (
       </div>
       <InputForm
         inputFeilds={{
-          name: `User ${length} Name`,
-          id: "username",
+          name: `Name of Driver`,
+          id: "drivername",
           maxlength: 50,
           type: "text",
         }}
@@ -105,18 +105,6 @@ const NewTransportationForm = (props: props) => {
     ]);
   }, []);
 
-  const addMoreTickets = () => {
-    setAllUserTickets((previous) => [
-      ...previous,
-      UserTicket(
-        allUserTickets.length + 1,
-        saveUserTicketsData,
-        setshowImage,
-        setimageUrl
-      ),
-    ]);
-  };
-
   const saveUserTicketsData = (data: {}) => {
     setTicketsData((previous) => [...previous, { ...data }]);
   };
@@ -125,7 +113,7 @@ const NewTransportationForm = (props: props) => {
     setshowImage(false);
   };
 
-  const { cancelAdd, addFlight } = props;
+  const { cancelAdd, addCar } = props;
 
   return (
     <div className={styles["add-itinerary-data-form"]}>
@@ -146,63 +134,40 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFeilds={{
-                  name: "Airline",
-                  id: "airline",
+                  name: "Pickup Location",
+                  id: "pickupLocation",
                   maxlength: 70,
-                  type: "text",
-                }}
-              />
-              <InputForm
-                inputFeilds={{
-                  name: "Flight Class",
-                  id: "flight class",
-                  maxlength: 360,
-                  type: "text",
-                }}
-              />
-              <InputForm
-                inputFeilds={{
-                  name: "Depart",
-                  id: "depart",
-                  maxlength: 360,
                   type: "text",
                 }}
               />
 
               <InputForm
                 inputFeilds={{
-                  name: "Depart Date",
+                  name: "Pickup Date",
                   id: "date",
                   maxlength: 30,
                   type: "date",
+                }}
+              />
+              <InputForm
+                inputFeilds={{
+                  name: "Pickup Time",
+                  id: "time",
+                  maxlength: 30,
+                  type: "time",
                 }}
               />
             </div>
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFeilds={{
-                  name: "Depart Time",
-                  id: "time",
-                  maxlength: 30,
-                  type: "time",
-                }}
-              />
-              <InputForm
-                inputFeilds={{
-                  name: "Arrival",
-                  id: "arrival",
+                  name: "Dropoff Location",
+                  id: "dropoffLocation",
                   maxlength: 70,
                   type: "text",
                 }}
               />
-              <InputForm
-                inputFeilds={{
-                  name: "Arrival Time",
-                  id: "time",
-                  maxlength: 30,
-                  type: "time",
-                }}
-              />
+
               <TextArea
                 inputFeilds={{
                   name: "Specialist Note",
@@ -214,7 +179,7 @@ const NewTransportationForm = (props: props) => {
             </div>
           </div>
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
-            User Flight Details
+            User Car Details
           </div>
           <div
             className={styles["form-required-feilds"]}
@@ -225,12 +190,16 @@ const NewTransportationForm = (props: props) => {
                 {element}
               </div>
             ))}
-          </div>
-          <div
-            className={`${styles["add-more"]} ${styles["form-heading"]}`}
-            onClick={addMoreTickets}
-          >
-            + Add More Users
+            <div className={styles["form-left-details"]}>
+              <InputForm
+                inputFeilds={{
+                  name: `No of users travelling`,
+                  id: "usersTravelling",
+                  maxlength: 50,
+                  type: "number",
+                }}
+              />
+            </div>
           </div>
 
           <div className={styles["button-save"]}>

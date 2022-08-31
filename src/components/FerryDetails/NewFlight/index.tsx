@@ -36,12 +36,6 @@ const UserTicket = (
       saveData({ [name]: file[0] });
       let url = URL.createObjectURL(file[0]);
       newImageUrl = url;
-      const imageElement = document.getElementById(`bg-img-${length}`);
-      if (imageElement) {
-        imageElement.style.background = `url(${url}) no-repeat`;
-        imageElement.style.backgroundPosition = "center";
-        imageElement.style.backgroundSize = "100%";
-      }
     }
   };
   return (

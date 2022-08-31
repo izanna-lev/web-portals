@@ -9,8 +9,10 @@ import { useState } from "react";
 import { Modal } from "../../components/Portal";
 import NewFlight from "./NewFlight";
 import styles from "./index.module.scss";
+import { MdDeleteOutline } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
 
-type ActivityProps = {
+interface ActivityProps {
   day: number;
   outbound: string;
   flightClass: string;
@@ -20,23 +22,13 @@ type ActivityProps = {
   arrivalTime: Date;
   arrival: string;
   note: string;
-};
+}
 
 const AddActivitiesPage = () => {
   const [flightDataList, setflightDataList] = useState<ActivityProps[]>([]);
   const [canAddMore, setAddMore] = useState(false);
 
-  const addObjectToArray = (obj: {
-    day: number;
-    outbound: string;
-    flightClass: string;
-    depart: string;
-    departDate: Date;
-    departTime: Date;
-    arrivalTime: Date;
-    arrival: string;
-    note: string;
-  }) => {
+  const addObjectToArray = (obj: ActivityProps) => {
     setflightDataList((current) => [...current, obj]);
     setAddMore(false);
   };
@@ -58,7 +50,7 @@ const AddActivitiesPage = () => {
         </div>
 
         <div className={styles["forms"]}>
-          {flightDataList.length ? (
+          {/* {flightDataList.length ? (
             flightDataList.map((element, index) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
@@ -79,7 +71,31 @@ const AddActivitiesPage = () => {
             <div className={`${styles["empty-table"]} ${styles["table-item"]}`}>
               Nothing Added
             </div>
-          )}
+          )} */}
+
+          <div
+            className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
+          >
+            <div>Test</div>
+            <div>Test</div>
+            <div>Test</div>
+            <div>Test</div>
+            <div>Test</div>
+            <div>Test</div>
+            <div>Test</div>
+            <div>Test</div>
+            <div>Test</div>
+            <div className="action-buttons">
+              <button className="edit-button">
+                <FaRegEdit />
+                &nbsp;<span>Edit</span>
+              </button>
+              <button className="delete-button">
+                <MdDeleteOutline />
+                &nbsp;<span>Delete</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div
