@@ -1,14 +1,12 @@
 @import "../../styles/globals.scss";
 
 * {
-  padding: 0;
   margin-right: 4px;
   box-sizing: border-box;
 }
 
-
 .clientPage {
-  align-self:flex-start;
+  align-self: flex-start;
   margin-left: 8px;
   padding-left: 20px;
 }
@@ -16,7 +14,7 @@
 .heading {
   font-size: 40px;
   color: black;
-  position:static;
+  position: static;
   border-bottom: 1px solid;
   border-color: $global_grey_one;
 }

@@ -1,10 +1,5 @@
 @import "../../../styles/globals.scss";
 
-* {
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .AddActivitiesPage {
   height: calc(92vh - 158px);
   margin-top: 16px;
@@ -14,17 +9,19 @@
   flex-direction: column;
 }
 
-
 .add-activities {
   width: 100%;
-  background-image: linear-gradient(to right, $theme_color_lime , $theme_color_light_blue);
+  background-image: linear-gradient(
+    to right,
+    $theme_color_lime,
+    $theme_color_light_blue
+  );
   display: grid;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  grid-template-columns: .25fr .75fr .9fr .6fr .6fr .9fr 1fr 1fr;
+  grid-template-columns: 0.25fr 0.75fr 0.9fr 0.6fr 0.6fr 0.9fr 1fr 1fr;
   align-items: center;
 }
-
 
 .add-data {
   border-top-left-radius: 0px;
@@ -32,7 +29,7 @@
   background-image: none;
   margin-top: 2px;
   border-radius: 4px;
-  gap:2px;
+  gap: 2px;
   height: 90px;
 }
 
@@ -79,12 +76,11 @@ input::-webkit-inner-spin-button {
   background-color: $theme_color_white;
 }
 
-input:focus{
+input:focus {
   outline: none;
-   border: 2px solid $theme_color_light_blue;
-   background-color: $theme_color_white;
+  border: 2px solid $theme_color_light_blue;
+  background-color: $theme_color_white;
 }
-
 
 .fixed-background {
   background-color: $theme_color_light_blue_3x !important;
@@ -93,7 +89,7 @@ input:focus{
 
 .day-blank.image {
   justify-content: space-around;
-  background-color: $theme_color_light_blue_3x
+  background-color: $theme_color_light_blue_3x;
 }
 
 .not-selected-preview {
@@ -128,9 +124,8 @@ input:focus{
   justify-content: center;
   align-items: center;
   padding: 4px;
-  gap: 8px
+  gap: 8px;
 }
-
 
 .activity-button {
   display: flex;
@@ -143,8 +138,7 @@ input:focus{
 
 .activity-button.edit {
   border: 2px solid $theme_color_blue;
-  border-radius: 8px ;
-
+  border-radius: 8px;
 }
 
 .activity-button > div {
@@ -154,13 +148,12 @@ input:focus{
 .activity-button.delete {
   background-color: red;
   color: $theme_color_white;
-  border-radius: 8px ;
+  border-radius: 8px;
 }
 
 .add-more-error {
   font-size: 8px;
   color: red;
-  
 }
 
 .add-more {

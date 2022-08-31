@@ -1,12 +1,4 @@
-
- @import "../../styles/globals.scss";
-
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+@import "../../styles/globals.scss";
 
 .navBar {
   width: 100%;
@@ -70,7 +62,7 @@
   flex-wrap: nowrap;
   gap: 4px;
   flex-basis: auto;
- justify-content: center;
+  justify-content: center;
 }
 
 .user-welcome {

@@ -1,10 +1,5 @@
 @import "../../../styles/globals.scss";
 
-* {
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .itineraryDetailPage {
   height: calc(92vh - 16px);
   margin-top: 16px;
@@ -16,7 +11,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: max-content max-content;
-  font-size:x-large;
+  font-size: x-large;
   font-weight: 600;
   display: grid;
   height: 60px;
@@ -81,10 +76,9 @@
 
 .status {
   font-size: 16px;
-  text-align:start;
+  text-align: start;
   // margin-top: 4px;
   font-weight: 500;
-
 }
 
 .status-text {
