@@ -3,20 +3,16 @@
  * @author Jagmohan Singh
  */
 
+// import { GiSandsOfTime } from "react-icons/gi";
+// import logo from "../../../images/placeholder.png";
 
-import { GiSandsOfTime } from "react-icons/gi";
-import logo from "../../../images/placeholder.png";
-
+import { useNavigate } from "react-router-dom";
 import { IoImageOutline } from "react-icons/io5";
 
-import { Dispatch, useState } from "react";
-import { connect } from "react-redux";
-
 import "./index.scss";
-import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
 
-type Props = {};
+// type Props = {};
+
 const ItineraryDetailsPage = () => {
   const navigate = useNavigate();
 

@@ -2,10 +2,8 @@
  * This file defines application level constants
  */
 
-
-const S3_URL = process.env.REACT_APP_S3_URL;
-const ASSET_URL = process.env.REACT_APP_ASSET_URL;
-
+const S3_URL = "https://app-onsite.s3.amazonaws.com/development/images/";
+const ASSET_URL = "https://onsite-travel-assets.s3.amazonaws.com/";
 
 export const SERVER_BASE_URL = "http://44.209.25.93:3000/api/";
 
@@ -15,20 +13,6 @@ export const APPLICATION_ROUTES = {
   DASHBOARD: `${SERVER_BASE_URL}specialist/dashboard`,
 
   ITINERARIES: `${SERVER_BASE_URL}itinerary/list`,
-  EDIT_USER: `${SERVER_BASE_URL}admin/editUser`,
-  EXPORT: `${SERVER_BASE_URL}admin/exportCsv`,
-  REPORTED_USERS: `${SERVER_BASE_URL}admin/reportList`,
-  GROUP_LIST: `${SERVER_BASE_URL}admin/eventList`,
-  DELETE_GROUP: `${SERVER_BASE_URL}admin/deleteEvent`,
-  NOTIFICATION_BROADCAST: `${SERVER_BASE_URL}notification/broadcast`,
-  APP_DETAILS: `${SERVER_BASE_URL}appDetail/list`,
-  EDIT_APP_DETAILS: `${SERVER_BASE_URL}appDetail/add`,
-  FAQ_ADD: `${SERVER_BASE_URL}faq/add`,
-  FAQ_DELETE: `${SERVER_BASE_URL}faq/delete`,
-  FAQ_EDIT: `${SERVER_BASE_URL}faq/update`,
-  FAQ_LIST: `${SERVER_BASE_URL}faq/list`,
-  GOOGLE_PLACE: `${SERVER_BASE_URL}admin/googlePlaceDetails`,
-  PLACES_DETAILS: `${SERVER_BASE_URL}admin/placeid`,
 };
 
 export const IMAGE_PREFIXES = {
@@ -39,9 +23,34 @@ export const IMAGE_PREFIXES = {
 
 export const ASSETS = {
   SIGNIN: `${ASSET_URL}signin.png`,
-  CROSS: `${ASSET_URL}cross.png`,
-  LOGO_LOGIN: `${ASSET_URL}logo.png`,
   IMAGE_PLACEHOLDER: `${ASSET_URL}placeholder.png`,
+
+  // APP LOGO & BANNER
+
+  APP_LOGO: `${ASSET_URL}logo.png`,
+  APP_LOGO_BACKGROUND: `${ASSET_URL}ic_login-background.png`,
+
+  // NAVBAR ICONS INACTIVE
+
+  ACCESS_MANAGEMENT_INACTIVE: `${ASSET_URL}ic_access-management-inactive.svg`,
+  CHAT_INACTIVE: `${ASSET_URL}ic_chat-inactive.svg`,
+  DASHBOARD_INACTIVE: `${ASSET_URL}ic_home-inactive.svg`,
+  ITINERARIES_INACTIVE: `${ASSET_URL}ic_itinerary-inactive.svg`,
+  NOTIFICATIONS_INACTIVE: `${ASSET_URL}ic_notification_inactive.svg`,
+  SETTINGS_INACTIVE: `${ASSET_URL}ic_settings-inactive.svg`,
+  TRAVELLERS_INACTIVE: `${ASSET_URL}ic_travellers-inactive.svg`,
+
+  // CHAT SCREEN ICONS
+
+  CHAT_SEND: `${ASSET_URL}ic_send.svg`,
+  CHAT_ADD: `${ASSET_URL}ic_add.svg`,
+
+  // PAGINATION ICONS
+
+  NEXT_PAGE: `${ASSET_URL}ic_next.svg`,
+  PREV_PAGE: `${ASSET_URL}ic_previous.svg`,
+
+  LOGOUT: `${ASSET_URL}ic_logout.svg`,
 };
 
 // ////////// NAVIGATION CONSTANT ///////////
@@ -60,27 +69,29 @@ export const TRAVELER_ITINERARY_DETAILS = {
   ITINERARY: 2,
 };
 
-
-export const ITINERARY_TYPE = [{
-  name: "One Day",
-  value: 1
-},{
-  name: "Domestic Trip",
-  value: 1
-},{
-  name: "International Trip",
-  value: 1
-}]
-
+export const ITINERARY_TYPE = [
+  {
+    name: "One Day",
+    value: 1,
+  },
+  {
+    name: "Domestic Trip",
+    value: 1,
+  },
+  {
+    name: "International Trip",
+    value: 1,
+  },
+];
 
 type tplotOptions = {
-  [key: number]: string
-}
+  [key: number]: string;
+};
 
 export const ITINERARY_STATUS: tplotOptions = {
-	1: "ongoing",
-	2: "upcoming",
-	3: "cancelled",
-	4: "pending",
-	5: "completed",
+  1: "ongoing",
+  2: "upcoming",
+  3: "cancelled",
+  4: "pending",
+  5: "completed",
 };

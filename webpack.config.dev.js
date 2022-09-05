@@ -23,6 +23,7 @@ module.exports = (env) => {
       path: BUILD_DIR,
       assetModuleFilename: "[name][ext]",
       filename: "[name].[contenthash].js",
+
       // sourceMapFilename: "[name].[contenthash].js.map",
     },
 
@@ -48,7 +49,7 @@ module.exports = (env) => {
       },
       historyApiFallback: true,
       compress: true,
-      port: 8001,
+      port: 3000,
       hot: true,
     },
 
@@ -127,7 +128,7 @@ module.exports = (env) => {
       new webpack.ProvidePlugin({ process: "process/browser" }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
-        favicon: "./public/aa.png",
+        favicon: "./public/logo.png",
       }),
     ],
   };

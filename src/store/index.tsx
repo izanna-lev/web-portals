@@ -6,6 +6,7 @@ import profile from "./Slice/profile";
 import dashboard from "./Slice/dashboard";
 import itineraries from "./Slice/itineraries";
 import itineraryDetails from "./Slice/itineraryDetails";
+import { createLogger } from "redux-logger";
 
 export const store = configureStore({
   reducer: {
@@ -17,10 +18,13 @@ export const store = configureStore({
     itineraries: itineraries,
     itineraryDetails: itineraryDetails,
   },
+  devTools: process.env.NODE_ENV !== "production",
+  middleware: (getDefaultMiddleware) =>
+    process.env.NODE_ENV === "production"
+      ? getDefaultMiddleware().concat([])
+      : getDefaultMiddleware().concat(createLogger()),
 });
 
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
 
-export type RootState = ReturnType<typeof store.getState>
-
-
+export type RootState = ReturnType<typeof store.getState>;
