@@ -3,17 +3,17 @@
  * @author Jagmohan Singh
  */
 
-
-import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { useEffect } from "react";
 import "./index.scss";
 
+import { setItineraryDetails } from "../../store/Slice/itineraryDetails";
+import { IMAGE_PREFIXES, ITINERARY_STATUS } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { itineraries } from "../../store/Actions/itineraries";
-import { IMAGE_PREFIXES, ITINERARY_STATUS } from "../../constants";
-import { setItineraryDetails } from "../../store/Slice/itineraryDetails";
+import { Pagination } from "../../components/Pagination";
+import { SerialNum } from "../../util";
 
 const ItineraryPage = () => {
   const navigate = useNavigate();
@@ -21,19 +21,18 @@ const ItineraryPage = () => {
 
   const itinerariesData = useAppSelector((state) => state.itineraries);
 
+  const { page, limit, size, total, list } = itinerariesData;
+
   function updateItineraryDetails(data: any) {
     dispatch(setItineraryDetails(data));
   }
 
   useEffect(() => {
-    dispatch(itineraries({}))
-  }, []);
-
+    dispatch(itineraries());
+  }, [dispatch]);
 
   return (
     <section className="itenaryPage" id="itenaryPage">
-
-
       <div className="yo">
         <div className="dashboard">
           <div className="heading">
@@ -42,9 +41,16 @@ const ItineraryPage = () => {
         </div>
 
         <div className="pagination">
-          <HiOutlineChevronLeft className="left" />
-          <div className="pagination-text">8 of 50</div>
-          <HiOutlineChevronRight className="right" />
+          {list.length
+            ? Pagination({
+                page,
+                limit,
+                total,
+                size,
+                nextPage: () => dispatch(itineraries(page + 1, limit)),
+                previousPage: () => dispatch(itineraries(page - 1, limit)),
+              })
+            : null}
         </div>
       </div>
       <div className="itenary-list">
@@ -75,31 +81,36 @@ const ItineraryPage = () => {
             </tr>
           </thead>
           <tbody>
-            {itinerariesData.list.map((element, index) => {
+            {list.map((item, index) => {
               return (
-                <tr className="table-data-row" key={element._id}>
-                  <td className="table-data">{index + 1}</td>
+                <tr className="table-data-row" key={item._id}>
+                  <td className="table-data">
+                    {SerialNum(limit, page, index)}
+                  </td>
                   <td className="table-data name">
                     <img
                       className="table-user-image"
-                      src={IMAGE_PREFIXES.IMAGE_SMALL + element.image}
+                      src={IMAGE_PREFIXES.IMAGE_SMALL + item.image}
                       alt="user"
                     />
-                    <div className="table-user-name">{element.name}</div>
+                    <div className="table-user-name">{item.name}</div>
                   </td>
-                  <td className="table-data">{element.duration}</td>
-                  <td className="table-data">{element.guests}</td>
-                  <td className="table-data">{moment(element.fromDate).format("D-MMM-YYYY")}</td>
+                  <td className="table-data">{item.duration}</td>
+                  <td className="table-data">{item.guests}</td>
                   <td className="table-data">
-                    <div className="table-data-status">{ITINERARY_STATUS[element.itineraryStatus]}</div>
+                    {moment(item.fromDate).format("D-MMM-YYYY")}
+                  </td>
+                  <td className="table-data">
+                    <div className="table-data-status">
+                      {ITINERARY_STATUS[item.itineraryStatus]}
+                    </div>
                   </td>
                   <td className="table-data">
                     <b
                       className="table-data-details"
                       onClick={() => {
-                        updateItineraryDetails(element)
-                        let path = `/itineraries/${element._id}`;
-                        navigate(path);
+                        updateItineraryDetails(item);
+                        navigate(`/itineraries/${item._id}`);
                       }}
                     >
                       View Details
@@ -114,6 +125,5 @@ const ItineraryPage = () => {
     </section>
   );
 };
-
 
 export default ItineraryPage;

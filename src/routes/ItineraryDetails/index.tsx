@@ -3,40 +3,30 @@
  * @author Jagmohan Singh
  */
 
+import { BsChevronLeft, BsHourglassTop, BsChatRightDots } from "react-icons/bs";
+import ItineraryDetail from "./ItineraryDetail/index";
+import { useAppSelector } from "../../store/hooks";
+import DetailsPage from "./TravelerDetails/index";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import { TRAVELER_ITINERARY_DETAILS } from "../../constants";
-import DetailsPage  from './TravelerDetails/index'
-import ItineraryDetail from './ItineraryDetail/index'
-import { BsChevronLeft, BsHourglassTop, BsChatRightDots } from "react-icons/bs";
-
-import { Dispatch, useState } from "react";
-import { connect } from "react-redux";
-
-import { fetchEntity } from "../../redux/actions";
+import { ITINERARY_STATUS } from "../../constants";
 import "./index.scss";
-import { useParams } from "react-router";
 
-type Props = {
-  triggerFetchEntity: (endpoint: string) => void;
-  fetching: boolean;
-  dashboard: {
-    active: number;
-    blocked: number;
-    deleted: number;
-    pActive: number;
-    pBlocked: number;
-    pDeleted: number;
-    totalClicksOnAds: number;
-  };
-};
 const ItineraryDetailsPage = () => {
   const [getDetail, setDetail] = useState(TRAVELER_ITINERARY_DETAILS.TRAVELER);
-
+  const details = useAppSelector((state) => state.itineraryDetails.data);
+  const navigate = useNavigate();
   return (
     <section className="itineraryDetailPage" id="itineraryDetailPage">
-      <div className="heading">
+      <div
+        className="heading"
+        onClick={() => navigate("/itineraries")}
+        style={{ cursor: "pointer" }}
+      >
         <BsChevronLeft />
-        <div className="heading-text">Itinerary Details</div>
+        <span className="heading-text">Itinerary Details</span>
       </div>
 
       <div className="button">
@@ -62,7 +52,9 @@ const ItineraryDetailsPage = () => {
         <BsHourglassTop className="time-icon" />
         <div className="status-view">
           <div className="status">Status</div>
-          <div className="status-text">Pending</div>
+          <div className="status-text">
+            {ITINERARY_STATUS[details.itineraryStatus || 4]}
+          </div>
         </div>
 
         <div className="chat">
@@ -70,27 +62,14 @@ const ItineraryDetailsPage = () => {
           <div>Chat</div>
         </div>
       </div>
-      
-      { getDetail === TRAVELER_ITINERARY_DETAILS.TRAVELER ? <DetailsPage/> : <ItineraryDetail/>}
+
+      {getDetail === TRAVELER_ITINERARY_DETAILS.TRAVELER ? (
+        <DetailsPage details={details} />
+      ) : (
+        <ItineraryDetail />
+      )}
     </section>
   );
 };
 
-// handles the outgoing dispatches
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-  return {
-    triggerFetchEntity: (endpoint: string) =>
-      dispatch(fetchEntity({ endpoint, payload: {}, page: 1, limit: 10 })),
-  };
-};
-
-// handles incoming state changes
-const mapStateToProps = (state: any) => {
-  const { fetching, dashboard } = state;
-  return { fetching, dashboard };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ItineraryDetailsPage);
+export default ItineraryDetailsPage;

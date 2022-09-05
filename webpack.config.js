@@ -120,7 +120,7 @@ module.exports = (env) => {
       }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
-        favicon: "./public/aa.png",
+        favicon: "./public/logo.png",
         hash: true,
         cache: true,
       }),

@@ -3,26 +3,13 @@
  * @author Jagmohan Singh
  */
 
-
 import { useAppSelector } from "../../store/hooks";
 import { IMAGE_PREFIXES } from "../../constants";
 
 import "./index.scss";
 
 const ProfilePage = () => {
-  const profileData = useAppSelector((state: {
-    profile: {
-      data: {
-        name: string,
-        email: string,
-        phoneNumber: string,
-        picture: string,
-        device: string,
-        fcmToken: string,
-        _id: string,
-      }
-    }
-  }) => state.profile.data);
+  const profileData = useAppSelector((state) => state.profile.data);
 
   return (
     <section className="profilePage" id="profilePage">
@@ -33,7 +20,11 @@ const ProfilePage = () => {
       </div>
 
       <div className="profile">
-        <img className="profile-image" src={IMAGE_PREFIXES.IMAGE_AVERAGE + profileData.picture} alt="signinImage" />
+        <img
+          className="profile-image"
+          src={IMAGE_PREFIXES.IMAGE_AVERAGE + profileData.picture}
+          alt="signinImage"
+        />
         <div className="profile-details">
           <div className="profile-name">{profileData.name}</div>
           <div className="profile-text">{profileData.email}</div>
@@ -43,6 +34,5 @@ const ProfilePage = () => {
     </section>
   );
 };
-
 
 export default ProfilePage;

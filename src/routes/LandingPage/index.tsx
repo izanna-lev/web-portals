@@ -2,33 +2,30 @@
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri"
 
-import LoginSpinner from "../../components/LoginSpinner";
-import Nav from "../nav/index";
-import { login } from "../../store/Actions/login";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import "./index.scss";
+import LoginSpinner from "../../components/LoginSpinner";
+import { login } from "../../store/Actions/login";
 import { ASSETS } from "../../constants";
+import Nav from "../nav/index";
+import "./index.scss";
 
 type Props = {
-  showUserData?: boolean
-}
+  showUserData?: boolean;
+};
 
-const LandingPage = ({showUserData}:Props) => {
-  const navigate = useNavigate();
+const LandingPage = ({ showUserData }: Props) => {
   const [passVisibleStatus, setPassVisibleStatus] = useState(false);
-
+  const accessToken = useAppSelector((state) => state.login.accessToken);
+  const show = useAppSelector((state) => state.loader.value);
   const dispatch = useAppDispatch();
-  const accessToken = useAppSelector((state: { login: { accessToken: string; }; }) => state.login.accessToken);
-  const show = useAppSelector((state: { loader: { value: boolean; }; }) => state.loader.value);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      navigate("/dashboard");
-    }
+    localStorage.getItem("accessToken") && navigate("/dashboard");
   }, [accessToken, navigate]);
 
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
@@ -44,7 +41,7 @@ const LandingPage = ({showUserData}:Props) => {
 
   return (
     <section className="loginPage" id="loginPage">
-      <Nav showUserData={showUserData}/>
+      <Nav showUserData={showUserData} />
       <div className="login">
         <img className="signin-image" src={ASSETS.SIGNIN} alt="signinImage" />
         <div className="login-form">
@@ -99,7 +96,11 @@ const LandingPage = ({showUserData}:Props) => {
             </div>
 
             <div className="button-login">
-              { show ? <LoginSpinner/> : <button className="button">Log In</button> }
+              {show ? (
+                <LoginSpinner />
+              ) : (
+                <button className="button">Log In</button>
+              )}
             </div>
           </form>
         </div>

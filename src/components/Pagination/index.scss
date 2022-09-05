@@ -1,0 +1,18 @@
+@import "../../styles/configs/_fonts.scss";
+@import "../../styles/configs/_colors.scss";
+@import "../../styles/configs/_ui.scss";
+
+.pagination {
+  display: flex;
+  align-items: center;
+
+  &-button {
+    display: flex;
+    margin: 0 5px;
+  }
+
+  &-icon {
+    width: 80%;
+    cursor: pointer;
+  }
+}

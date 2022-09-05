@@ -3,20 +3,19 @@
  * @author Jagmohan Singh
  */
 
-import { GiSandsOfTime } from "react-icons/gi";
-
-import { BsChevronLeft, BsHourglassTop, BsChatRightDots } from "react-icons/bs";
-
-import { Dispatch, useState } from "react";
-import { connect } from "react-redux";
-
+import { useAppSelector } from "../../../store/hooks";
+import moment from "moment";
 import "./index.scss";
-import { useParams } from "react-router";
 
-type Props = {
-};
-const DetailsPage = () => {
+import { IMAGE_PREFIXES } from "../../../constants";
 
+interface Props {
+  details: any;
+}
+
+const DetailsPage = (props: Props) => {
+  const specialist = useAppSelector((state) => state.profile);
+  const { details } = props;
   return (
     <>
       <div className="trip-details">
@@ -24,17 +23,19 @@ const DetailsPage = () => {
         <div className="trip-details-data">
           <div>
             <div className="key">Location</div>
-            <div className="value">Cebu city, LA</div>
+            <div className="value">{details.location.location || "NA"}</div>
           </div>
 
           <div>
             <div className="key">Planned Date</div>
-            <div className="value">12-may-2022</div>
+            <div className="value">
+              {moment(details.toDate).format("DD-MM-YYYY")}
+            </div>
           </div>
 
           <div>
             <div className="key">Traveler/Companions</div>
-            <div className="value">1 Room|2 Adults|2 Children</div>
+            <div className="value">{`${details.rooms} rooms | ${details.plannedTraveller} travellers`}</div>
           </div>
         </div>
         <div className="trip-details-heading">Assigned Specialist</div>
@@ -43,17 +44,18 @@ const DetailsPage = () => {
           <div className="assigned-specialist">
             <img
               className="specialist-image"
-              src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
+              src={`${IMAGE_PREFIXES.IMAGE_SMALL}${specialist.data.picture}`}
               alt="signinImage"
             />
             <div className="specialist-details">
-              <div className="key">Steven Walter</div>
-              <div className="specialist-detail value">+01-943-432-4317</div>
+              <div className="key">{specialist.data.name || "NA"}</div>
+              <div className="specialist-detail value">
+                {specialist.data.phoneNumber || "NA"}
+              </div>
             </div>
           </div>
         </div>
       </div>
-
 
       <div className="trip-details">
         <div className="trip-details-heading">Travler Details</div>
@@ -68,9 +70,8 @@ const DetailsPage = () => {
             <div className="value">ewilliam2@gmail.com</div>
           </div>
         </div>
-
       </div>
-      </>
+    </>
   );
 };
 
@@ -86,4 +87,4 @@ const DetailsPage = () => {
 //   return { fetching, dashboard };
 // };
 
-export default DetailsPage
+export default DetailsPage;

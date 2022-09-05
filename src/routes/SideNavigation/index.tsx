@@ -7,6 +7,9 @@ import LoadingOverlay from "../../components/LoadingOverlay";
 import "./index.scss";
 import Nav from "../nav/index";
 import { useAppSelector } from "../../store/hooks";
+import { useNavigate } from "react-router-dom";
+
+import { useEffect } from "react";
 
 type Props = {
   navPaths: Array<{
@@ -20,7 +23,12 @@ type Props = {
 };
 
 const SideNavigationPage = ({ navPaths }: Props) => {
-  const show = useAppSelector(state => state.loader.value)
+  const show = useAppSelector((state) => state.loader.value);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.accessToken) navigate("/login", { replace: true });
+  }, [navigate]);
 
   return (
     <div className="screen">
@@ -37,7 +45,7 @@ const SideNavigationPage = ({ navPaths }: Props) => {
                     to={item.path}
                     style={({ isActive }) => ({
                       color: isActive ? "#0b9dd8" : "#ffffff",
-                      "backgroundColor": isActive ? "#ffffff" : "#0b9dd8",
+                      backgroundColor: isActive ? "#ffffff" : "#0b9dd8",
                     })}
                   >
                     {item.icon}

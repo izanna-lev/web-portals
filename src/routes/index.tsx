@@ -1,19 +1,19 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import loadable from "@loadable/component";
-import { Provider } from "react-redux";
-import { store } from "../store/index";
 import { BiHome, BiConversation, BiUser } from "react-icons/bi";
 import { RiTodoLine } from "react-icons/ri";
+import loadable from "@loadable/component";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
+const ItineraryDetailsPage = loadable(() => import("./ItineraryDetails/index"));
+const SideNavigation = loadable(() => import("./SideNavigation/index"));
+const NavBar = loadable(() => import("./CreateItinerary/Nav/index"));
+const ItineraryPage = loadable(() => import("./Itineraries/index"));
 const LandingPage = loadable(() => import("./LandingPage/index"));
 const DashboardPage = loadable(() => import("./Dashboard/index"));
-const ItineraryPage = loadable(() => import("./Itineraries/index"));
-const SideNavigation = loadable(() => import("./SideNavigation/index"));
-const ItineraryDetailsPage = loadable(() => import("./ItineraryDetails/index"));
 const ProfilePage = loadable(() => import("./Profile/index"));
 const ChatPage = loadable(() => import("./Chat/index"));
-const Nav = loadable(() => import("./CreateItinerary/Nav/index"));
 
 const AddItineraryPage = loadable(
   () => import("./CreateItinerary/AddItineraryDetails/index")
@@ -105,15 +105,16 @@ export default () => {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LandingPage />} />
+          <Route path="/login" element={<LandingPage showUserData={false} />} />
           <Route path="/" element={<SideNavigation navPaths={paths} />}>
+            <Route index element={<DashboardPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="/itineraries">
+            <Route path="itineraries">
               <Route index element={<ItineraryPage />} />
               <Route path=":id" element={<ItineraryDetailsPage />} />
               <Route
                 path="1/create"
-                element={<Nav steps={createItinerarySteps} />}
+                element={<NavBar steps={createItinerarySteps} />}
               >
                 <Route path="1" element={<AddItineraryPage />} />
                 <Route path="2" element={<AddTransportationPage />} />

@@ -1,5 +1,10 @@
 @import "../../styles/globals.scss";
 
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .itenaryPage {
   height: calc(92vh - 16px);
   margin-top: 16px;
@@ -60,6 +65,8 @@
   margin-top: 12px;
   overflow-y: auto;
   height: calc(92vh - 124px);
+  display: flex;
+  flex-direction: column;
 }
 
 .itenary-list thead {
