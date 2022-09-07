@@ -1,0 +1,25 @@
+@import "../../styles/configs/_fonts.scss";
+@import "../../styles/configs/_colors.scss";
+@import "../../styles/configs/_ui.scss";
+
+.navigation {
+  &-sidebar {
+    min-width: 220px;
+    padding-top: 20px;
+    background-color: $theme_color_blue;
+  }
+}
+
+.small-navigation-sidebar {
+  min-width: 75px;
+
+  a {
+    span {
+      font-size: 0;
+    }
+
+    img {
+      margin: auto;
+    }
+  }
+}

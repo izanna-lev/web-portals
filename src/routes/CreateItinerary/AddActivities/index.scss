@@ -2,8 +2,8 @@
 
 .AddActivitiesPage {
   height: calc(92vh - 158px);
-  margin-top: 16px;
-  margin-left: 8px;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -17,8 +17,8 @@
     $theme_color_light_blue
   );
   display: grid;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
   grid-template-columns: 0.25fr 0.75fr 0.9fr 0.6fr 0.6fr 0.9fr 1fr 1fr;
   align-items: center;
 }
@@ -34,10 +34,10 @@
 }
 
 .add-activities > div {
-  font-size: 12px;
-  margin-left: 8px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .forms {
@@ -51,18 +51,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $theme_color_blue !important;
+  background: $light_blue !important;
 }
 
 .add-activities .day-blank {
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-left: 0px;
   width: 100%;
   display: flex;
   align-items: center;
   padding: 4px;
   height: 100%;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 input::-webkit-outer-spin-button,
@@ -73,13 +73,13 @@ input::-webkit-inner-spin-button {
 
 .edit-background {
   border: 2px solid $theme_color_blue;
-  background-color: $theme_color_white;
+  background-color: $white;
 }
 
 input:focus {
   outline: none;
   border: 2px solid $theme_color_light_blue;
-  background-color: $theme_color_white;
+  background-color: $white;
 }
 
 .fixed-background {
@@ -90,17 +90,17 @@ input:focus {
 .day-blank.image {
   justify-content: space-around;
   background-color: $theme_color_light_blue_3x;
-}
 
-.not-selected-preview {
-  width: 80%;
-  height: 70%;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid $theme_color_blue;
-  border-radius: 8px;
+  .not-selected-preview {
+    width: 80%;
+    height: 70%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $theme_color_blue;
+    border-radius: 0.5rem;
+  }
 }
 
 .activity-image-preview {
@@ -108,7 +108,7 @@ input:focus {
   max-height: 78px;
   justify-self: center;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .activity-image-placeholder {
@@ -120,17 +120,17 @@ input:focus {
 .add-activity-buttons {
   display: flex;
   flex-basis: auto;
-  height: 40px;
+  height: 2.5rem;
   justify-content: center;
   align-items: center;
   padding: 4px;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .activity-button {
   display: flex;
   height: 28px;
-  gap: 8px;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   flex: 1;
@@ -138,7 +138,7 @@ input:focus {
 
 .activity-button.edit {
   border: 2px solid $theme_color_blue;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .activity-button > div {
@@ -147,18 +147,18 @@ input:focus {
 
 .activity-button.delete {
   background-color: red;
-  color: $theme_color_white;
-  border-radius: 8px;
+  color: $white;
+  border-radius: 0.5rem;
 }
 
 .add-more-error {
-  font-size: 8px;
+  font-size: 0.5rem;
   color: red;
 }
 
 .add-more {
   font-size: 14px;
   font-weight: 500;
-  margin-top: 8px;
+  margin-top: 0.5rem;
   cursor: pointer;
 }

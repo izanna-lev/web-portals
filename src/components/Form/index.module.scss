@@ -1,5 +1,5 @@
-@import "../../styles/globals";
-
+@import "../../styles/configs/colors";
+@import "../../styles/configs/ui";
 
 .add-itinerary-data-form {
   position: fixed;
@@ -12,12 +12,11 @@
   align-items: center;
 }
 
-
 .form-background {
   width: 88vw;
   height: 90vh;
-  border-radius: 12px;
-  background-color: $theme_color_white;
+  border-radius: 0.75rem;
+  background-color: $white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,23 +28,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   gap: 4px;
   position: relative;
 }
 
-
-.form-image{
+.form-image {
   margin-left: 0px;
   width: 20%;
   display: flex;
   align-items: center;
   padding: 4px;
   height: 15%;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   justify-content: space-around;
-  background-color: $theme_color_light_blue_3x
+  background-color: $theme_color_light_blue_3x;
 }
 
 .form-image > .not-selected-preview {
@@ -55,7 +53,7 @@
   align-self: center;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .activity-image-placeholder {
@@ -80,15 +78,15 @@
 }
 
 .cross {
-  width: 24px;
-  height: 24px;
-  color: $theme_color_white;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $white;
   background-color: $theme_color_dark_grey;
   border-radius: 50%;
   justify-self: end;
   align-self: baseline;
-  margin-top: 32px;
-  margin-left: 12px;
+  margin-top: 2rem;
+  margin-left: 0.75rem;
 }
 
 .button-save {
@@ -107,14 +105,14 @@
   align-items: center;
   margin: 0 auto;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   transition: all 1.5s ease-out;
   background-color: $theme_color_light_blue;
   background-size: 120% auto;
   color: $theme_color_3;
   font-size: large;
   -webkit-transition: 1s;
-  box-shadow:0px 0px 15px 0 rgba(0,0,0,.1);
+  box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, 0.1);
 }
 
 .form-button-text:hover {

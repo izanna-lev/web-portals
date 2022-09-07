@@ -2,7 +2,7 @@ import { RootState } from "..";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { APPLICATION_ROUTES } from "../../constants";
+import { API } from "../../constants";
 
 import { setLoader } from "../Slice/loader";
 import { setItineraries } from "../Slice/itineraries";
@@ -19,7 +19,7 @@ export const itineraries = (
     try {
       dispatch(setLoader(true));
       const response = await axios.post(
-        APPLICATION_ROUTES.ITINERARIES,
+        API.ITINERARIES,
         { page, limit },
         {
           headers: {

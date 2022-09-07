@@ -1,10 +1,12 @@
-@import "../../styles/globals.scss";
+@import "../../styles/configs/_fonts.scss";
+@import "../../styles/configs/_colors.scss";
+@import "../../styles/configs/_ui.scss";
 
 .profilePage {
-  height: calc(92vh - 16px);
-  margin-top: 16px;
-  margin-left: 16px;
-  margin-right: 16px;
+  height: calc(92vh - 1rem);
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   overflow: auto;
 }
 
@@ -43,8 +45,8 @@
   width: fit-content;
   padding: 28px 68px;
   gap: 6px;
-  border-radius: 8px;
-  color: $theme_color_white;
+  border-radius: 0.5rem;
+  color: $white;
   align-items: center;
   max-height: fit-content;
   background-color: $theme_color_blue;

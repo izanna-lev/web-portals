@@ -2,8 +2,8 @@
 
 .AddActivitiesPage {
   height: calc(92vh - 158px);
-  margin-top: 16px;
-  margin-left: 8px;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
 
 .TransportationOptions {
   display: flex;
-  margin: 10px 0 10px 8px;
+  margin: 10px 0 10px 0.5rem;
   background-color: #f0eded;
   width: fit-content;
   border-radius: 5px;

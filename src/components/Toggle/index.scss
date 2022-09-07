@@ -1,20 +1,20 @@
-@import "../../styles/globals";
-
+@import "../../styles/configs/colors";
+@import "../../styles/configs/ui";
 
 .input-toggle-form {
   display: flex;
   width: 100%;
-  height: 48px;
-  margin-top: 16px;
+  height: 3rem;
+  margin-top: 1rem;
   flex-direction: row;
   justify-content: space-between;
 }
 
 .feild-heading {
-  margin-top: 4px;
+  margin-top: 0.5rem;
   height: 20px;
-  font-size: 12px;
-  padding: 4px 0px;
+  font-size: 0.9rem;
+  padding: 0 0 0.5rem;
   font-weight: 600;
 }
 
@@ -23,7 +23,7 @@
   -moz-appearance: none;
   appearance: none;
   width: 62px;
-  height: 32px;
+  height: 2rem;
   display: inline-block;
   position: relative;
   border-radius: 50px;
@@ -33,6 +33,12 @@
   cursor: pointer;
   background-color: $theme_color_light_blue_3x;
   transition: background-color ease 0.3s;
+
+  &:focus {
+    background-color: $theme_color_light_blue_3x;
+    outline: none;
+    border: none;
+  }
 }
 
 .field-toggle-value:before {
@@ -52,9 +58,9 @@
   text-indent: -22px;
   word-spacing: 37px;
   color: #fff;
-  text-shadow: -1px -1px rgba(0,0,0,0.15);
+  text-shadow: -1px -1px rgba(0, 0, 0, 0.15);
   white-space: nowrap;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
 }
 
@@ -63,5 +69,5 @@
 // }
 
 .field-toggle-value:checked:before {
-  left: 32px;
+  left: 2rem;
 }

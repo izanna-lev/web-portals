@@ -1,4 +1,5 @@
-@import "../../styles/globals";
+@import "../../styles/configs/colors";
+@import "../../styles/configs/ui";
 
 .image-popup-container {
   position: absolute;
@@ -13,7 +14,7 @@
 .image-popup {
   width: 40rem;
   height: 25rem;
-  background-color: $theme_color_white;
+  background-color: $white;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -24,13 +25,13 @@
 .popup-background {
   max-width: 33rem;
   max-height: 20rem;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   margin: 1rem;
 }
 
 .cross {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   color: #ffffff;
   background-color: #484848;
   border-radius: 50%;

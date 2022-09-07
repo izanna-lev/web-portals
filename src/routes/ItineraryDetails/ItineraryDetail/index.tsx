@@ -17,42 +17,27 @@ const ItineraryDetailsPage = () => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <div className="itinerary-details">
-        <div className="itinerary-details-heading">Itinerary Details</div>
-        <div className="no-itenary">
-          <div className="image-background">
-            <IoImageOutline className="image" />
-          </div>
-          <div className="itinerary-heading">No itenary created</div>
-          <div className="itinerary-text">
-            Please create itinerary for the user below.
-          </div>
-          <div
-            className="button-text create-itinerary"
-            onClick={() => {
-              let path = `/itineraries/1/create`;
-              navigate(path);
-            }}
-          >
-            Create Itinerary
-          </div>
+    <section className="itinerary-details">
+      <div className="itinerary-details-heading">Itinerary Details</div>
+      <div className="no-itenary">
+        <div className="image-background">
+          <IoImageOutline className="image" />
+        </div>
+        <div className="itinerary-heading">No Itinerary Created</div>
+        <div className="itinerary-text">
+          Please create itinerary for the user below.
+        </div>
+        <div
+          className="create-itinerary-btn"
+          onClick={() => {
+            navigate("/itinerary/create");
+          }}
+        >
+          Create Itinerary
         </div>
       </div>
-    </>
+    </section>
   );
 };
-
-// handles the outgoing dispatches
-// const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-//   return {
-//   };
-// };
-
-// handles incoming state changes
-// const mapStateToProps = (state: any) => {
-//   const { fetching, dashboard } = state;
-//   return { fetching, dashboard };
-// };
 
 export default ItineraryDetailsPage;

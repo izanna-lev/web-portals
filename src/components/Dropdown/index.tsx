@@ -1,24 +1,25 @@
 import "./index.scss";
 
 type InputProps = {
-  name: string,
-  inputFeilds: Array<{
-    name: string
+  name: string;
+  inputFields: Array<{
+    name: string;
     value: number;
   }>;
+  refe: any;
 };
 
-const Dropdown = ({inputFeilds, name}:InputProps) => {
+const Dropdown = ({ inputFields, name, refe }: InputProps) => {
   return (
     <div className="input-form">
       <div className="feild-heading">{name}</div>
-      <select className="field-value">
-    {inputFeilds.map((element) => {
-      return (
-    <option value={element.value}>{element.name}</option>
-      )
-    })}
-    </select>
+      <select className="field-value" ref={refe}>
+        {inputFields.map((element, index) => (
+          <option value={element.value} key={index}>
+            {element.name}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };

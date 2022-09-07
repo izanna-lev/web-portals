@@ -1,23 +1,25 @@
-import styles from "./index.module.scss"
+import styles from "./index.module.scss";
 
 type InputProps = {
-  inputFeilds: {
-    name: string
-    maxlength: number
-    type: string
-    id: string
-    max?: number
-  }
-}
+  inputFields: {
+    name: string;
+    maxlength: number;
+    type: string;
+    id: string;
+    max?: number;
+    ref?: any;
+  };
+};
 
-const TextArea = ({inputFeilds}:InputProps) => {
+const TextArea = ({ inputFields }: InputProps) => {
   return (
     <div className={styles["input-form"]}>
-      <div className={styles["feild_heading"]}>{inputFeilds.name}</div>
+      <div className={styles["feild_heading"]}>{inputFields.name}</div>
       <textarea
-        name={inputFeilds.id}
-        maxLength={inputFeilds.maxlength}
+        name={inputFields.id}
+        maxLength={inputFields.maxlength}
         className={styles["textarea-value"]}
+        ref={inputFields.ref}
         autoFocus
         required
       />
