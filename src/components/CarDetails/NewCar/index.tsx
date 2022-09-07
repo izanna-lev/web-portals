@@ -8,7 +8,7 @@ import ImagePopup from "../../ImagePopup";
 import React, { useState, useEffect } from "react";
 
 interface InputProps {
-  inputFeilds: {
+  inputFields: {
     name: string;
     maxlength: number;
     type: string;
@@ -82,7 +82,7 @@ const UserTicket = (
         </div>
       </div>
       <InputForm
-        inputFeilds={{
+        inputFields={{
           name: `Name of Driver`,
           id: "drivername",
           maxlength: 50,
@@ -125,7 +125,7 @@ const NewTransportationForm = (props: props) => {
           <div className={styles["form-required-feilds"]}>
             <div className={styles["form-left-details"]}>
               <InputForm
-                inputFeilds={{
+                inputFields={{
                   name: "Day",
                   id: "day",
                   maxlength: 30,
@@ -133,7 +133,7 @@ const NewTransportationForm = (props: props) => {
                 }}
               />
               <InputForm
-                inputFeilds={{
+                inputFields={{
                   name: "Pickup Location",
                   id: "pickupLocation",
                   maxlength: 70,
@@ -142,7 +142,7 @@ const NewTransportationForm = (props: props) => {
               />
 
               <InputForm
-                inputFeilds={{
+                inputFields={{
                   name: "Pickup Date",
                   id: "date",
                   maxlength: 30,
@@ -150,7 +150,7 @@ const NewTransportationForm = (props: props) => {
                 }}
               />
               <InputForm
-                inputFeilds={{
+                inputFields={{
                   name: "Pickup Time",
                   id: "time",
                   maxlength: 30,
@@ -160,7 +160,7 @@ const NewTransportationForm = (props: props) => {
             </div>
             <div className={styles["form-left-details"]}>
               <InputForm
-                inputFeilds={{
+                inputFields={{
                   name: "Dropoff Location",
                   id: "dropoffLocation",
                   maxlength: 70,
@@ -169,7 +169,7 @@ const NewTransportationForm = (props: props) => {
               />
 
               <TextArea
-                inputFeilds={{
+                inputFields={{
                   name: "Specialist Note",
                   id: "specialist note",
                   maxlength: 350,
@@ -192,7 +192,7 @@ const NewTransportationForm = (props: props) => {
             ))}
             <div className={styles["form-left-details"]}>
               <InputForm
-                inputFeilds={{
+                inputFields={{
                   name: `No of users travelling`,
                   id: "usersTravelling",
                   maxlength: 50,

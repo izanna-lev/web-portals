@@ -1,107 +1,77 @@
-@import "../../styles/globals.scss";
+@import "../../styles/configs/_colors.scss";
+@import "../../styles/configs/_ui.scss";
 
-* {
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.statsPage {
-  height: calc(92vh - 16px);
-  margin-top: 16px;
-  margin-left: 16px;
-  margin-right: 16px;
-}
-
-.dashboard {
-  display: grid;
+@mixin flexAlignCenter {
+  display: flex;
   align-items: center;
 }
 
-.heading {
-  display: grid;
-  align-items: center;
-  height: 60px;
-}
-
-.stats {
-  margin-top: 32px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
+.dashboard-stats {
+  height: 14rem;
+  margin: 1.5rem auto;
   justify-items: center;
-  height: 200px;
-  margin-left: 60px;
-  margin-right: 60px;
-  margin-bottom: 32px;
+  min-width: fit-content;
+  @include flexAlignCenter();
+  justify-content: space-evenly;
 }
 
-.stat-box {
-  width: 260px;
-  height: 160px;
+.card-container {
+  margin: 1rem;
+  width: 16rem;
+  height: 10rem;
+  color: $white;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  min-width: fit-content;
+  flex-direction: column;
+  justify-content: center;
+  @include flexAlignCenter();
   background-color: $theme_color_light_blue;
-  display: grid;
-  justify-items: center;
-  align-items: end;
-  row-gap: 12px;
-  border-radius: 20px;
 }
 
-.feild-number {
-  font-size: xx-large;
-  color: $theme_color_white;
+.card-value {
+  font-size: 2rem;
   font-weight: 700;
 }
 
-.feild-name {
-  font-size: larger;
-  align-self: start;
-  color: $theme_color_white;
+.card-title {
+  font-size: 1.5rem;
 }
 
-.pending {
-  justify-self: end;
-}
-
-.completed {
-  justify-self: start;
-}
-
-.rating {
-  height: 48px;
+.rating-text {
+  font-size: 1rem;
+  height: 3rem;
+  padding-left: 1rem;
   background-image: linear-gradient(
     to right,
     $theme_color_lime,
     $theme_color_light_blue
   );
-  border-radius: 8px;
-  margin-bottom: 32px;
-}
-
-.rating-text {
-  font-size: large;
-  margin-left: 20px;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  @include flexAlignCenter();
 }
 
 .overall-ratings {
   width: 80%;
-  margin: 0 auto;
-  border-radius: 8px;
-  background-color: $theme_color_light_blue_2x;
-  max-height: 200px;
   display: grid;
+  margin: 0 auto;
+  max-height: 15rem;
   align-items: center;
   justify-items: center;
+  border-radius: 1.5rem;
+  background-color: $theme_color_light_blue_2x;
 }
 
 .stars {
-  margin-top: 32px;
+  gap: 1rem;
   display: grid;
-  gap: 12px;
+  margin-top: 2rem;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .star-icon {
-  font-size: 24px;
+  font-size: 1.5rem;
   svg {
     height: 100%;
     width: 100%;
@@ -109,15 +79,15 @@
 }
 
 .overall-experience {
-  margin-top: 8px;
   font-weight: 500;
   font-size: x-large;
+  margin-top: 0.5rem;
 }
 
 .experience-note {
-  max-width: 380px;
-  margin-top: 12px;
-  margin-bottom: 32px;
+  max-width: 25rem;
+  margin-top: 0.75rem;
+  margin-bottom: 2rem;
   text-align: center;
   font-size: medium;
   color: $theme_color_8;

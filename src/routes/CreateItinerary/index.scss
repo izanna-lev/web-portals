@@ -1,11 +1,9 @@
-@import "../../../styles/globals.scss";
+@import "../../styles/configs/_colors.scss";
+@import "../../styles/configs/_ui.scss";
 
-.createItineraryDetailPage {
-  height: calc(92vh - 16px);
-  margin-top: 16px;
-  margin-right: 16px;
-  display: flex;
-  flex-direction: column;
+#itineraryDetailPage {
+  display: grid;
+  grid-template-rows: 1fr 2fr 12fr;
 }
 
 .nav-heading {
@@ -19,64 +17,57 @@
 
 .createItineraryNav {
   width: 100%;
-  height: 88px;
-  border-top-right-radius: 50%;
-  margin-left: 16px;
-  justify-self: center;
-  align-self: center;
   display: grid;
+  height: 5.5rem;
+  min-width: 54rem;
+  align-self: center;
+  border-radius: 0.5rem;
+  justify-self: center;
   grid-template-columns: repeat(7, 1fr);
   background-image: linear-gradient(
     to right,
     $theme_color_light_lime,
     $theme_color_light_blue_2x
   );
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
 }
 
 .form-request {
-  font-size: 12px;
-  margin: 4px 8px 0px 8px;
+  font-size: 0.75rem;
+  margin: 4px 0.5rem 0px 0rem;
 }
 
 .step {
-  height: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  justify-items: center;
   align-items: center;
-  border-top-left-radius: 8px;
-}
-
-.step {
-  border-radius: 18px;
+  justify-items: center;
+  grid-template-rows: 1fr 1fr;
 }
 
 .step-number-background {
   width: 100%;
   height: 100%;
-  background-color: $theme_color_white;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: $white;
 }
 
 .step-number {
-  align-self: flex-end;
-  width: 24px;
-  height: 24px;
-  text-align: center;
+  width: 1.5rem;
+  height: 1.5rem;
   border: 2px solid $theme_color_blue;
   color: $theme_color_dark_grey;
   border-radius: 50%;
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .step-name-background {
   width: 100%;
   height: 100%;
   display: flex;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   justify-content: center;
   text-decoration: none;
 }
@@ -86,12 +77,17 @@
   align-self: center;
   justify-self: center;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 0.8rem;
   text-decoration: none;
 }
 
 .step > .selected {
   background-color: $theme_color_blue;
-  color: $theme_color_white;
-  border-radius: 8px;
+  color: $white;
+  border-radius: 0.5rem;
+}
+
+.tab-active {
+  color: #000000;
+  background-color: #73d8bb;
 }

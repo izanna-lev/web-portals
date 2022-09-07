@@ -1,0 +1,128 @@
+button {
+  transition: $global_transition;
+  cursor: pointer;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  min-width: 130px;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: default;
+    color: inherit !important;
+    background-color: inherit !important;
+  }
+}
+
+.view-button {
+  border: 1px solid $blue;
+  color: $blue;
+  transform: $global_transition !important;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $blue !important;
+    color: $white !important;
+  }
+}
+
+.block-button {
+  background-color: $white;
+  border: 1px solid $blue !important;
+  border-radius: 20px;
+
+  &:hover {
+    color: $blue !important;
+    background-color: $white !important;
+  }
+}
+
+.blocked-button {
+  color: $white;
+  background-color: $blue;
+  border: 5px solid $blue !important;
+
+  &:hover {
+    color: $blue !important;
+    background-color: $white !important;
+  }
+}
+
+.delete-button {
+  border: 1px solid $blue;
+  color: $blue;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $blue !important;
+    color: $white !important;
+  }
+}
+
+.notifications-send-btn {
+  width: 100%;
+  height: 50px;
+  color: white;
+  font-size: 18px;
+  margin-top: 2.5rem;
+  background: $blue;
+  border-radius: 10px;
+  border: 0;
+
+  &:hover {
+    color: $blue;
+    background: white;
+    border: 1px solid;
+  }
+}
+
+.selection-btn {
+  height: 35px;
+  font-size: 13px;
+  padding: 0 15px;
+  color: $blue;
+  margin-left: 10px;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid $blue;
+
+  &:hover {
+    color: white;
+    background: $blue;
+  }
+
+  &-active {
+    height: 35px;
+    color: white;
+    font-size: 13px;
+    padding: 0 15px;
+    margin-left: 10px;
+    background: $blue;
+    border-radius: 10px;
+    border: 0;
+
+    &:hover {
+      color: $blue;
+      background: white;
+      border: 1px solid;
+    }
+  }
+}
+
+.no-border {
+  border: none !important;
+  &:hover {
+    background-color: $white !important;
+    color: $blue !important;
+  }
+}

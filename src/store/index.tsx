@@ -1,22 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import login from "./Slice/login";
-import loader from "./Slice/loader";
-import popup from "./Slice/popup";
-import profile from "./Slice/profile";
-import dashboard from "./Slice/dashboard";
-import itineraries from "./Slice/itineraries";
-import itineraryDetails from "./Slice/itineraryDetails";
 import { createLogger } from "redux-logger";
+
+import * as reducers from "./Slice/AllReducers";
 
 export const store = configureStore({
   reducer: {
-    login: login,
-    loader: loader,
-    popup: popup,
-    profile: profile,
-    dashboard: dashboard,
-    itineraries: itineraries,
-    itineraryDetails: itineraryDetails,
+    dashboard: reducers.dashboard,
+    itineraries: reducers.itineraries,
+    itineraryDetails: reducers.itineraryDetails,
+    loader: reducers.loader,
+    login: reducers.login,
+    popup: reducers.popup,
+    profile: reducers.profile,
+    navigation: reducers.navigation,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>

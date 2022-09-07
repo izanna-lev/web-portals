@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { API } from "../../constants";
 
 interface detailsObject {
   name?: string;
@@ -20,24 +21,23 @@ interface detailsObject {
   guests?: number;
 }
 
-interface ItinerariesState {
-  data: detailsObject;
-}
-
-const initialState: ItinerariesState = {
-  data: {},
-};
+const initialState: detailsObject = {};
 
 const itineraryDetails = createSlice({
   name: "itineraryDetails",
   initialState,
   reducers: {
     setItineraryDetails: (
-      state: { data: detailsObject },
+      state: detailsObject,
       action: { payload: detailsObject }
     ) => {
-      state.data = action.payload;
+      Object.assign(state, action.payload);
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(API.ITINERARY_DETAILS, (state, action: any) => {
+      Object.assign(state, action.payload);
+    });
   },
 });
 

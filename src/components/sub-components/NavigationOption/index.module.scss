@@ -1,0 +1,26 @@
+@import "../../../styles/configs/_fonts.scss";
+@import "../../../styles/configs/_colors.scss";
+@import "../../../styles/configs/_ui.scss";
+
+.sidebar {
+  &-item {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    color: $white;
+  }
+
+  &-icon {
+    margin: auto 10px auto 20px;
+  }
+}
+
+.sidebar-item:hover,
+.item-active {
+  background: $white;
+  color: $light-blue;
+  img {
+    filter: invert(61%) sepia(52%) saturate(4519%) hue-rotate(162deg)
+      brightness(89%) contrast(92%);
+  }
+}

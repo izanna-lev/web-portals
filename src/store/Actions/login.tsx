@@ -2,7 +2,7 @@ import { RootState } from "..";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { APPLICATION_ROUTES } from "../../constants";
+import { API } from "../../constants";
 
 import { setLoader } from "../Slice/loader";
 import { setPopup } from "../Slice/popup";
@@ -22,7 +22,7 @@ export const login = ({
   ) => {
     try {
       dispatch(setLoader(true));
-      const response = await axios.post(APPLICATION_ROUTES.LOGIN, {
+      const response = await axios.post(API.LOGIN, {
         email,
         password,
       });

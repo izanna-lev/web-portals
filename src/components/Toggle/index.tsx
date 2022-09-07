@@ -1,20 +1,22 @@
 import "./index.scss";
 
 type InputProps = {
-  inputFeilds: {
-    name: string
-    type: string
-    id: string
-  }
-}
+  inputFields: {
+    name: string;
+    type: string;
+    id: string;
+    ref?: any;
+  };
+};
 
-const Toggle = ({inputFeilds}:InputProps) => {
+const Toggle = ({ inputFields }: InputProps) => {
   return (
     <div className="input-toggle-form">
-      <div className="feild-heading">{inputFeilds.name}</div>
+      <div className="feild-heading">{inputFields.name}</div>
       <input
-        name={inputFeilds.id}
-        type={inputFeilds.type}
+        name={inputFields.id}
+        type={inputFields.type}
+        ref={inputFields.ref}
         className="field-toggle-value"
         autoFocus
         required

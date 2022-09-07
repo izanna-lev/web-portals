@@ -4,7 +4,7 @@
  */
 
 import { useAppSelector } from "../../store/hooks";
-import { IMAGE_PREFIXES } from "../../constants";
+import { IMAGE } from "../../constants";
 
 import "./index.scss";
 
@@ -12,26 +12,28 @@ const ProfilePage = () => {
   const profileData = useAppSelector((state) => state.profile.data);
 
   return (
-    <section className="profilePage" id="profilePage">
-      <div className="dashboard">
-        <div className="heading">
-          <div className="heading-text">Profile</div>
-        </div>
-      </div>
+    <main className="content-container" id="profilePage">
+      <section className="content-top">
+        <h2 className="content-heading">Profile</h2>
+      </section>
 
-      <div className="profile">
+      <section className="profile">
         <img
           className="profile-image"
-          src={IMAGE_PREFIXES.IMAGE_AVERAGE + profileData.picture}
-          alt="signinImage"
+          src={IMAGE.AVERAGE + profileData.picture}
+          alt={profileData.name}
         />
         <div className="profile-details">
-          <div className="profile-name">{profileData.name}</div>
-          <div className="profile-text">{profileData.email}</div>
-          <div className="profile-text">{profileData.phoneNumber}</div>
+          <h4 className="profile-name">{profileData.name}</h4>
+          <a href={`mailto:${profileData.email}`} className="profile-text">
+            {profileData.email}
+          </a>
+          <a href={`tel:${profileData.phoneNumber}`} className="profile-text">
+            {profileData.phoneNumber}
+          </a>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 

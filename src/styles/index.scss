@@ -1,31 +1,53 @@
-@import "globals";
+@import "./globals.scss";
 
 * {
   margin: $global_margin;
   padding: $global_padding;
-  transition: $global_transition;
-  -moz-transition: $global_transition;
-  -webkit-transition: $global_transition;
-  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1rem;
 }
 
 body {
-  background: #fafafa;
+  width: 100vw;
+  height: 100vh;
+  direction: ltr;
+  line-height: 1.5;
+  font-family: $font-sans-serif;
 
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  overflow-x: hidden;
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  // .css-lj0up9,
-  // [data-css-lj0up9] {
-  // background-color: #00a0ad !important;
-  //   }
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+// input[type="time"]::-webkit-calendar-picker-indicator {
+//   // background: none;
+//   display: none;
+// }
+
+// input[type="number"]::-webkit-inner-spin-button,
+// input[type="number"]::-webkit-outer-spin-button {
+//   -webkit-appearance: none;
+//   margin: 0;
+// }
+// overflow-x: hidden;
+
+// .css-lj0up9,
+// [data-css-lj0up9] {
+// background-color: #00a0ad !important;
+// }

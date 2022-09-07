@@ -1,4 +1,5 @@
-@import "../../../styles/globals";
+@import "../../../styles/configs/colors";
+@import "../../../styles/configs/ui";
 
 .add-itinerary-data-form {
   position: fixed;
@@ -14,8 +15,8 @@
 .form-background {
   width: 70vw;
   height: 90vh;
-  border-radius: 12px;
-  background-color: $theme_color_white;
+  border-radius: 0.75rem;
+  background-color: $white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   gap: 4px;
   position: relative;
@@ -40,7 +41,7 @@
   align-items: center;
   padding: 4px;
   height: 60px;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   justify-content: space-around;
   background-color: $theme_color_light_blue_3x;
 }
@@ -52,7 +53,7 @@
   align-self: center;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .activity-image-placeholder {
@@ -86,15 +87,15 @@
 }
 
 .cross {
-  width: 24px;
-  height: 24px;
-  color: $theme_color_white;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $white;
   background-color: $theme_color_dark_grey;
   border-radius: 50%;
   justify-self: end;
   align-self: baseline;
-  margin-top: 32px;
-  margin-left: 12px;
+  margin-top: 2rem;
+  margin-left: 0.75rem;
 }
 
 .button-save {
@@ -113,7 +114,7 @@
   align-items: center;
   margin: 0 auto;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   transition: all 1.5s ease-out;
   background-color: $theme_color_light_blue;
   background-size: 120% auto;
@@ -139,6 +140,6 @@
 .add-more {
   font-size: 14px;
   font-weight: 500;
-  margin-top: 8px;
+  margin-top: 0.5rem;
   cursor: pointer;
 }

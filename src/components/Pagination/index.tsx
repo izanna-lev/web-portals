@@ -4,7 +4,7 @@
  * @since 24th october 2020
  */
 import React from "react";
-import { ASSETS } from "../../constants";
+import { ICON } from "../../constants";
 import "./index.scss";
 
 interface PaginationProps {
@@ -24,13 +24,13 @@ const Pagination = ({
   nextPage,
   previousPage,
 }: PaginationProps) => (
-  <React.Fragment>
+  <div className="pagination">
     <div className="pagination-button">
       {page !== 1 && (
         <img
           title="previous page"
           alt="previous page"
-          src={ASSETS.PREV_PAGE}
+          src={ICON.PREV_PAGE}
           onClick={() => previousPage()}
           className="pagination-icon"
           loading="lazy"
@@ -49,14 +49,14 @@ const Pagination = ({
         <img
           alt="next page"
           title="next page"
-          src={ASSETS.NEXT_PAGE}
+          src={ICON.NEXT_PAGE}
           onClick={() => nextPage()}
           className="pagination-icon"
           loading="lazy"
         />
       )}
     </div>
-  </React.Fragment>
+  </div>
 );
 
 export { Pagination };

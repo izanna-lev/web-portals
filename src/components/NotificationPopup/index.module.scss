@@ -1,13 +1,11 @@
-@import "../../styles/globals";
-
-
+@import "../../styles/configs/colors";
+@import "../../styles/configs/ui";
 
 .notification-popup {
   position: absolute;
   width: 400px;
-  // height: 600px;
-  top: 5vh;
-  right: -60%;
+  top: 4rem;
+  right: 13rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,17 +17,16 @@
   height: 100%;
   color: black;
   background-color: $theme_color_light_blue_3x;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   position: relative;
   float: left;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   display: flex;
   flex-direction: column;
-  -webkit-box-shadow: 0 0 8px $theme_color_light_blue;
-  box-shadow: 0 0 8px $theme_color_light_blue;
+  -webkit-box-shadow: 0 0 0.5rem $theme_color_light_blue;
+  box-shadow: 0 0 0.5rem $theme_color_light_blue;
 }
-
 
 .box.arrow:after {
   content: "";
@@ -41,13 +38,12 @@
   border-bottom: 15px solid $theme_color_light_blue_3x;
 }
 
-
 .notification-heading {
   font-size: 14px;
   font-weight: 700;
   border-bottom: 2px solid $theme_color_blue;
-  padding-left: 12px;
-  padding-bottom: 12px;
+  padding-left: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .list-container {
@@ -58,7 +54,7 @@
 .notification-user-data {
   display: grid;
   height: 60px;
-  gap: 8px;
+  gap: 0.5rem;
   grid-template-columns: max-content auto;
   border-bottom: 1px solid $theme_color_blue;
 }
@@ -67,7 +63,7 @@
   width: 44px;
   height: 44px;
   align-self: center;
-  margin-left: 12px;
+  margin-left: 0.75rem;
 }
 
 .notification-user-image {
@@ -83,11 +79,11 @@
   flex-wrap: nowrap;
   gap: 4px;
   flex-basis: auto;
- justify-content: center;
+  justify-content: center;
 }
 
 .notification-user-message {
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .notification-user-time {

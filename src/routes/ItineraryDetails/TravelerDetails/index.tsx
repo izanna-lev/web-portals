@@ -3,19 +3,16 @@
  * @author Jagmohan Singh
  */
 
-import { useAppSelector } from "../../../store/hooks";
+import { IMAGE } from "../../../constants";
 import moment from "moment";
 import "./index.scss";
 
-import { IMAGE_PREFIXES } from "../../../constants";
-
 interface Props {
-  details: any;
+  itineraryDetails: any;
 }
 
 const DetailsPage = (props: Props) => {
-  const specialist = useAppSelector((state) => state.profile);
-  const { details } = props;
+  const { itineraryDetails } = props;
   return (
     <>
       <div className="trip-details">
@@ -23,19 +20,29 @@ const DetailsPage = (props: Props) => {
         <div className="trip-details-data">
           <div>
             <div className="key">Location</div>
-            <div className="value">{details.location.location || "NA"}</div>
+            <div className="value">
+              {itineraryDetails.location?.location || "NA"}
+            </div>
           </div>
 
           <div>
             <div className="key">Planned Date</div>
             <div className="value">
-              {moment(details.toDate).format("DD-MM-YYYY")}
+              {itineraryDetails.toDate
+                ? moment(itineraryDetails.toDate).format("DD-MM-YYYY")
+                : "NA"}
             </div>
           </div>
 
           <div>
             <div className="key">Traveler/Companions</div>
-            <div className="value">{`${details.rooms} rooms | ${details.plannedTraveller} travellers`}</div>
+            <div className="value">{`${
+              itineraryDetails.rooms || "NA"
+            } Rooms | ${
+              itineraryDetails.plannedTraveller ||
+              itineraryDetails.guests ||
+              "NA"
+            } Travellers`}</div>
           </div>
         </div>
         <div className="trip-details-heading">Assigned Specialist</div>
@@ -44,14 +51,19 @@ const DetailsPage = (props: Props) => {
           <div className="assigned-specialist">
             <img
               className="specialist-image"
-              src={`${IMAGE_PREFIXES.IMAGE_SMALL}${specialist.data.picture}`}
+              src={`${IMAGE.SMALL}${itineraryDetails.specialist?.picture}`}
               alt="signinImage"
             />
             <div className="specialist-details">
-              <div className="key">{specialist.data.name || "NA"}</div>
-              <div className="specialist-detail value">
-                {specialist.data.phoneNumber || "NA"}
+              <div className="key">
+                {itineraryDetails.specialist?.name || "NA"}
               </div>
+              <a
+                className="specialist-detail value"
+                href={`tel:${itineraryDetails.specialist?.phoneNumber}`}
+              >
+                {itineraryDetails.specialist?.phoneNumber || "NA"}
+              </a>
             </div>
           </div>
         </div>
@@ -62,29 +74,24 @@ const DetailsPage = (props: Props) => {
         <div className="trip-details-data">
           <div>
             <div className="key">Name</div>
-            <div className="value">Elina Williams</div>
+            <div className="value">
+              {itineraryDetails.traveller?.name || "NA"}
+            </div>
           </div>
 
           <div>
             <div className="key">Email</div>
-            <div className="value">ewilliam2@gmail.com</div>
+            <a
+              className="value"
+              href={`mailto:${itineraryDetails.traveller?.email}`}
+            >
+              {itineraryDetails.traveller?.email || "NA"}
+            </a>
           </div>
         </div>
       </div>
     </>
   );
 };
-
-// handles the outgoing dispatches
-// const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-//   return {
-//   };
-// };
-
-// handles incoming state changes
-// const mapStateToProps = (state: any) => {
-//   const { fetching, dashboard } = state;
-//   return { fetching, dashboard };
-// };
 
 export default DetailsPage;

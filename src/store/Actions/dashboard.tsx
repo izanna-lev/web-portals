@@ -2,7 +2,7 @@ import { RootState } from "..";
 import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { APPLICATION_ROUTES } from "../../constants";
+import { API } from "../../constants";
 
 import { setLoader } from "../Slice/loader";
 import { setDashboard } from "../Slice/dashboard";
@@ -21,7 +21,7 @@ export const dashboard = (): ThunkAction<
     try {
       dispatch(setLoader(true));
       const response = await axios.post(
-        APPLICATION_ROUTES.DASHBOARD,
+        API.DASHBOARD,
         {},
         {
           headers: {
