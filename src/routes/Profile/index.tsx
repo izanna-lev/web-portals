@@ -3,13 +3,21 @@
  * @author Jagmohan Singh
  */
 
-import { useAppSelector } from "../../store/hooks";
-import { IMAGE } from "../../constants";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { API, IMAGE, NAVIGATE } from "../../constants";
 
 import "./index.scss";
+import { useEffect } from "react";
+import { SET_NAVIGATION } from "../../store/slices/navigation";
+import { Fetch } from "../../api/Fetch";
 
 const ProfilePage = () => {
-  const profileData = useAppSelector((state) => state.profile.data);
+  const profileData = useAppSelector((state) => state.profile);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(SET_NAVIGATION({ value: NAVIGATE.PROFILE }));
+  }, [dispatch]);
 
   return (
     <main className="content-container" id="profilePage">

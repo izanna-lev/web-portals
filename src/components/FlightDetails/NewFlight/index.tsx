@@ -5,24 +5,19 @@ import TextArea from "../../TextArea/index";
 import styles from "./index.module.scss";
 import { Modal } from "../../../components/Portal";
 import ImagePopup from "../../../components/ImagePopup";
-import React, { useState, useEffect } from "react";
-
-interface InputProps {
-  inputFields: {
-    name: string;
-    maxlength: number;
-    type: string;
-    id: string;
-    max?: number;
-  };
-}
+import React, { useState, useEffect, useRef } from "react";
+import Dropdown from "../../Dropdown";
+import { FLIGHT_CLASS } from "../../../constants";
+import { useAppSelector } from "../../../store/hooks";
 
 interface props {
   cancelAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  addFlight: Function;
 }
 
-interface Tickets {}
+interface Tickets {
+  name: string;
+  image: any;
+}
 
 const UserTicket = (
   length: number,
@@ -31,9 +26,10 @@ const UserTicket = (
   setimageUrl: React.Dispatch<React.SetStateAction<string>>
 ) => {
   let newImageUrl = "";
-  const handleImageChange = (name: string, file: any) => {
+
+  const handleImageChange = (file: any) => {
     if (file[0]) {
-      saveData({ [name]: file[0] });
+      saveData({ length, image: file[0] });
       let url = URL.createObjectURL(file[0]);
       newImageUrl = url;
       const imageElement = document.getElementById(`bg-img-${length}`);
@@ -44,6 +40,11 @@ const UserTicket = (
       }
     }
   };
+
+  const handleNameChange = (name: string) => {
+    saveData({ length, name });
+  };
+
   return (
     <React.Fragment>
       <div className={`${styles["form-heading"]}`}>Upload Ticket Image</div>
@@ -54,9 +55,7 @@ const UserTicket = (
             id={`${length}`}
             accept="image/*"
             name={`Ticket${length}`}
-            onChange={(e) =>
-              handleImageChange(`Ticket${e.target.id}`, e.target.files)
-            }
+            onChange={(e) => handleImageChange(e.target.files)}
             hidden
           />
           <label
@@ -83,10 +82,11 @@ const UserTicket = (
       </div>
       <InputForm
         inputFields={{
-          name: `User ${length} Name`,
-          id: "username",
+          name: `User ${length + 1} Name`,
+          id: `user${length}`,
           maxlength: 50,
           type: "text",
+          onChange: handleNameChange,
         }}
       />
     </React.Fragment>
@@ -95,13 +95,43 @@ const UserTicket = (
 
 const NewTransportationForm = (props: props) => {
   const [allUserTickets, setAllUserTickets] = useState<JSX.Element[]>([]);
-  const [ticketsData, setTicketsData] = useState<Tickets[]>([]);
+  const [ticketsData, setTicketsData] = useState([{ name: "", image: null }]);
   const [showImage, setshowImage] = useState(false);
   const [imageUrl, setimageUrl] = useState("");
 
+  const { _id } = useAppSelector(
+    (state) => state.itineraryData.itineraryDetails
+  );
+
+  const dayRef = useRef();
+  const airlineRef = useRef();
+  const flightClassRef = useRef();
+  const departRef = useRef();
+  const departDateRef = useRef();
+  const departTimeRef = useRef();
+  const arrivalRef = useRef();
+  const arrivalTimeRef = useRef();
+  const specialistNoteRef = useRef();
+
+  const saveUserTicketsData = ({
+    length,
+    image,
+    name,
+  }: {
+    length: number;
+    image: any;
+    name: string;
+  }) => {
+    const newObj = [...ticketsData];
+
+    if (name) newObj[length].name = name;
+    else newObj[length].image = image;
+    setTicketsData(newObj);
+  };
+
   useEffect(() => {
     setAllUserTickets([
-      UserTicket(1, saveUserTicketsData, setshowImage, setimageUrl),
+      UserTicket(0, saveUserTicketsData, setshowImage, setimageUrl),
     ]);
   }, []);
 
@@ -109,28 +139,49 @@ const NewTransportationForm = (props: props) => {
     setAllUserTickets((previous) => [
       ...previous,
       UserTicket(
-        allUserTickets.length + 1,
+        allUserTickets.length,
         saveUserTicketsData,
         setshowImage,
         setimageUrl
       ),
     ]);
-  };
 
-  const saveUserTicketsData = (data: {}) => {
-    setTicketsData((previous) => [...previous, { ...data }]);
+    ticketsData.push({ name: "", image: null });
   };
 
   const closePopup = () => {
     setshowImage(false);
   };
 
-  const { cancelAdd, addFlight } = props;
+  const { cancelAdd } = props;
+
+  const saveFlightDetails = (e: any) => {
+    e.preventDefault();
+    const getInputValue = (ref: any) => ref.current.value;
+    const data = {
+      day: getInputValue(dayRef),
+      flightClass: getInputValue(flightClassRef),
+      departTime: getInputValue(departTimeRef),
+      departDate: getInputValue(departDateRef),
+      airline: getInputValue(airlineRef),
+      depart: getInputValue(departRef),
+      arrival: getInputValue(arrivalRef),
+      arrivalTime: getInputValue(arrivalTimeRef),
+      specialistNote: getInputValue(specialistNoteRef),
+      userDetails: ticketsData,
+      itineraryRef: _id,
+    };
+
+    console.log(data);
+  };
 
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
-        <form className={styles["form-block"]}>
+        <form
+          className={styles["form-block"]}
+          onSubmit={(e) => saveFlightDetails(e)}
+        >
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             Basic Details
           </div>
@@ -138,6 +189,7 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
+                  ref: dayRef,
                   name: "Day",
                   id: "day",
                   maxlength: 30,
@@ -146,22 +198,22 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
+                  ref: airlineRef,
                   name: "Airline",
                   id: "airline",
                   maxlength: 70,
                   type: "text",
                 }}
               />
-              <InputForm
-                inputFields={{
-                  name: "Flight Class",
-                  id: "flight class",
-                  maxlength: 360,
-                  type: "text",
-                }}
+
+              <Dropdown
+                name="Flight Class"
+                inputFields={FLIGHT_CLASS}
+                refe={flightClassRef}
               />
               <InputForm
                 inputFields={{
+                  ref: departRef,
                   name: "Depart",
                   id: "depart",
                   maxlength: 360,
@@ -171,6 +223,7 @@ const NewTransportationForm = (props: props) => {
 
               <InputForm
                 inputFields={{
+                  ref: departDateRef,
                   name: "Depart Date",
                   id: "date",
                   maxlength: 30,
@@ -181,6 +234,7 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
+                  ref: departTimeRef,
                   name: "Depart Time",
                   id: "time",
                   maxlength: 30,
@@ -189,6 +243,7 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
+                  ref: arrivalRef,
                   name: "Arrival",
                   id: "arrival",
                   maxlength: 70,
@@ -197,6 +252,7 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
+                  ref: arrivalTimeRef,
                   name: "Arrival Time",
                   id: "time",
                   maxlength: 30,
@@ -205,6 +261,7 @@ const NewTransportationForm = (props: props) => {
               />
               <TextArea
                 inputFields={{
+                  ref: specialistNoteRef,
                   name: "Specialist Note",
                   id: "specialist note",
                   maxlength: 350,
@@ -234,7 +291,9 @@ const NewTransportationForm = (props: props) => {
           </div>
 
           <div className={styles["button-save"]}>
-            <button className={styles["form-button-text"]}>Save</button>
+            <button className={styles["form-button-text"]} type="submit">
+              Save
+            </button>
           </div>
         </form>
 

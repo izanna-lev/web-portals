@@ -4,16 +4,16 @@
  */
 
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
 import { useEffect } from "react";
-import "./index.scss";
+import moment from "moment";
 
-import { setItineraryDetails } from "../../store/Slice/itineraryDetails";
-import { IMAGE, ITINERARY_STATUS, ICON } from "../../constants";
+import { IMAGE, ITINERARY_STATUS, ICON, API } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { itineraries } from "../../store/Actions/itineraries";
+import { setFormRef } from "../../store/slices/appData";
 import { Pagination } from "../../components/Pagination";
 import { SerialNum } from "../../util";
+import { Fetch } from "../../api/Fetch";
+import "./index.scss";
 
 const TableHead = () => (
   <thead className="table-head">
@@ -38,8 +38,8 @@ const TableRow = (
   dispatch: any
 ) => {
   const itineraryDetailsPage = (item: any) => {
-    dispatch(setItineraryDetails(item));
-    navigate(`/itinerary/${item._id}`);
+    dispatch(setFormRef(item._id));
+    navigate(`/itinerary/detail/${item._id}`);
   };
 
   return (
@@ -87,7 +87,7 @@ const ItineraryPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(itineraries());
+    dispatch(Fetch(API.ITINERARIES, {}, 1, 10));
   }, [dispatch]);
 
   return (
@@ -101,8 +101,9 @@ const ItineraryPage = () => {
             limit,
             total,
             size,
-            nextPage: () => dispatch(itineraries(page + 1, limit)),
-            previousPage: () => dispatch(itineraries(page - 1, limit)),
+            nextPage: () => dispatch(Fetch(API.PROFILE, {}, page + 1, limit)),
+            previousPage: () =>
+              dispatch(Fetch(API.PROFILE, {}, page - 1, limit)),
           })
         : null}
       <section className="table-container">

@@ -1,56 +1,61 @@
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { MdDone } from "react-icons/md"
-import { IoMdClose } from "react-icons/io"
-import "./index.scss"
+import { MdDone } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
+import "./index.scss";
 import { useEffect } from "react";
-import { setPopup } from "../../store/Slice/popup";
+import { setApiMessage } from "../../store/slices/apiMessage";
 
 const Toast = () => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    const show = useAppSelector((state: {
-        popup: {
-            data: {
-                message: string,
-                type: string,
-            }
-        }
-    }) => state.popup.data);
+  const { type, message } = useAppSelector(
+    (state: {
+      apiMessage: {
+        message: string;
+        type: string;
+      };
+    }) => state.apiMessage
+  );
 
-    useEffect(() => {
-        let shand = document.getElementsByClassName('wrapper') as HTMLCollectionOf<HTMLElement>;
+  useEffect(() => {
+    const ToastWrapper = document.getElementById("wrapper") as HTMLElement;
 
-        if (show.type && shand.length !== 0) {
-            shand[0].style.display = "";
+    if (type) {
+      ToastWrapper.style.display = "";
 
-            setTimeout(function () {
-                shand[0].style.display = "none";
-                dispatch(setPopup({
-                    data: {
-                        message: "",
-                        type: ""
-                    }
-                }))
-            }, 2000);
-        }
-    }, [new Date().getTime()]);
+      setTimeout(function () {
+        ToastWrapper.style.display = "none";
+        dispatch(
+          setApiMessage({
+            type: "",
+            message: "",
+          })
+        );
+      }, 2000);
+    }
+  }, [dispatch, type]);
 
-
-    return (
-        show.type ?
-            <div className="wrapper" id="wrapper">
-                <div className={`toast ${show.type}`}>
-                    <div className={`outer-container ${show.type}icon`}>
-                        {show.type === 'success' ? <MdDone className="fas done" /> : <IoMdClose className="fas" />}
-                    </div>
-                    <div className="inner-container">
-                        <p>{show.type.charAt(0).toUpperCase() + show.type.slice(1)}</p>
-                        <p>{show.message}</p>
-                    </div>
-                </div>
-            </div> : <></>
-    )
-        ;
+  return (
+    <div
+      className="wrapper"
+      id="wrapper"
+      style={{ display: type ? "block" : "none" }}
+    >
+      <div className={`toast ${type}`}>
+        <div className={`outer-container ${type}icon`}>
+          {type === "success" ? (
+            <MdDone className="fas done" />
+          ) : (
+            <IoMdClose className="fas" />
+          )}
+        </div>
+        <div className="inner-container">
+          <p>{type.charAt(0).toUpperCase() + type.slice(1)}</p>
+          <p>{message}</p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Toast;

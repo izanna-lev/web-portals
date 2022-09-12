@@ -2,7 +2,7 @@
 @import "../../styles/configs/_colors.scss";
 @import "../../styles/configs/_ui.scss";
 
-.AddFlightsPage {
+.AddTrainsPage {
   min-height: 350px;
   margin-top: 1rem;
   margin-left: 0.5rem;
@@ -22,7 +22,7 @@
   display: grid;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  grid-template-columns: 0.25fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr;
+  grid-template-columns: 0.25fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr 0.75fr;
   align-items: center;
 }
 
@@ -39,8 +39,9 @@
 .flightDetails-table > div {
   font-size: 14px;
   margin-left: 0.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 ::-webkit-scrollbar {

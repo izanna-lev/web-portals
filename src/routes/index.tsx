@@ -11,10 +11,12 @@ const AssignedItineraries = loadable(() => import("./AssignedItineraries"));
 const Chat = loadable(() => import("./Chat"));
 const CreateItinerary = loadable(() => import("./CreateItinerary"));
 const Dashboard = loadable(() => import("./Dashboard"));
+const Itinerary = loadable(() => import("./Itinerary"));
 const ItineraryDetails = loadable(() => import("./ItineraryDetails"));
 const Login = loadable(() => import("./Login"));
 const Profile = loadable(() => import("./Profile"));
 const SendNotifications = loadable(() => import("./Notifications"));
+const CancelledItineraries = loadable(() => import("./CancelledItineraries"));
 
 const AddItinerary = loadable(
   () => import("./CreateItinerary/AddItineraryDetails")
@@ -29,10 +31,12 @@ const App = () => (
     <Route path="/" element={<Account />}>
       <Route index element={<Dashboard />} />
       <Route path="dashboard" element={<Dashboard />} />
-      <Route path="/itineraries" element={<AssignedItineraries />} />
-      <Route path="itinerary">
-        <Route path=":itineraryRef" element={<ItineraryDetails />} />
-        <Route path="create" element={<CreateItinerary />}>
+      <Route path="itinerary" element={<Itinerary />}>
+        <Route index element={<AssignedItineraries />} />
+        <Route path="list" element={<AssignedItineraries />} />
+        <Route path="cancelled" element={<CancelledItineraries />} />
+        <Route path="detail/:formRef" element={<ItineraryDetails />} />
+        <Route path="add" element={<CreateItinerary />}>
           <Route index element={<AddItinerary />} />
           <Route path="details" element={<AddItinerary />} />
           <Route path="transportation" element={<AddTransportation />} />
@@ -51,7 +55,7 @@ const App = () => (
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace={true} />} />
     </Route>
-    <Route path="login" element={<Login showUserData={false} />} />
+    <Route path="login" element={<Login />} />
   </Routes>
 );
 

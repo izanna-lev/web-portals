@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { API } from "../../constants";
 
 interface listObject {
   _id: string;
@@ -41,16 +42,12 @@ const initialState: ItinerariesState = {
 const itineraries = createSlice({
   name: "itineraries",
   initialState,
-  reducers: {
-    setItineraries: (
-      state: { list: listObject[]; hasMore: boolean },
-      action: { payload: { data: { list: listObject[]; hasMore: boolean } } }
-    ) => {
-      Object.assign(state, action.payload.data);
-    },
+  reducers: {},
+  extraReducers(builder) {
+    builder.addCase(API.ITINERARIES, (state, action: any) => {
+      Object.assign(state, action.payload);
+    });
   },
 });
-
-export const { setItineraries } = itineraries.actions;
 
 export default itineraries.reducer;

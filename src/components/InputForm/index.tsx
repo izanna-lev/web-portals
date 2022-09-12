@@ -8,6 +8,7 @@ type InputProps = {
     id: string;
     max?: number;
     ref?: any;
+    onChange?: Function;
   };
 };
 
@@ -22,6 +23,9 @@ const InputForm = ({ inputFields }: InputProps) => {
         max={inputFields.max}
         className={styles["field-value"]}
         ref={inputFields.ref}
+        onChange={(e) =>
+          inputFields.onChange && inputFields.onChange(e.target.value)
+        }
         autoFocus
         required
       />

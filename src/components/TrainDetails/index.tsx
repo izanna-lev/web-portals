@@ -5,32 +5,16 @@
  * @author Jagmohan Singh
  */
 
-import { useState } from "react";
+import { useAppSelector } from "../../store/hooks";
 import { Modal } from "../../components/Portal";
-import NewTrain from "./NewTrain";
 import styles from "./index.module.scss";
-import { MdDeleteOutline } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
-
-interface ActivityProps {
-  day: number;
-  trainClass: string;
-  arrivalStation: string;
-  arrivalDate: Date;
-  arrivalTime: Date;
-  departStation: string;
-  departTime: Date;
-  note: string;
-}
+import NewTrain from "./NewTrain";
+import { useState } from "react";
 
 const AddActivitiesPage = () => {
-  const [trainDataList, setTrainDataList] = useState<ActivityProps[]>([]);
   const [canAddMore, setAddMore] = useState(false);
 
-  const addObjectToArray = (obj: ActivityProps) => {
-    setTrainDataList((current) => [...current, obj]);
-    setAddMore(false);
-  };
+  const trainsList = useAppSelector((state: any) => state.transportation.train);
 
   return (
     <>
@@ -48,51 +32,27 @@ const AddActivitiesPage = () => {
         </div>
 
         <div className={styles["forms"]}>
-          {/* {trainDataList.length ? (
-            trainDataList.map((element, index) => (
+          {trainsList.length ? (
+            trainsList.map((element: any, index: number) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
                 key={index}
               >
                 <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
+                <div>{element.arrival || "NA"}</div>
+                <div>{element.trainClass || "NA"}</div>
+                <div>{element.arrivalDate || "NA"}</div>
+                <div>{element.arrivalTime || "NA"}</div>
+                <div>{element.depart || "NA"}</div>
+                <div>{element.departTime || "NA"}</div>
+                <div>{element.specialistNote || "NA"}</div>
               </div>
             ))
           ) : (
             <div className={`${styles["empty-table"]} ${styles["table-item"]}`}>
               Nothing Added
             </div>
-          )} */}
-
-          <div
-            className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
-          >
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div className="action-buttons">
-              <button className="edit-button">
-                <FaRegEdit />
-                &nbsp;<span>Edit</span>
-              </button>
-              <button className="delete-button">
-                <MdDeleteOutline />
-                &nbsp;<span>Delete</span>
-              </button>
-            </div>
-          </div>
+          )}
         </div>
 
         <div
@@ -106,9 +66,7 @@ const AddActivitiesPage = () => {
 
         {canAddMore ? (
           <Modal
-            modal={
-              <NewTrain cancelAdd={setAddMore} addTrain={addObjectToArray} />
-            }
+            modal={<NewTrain cancelAdd={setAddMore} />}
             root={document.getElementById("overlay-root") as HTMLElement}
           />
         ) : null}

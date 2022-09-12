@@ -5,33 +5,19 @@
  * @author Jagmohan Singh
  */
 
-import { useState } from "react";
-import { Modal } from "../../components/Portal";
-import NewFlight from "./NewFlight";
-import styles from "./index.module.scss";
+import { useAppSelector } from "../../store/hooks";
 import { MdDeleteOutline } from "react-icons/md";
+import { Modal } from "../../components/Portal";
 import { FaRegEdit } from "react-icons/fa";
-
-interface ActivityProps {
-  day: number;
-  outbound: string;
-  flightClass: string;
-  depart: string;
-  departDate: Date;
-  departTime: Date;
-  arrivalTime: Date;
-  arrival: string;
-  note: string;
-}
+import styles from "./index.module.scss";
+import NewFlight from "./NewFlight";
+import { useState } from "react";
 
 const AddActivitiesPage = () => {
-  const [flightDataList, setflightDataList] = useState<ActivityProps[]>([]);
   const [canAddMore, setAddMore] = useState(false);
-
-  const addObjectToArray = (obj: ActivityProps) => {
-    setflightDataList((current) => [...current, obj]);
-    setAddMore(false);
-  };
+  const flightList = useAppSelector(
+    (state: any) => state.transportation.flight
+  );
 
   return (
     <>
@@ -50,52 +36,38 @@ const AddActivitiesPage = () => {
         </div>
 
         <div className={styles["forms"]}>
-          {/* {flightDataList.length ? (
-            flightDataList.map((element, index) => (
+          {flightList.list?.length ? (
+            flightList.list.map((element: any, index: number) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
                 key={index}
               >
                 <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
-                <div>{element.day || "NA"}</div>
+                <div>{element.airline || "NA"}</div>
+                <div>{element.flightClass || "NA"}</div>
+                <div>{element.depart || "NA"}</div>
+                <div>{element.departDate || "NA"}</div>
+                <div>{element.departTime || "NA"}</div>
+                <div>{element.arrival || "NA"}</div>
+                <div>{element.arrivalTime || "NA"}</div>
+                <div>{element.specialistNote || "NA"}</div>
+                <div className="action-buttons">
+                  <button className="edit-button">
+                    <FaRegEdit />
+                    &nbsp;<span>Edit</span>
+                  </button>
+                  <button className="delete-button">
+                    <MdDeleteOutline />
+                    &nbsp;<span>Delete</span>
+                  </button>
+                </div>
               </div>
             ))
           ) : (
             <div className={`${styles["empty-table"]} ${styles["table-item"]}`}>
               Nothing Added
             </div>
-          )} */}
-
-          <div
-            className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
-          >
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div>Test</div>
-            <div className="action-buttons">
-              <button className="edit-button">
-                <FaRegEdit />
-                &nbsp;<span>Edit</span>
-              </button>
-              <button className="delete-button">
-                <MdDeleteOutline />
-                &nbsp;<span>Delete</span>
-              </button>
-            </div>
-          </div>
+          )}
         </div>
 
         <div
@@ -109,9 +81,7 @@ const AddActivitiesPage = () => {
 
         {canAddMore ? (
           <Modal
-            modal={
-              <NewFlight cancelAdd={setAddMore} addFlight={addObjectToArray} />
-            }
+            modal={<NewFlight cancelAdd={setAddMore} />}
             root={document.getElementById("overlay-root") as HTMLElement}
           />
         ) : null}

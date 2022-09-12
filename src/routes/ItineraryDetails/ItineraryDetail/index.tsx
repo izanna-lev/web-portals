@@ -11,8 +11,6 @@ import { IoImageOutline } from "react-icons/io5";
 
 import "./index.scss";
 
-// type Props = {};
-
 const ItineraryDetailsPage = () => {
   const navigate = useNavigate();
 
@@ -30,7 +28,7 @@ const ItineraryDetailsPage = () => {
         <div
           className="create-itinerary-btn"
           onClick={() => {
-            navigate("/itinerary/create");
+            navigate("/itinerary/add/details");
           }}
         >
           Create Itinerary

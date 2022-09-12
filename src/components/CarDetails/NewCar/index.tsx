@@ -7,19 +7,8 @@ import { Modal } from "../../Portal";
 import ImagePopup from "../../ImagePopup";
 import React, { useState, useEffect } from "react";
 
-interface InputProps {
-  inputFields: {
-    name: string;
-    maxlength: number;
-    type: string;
-    id: string;
-    max?: number;
-  };
-}
-
 interface props {
   cancelAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  addCar: Function;
 }
 
 interface Tickets {}
@@ -113,7 +102,7 @@ const NewTransportationForm = (props: props) => {
     setshowImage(false);
   };
 
-  const { cancelAdd, addCar } = props;
+  const { cancelAdd } = props;
 
   return (
     <div className={styles["add-itinerary-data-form"]}>

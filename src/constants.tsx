@@ -7,6 +7,11 @@ const API_URL = "http://44.209.25.93:3000/api/";
 const ICONS_URL = "https://onsite-travel-assets.s3.amazonaws.com/";
 const IMAGE_URL = "https://app-onsite.s3.amazonaws.com/development/images/";
 
+// Google Places Api Key
+export const GOOGLE_API = "AIzaSyByy1LrT-5ZQ642PzXM4m_WCQ-fS6GO-9s";
+
+// export const GOOGLE_API = "AIzaSyC8slXFlsTx3BYPslH8Ba-7-COrx8G6R6M";
+
 // Custom Variables
 const ACTION_ICON = `${ICONS_URL}action/`;
 const NAVIGATION_ICON = `${ICONS_URL}navigation/`;
@@ -14,11 +19,24 @@ const STATUS_ICON = `${ICONS_URL}status/`;
 
 export const API = {
   LOGIN: `${API_URL}specialist/login`,
-  DETAILS: `${API_URL}specialist/details`,
+  PROFILE: `${API_URL}specialist/details`,
   DASHBOARD: `${API_URL}specialist/dashboard`,
 
   ITINERARIES: `${API_URL}itinerary/list`,
+  ITINERARY_ADD: `${API_URL}itinerary/add`,
   ITINERARY_DETAILS: `${API_URL}itinerary/details`,
+
+  TRANSPORTATION_DATA: `${API_URL}transportation/list`,
+
+  ADD_CAR: `${API_URL}transportation/addCar`,
+  ADD_FERRY: `${API_URL}transportation/addTrainFerry`,
+  ADD_FLIGHT: `${API_URL}transportation/addFlight`,
+  ADD_TRAIN: `${API_URL}transportation/addTrainFerry`,
+
+  EDIT_CAR: `${API_URL}transportation/editCar`,
+  EDIT_FERRY: `${API_URL}transportation/editTrainFerry`,
+  EDIT_FLIGHT: `${API_URL}transportation/editFlight`,
+  EDIT_TRAIN: `${API_URL}transportation/editTrainFerry`,
 };
 
 export const IMAGE = {
@@ -67,13 +85,13 @@ export const ICON: IconOptions = {
 
 // ////////// NAVIGATION CONSTANT ///////////
 
-export const navigationIndexer = {
-  dashboard: 1,
-  assignedItineraries: 2,
-  chat: 3,
-  cancelledItineraries: 4,
-  sendNotifications: 5,
-  profile: 6,
+export const NAVIGATE = {
+  DASHBOARD: 1,
+  ITINERARY: 2,
+  CHAT: 3,
+  CANCELLED_ITINERARIES: 4,
+  NOTIFICATION: 5,
+  PROFILE: 6,
 };
 
 export const TRAVELER_ITINERARY_DETAILS = {
@@ -94,6 +112,11 @@ export const ITINERARY_TYPE = [
     name: "International Trip",
     value: 3,
   },
+];
+
+export const FLIGHT_CLASS = [
+  { name: "Business", value: 1 },
+  { name: "Economy", value: 2 },
 ];
 
 type ItineraryOptions = {

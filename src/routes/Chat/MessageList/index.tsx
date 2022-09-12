@@ -2,17 +2,19 @@
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
+import LoginSpinner from "../../../components/LoginSpinner";
 import { IoSend } from "react-icons/io5";
 import { DUMMY } from "./dummy";
-import LoginSpinner from "../../../components/LoginSpinner";
 
-import { BsPlus } from "react-icons/bs";
-import "./index.scss";
 import { useAppSelector } from "../../../store/hooks";
 import { useRef, useState } from "react";
+import { BsPlus } from "react-icons/bs";
+import "./index.scss";
 
 const ChatPage = () => {
-  const show = useAppSelector((state: { loader: { value: boolean; }; }) => state.loader.value);
+  const show = useAppSelector(
+    (state: { loader: { active: boolean } }) => state.loader.active
+  );
   const listInnerRef = useRef(null);
 
   const [theArray, setTheArray] = useState(DUMMY);
@@ -20,13 +22,12 @@ const ChatPage = () => {
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-      console.log(Math.ceil( Math.abs(scrollTop)), clientHeight, scrollHeight )
-      if (Math.ceil( Math.abs(scrollTop)) + clientHeight + 20 >= scrollHeight) {
+      console.log(Math.ceil(Math.abs(scrollTop)), clientHeight, scrollHeight);
+      if (Math.ceil(Math.abs(scrollTop)) + clientHeight + 20 >= scrollHeight) {
         setTheArray([...theArray, ...DUMMY]);
       }
     }
   };
-
 
   return (
     <section className="MessagePage" id="MessagePage">
@@ -34,7 +35,7 @@ const ChatPage = () => {
         <img
           className="user-image"
           src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-          alt="msg-image"
+          alt="msg"
         />
         <div className="user-name">Jaggi</div>
       </div>
@@ -43,7 +44,7 @@ const ChatPage = () => {
         <img
           className="user-image"
           src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-          alt="msg-image"
+          alt="msg"
         />
         <div className="itinerary-data">
           <div className="itinerary-text date">30-Sept-2022</div>
@@ -51,35 +52,27 @@ const ChatPage = () => {
         </div>
         {show && <LoginSpinner position="relative" />}
       </div>
-      <ul className="message-data"
-        onScroll={onScroll}
-        ref={listInnerRef}>
+      <ul className="message-data" onScroll={onScroll} ref={listInnerRef}>
         {theArray.map((element, index) => {
           return (
-            <li className={`user-message ${element.name === "Jaggi" ? "" : "other-user"}`}>
+            <li
+              className={`user-message ${
+                element.name === "Jaggi" ? "" : "other-user"
+              }`}
+            >
               {element.message}
               <div className="message-date">10:10AM</div>
             </li>
-
           );
         })}
       </ul>
 
       <div className="socket">
         <div className="add-icon">
-          <input
-            type="file"
-            id="upload"
-            accept="image/*"
-            hidden
-          />
-          <label
-            htmlFor="upload"
-          >
+          <input type="file" id="upload" accept="image/*" hidden />
+          <label htmlFor="upload">
             <BsPlus className="img" />
           </label>
-
-
         </div>
         <input type="text" className="socket-input" />
         <div className="send-icon">

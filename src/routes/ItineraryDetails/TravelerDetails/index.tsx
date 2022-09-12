@@ -3,16 +3,20 @@
  * @author Jagmohan Singh
  */
 
+import { useAppSelector } from "../../../store/hooks";
 import { IMAGE } from "../../../constants";
 import moment from "moment";
 import "./index.scss";
 
-interface Props {
-  itineraryDetails: any;
-}
+const DetailsPage = () => {
+  const { itineraryDetails, travellerDetails } = useAppSelector(
+    (state: any) => state.itineraryData
+  );
 
-const DetailsPage = (props: Props) => {
-  const { itineraryDetails } = props;
+  const { name, phoneNumber, picture } = useAppSelector(
+    (state: any) => state.profile
+  );
+
   return (
     <>
       <div className="trip-details">
@@ -51,18 +55,16 @@ const DetailsPage = (props: Props) => {
           <div className="assigned-specialist">
             <img
               className="specialist-image"
-              src={`${IMAGE.SMALL}${itineraryDetails.specialist?.picture}`}
+              src={`${IMAGE.SMALL}${picture}`}
               alt="signinImage"
             />
             <div className="specialist-details">
-              <div className="key">
-                {itineraryDetails.specialist?.name || "NA"}
-              </div>
+              <div className="key">{name || "NA"}</div>
               <a
                 className="specialist-detail value"
-                href={`tel:${itineraryDetails.specialist?.phoneNumber}`}
+                href={`tel:${phoneNumber}`}
               >
-                {itineraryDetails.specialist?.phoneNumber || "NA"}
+                {phoneNumber || "NA"}
               </a>
             </div>
           </div>
@@ -75,7 +77,7 @@ const DetailsPage = (props: Props) => {
           <div>
             <div className="key">Name</div>
             <div className="value">
-              {itineraryDetails.traveller?.name || "NA"}
+              {travellerDetails.travellerName || "NA"}
             </div>
           </div>
 
@@ -83,9 +85,9 @@ const DetailsPage = (props: Props) => {
             <div className="key">Email</div>
             <a
               className="value"
-              href={`mailto:${itineraryDetails.traveller?.email}`}
+              href={`mailto:${travellerDetails.travellerEmail}`}
             >
-              {itineraryDetails.traveller?.email || "NA"}
+              {travellerDetails.travellerEmail || "NA"}
             </a>
           </div>
         </div>

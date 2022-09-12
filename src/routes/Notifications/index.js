@@ -1,6 +1,7 @@
+import { SET_NAVIGATION } from "../../store/slices/navigation";
 import { useEffect, useState, useLayoutEffect } from "react";
-
-import { API, IMAGE, ICON, navigationIndexer } from "../../constants";
+import { API, IMAGE, ICON, NAVIGATE } from "../../constants";
+import { useAppDispatch } from "../../store/hooks";
 import "./index.scss";
 
 const User = (user, index, selectOne) => (
@@ -34,11 +35,16 @@ let selectedUsers = [];
 
 const Notifications = (props) => {
   const [newUserList, setnewUserList] = useState([]);
+  const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
     document.title = "Notifications";
     selectedUsers = [];
   }, []);
+
+  useEffect(() => {
+    dispatch(SET_NAVIGATION({ value: NAVIGATE.NOTIFICATION }));
+  }, [dispatch]);
 
   // useEffect(() => {
   //   FetchEntity(

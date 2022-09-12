@@ -4,10 +4,10 @@ import axios from "axios";
 
 import { API } from "../../constants";
 
-import { setLoader } from "../Slice/loader";
-import { setPopup } from "../Slice/popup";
-import { getAccessToken } from "../Slice/login";
-import { setProfile } from "../Slice/profile";
+import { setLoader } from "../slices/loader";
+import { setApiMessage } from "../slices/apiMessage";
+import { getAccessToken } from "../slices/login";
+import { setProfile } from "../slices/profile";
 
 export const login = ({
   email,
@@ -27,15 +27,14 @@ export const login = ({
         password,
       });
       dispatch(setLoader(false));
-      if (response.data.code !== 100) {
-        throw new Error(response.data.message);
-      }
+      if (response.data.code !== 100) throw new Error(response.data.message);
+
       localStorage.setItem("accessToken", response.data.data.accessToken);
       dispatch(getAccessToken(response.data.data));
       dispatch(setProfile({ data: response.data.data.user }));
 
       dispatch(
-        setPopup({
+        setApiMessage({
           data: {
             message: response.data.message,
             type: "success",
@@ -44,7 +43,7 @@ export const login = ({
       );
     } catch (err: any) {
       dispatch(
-        setPopup({
+        setApiMessage({
           data: {
             message: err.message,
             type: "error",

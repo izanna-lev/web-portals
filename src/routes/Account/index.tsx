@@ -1,11 +1,12 @@
 import { useNavigate, Outlet } from "react-router-dom";
 import { useEffect } from "react";
 
-import Header from "../../components/Header";
+import LoadingOverlay from "../../components/LoadingOverlay";
 import SideNavBar from "../../components/SideNavBar";
+import Header from "../../components/Header";
 import styles from "./index.module.scss";
 
-const Account = (props) => {
+const Account = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const Account = (props) => {
 
   return (
     <div className={styles["page"]}>
+      <LoadingOverlay />
       <Header />
       <section className={styles["page--bottom"]}>
         <SideNavBar />
