@@ -3,13 +3,11 @@ import { setApiMessage } from "../store/slices/apiMessage";
 import axios from "axios";
 import { Fetch } from "./Fetch";
 
-// Create API
-export const Create =
+// Delete API
+export const DeleteEntity =
   (
     endpoint: string = "",
     payload: any = {},
-    multipart: boolean = false,
-    image: any = null,
     listingEndpoint: string = "",
     listingPayload: any = {},
     page: number = 1,
@@ -17,26 +15,16 @@ export const Create =
   ) =>
   async (dispatch: any) => {
     const Authorization = localStorage.getItem("accessToken") || "";
-    const ContentType = multipart ? "multipart/form-data" : "application/json";
 
     if (!endpoint) return alert("Missing Endpoint");
     if (!Authorization) return alert("No Authorization");
 
     dispatch(setLoader(true));
 
-    let data = { ...payload, page, limit };
-
-    if (multipart) {
-      const formData = new FormData();
-      formData.append("data", JSON.stringify(data));
-      if (image) formData.append("image", image);
-      data = formData;
-    }
-
     try {
-      const response = await axios.post(endpoint, data, {
+      const response = await axios.post(endpoint, payload, {
         headers: {
-          "Content-Type": ContentType,
+          "Content-Type": "application/json",
           Authorization,
         },
       });

@@ -25,13 +25,14 @@ button {
 }
 
 .view-button {
-  border: 1px solid $blue;
-  color: $blue;
+  border: 1px solid $light-blue;
+  border-radius: 0.7rem;
+  color: $light-blue;
   transform: $global_transition !important;
   background-color: transparent;
 
   &:hover {
-    background-color: $blue !important;
+    background-color: $light-blue !important;
     color: $white !important;
   }
 }
@@ -59,12 +60,23 @@ button {
 }
 
 .delete-button {
-  border: 1px solid $blue;
-  color: $blue;
-  background-color: transparent;
+  color: $white;
+  border: 1px solid $red;
+  background-color: $red;
 
   &:hover {
-    background-color: $blue !important;
+    background-color: $white !important;
+    color: $red !important;
+  }
+}
+
+.edit-button {
+  color: $light-blue;
+  border: 1px solid $light-blue;
+  background-color: $white;
+
+  &:hover {
+    background-color: $light-blue !important;
     color: $white !important;
   }
 }
@@ -124,5 +136,12 @@ button {
   &:hover {
     background-color: $white !important;
     color: $blue !important;
+  }
+}
+
+.add-activity-buttons {
+  gap: 0.5rem;
+  button {
+    min-width: 6rem;
   }
 }

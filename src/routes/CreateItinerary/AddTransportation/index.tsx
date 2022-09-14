@@ -4,10 +4,10 @@
  */
 
 import { useState, useEffect } from "react";
-import FlightDetails from "../../../components/FlightDetails";
-import TrainDetails from "../../../components/TrainDetails";
-import FerryDetails from "../../../components/FerryDetails";
-import CarDetails from "../../../components/CarDetails";
+import FlightDetails from "../../../components/TransportationDetails/FlightDetails";
+import TrainDetails from "../../../components/TransportationDetails/TrainDetails";
+import FerryDetails from "../../../components/TransportationDetails/FerryDetails";
+import CarDetails from "../../../components/TransportationDetails/CarDetails";
 import "./index.scss";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Fetch } from "../../../api/Fetch";

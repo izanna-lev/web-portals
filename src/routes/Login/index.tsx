@@ -36,7 +36,11 @@ const Login = () => {
 
   return (
     <section className="loginPage" id="loginPage">
-      <img className="signin-image" src={ICON.SIGNIN} alt="signinImage" />
+      <div className="loginPageLeft">
+        <div className="loginPage-logo">
+          <img src={ICON.APP_LOGO} alt="logo" loading="lazy" />
+        </div>
+      </div>
       <div className="login-form">
         <div className="heading">
           Welcome to <strong className="strong-heading">Onsite Travel</strong>

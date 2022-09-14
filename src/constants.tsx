@@ -10,8 +10,6 @@ const IMAGE_URL = "https://app-onsite.s3.amazonaws.com/development/images/";
 // Google Places Api Key
 export const GOOGLE_API = "AIzaSyByy1LrT-5ZQ642PzXM4m_WCQ-fS6GO-9s";
 
-// export const GOOGLE_API = "AIzaSyC8slXFlsTx3BYPslH8Ba-7-COrx8G6R6M";
-
 // Custom Variables
 const ACTION_ICON = `${ICONS_URL}action/`;
 const NAVIGATION_ICON = `${ICONS_URL}navigation/`;
@@ -27,6 +25,7 @@ export const API = {
   ITINERARY_DETAILS: `${API_URL}itinerary/details`,
 
   TRANSPORTATION_DATA: `${API_URL}transportation/list`,
+  TRANSPORTATION_DELETE: `${API_URL}transportation/delete`,
 
   ADD_CAR: `${API_URL}transportation/addCar`,
   ADD_FERRY: `${API_URL}transportation/addTrainFerry`,
@@ -37,6 +36,8 @@ export const API = {
   EDIT_FERRY: `${API_URL}transportation/editTrainFerry`,
   EDIT_FLIGHT: `${API_URL}transportation/editFlight`,
   EDIT_TRAIN: `${API_URL}transportation/editTrainFerry`,
+
+  IMAGE_UPLOAD: `${API_URL}transportation/upload`,
 };
 
 export const IMAGE = {
@@ -119,6 +120,16 @@ export const FLIGHT_CLASS = [
   { name: "Economy", value: 2 },
 ];
 
+export const TRAIN_CLASS = [
+  { name: "Business", value: 1 },
+  { name: "Economy", value: 2 },
+];
+
+export const FERRY_CLASS = [
+  { name: "Business", value: 1 },
+  { name: "Economy", value: 2 },
+];
+
 type ItineraryOptions = {
   [key: number]: string;
 };
@@ -138,8 +149,11 @@ export const TRANSPORTATION_TYPE = {
   CAR: 4,
 };
 
-export const PLANNED_TRVELLER = {
-  HAVENT_STARTED: 1,
-  FEW_THINGS: 2,
-  IMPORTANT_STUFF: 3,
-};
+export const PLANNED_TRAVELLER = [
+  { name: "I haven't even started", value: 1 },
+  { name: "I have a few things planned but still have a lot to go", value: 2 },
+  {
+    name: "The important stuff is booked but I need to plan the itinerary",
+    value: 3,
+  },
+];

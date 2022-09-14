@@ -7,11 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import moment from "moment";
 
-import { IMAGE, ITINERARY_STATUS, ICON, API } from "../../constants";
+import {
+  IMAGE,
+  ITINERARY_STATUS,
+  ICON,
+  API,
+  PLANNED_TRAVELLER,
+} from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setFormRef } from "../../store/slices/appData";
 import { Pagination } from "../../components/Pagination";
-import { SerialNum } from "../../util";
+import { getFormattedDate, SerialNum } from "../../util";
 import { Fetch } from "../../api/Fetch";
 import "./index.scss";
 
@@ -20,9 +26,10 @@ const TableHead = () => (
     <tr className="head-tr">
       <th>Sr.No.</th>
       <th>Name</th>
-      <th>No. of Days</th>
-      <th>No. of Guests</th>
-      <th>Assigned Date</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Planned Date</th>
+      <th className="custom-head">How much have you already planned?</th>
       <th>Status</th>
       <th>Actions</th>
     </tr>
@@ -43,7 +50,7 @@ const TableRow = (
   };
 
   return (
-    <tr className="body-tr" key={item._id}>
+    <tr className="body-tr" key={index}>
       <td>{SerialNum(limit, page, index)}</td>
       <td>
         <div className="name-image-cell">
@@ -55,26 +62,33 @@ const TableRow = (
               e.target.src = ICON.USER_PLACEHOLDER;
             }}
           />
-          <span className="table-user-name">{item.name}</span>
+          <span className="table-user-name">{item.location}</span>
         </div>
       </td>
-      <td>{item.duration}</td>
-      <td>{item.guests}</td>
-      <td>{moment(item.fromDate).format("D-MMM-YYYY")}</td>
+      <td>{item.userName}</td>
+      <td>
+        {item.travellerEmail ? (
+          <a href={`mailto:${item.travellerEmail}`}>{item.travellerEmail}</a>
+        ) : (
+          "NA"
+        )}
+      </td>
+      <td>{getFormattedDate(item.plannedDate)}</td>
+      <td>{PLANNED_TRAVELLER[item.plannedTraveller - 1 || 0].name}</td>
       <td>
         <div className="table-data-status">
           {ITINERARY_STATUS[item.itineraryStatus]}
         </div>
       </td>
       <td>
-        <div
-          className="table-data-details"
+        <button
+          className=" btn view-button"
           onClick={() => {
             itineraryDetailsPage(item);
           }}
         >
           View Details
-        </div>
+        </button>
       </td>
     </tr>
   );

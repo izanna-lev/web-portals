@@ -24,6 +24,7 @@ export const Fetch =
     try {
       const response = await axios.post(endpoint, data, {
         headers: {
+          "Content-Type": "application/json",
           Authorization,
         },
       });

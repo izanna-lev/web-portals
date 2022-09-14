@@ -12,7 +12,7 @@
 }
 
 .content {
-  min-width: fit-content;
+  // min-width: fit-content;
   min-height: fit-content;
 }
 
@@ -31,4 +31,5 @@
 
 .content-bottom {
   flex-direction: column;
+  min-width: 54rem;
 }

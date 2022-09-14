@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
-import InputForm from "../InputForm/index";
-import TextArea from "../TextArea/index";
+import InputForm from "../InputTypes/InputForm/index";
+import TextArea from "../InputTypes/TextArea/index";
 
 type InputProps = {
   inputFields: {

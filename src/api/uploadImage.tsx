@@ -2,36 +2,22 @@ import { setLoader } from "../store/slices/loader";
 import { setApiMessage } from "../store/slices/apiMessage";
 import axios from "axios";
 import { Fetch } from "./Fetch";
+import { API } from "../constants";
 
-// Create API
-export const Create =
-  (
-    endpoint: string = "",
-    payload: any = {},
-    multipart: boolean = false,
-    image: any = null,
-    listingEndpoint: string = "",
-    listingPayload: any = {},
-    page: number = 1,
-    limit: number = 10
-  ) =>
+// Upload Image to server
+export const UploadImage =
+  (endpoint: string = API.IMAGE_UPLOAD, image: any) =>
   async (dispatch: any) => {
+    const ContentType = "multipart/form-data";
     const Authorization = localStorage.getItem("accessToken") || "";
-    const ContentType = multipart ? "multipart/form-data" : "application/json";
 
     if (!endpoint) return alert("Missing Endpoint");
     if (!Authorization) return alert("No Authorization");
 
     dispatch(setLoader(true));
 
-    let data = { ...payload, page, limit };
-
-    if (multipart) {
-      const formData = new FormData();
-      formData.append("data", JSON.stringify(data));
-      if (image) formData.append("image", image);
-      data = formData;
-    }
+    const data = new FormData();
+    data.append("image", image);
 
     try {
       const response = await axios.post(endpoint, data, {
@@ -52,11 +38,7 @@ export const Create =
             message: message,
           })
         );
-
-        if (listingEndpoint)
-          dispatch(
-            Fetch(listingEndpoint, listingPayload, page, limit, listingPayload)
-          );
+        return response.data;
       }
     } catch (error: any) {
       dispatch(setLoader(false));

@@ -5,11 +5,11 @@
 
 import { API, GOOGLE_API, ITINERARY_TYPE } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import InputForm from "../../../components/InputForm/index";
+import InputForm from "../../../components/InputTypes/InputForm/index";
 import { usePlacesWidget } from "react-google-autocomplete";
-import Dropdown from "../../../components/Dropdown/index";
-import TextArea from "../../../components/TextArea/index";
-import Toggle from "../../../components/Toggle/index";
+import Dropdown from "../../../components/InputTypes/Dropdown/index";
+import TextArea from "../../../components/InputTypes/TextArea/index";
+import Toggle from "../../../components/InputTypes/Toggle/index";
 import { useEffect, useRef, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { Create } from "../../../api/Create";
@@ -124,6 +124,7 @@ const AddItineraryPage = () => {
           <div className="feild-heading">Basic Details</div>
           <InputForm
             inputFields={{
+              placeholder: "Steven Johns",
               ref: nameRef,
               name: "Name",
               id: "name",
@@ -133,6 +134,7 @@ const AddItineraryPage = () => {
           />
           <InputForm
             inputFields={{
+              placeholder: "example@mail.com",
               ref: emailRef,
               name: "Email",
               id: "email",
@@ -147,6 +149,7 @@ const AddItineraryPage = () => {
           />
           <InputForm
             inputFields={{
+              placeholder: "$250",
               ref: priceRef,
               name: "Itinerary Price",
               id: "price",
@@ -157,6 +160,7 @@ const AddItineraryPage = () => {
 
           <InputForm
             inputFields={{
+              placeholder: "",
               ref: fromDateRef,
               name: "From Date",
               id: "from_date",
@@ -166,6 +170,7 @@ const AddItineraryPage = () => {
           />
           <InputForm
             inputFields={{
+              placeholder: "",
               ref: toDateRef,
               name: "To Date",
               id: "to_date",
@@ -184,6 +189,7 @@ const AddItineraryPage = () => {
 
           <InputForm
             inputFields={{
+              placeholder: "Cebu City, Canada",
               ref: ref,
               name: "Location",
               id: "location",
@@ -193,6 +199,7 @@ const AddItineraryPage = () => {
           />
           <InputForm
             inputFields={{
+              placeholder: "1",
               ref: roomsRef,
               name: "No of Rooms allotted",
               id: "rooms",
@@ -203,6 +210,7 @@ const AddItineraryPage = () => {
           />
           <TextArea
             inputFields={{
+              placeholder: "Lorem Ipsum",
               ref: noteRef,
               name: "Specialist Note",
               id: "note",
@@ -212,6 +220,7 @@ const AddItineraryPage = () => {
           />
           <TextArea
             inputFields={{
+              placeholder: "Lorem ipsum",
               ref: regulationsRef,
               name: "Specific Restriction and Regulation",
               id: "restriction",

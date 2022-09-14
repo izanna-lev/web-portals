@@ -13,8 +13,8 @@ import { Fetch } from "../../api/Fetch";
 
 const ProfilePage = () => {
   const profileData = useAppSelector((state) => state.profile);
-
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(SET_NAVIGATION({ value: NAVIGATE.PROFILE }));
   }, [dispatch]);
