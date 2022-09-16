@@ -8,6 +8,7 @@
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { getFormattedDate, getFormattedTime } from "../../../util";
 import { API, TRANSPORTATION_TYPE } from "../../../constants";
+import EditCar from "../../TransportationEdit/EditCar";
 import NewCar from "../../TransportationAdd/AddCar";
 import { Modal } from "../../../components/Portal";
 import { DeleteEntity } from "../../../api/Delete";
@@ -17,13 +18,16 @@ import styles from "./index.module.scss";
 import { useState } from "react";
 
 const AddActivitiesPage = () => {
-  const [canAddMore, setAddMore] = useState(false);
+  const [addMore, setAddMore] = useState(false);
+  const [edit, setEdit] = useState(undefined);
+
+  const dispatch = useAppDispatch();
+
   const carDataList = useAppSelector((state: any) => state.transportation.car);
 
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
   );
-  const dispatch = useAppDispatch();
 
   const deleteTransportation = (transportationRef: string) => {
     const confirmDelete = window.confirm(
@@ -69,12 +73,17 @@ const AddActivitiesPage = () => {
                 <div>{element.arrival || "NA"}</div>
                 <div>{element.specialistNote || "NA"}</div>
                 <div className="add-activity-buttons">
-                  <button className="activity-button edit">
+                  <button
+                    className="btn edit-button"
+                    onClick={() => {
+                      setEdit(element);
+                    }}
+                  >
                     <FaRegEdit />
                     &nbsp;<span>Edit</span>
                   </button>
                   <button
-                    className="activity-button delete"
+                    className="btn delete-button"
                     onClick={() => deleteTransportation(element._id)}
                   >
                     <MdDeleteOutline />
@@ -98,13 +107,6 @@ const AddActivitiesPage = () => {
         >
           + Add Car Details
         </div>
-
-        {canAddMore ? (
-          <Modal
-            modal={<NewCar closePopup={setAddMore} />}
-            root={document.getElementById("overlay-root") as HTMLElement}
-          />
-        ) : null}
       </section>
 
       <div
@@ -113,6 +115,18 @@ const AddActivitiesPage = () => {
       >
         Continue
       </div>
+      {addMore ? (
+        <Modal
+          modal={<NewCar handleAddPopup={setAddMore} />}
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      ) : null}
+      {edit ? (
+        <Modal
+          modal={<EditCar handleEditPopup={setEdit} data={edit} />}
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      ) : null}
     </>
   );
 };

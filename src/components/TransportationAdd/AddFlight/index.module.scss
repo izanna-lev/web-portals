@@ -34,48 +34,13 @@
   position: relative;
 }
 
-.form-image {
-  margin-left: 0px;
-  width: 120px;
-  display: flex;
-  align-items: center;
-  padding: 4px;
-  height: 60px;
-  border-radius: 0.5rem;
-  justify-content: space-around;
-  background-color: $theme_color_light_blue_3x;
-}
-
-.form-image > .not-selected-preview {
-  width: 80%;
-  height: 70%;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.5rem;
-}
-
-.activity-image-placeholder {
-  width: 20px;
-  height: 20px;
-  color: $theme_color_light_blue;
-}
-
-.activity-image-popup {
-  color: $theme_color_light_blue;
-  display: flex;
-  align-items: center;
-  margin: 1rem;
-  cursor: pointer;
-}
-
 .form-required-feilds {
   margin-top: 4px;
   margin-bottom: 4px;
   width: 100%;
   display: grid;
-  gap: 60px;
+  column-gap: 60px;
+  row-gap: 20px;
   grid-template-columns: 1fr 1fr;
 }
 

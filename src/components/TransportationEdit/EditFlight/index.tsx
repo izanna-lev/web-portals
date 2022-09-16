@@ -1,5 +1,4 @@
-import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
-import { MdZoomOutMap } from "react-icons/md";
+import { IoCloseOutline } from "react-icons/io5";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
 import styles from "./index.module.scss";
@@ -14,107 +13,51 @@ import {
   TRANSPORTATION_TYPE,
 } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setBackground } from "../../../util";
-import { UploadImage } from "../../../api/uploadImage";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { Create } from "../../../api/Create";
+import { NewTicket } from "../../TransportationAdd/NewTicket";
+import { OldTicket } from "../OldTicket";
 
 interface props {
-  closePopup: React.Dispatch<React.SetStateAction<boolean>>;
+  handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
+  data: any;
 }
 
-const UserTicket = (
-  length: number,
-  saveData: Function,
-  setshowImage: React.Dispatch<React.SetStateAction<boolean>>,
-  setimageUrl: React.Dispatch<React.SetStateAction<string>>,
-  dispatch: any
-) => {
-  let newImageUrl = "";
+const EditFlight = (props: props) => {
+  const [deleteUserDetails, setdeleteUserDetails] = useState<any>([]);
+  const [newTicketsData, setNewTicketsData] = useState<any>([]);
+  const [oldTicketsData, setOldTicketsData] = useState<any>([]);
 
-  const handleImageChange = async (file: any) => {
-    if (file[0]) {
-      newImageUrl = URL.createObjectURL(file[0]);
-      setBackground(newImageUrl, `bg-img-${length}`);
-      const response = await dispatch(UploadImage(undefined, file[0]));
-      saveData({ length, image: response.data });
-    }
-  };
-
-  const handleNameChange = (name: string) => {
-    saveData({ length, name });
-  };
-
-  return (
-    <React.Fragment>
-      <div className={`${styles["form-heading"]}`}>Upload Ticket Image</div>
-      <div style={{ display: "flex" }}>
-        <div className={styles["form-image"]} id={`bg-img-${length}`}>
-          <input
-            type="file"
-            id={`${length}`}
-            accept="image/*"
-            name={`Ticket${length}`}
-            onChange={(e) => handleImageChange(e.target.files)}
-            hidden
-          />
-          <label
-            htmlFor={`${length}`}
-            className={styles["not-selected-preview"]}
-            id={`Ticket${length}`}
-          >
-            <IoCloudUploadOutline
-              className={styles["activity-image-placeholder"]}
-            />
-          </label>
-        </div>
-
-        <div
-          className={styles["activity-image-popup"]}
-          onClick={() => {
-            setshowImage(true);
-            setimageUrl(newImageUrl);
-          }}
-        >
-          <MdZoomOutMap />
-          &nbsp;View Image
-        </div>
-      </div>
-      <InputForm
-        inputFields={{
-          placeholder: "Steven Johns",
-          name: `User ${length + 1} Name`,
-          id: `user${length}`,
-          maxlength: 50,
-          type: "text",
-          onChange: handleNameChange,
-        }}
-      />
-    </React.Fragment>
-  );
-};
-
-const NewTransportationForm = (props: props) => {
-  const [allUserTickets, setAllUserTickets] = useState<JSX.Element[]>([]);
-  const [ticketsData, setTicketsData] = useState([{ name: "", image: "" }]);
   const [showImage, setshowImage] = useState(false);
   const [imageUrl, setimageUrl] = useState("");
-  const [depart, setDepart] = useState({});
-  const [arrival, setArrival] = useState({});
+
+  const [arrival, setArrival] = useState({ type: "" });
+  const [depart, setDepart] = useState({ type: "" });
+
   const dispatch = useAppDispatch();
 
-  const { closePopup } = props;
+  const { handleEditPopup, data } = props;
+
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
   );
 
-  const dayRef = useRef();
-  const airlineRef = useRef();
+  const specialistNoteRef = useRef();
   const flightClassRef = useRef();
+  const arrivalTimeRef = useRef();
   const departDateRef = useRef();
   const departTimeRef = useRef();
-  const arrivalTimeRef = useRef();
-  const specialistNoteRef = useRef();
+  const airlineRef = useRef();
+  const dayRef = useRef();
+
+  useEffect(() => {
+    if (data) {
+      const oldTickets = data.tickets.map((ticket: any) => {
+        return { name: ticket.name, image: ticket.image };
+      });
+      setOldTicketsData([...oldTickets]);
+    }
+  }, [data]);
 
   const DepartLocation = usePlacesWidget({
     apiKey: GOOGLE_API,
@@ -129,14 +72,12 @@ const NewTransportationForm = (props: props) => {
   const checkPlace = (type: string, place: any) => {
     const {
       formatted_address,
-      // address_components,
       geometry: {
         location: { lat, lng },
       },
     } = place;
 
     const newLocationObj = {
-      // location: `${address_components[0].long_name}, ${address_components[3].long_name}`,
       location: formatted_address,
       type: "Point",
       coordinates: [lat(), lng()],
@@ -145,73 +86,114 @@ const NewTransportationForm = (props: props) => {
     else setArrival(newLocationObj);
   };
 
+  const modifyTicket = (id: string) => {
+    if (id) {
+      if (!deleteUserDetails.includes(id))
+        setdeleteUserDetails((prev: any) => [...prev, id]);
+    }
+  };
+
+  const removeUserTicket = (id: string, index: number, type: string = "") => {
+    modifyTicket(id);
+
+    const elementToRemove = document.getElementById(
+      `${type}ticket${index}`
+    ) as HTMLElement;
+
+    if (elementToRemove) elementToRemove.remove();
+
+    if (type === "old") {
+      const filteredTickets = oldTicketsData.filter(
+        (ticket: any, idx: number) => idx !== index
+      );
+
+      setOldTicketsData(filteredTickets);
+    } else {
+      const filteredTickets = newTicketsData.filter(
+        (ticket: any, idx: number) => idx !== index
+      );
+
+      setNewTicketsData(filteredTickets);
+    }
+  };
+
   const saveUserTicketsData = ({
     length,
     image,
     name,
+    type,
   }: {
     length: number;
     image: string;
     name: string;
+    type: string;
   }) => {
-    const newObj = [...ticketsData];
+    let Obj: any;
 
-    if (name) newObj[length].name = name;
-    else newObj[length].image = image;
-    setTicketsData(newObj);
+    if (type === "new") {
+      Obj = [...newTicketsData];
+      if (name) Obj[length - oldTicketsData.length].name = name;
+      else Obj[length - oldTicketsData.length].image = image;
+      setNewTicketsData(Obj);
+    } else {
+      Obj = [...oldTicketsData];
+      if (name) Obj[length].name = name;
+      else Obj[length].image = image;
+      Obj[length].modified = true;
+
+      setOldTicketsData(Obj);
+    }
   };
-
-  useEffect(() => {
-    setAllUserTickets([
-      UserTicket(0, saveUserTicketsData, setshowImage, setimageUrl, dispatch),
-    ]);
-  }, []);
 
   const addMoreTickets = () => {
-    setAllUserTickets((previous) => [
-      ...previous,
-      UserTicket(
-        allUserTickets.length,
-        saveUserTicketsData,
-        setshowImage,
-        setimageUrl,
-        dispatch
-      ),
-    ]);
-
-    ticketsData.push({ name: "", image: "" });
+    const addNewTicketInArr = [...newTicketsData];
+    addNewTicketInArr.push({ name: "", image: "" });
+    setNewTicketsData(addNewTicketInArr);
   };
 
-  const closeImagePopup = () => setshowImage(false);
+  const handleImagePopup = () => setshowImage(false);
 
   const saveFlightDetails = (e: any) => {
     e.preventDefault();
     const getInputValue = (ref: any) => ref.current.value;
-    const data = {
+    let payload: any;
+
+    const ticketsEdited = oldTicketsData.filter(
+      (ticket: any) => ticket.modified
+    );
+
+    payload = {
       day: getInputValue(dayRef),
       flightClass: getInputValue(flightClassRef),
       departDateTime: new Date(
         `${getInputValue(departDateRef)}T${getInputValue(departTimeRef)}`
       ).toISOString(),
       airline: getInputValue(airlineRef),
-      depart,
-      arrival,
       arrivalDateTime: new Date(
         `${getInputValue(departDateRef)}T${getInputValue(arrivalTimeRef)}`
       ).toISOString(),
       specialistNote: getInputValue(specialistNoteRef),
-      userDetails: ticketsData,
-      itineraryRef: _id,
+      userDetails: [...newTicketsData, ...ticketsEdited],
+      deleteUserDetails,
+      transportationRef: data._id,
     };
 
+    if (depart.type) {
+      payload = { ...payload, depart };
+    }
+
+    if (arrival.type) {
+      payload = { ...payload, arrival };
+    }
+
     dispatch(
-      Create(API.ADD_FLIGHT, data, false, null, API.TRANSPORTATION_DATA, {
+      Create(API.EDIT_FLIGHT, payload, false, null, API.TRANSPORTATION_DATA, {
         itineraryRef: _id,
         transportationType: TRANSPORTATION_TYPE.FLIGHT,
       })
     );
 
-    closePopup(false);
+    handleEditPopup(false);
   };
 
   return (
@@ -228,7 +210,7 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  placeholder: "1",
+                  default: data.day,
                   ref: dayRef,
                   name: "Day",
                   id: "day",
@@ -238,7 +220,7 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
-                  placeholder: "Phillippines",
+                  default: data.airline,
                   ref: airlineRef,
                   name: "Airline",
                   id: "airline",
@@ -251,10 +233,11 @@ const NewTransportationForm = (props: props) => {
                 name="Flight Class"
                 inputFields={FLIGHT_CLASS}
                 refe={flightClassRef}
+                checkedVal={data.flightClass}
               />
               <InputForm
                 inputFields={{
-                  placeholder: "Canada",
+                  default: data.depart,
                   ref: DepartLocation.ref,
                   name: "Depart",
                   id: "depart",
@@ -265,7 +248,7 @@ const NewTransportationForm = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  placeholder: "",
+                  default: data.departDateTime.slice(0, 10),
                   ref: departDateRef,
                   name: "Depart Date",
                   id: "date",
@@ -277,7 +260,7 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  placeholder: "",
+                  default: data.departDateTime.slice(11, 16),
                   ref: departTimeRef,
                   name: "Depart Time",
                   id: "time",
@@ -287,7 +270,7 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
-                  placeholder: "Cebu City",
+                  default: data.arrival,
                   ref: ArrivalLocation.ref,
                   name: "Arrival",
                   id: "arrival",
@@ -297,7 +280,7 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
-                  placeholder: "",
+                  default: data.arrivalDateTime.slice(11, 16),
                   ref: arrivalTimeRef,
                   name: "Arrival Time",
                   id: "time",
@@ -307,7 +290,7 @@ const NewTransportationForm = (props: props) => {
               />
               <TextArea
                 inputFields={{
-                  placeholder: "Lorem Ipsum",
+                  default: data.specialistNote,
                   ref: specialistNoteRef,
                   name: "Specialist Note",
                   id: "specialist note",
@@ -324,15 +307,34 @@ const NewTransportationForm = (props: props) => {
             className={styles["form-required-feilds"]}
             style={{ maxHeight: "400px", overflow: "auto" }}
           >
-            {allUserTickets.map((element, index) => (
-              <div className={styles["form-left-details"]} key={index}>
-                {element}
-              </div>
-            ))}
+            {data.tickets.map((element: any, index: number) =>
+              OldTicket(
+                index,
+                saveUserTicketsData,
+                setshowImage,
+                setimageUrl,
+                dispatch,
+                useEffect,
+                element,
+                useRef,
+                removeUserTicket,
+                modifyTicket
+              )
+            )}
+            {newTicketsData.map((element: any, index: number) =>
+              NewTicket(
+                oldTicketsData.length + index,
+                saveUserTicketsData,
+                setshowImage,
+                setimageUrl,
+                dispatch,
+                removeUserTicket
+              )
+            )}
           </div>
           <div
             className={`${styles["add-more"]} ${styles["form-heading"]}`}
-            onClick={addMoreTickets}
+            onClick={() => addMoreTickets()}
           >
             + Add More Users
           </div>
@@ -346,13 +348,16 @@ const NewTransportationForm = (props: props) => {
 
         <IoCloseOutline
           className={styles["cross"]}
-          onClick={() => closePopup(false)}
+          onClick={() => handleEditPopup(false)}
         />
       </div>
       {showImage && imageUrl ? (
         <Modal
           modal={
-            <ImagePopup imageUrl={imageUrl} closeImagePopup={closeImagePopup} />
+            <ImagePopup
+              imageUrl={imageUrl}
+              handleImagePopup={handleImagePopup}
+            />
           }
           root={document.getElementById("overlay-root") as HTMLElement}
         />
@@ -361,6 +366,4 @@ const NewTransportationForm = (props: props) => {
   );
 };
 
-export default NewTransportationForm;
-
-// className={styles[{` ${activityChangedData?.[index]?.image ? "" : "not-selected-preview"}`}
+export default EditFlight;

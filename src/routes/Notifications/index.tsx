@@ -1,40 +1,46 @@
 import { SET_NAVIGATION } from "../../store/slices/navigation";
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState, useLayoutEffect, Key } from "react";
 import { API, IMAGE, ICON, NAVIGATE } from "../../constants";
 import { useAppDispatch } from "../../store/hooks";
 import "./index.scss";
 
-const User = (user, index, selectOne) => (
-  <div className="user-selection-element" key={user._id + index}>
-    <input
-      id={`checkbox-${index}`}
-      type="checkbox"
-      className="checkbox"
-      defaultChecked={selectedUsers.includes(user._id)}
-      onChange={() => {
-        selectOne(user._id);
-      }}
-    />
-    <img
-      className="user-selection-img"
-      src={`${IMAGE.SMALL}${user.image}`}
-      alt={user.name}
-      onError={(e) => {
-        e.target.src = ICON.USER_PLACEHOLDER;
-      }}
-      loading="lazy"
-    />
-    <div className="user-selection-info">
-      <div className="user-selection-name">{user.firstName}</div>
-      <div className="user-selection-email">{user.email}</div>
+const User = (
+  user: any,
+  index: Key | null | undefined,
+  selectOne: { (id: any): void; (arg0: any): void }
+) => {
+  return (
+    <div className="user-selection-element" key={index}>
+      <input
+        id={`checkbox-${index}`}
+        type="checkbox"
+        className="checkbox"
+        defaultChecked={selectedUsers.includes(user._id)}
+        onChange={() => {
+          selectOne(user._id);
+        }}
+      />
+      <img
+        className="user-selection-img"
+        src={`${IMAGE.SMALL}${user.image}`}
+        alt={user.name}
+        onError={(e) => {
+          // e.target.src = ICON.USER_PLACEHOLDER;
+        }}
+        loading="lazy"
+      />
+      <div className="user-selection-info">
+        <div className="user-selection-name">{user.firstName}</div>
+        <div className="user-selection-email">{user.email}</div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-let selectedUsers = [];
+let selectedUsers: any[] = [];
 
-const Notifications = (props) => {
-  const [newUserList, setnewUserList] = useState([]);
+const Notifications = (props: any) => {
+  const [newUserList, setnewUserList] = useState<any>([]);
   const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
@@ -67,22 +73,22 @@ const Notifications = (props) => {
           selectedUsers.push(newUserList[index]._id);
         }
       }
-      checkboxes.forEach((checkbox) => {
+      checkboxes.forEach((checkbox: any) => {
         checkbox.checked = true;
       });
       // handleActiveState(NOTIFICATION_LIST.ALL);
     }
   };
 
-  const unselectAll = (checkboxes) => {
+  const unselectAll = (checkboxes: any[] | NodeListOf<Element>) => {
     selectedUsers = [];
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach((checkbox: any) => {
       checkbox.checked = false;
     });
     // handleActiveState(NOTIFICATION_LIST.NONE);
   };
 
-  const selectOne = (id) => {
+  const selectOne = (id: any) => {
     if (selectedUsers.indexOf(id) > -1) {
       selectedUsers.splice(selectedUsers.indexOf(id), 1);
     } else {
@@ -163,7 +169,7 @@ const Notifications = (props) => {
 
               <div className="user-selection-list">
                 {newUserList &&
-                  newUserList.map((user, index) =>
+                  newUserList.map((user: any, index: number) =>
                     User(user, index, selectOne)
                   )}
               </div>

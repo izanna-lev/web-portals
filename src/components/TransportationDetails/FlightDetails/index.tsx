@@ -15,16 +15,20 @@ import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
+import EditFlight from "../../TransportationEdit/EditFlight";
 
 const AddActivitiesPage = () => {
-  const [canAddMore, setAddMore] = useState(false);
+  const [addMore, setAddMore] = useState(false);
+  const [edit, setEdit] = useState(undefined);
+
+  const dispatch = useAppDispatch();
+
   const flightList = useAppSelector(
     (state: any) => state.transportation.flight
   );
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
   );
-  const dispatch = useAppDispatch();
 
   const deleteTransportation = (transportationRef: string) => {
     const confirmDelete = window.confirm(
@@ -76,7 +80,10 @@ const AddActivitiesPage = () => {
                 <div>{getFormattedTime(element.arrivalDateTime)}</div>
                 <div>{element.specialistNote || "NA"}</div>
                 <div className="add-activity-buttons">
-                  <button className="btn edit-button">
+                  <button
+                    className="btn edit-button"
+                    onClick={() => setEdit(element)}
+                  >
                     <FaRegEdit />
                     &nbsp;<span>Edit</span>
                   </button>
@@ -105,13 +112,6 @@ const AddActivitiesPage = () => {
         >
           + Add Flight Details
         </div>
-
-        {canAddMore ? (
-          <Modal
-            modal={<NewFlight closePopup={setAddMore} />}
-            root={document.getElementById("overlay-root") as HTMLElement}
-          />
-        ) : null}
       </section>
 
       <div
@@ -120,6 +120,18 @@ const AddActivitiesPage = () => {
       >
         Continue
       </div>
+      {addMore ? (
+        <Modal
+          modal={<NewFlight handleAddPopup={setAddMore} />}
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      ) : null}
+      {edit ? (
+        <Modal
+          modal={<EditFlight handleEditPopup={setEdit} data={edit} />}
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      ) : null}
     </>
   );
 };

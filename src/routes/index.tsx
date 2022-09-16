@@ -2,10 +2,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
 
-// import AddItinerary from "./CreateItinerary/AddItineraryDetails";
-// import TransportationAdd from "./CreateItinerary/TransportationAdd";
-// import AddActivities from "./CreateItinerary/AddActivities";
-
 const Account = loadable(() => import("./Account"));
 const AssignedItineraries = loadable(() => import("./AssignedItineraries"));
 const Chat = loadable(() => import("./Chat"));

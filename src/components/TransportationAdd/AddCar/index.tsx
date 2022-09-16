@@ -14,7 +14,7 @@ import { setBackground } from "../../../util";
 import { Create } from "../../../api/Create";
 
 interface props {
-  closePopup: React.Dispatch<React.SetStateAction<boolean>>;
+  handleAddPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserTicket = (
@@ -120,7 +120,6 @@ const NewTransportationForm = (props: props) => {
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
   );
-
   const dayRef = useRef();
   const pickupTimeRef = useRef();
   const pickupDateRef = useRef();
@@ -139,14 +138,13 @@ const NewTransportationForm = (props: props) => {
   const checkPlace = (type: string, place: any) => {
     const {
       formatted_address,
-      // address_components,
+
       geometry: {
         location: { lat, lng },
       },
     } = place;
 
     const newLocationObj = {
-      // location: `${address_components[0].long_name}, ${address_components[3].long_name}`,
       location: formatted_address,
       type: "Point",
       coordinates: [lat(), lng()],
@@ -156,19 +154,19 @@ const NewTransportationForm = (props: props) => {
   };
 
   const saveUserTicketsData = ({
-    image,
-    name,
+    carImage,
+    driverName,
     noOfTravellers,
   }: {
-    image: string;
-    name: string;
+    carImage: string;
+    driverName: string;
     noOfTravellers: string;
   }) => {
     const newObj = { ...ticketsData };
 
-    if (name) newObj.driverName = name;
+    if (driverName) newObj.driverName = driverName;
     else if (noOfTravellers) newObj.noOfTravellers = noOfTravellers;
-    else newObj.carImage = image;
+    else newObj.carImage = carImage;
     setTicketsData(newObj);
   };
 
@@ -197,12 +195,12 @@ const NewTransportationForm = (props: props) => {
       })
     );
 
-    closePopup(false);
+    handleAddPopup(false);
   };
 
-  const closeImagePopup = () => setshowImage(false);
+  const handleImagePopup = () => setshowImage(false);
 
-  const { closePopup } = props;
+  const { handleAddPopup } = props;
 
   return (
     <div className={styles["add-itinerary-data-form"]}>
@@ -305,13 +303,16 @@ const NewTransportationForm = (props: props) => {
 
         <IoCloseOutline
           className={styles["cross"]}
-          onClick={() => closePopup(false)}
+          onClick={() => handleAddPopup(false)}
         />
       </div>
       {showImage && imageUrl ? (
         <Modal
           modal={
-            <ImagePopup imageUrl={imageUrl} closeImagePopup={closeImagePopup} />
+            <ImagePopup
+              imageUrl={imageUrl}
+              handleImagePopup={handleImagePopup}
+            />
           }
           root={document.getElementById("overlay-root") as HTMLElement}
         />

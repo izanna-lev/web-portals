@@ -35,19 +35,15 @@ export const login = ({
 
       dispatch(
         setApiMessage({
-          data: {
-            message: response.data.message,
-            type: "success",
-          },
+          message: response.data.message,
+          type: "success",
         })
       );
     } catch (err: any) {
       dispatch(
         setApiMessage({
-          data: {
-            message: err.message,
-            type: "error",
-          },
+          message: err.message,
+          type: "error",
         })
       );
       //   dispatch(setLoader(false));

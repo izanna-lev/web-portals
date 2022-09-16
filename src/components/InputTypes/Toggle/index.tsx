@@ -6,6 +6,7 @@ type InputProps = {
     type: string;
     id: string;
     ref?: any;
+    default?: any;
   };
 };
 

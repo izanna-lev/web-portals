@@ -5,18 +5,18 @@ import styles from "./index.module.scss";
 
 interface props {
   imageUrl: string;
-  closeImagePopup: Function;
+  handleImagePopup: Function;
 }
 
 const ImagePopup = (props: props) => {
-  const { imageUrl, closeImagePopup } = props;
+  const { imageUrl, handleImagePopup } = props;
 
   return (
     <div className={styles["image-popup-container"]}>
       <div className={styles["image-popup"]}>
         <IoCloseOutline
           className={styles["cross"]}
-          onClick={() => closeImagePopup()}
+          onClick={() => handleImagePopup()}
         />
         <br />
         <img

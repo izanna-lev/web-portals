@@ -15,6 +15,7 @@ export const store = configureStore({
     navigation: reducers.navigation,
     profile: reducers.profile,
     transportation: reducers.transportation,
+    allTickets: reducers.allTickets,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>

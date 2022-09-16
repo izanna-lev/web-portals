@@ -14,96 +14,23 @@ import {
   TRANSPORTATION_TYPE,
 } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setBackground } from "../../../util";
-import { UploadImage } from "../../../api/uploadImage";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { Create } from "../../../api/Create";
+import { NewTicket } from "../NewTicket";
 
 interface props {
-  closePopup: React.Dispatch<React.SetStateAction<boolean>>;
+  handleAddPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UserTicket = (
-  length: number,
-  saveData: Function,
-  setshowImage: React.Dispatch<React.SetStateAction<boolean>>,
-  setimageUrl: React.Dispatch<React.SetStateAction<string>>,
-  dispatch: any
-) => {
-  let newImageUrl = "";
-
-  const handleImageChange = async (file: any) => {
-    if (file[0]) {
-      newImageUrl = URL.createObjectURL(file[0]);
-      setBackground(newImageUrl, `bg-img-${length}`);
-      const response = await dispatch(UploadImage(undefined, file[0]));
-      saveData({ length, image: response.data });
-    }
-  };
-
-  const handleNameChange = (name: string) => {
-    saveData({ length, name });
-  };
-
-  return (
-    <React.Fragment>
-      <div className={`${styles["form-heading"]}`}>Upload Ticket Image</div>
-      <div style={{ display: "flex" }}>
-        <div className={styles["form-image"]} id={`bg-img-${length}`}>
-          <input
-            type="file"
-            id={`${length}`}
-            accept="image/*"
-            name={`Ticket${length}`}
-            onChange={(e) => handleImageChange(e.target.files)}
-            hidden
-          />
-          <label
-            htmlFor={`${length}`}
-            className={styles["not-selected-preview"]}
-            id={`Ticket${length}`}
-          >
-            <IoCloudUploadOutline
-              className={styles["activity-image-placeholder"]}
-            />
-          </label>
-        </div>
-
-        <div
-          className={styles["activity-image-popup"]}
-          onClick={() => {
-            setshowImage(true);
-            setimageUrl(newImageUrl);
-          }}
-        >
-          <MdZoomOutMap />
-          &nbsp;View Image
-        </div>
-      </div>
-      <InputForm
-        inputFields={{
-          placeholder: "Steven Johns",
-          name: `User ${length + 1} Name`,
-          id: `user${length}`,
-          maxlength: 50,
-          type: "text",
-          onChange: handleNameChange,
-        }}
-      />
-    </React.Fragment>
-  );
-};
-
 const NewTransportationForm = (props: props) => {
-  const [allUserTickets, setAllUserTickets] = useState<JSX.Element[]>([]);
-  const [ticketsData, setTicketsData] = useState([{ name: "", image: "" }]);
+  const [ticketsData, setTicketsData] = useState<any>([]);
   const [showImage, setshowImage] = useState(false);
   const [imageUrl, setimageUrl] = useState("");
   const [depart, setDepart] = useState({});
   const [arrival, setArrival] = useState({});
   const dispatch = useAppDispatch();
 
-  const { closePopup } = props;
+  const { handleAddPopup } = props;
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
   );
@@ -129,20 +56,31 @@ const NewTransportationForm = (props: props) => {
   const checkPlace = (type: string, place: any) => {
     const {
       formatted_address,
-      // address_components,
+
       geometry: {
         location: { lat, lng },
       },
     } = place;
 
     const newLocationObj = {
-      // location: `${address_components[0].long_name}, ${address_components[3].long_name}`,
       location: formatted_address,
       type: "Point",
       coordinates: [lat(), lng()],
     };
     if (type === "depart") setDepart(newLocationObj);
     else setArrival(newLocationObj);
+  };
+
+  const removeUserTicket = (id: string, index: number) => {
+    const elementToRemove = document.getElementById(
+      `ticket${index}`
+    ) as HTMLElement;
+    if (elementToRemove) elementToRemove.remove();
+    const filteredTickets = ticketsData.filter(
+      (ticket: any, idx: number) => idx !== index
+    );
+
+    setTicketsData(filteredTickets);
   };
 
   const saveUserTicketsData = ({
@@ -162,27 +100,16 @@ const NewTransportationForm = (props: props) => {
   };
 
   useEffect(() => {
-    setAllUserTickets([
-      UserTicket(0, saveUserTicketsData, setshowImage, setimageUrl, dispatch),
-    ]);
+    addMoreTickets();
   }, []);
 
   const addMoreTickets = () => {
-    setAllUserTickets((previous) => [
-      ...previous,
-      UserTicket(
-        allUserTickets.length,
-        saveUserTicketsData,
-        setshowImage,
-        setimageUrl,
-        dispatch
-      ),
-    ]);
-
-    ticketsData.push({ name: "", image: "" });
+    const addNewTicketInArr = [...ticketsData];
+    addNewTicketInArr.push({ name: "", image: "" });
+    setTicketsData(addNewTicketInArr);
   };
 
-  const closeImagePopup = () => setshowImage(false);
+  const handleImagePopup = () => setshowImage(false);
 
   const saveFlightDetails = (e: any) => {
     e.preventDefault();
@@ -211,7 +138,7 @@ const NewTransportationForm = (props: props) => {
       })
     );
 
-    closePopup(false);
+    handleAddPopup(false);
   };
 
   return (
@@ -324,11 +251,16 @@ const NewTransportationForm = (props: props) => {
             className={styles["form-required-feilds"]}
             style={{ maxHeight: "400px", overflow: "auto" }}
           >
-            {allUserTickets.map((element, index) => (
-              <div className={styles["form-left-details"]} key={index}>
-                {element}
-              </div>
-            ))}
+            {ticketsData.map((element: any, index: number) =>
+              NewTicket(
+                index,
+                saveUserTicketsData,
+                setshowImage,
+                setimageUrl,
+                dispatch,
+                removeUserTicket
+              )
+            )}
           </div>
           <div
             className={`${styles["add-more"]} ${styles["form-heading"]}`}
@@ -346,13 +278,16 @@ const NewTransportationForm = (props: props) => {
 
         <IoCloseOutline
           className={styles["cross"]}
-          onClick={() => closePopup(false)}
+          onClick={() => handleAddPopup(false)}
         />
       </div>
       {showImage && imageUrl ? (
         <Modal
           modal={
-            <ImagePopup imageUrl={imageUrl} closeImagePopup={closeImagePopup} />
+            <ImagePopup
+              imageUrl={imageUrl}
+              handleImagePopup={handleImagePopup}
+            />
           }
           root={document.getElementById("overlay-root") as HTMLElement}
         />

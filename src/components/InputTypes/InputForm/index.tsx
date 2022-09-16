@@ -9,6 +9,7 @@ type InputProps = {
     placeholder?: string;
     max?: number;
     ref?: any;
+    default?: string;
     onChange?: Function;
   };
 };
@@ -28,6 +29,7 @@ const InputForm = ({ inputFields }: InputProps) => {
           inputFields.onChange && inputFields.onChange(e.target.value)
         }
         placeholder={inputFields.placeholder}
+        defaultValue={inputFields.default}
         autoFocus
         required
       />

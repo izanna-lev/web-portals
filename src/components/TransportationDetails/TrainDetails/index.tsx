@@ -15,9 +15,11 @@ import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
+import EditTrain from "../../TransportationEdit/EditTrain";
 
 const AddActivitiesPage = () => {
-  const [canAddMore, setAddMore] = useState(false);
+  const [addMore, setAddMore] = useState(false);
+  const [edit, setEdit] = useState(undefined);
   const trainsList = useAppSelector((state: any) => state.transportation.train);
 
   const { _id } = useAppSelector(
@@ -73,12 +75,15 @@ const AddActivitiesPage = () => {
                 <div>{getFormattedTime(element.departDateTime)}</div>
                 <div>{element.specialistNote || "NA"}</div>
                 <div className="add-activity-buttons">
-                  <button className="activity-button edit">
+                  <button
+                    className="btn edit-button"
+                    onClick={() => setEdit(element)}
+                  >
                     <FaRegEdit />
                     &nbsp;<span>Edit</span>
                   </button>
                   <button
-                    className="activity-button delete"
+                    className="btn delete-button"
                     onClick={() => deleteTransportation(element._id)}
                   >
                     <MdDeleteOutline />
@@ -102,13 +107,6 @@ const AddActivitiesPage = () => {
         >
           + Add Train Details
         </div>
-
-        {canAddMore ? (
-          <Modal
-            modal={<NewTrain closePopup={setAddMore} />}
-            root={document.getElementById("overlay-root") as HTMLElement}
-          />
-        ) : null}
       </section>
 
       <div
@@ -117,6 +115,18 @@ const AddActivitiesPage = () => {
       >
         Continue
       </div>
+      {addMore ? (
+        <Modal
+          modal={<NewTrain handleAddPopup={setAddMore} />}
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      ) : null}
+      {edit ? (
+        <Modal
+          modal={<EditTrain handleEditPopup={setEdit} data={edit} />}
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      ) : null}
     </>
   );
 };

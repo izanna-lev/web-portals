@@ -4,7 +4,7 @@
  */
 
 import { useAppSelector } from "../../../store/hooks";
-import { IMAGE } from "../../../constants";
+import { IMAGE, PLANNED_TRAVELLER } from "../../../constants";
 import moment from "moment";
 import "./index.scss";
 
@@ -20,12 +20,17 @@ const DetailsPage = () => {
   return (
     <>
       <div className="trip-details">
-        <div className="trip-details-heading">Trip Request From Details</div>
+        <div className="trip-details-heading">Trip Request Form Details</div>
         <div className="trip-details-data">
           <div>
             <div className="key">Location</div>
             <div className="value">
-              {itineraryDetails.location?.location || "NA"}
+              <img
+                className="specialist-image"
+                src={`${IMAGE.SMALL}${itineraryDetails.image}`}
+                alt="signinImage"
+              />
+              <span>{itineraryDetails.location?.location || "NA"}</span>
             </div>
           </div>
 
@@ -39,14 +44,13 @@ const DetailsPage = () => {
           </div>
 
           <div>
-            <div className="key">Traveler/Companions</div>
-            <div className="value">{`${
-              itineraryDetails.rooms || "NA"
-            } Rooms | ${
-              itineraryDetails.plannedTraveller ||
-              itineraryDetails.guests ||
-              "NA"
-            } Travellers`}</div>
+            <div className="key">How much have you already planned?</div>
+            <div className="value">
+              {
+                PLANNED_TRAVELLER[itineraryDetails.plannedTraveller - 1 || 0]
+                  .name
+              }
+            </div>
           </div>
         </div>
         <div className="trip-details-heading">Assigned Specialist</div>

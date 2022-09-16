@@ -15,10 +15,12 @@ import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
+import EditFerry from "../../TransportationEdit/EditFerry";
 
 const AddActivitiesPage = () => {
   const ferryList = useAppSelector((state: any) => state.transportation.ferry);
-  const [canAddMore, setAddMore] = useState(false);
+  const [addMore, setAddMore] = useState(false);
+  const [edit, setEdit] = useState(undefined);
 
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
@@ -66,19 +68,22 @@ const AddActivitiesPage = () => {
               >
                 <div>{element.day || "NA"}</div>
                 <div>{element.arrival || "NA"}</div>
-                <div>{FERRY_CLASS[element.ferryClass - 1 || 0].name}</div>
+                <div>{FERRY_CLASS[element.trainClass - 1 || 0].name}</div>
                 <div>{getFormattedDate(element.arrivalDateTime)}</div>
                 <div>{getFormattedDate(element.arrivalDateTime)}</div>
                 <div>{element.depart || "NA"}</div>
                 <div>{getFormattedTime(element.departDateTime)}</div>
                 <div>{element.specialistNote || "NA"}</div>
-                <div className="add-activity-buttons">
-                  <button className="activity-button edit">
+                <div
+                  className="add-activity-buttons"
+                  onClick={() => setEdit(element)}
+                >
+                  <button className="btn edit-button">
                     <FaRegEdit />
                     &nbsp;<span>Edit</span>
                   </button>
                   <button
-                    className="activity-button delete"
+                    className="btn delete-button"
                     onClick={() => deleteTransportation(element._id)}
                   >
                     <MdDeleteOutline />
@@ -102,13 +107,6 @@ const AddActivitiesPage = () => {
         >
           + Add Ferry Details
         </div>
-
-        {canAddMore ? (
-          <Modal
-            modal={<NewFerry closePopup={setAddMore} />}
-            root={document.getElementById("overlay-root") as HTMLElement}
-          />
-        ) : null}
       </section>
 
       <div
@@ -117,6 +115,18 @@ const AddActivitiesPage = () => {
       >
         Continue
       </div>
+      {addMore ? (
+        <Modal
+          modal={<NewFerry handleAddPopup={setAddMore} />}
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      ) : null}
+      {edit ? (
+        <Modal
+          modal={<EditFerry handleEditPopup={setEdit} data={edit} />}
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      ) : null}
     </>
   );
 };

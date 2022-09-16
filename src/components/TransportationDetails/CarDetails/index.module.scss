@@ -9,11 +9,14 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
+
+  > div {
+    min-width: 78rem;
+  }
 }
 
 .flightDetails-table {
   width: 100%;
-  min-width: 78rem;
   min-height: 4.5rem;
   background-image: linear-gradient(
     to right,

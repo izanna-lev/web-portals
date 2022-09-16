@@ -12,7 +12,7 @@ export const SerialNum = (limit: number, page: number, index: number) => {
 export const setBackground = (image: string, id: string) => {
   const imageElement = document.getElementById(id);
   if (imageElement) {
-    imageElement.style.background = `url(${image}) no-repeat`;
+    imageElement.style.backgroundImage = `url(${image})`;
     imageElement.style.backgroundPosition = "center";
     imageElement.style.backgroundSize = "100%";
   }

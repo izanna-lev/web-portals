@@ -7,14 +7,20 @@ import { Modal } from "../../Portal";
 import ImagePopup from "../../sub-components/ImagePopup";
 import React, { useState, useEffect, useRef } from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
-import { API, GOOGLE_API, TRANSPORTATION_TYPE } from "../../../constants";
+import {
+  API,
+  GOOGLE_API,
+  IMAGE,
+  TRANSPORTATION_TYPE,
+} from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { UploadImage } from "../../../api/uploadImage";
 import { setBackground } from "../../../util";
 import { Create } from "../../../api/Create";
 
 interface props {
-  closePopup: React.Dispatch<React.SetStateAction<boolean>>;
+  handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
+  data: any;
 }
 
 const UserTicket = (
@@ -22,13 +28,22 @@ const UserTicket = (
   saveData: Function,
   setshowImage: React.Dispatch<React.SetStateAction<boolean>>,
   setimageUrl: React.Dispatch<React.SetStateAction<string>>,
-  dispatch: any
+  dispatch: any,
+  data: any,
+  useEffect: any
 ) => {
-  let newImageUrl = "";
+  const handleChangeBackground = (image: string) => {
+    setimageUrl(image);
+    setBackground(image, `bg-img-${length}`);
+  };
+
+  useEffect(() => {
+    handleChangeBackground(`${IMAGE.AVERAGE}${data.carImage}`);
+  }, []);
+
   const handleImageChange = async (file: any) => {
     if (file[0]) {
-      newImageUrl = URL.createObjectURL(file[0]);
-      setBackground(newImageUrl, `bg-img-${length}`);
+      handleChangeBackground(URL.createObjectURL(file[0]));
       const response = await dispatch(UploadImage(undefined, file[0]));
       saveData({ carImage: response.data });
     }
@@ -62,7 +77,7 @@ const UserTicket = (
               id={`Ticket${length}`}
             >
               <IoCloudUploadOutline
-                className={styles["activity-image-placeholder"]}
+                className={styles["activity-image-default"]}
               />
             </label>
           </div>
@@ -71,7 +86,6 @@ const UserTicket = (
             className={styles["activity-image-popup"]}
             onClick={() => {
               setshowImage(true);
-              setimageUrl(newImageUrl);
             }}
           >
             <MdZoomOutMap />
@@ -80,7 +94,7 @@ const UserTicket = (
         </div>
         <InputForm
           inputFields={{
-            placeholder: "Steven Johns",
+            default: data.driverName,
             name: `Name of Driver`,
             id: "drivername",
             maxlength: 50,
@@ -92,7 +106,7 @@ const UserTicket = (
       <div className={styles["form-left-details"]}>
         <InputForm
           inputFields={{
-            placeholder: "3",
+            default: data.noOfTravellers,
             name: `No of users travelling`,
             id: "usersTravelling",
             maxlength: 4,
@@ -105,7 +119,7 @@ const UserTicket = (
   );
 };
 
-const NewTransportationForm = (props: props) => {
+const EditCar = (props: props) => {
   const [ticketsData, setTicketsData] = useState({
     driverName: "",
     carImage: "",
@@ -113,8 +127,8 @@ const NewTransportationForm = (props: props) => {
   });
   const [showImage, setshowImage] = useState(false);
   const [imageUrl, setimageUrl] = useState("");
-  const [arrival, setArrival] = useState({});
-  const [depart, setDepart] = useState({});
+  const [arrival, setArrival] = useState({ type: "" });
+  const [depart, setDepart] = useState({ type: "" });
 
   const dispatch = useAppDispatch();
   const { _id } = useAppSelector(
@@ -125,6 +139,15 @@ const NewTransportationForm = (props: props) => {
   const pickupTimeRef = useRef();
   const pickupDateRef = useRef();
   const specialistNoteRef = useRef();
+
+  const { handleEditPopup, data } = props;
+
+  useEffect(() => {
+    if (data) {
+      setTicketsData(data.userCarDetails);
+      setimageUrl(data.userCarDetails.carImage);
+    }
+  }, [data]);
 
   const DepartLocation = usePlacesWidget({
     apiKey: GOOGLE_API,
@@ -139,14 +162,12 @@ const NewTransportationForm = (props: props) => {
   const checkPlace = (type: string, place: any) => {
     const {
       formatted_address,
-      // address_components,
       geometry: {
         location: { lat, lng },
       },
     } = place;
 
     const newLocationObj = {
-      // location: `${address_components[0].long_name}, ${address_components[3].long_name}`,
       location: formatted_address,
       type: "Point",
       coordinates: [lat(), lng()],
@@ -156,19 +177,19 @@ const NewTransportationForm = (props: props) => {
   };
 
   const saveUserTicketsData = ({
-    image,
-    name,
+    carImage,
+    driverName,
     noOfTravellers,
   }: {
-    image: string;
-    name: string;
+    carImage: string;
+    driverName: string;
     noOfTravellers: string;
   }) => {
     const newObj = { ...ticketsData };
 
-    if (name) newObj.driverName = name;
+    if (driverName) newObj.driverName = driverName;
     else if (noOfTravellers) newObj.noOfTravellers = noOfTravellers;
-    else newObj.carImage = image;
+    else newObj.carImage = carImage;
     setTicketsData(newObj);
   };
 
@@ -176,33 +197,38 @@ const NewTransportationForm = (props: props) => {
     e.preventDefault();
 
     const getInputValue = (ref: any) => ref.current.value;
+    let payload;
 
-    const data = {
+    payload = {
       day: getInputValue(dayRef),
       departDateTime: new Date(
         `${getInputValue(pickupDateRef)}T${getInputValue(pickupTimeRef)}`
       ).toISOString(),
-      depart,
-      arrival,
       specialistNote: getInputValue(specialistNoteRef),
+
       userCarDetails: ticketsData,
-      itineraryRef: _id,
-      transportationType: TRANSPORTATION_TYPE.CAR,
+      transportationRef: data._id,
     };
 
+    if (depart.type) {
+      payload = { ...payload, depart };
+    }
+
+    if (arrival.type) {
+      payload = { ...payload, arrival };
+    }
+
     dispatch(
-      Create(API.ADD_CAR, data, false, "", API.TRANSPORTATION_DATA, {
+      Create(API.EDIT_CAR, payload, false, "", API.TRANSPORTATION_DATA, {
         itineraryRef: _id,
         transportationType: TRANSPORTATION_TYPE.CAR,
       })
     );
 
-    closePopup(false);
+    handleEditPopup(false);
   };
 
-  const closeImagePopup = () => setshowImage(false);
-
-  const { closePopup } = props;
+  const handleImagePopup = () => setshowImage(false);
 
   return (
     <div className={styles["add-itinerary-data-form"]}>
@@ -218,7 +244,7 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  placeholder: "1",
+                  default: data.day,
                   ref: dayRef,
                   name: "Day",
                   id: "day",
@@ -228,7 +254,7 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
-                  placeholder: "Canada",
+                  default: data.depart,
                   ref: DepartLocation.ref,
                   name: "Pickup Location",
                   id: "pickupLocation",
@@ -239,7 +265,7 @@ const NewTransportationForm = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  placeholder: "",
+                  default: data.departDateTime.slice(0, 10),
                   ref: pickupDateRef,
                   name: "Pickup Date",
                   id: "date",
@@ -249,7 +275,7 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
-                  placeholder: "",
+                  default: data.departDateTime.slice(11, 16),
                   ref: pickupTimeRef,
                   name: "Pickup Time",
                   id: "time",
@@ -261,7 +287,7 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  placeholder: "Phillippines",
+                  default: data.arrival,
                   ref: ArrivalLocation.ref,
                   name: "Dropoff Location",
                   id: "dropoffLocation",
@@ -272,7 +298,7 @@ const NewTransportationForm = (props: props) => {
 
               <TextArea
                 inputFields={{
-                  placeholder: "Lorem Ipsum",
+                  default: data.specialistNote,
                   ref: specialistNoteRef,
                   name: "Specialist Note",
                   id: "specialist note",
@@ -294,7 +320,9 @@ const NewTransportationForm = (props: props) => {
               saveUserTicketsData,
               setshowImage,
               setimageUrl,
-              dispatch
+              dispatch,
+              data.userCarDetails,
+              useEffect
             )}
           </div>
 
@@ -305,13 +333,16 @@ const NewTransportationForm = (props: props) => {
 
         <IoCloseOutline
           className={styles["cross"]}
-          onClick={() => closePopup(false)}
+          onClick={() => handleEditPopup(false)}
         />
       </div>
       {showImage && imageUrl ? (
         <Modal
           modal={
-            <ImagePopup imageUrl={imageUrl} closeImagePopup={closeImagePopup} />
+            <ImagePopup
+              imageUrl={imageUrl}
+              handleImagePopup={handleImagePopup}
+            />
           }
           root={document.getElementById("overlay-root") as HTMLElement}
         />
@@ -320,4 +351,4 @@ const NewTransportationForm = (props: props) => {
   );
 };
 
-export default NewTransportationForm;
+export default EditCar;
