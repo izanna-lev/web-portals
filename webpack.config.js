@@ -25,7 +25,8 @@ module.exports = (env) => {
       path: BUILD_DIR,
       assetModuleFilename: "[name][ext]",
       filename: "[name].[contenthash].js",
-      // sourceMapFilename: "[name].[contenthash].js.map",
+      publicPath: "/",
+      sourceMapFilename: "[name].[contenthash].js.map",
     },
 
     optimization: {

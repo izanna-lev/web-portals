@@ -24,7 +24,6 @@ module.exports = (env) => {
       assetModuleFilename: "[name][ext]",
       filename: "[name].[contenthash].js",
       publicPath: "/",
-
       // sourceMapFilename: "[name].[contenthash].js.map",
     },
 
