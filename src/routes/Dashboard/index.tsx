@@ -4,8 +4,10 @@
  */
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { dashboard } from "../../store/Actions/dashboard";
+import { SET_NAVIGATION } from "../../store/slices/navigation";
+import { NAVIGATE, API } from "../../constants";
 import { useEffect } from "react";
+import { Fetch } from "../../api/Fetch";
 import "./index.scss";
 
 const DashboardCard = (title: string, data: number) => (
@@ -16,11 +18,12 @@ const DashboardCard = (title: string, data: number) => (
 );
 
 const DashboardPage = () => {
-  const dashboardData = useAppSelector((state) => state.dashboard.data);
+  const dashboardData = useAppSelector((state) => state.dashboard);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(dashboard());
+    dispatch(Fetch(API.DASHBOARD));
+    dispatch(SET_NAVIGATION({ value: NAVIGATE.DASHBOARD }));
   }, [dispatch]);
 
   return (

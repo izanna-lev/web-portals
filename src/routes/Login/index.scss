@@ -7,6 +7,40 @@
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.loginPageLeft {
+  flex: 0.5;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  // background: #f0f3f3;
+  background-image: url("https://onsite-travel-assets.s3.amazonaws.com/ic_login-background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .loginPage-logo {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 3rem;
+      font-weight: 500;
+    }
+
+    > img {
+      width: 80%;
+      max-width: 500px;
+      object-fit: contain;
+    }
+  }
 }
 
 .login-form {

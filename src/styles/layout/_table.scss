@@ -20,12 +20,6 @@
   min-width: 100%;
   border-collapse: collapse;
 
-  .custom-head {
-    th {
-      min-width: 200px !important;
-    }
-  }
-
   th {
     min-width: 8rem;
     text-align: left;
@@ -63,7 +57,7 @@
     height: 4rem;
 
     .custom-head {
-      min-width: 150px !important;
+      min-width: 20rem !important;
     }
   }
 

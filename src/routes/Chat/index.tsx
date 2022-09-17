@@ -3,11 +3,14 @@
  * @author Jagmohan Singh
  */
 import { useNavigate } from "react-router-dom";
-import { DUMMY } from "./dummy";
-import MessagesPage from "./MessageList/index";
+import { useEffect, useRef } from "react";
 
+import { SET_NAVIGATION } from "../../store/slices/navigation";
+import { useAppDispatch } from "../../store/hooks";
+import MessagesPage from "./MessageList/index";
+import { NAVIGATE } from "../../constants";
+import { DUMMY } from "./dummy";
 import "./index.scss";
-import { useRef } from "react";
 
 type Props = {
   navPaths: Array<{
@@ -23,10 +26,15 @@ const ChatPage = () => {
   const navigate = useNavigate();
   const listInnerRef = useRef(null);
 
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(SET_NAVIGATION({ value: NAVIGATE.CHAT }));
+  }, [dispatch]);
+
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-      console.log(scrollTop, scrollHeight, clientHeight)
+      console.log(scrollTop, scrollHeight, clientHeight);
       if (scrollTop + clientHeight === scrollHeight) {
         // This will be triggered after hitting the last element.
         // API call should be made here while implementing pagination.
@@ -36,13 +44,12 @@ const ChatPage = () => {
 
   return (
     <section className="ChatPage" id="ChatPage">
-      <div className="chat-list" >
+      <div className="chat-list">
         <div className="heading">
           <div className="heading-text">Chat</div>
         </div>
 
-        <ul className="chat-user-list" onScroll={onScroll}
-          ref={listInnerRef}>
+        <ul className="chat-user-list" onScroll={onScroll} ref={listInnerRef}>
           {DUMMY.map((element, index) => {
             return (
               <li
@@ -68,8 +75,6 @@ const ChatPage = () => {
             );
           })}
         </ul>
-        
-
       </div>
       <MessagesPage />
     </section>

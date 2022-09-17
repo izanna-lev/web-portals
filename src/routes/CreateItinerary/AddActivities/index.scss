@@ -117,40 +117,6 @@ input:focus {
   color: $theme_color_blue;
 }
 
-.add-activity-buttons {
-  display: flex;
-  flex-basis: auto;
-  height: 2.5rem;
-  justify-content: center;
-  align-items: center;
-  padding: 4px;
-  gap: 0.5rem;
-}
-
-.activity-button {
-  display: flex;
-  height: 28px;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
-.activity-button.edit {
-  border: 2px solid $theme_color_blue;
-  border-radius: 0.5rem;
-}
-
-.activity-button > div {
-  font-size: 14px;
-}
-
-.activity-button.delete {
-  background-color: red;
-  color: $white;
-  border-radius: 0.5rem;
-}
-
 .add-more-error {
   font-size: 0.5rem;
   color: red;

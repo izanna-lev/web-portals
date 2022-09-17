@@ -1,16 +1,17 @@
-/* eslint-disable import/no-anonymous-default-export */
 /**
  * The application loading component
  * @author gaurav sharma
  * @since 9th january 2018
  */
+import { useAppSelector } from "../../store/hooks";
 import "./index.scss";
 
-export default () => {
+const LoadingOverlay = () => {
+  const loader = useAppSelector((state) => state.loader.active);
   return (
     <section
-      style={{ display: true ? "block" : "none" }}
       className="loader-container"
+      style={{ display: loader ? "block" : "none" }}
     >
       <div className="blocks">
         <div className="block orange"></div>
@@ -19,3 +20,5 @@ export default () => {
     </section>
   );
 };
+
+export default LoadingOverlay;

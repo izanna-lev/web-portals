@@ -3,46 +3,45 @@
  * @author Jagmohan Singh
  */
 
-import { BsChevronLeft, BsHourglassTop, BsChatRightDots } from "react-icons/bs";
-import ItineraryDetail from "./ItineraryDetail/index";
-import { useAppSelector } from "../../store/hooks";
-import DetailsPage from "./TravelerDetails/index";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-
 import {
   TRAVELER_ITINERARY_DETAILS,
-  // API,
+  ITINERARY_STATUS,
+  ICON,
+  API,
 } from "../../constants";
-import { ITINERARY_STATUS, ICON } from "../../constants";
-// import { Fetch } from "../../store/fetch";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { BsChevronLeft, BsChatRightDots } from "react-icons/bs";
+import { useNavigate, useParams } from "react-router-dom";
+import ItineraryDetail from "./ItineraryDetail/index";
+import DetailsPage from "./TravelerDetails/index";
+import { useEffect, useState } from "react";
+import { Fetch } from "../../api/Fetch";
 import "./index.scss";
-// import { useDispatch } from "react-redux";
 
 const ItineraryDetailsPage = () => {
   const [tabSelected, setTabSelected] = useState(
     TRAVELER_ITINERARY_DETAILS.TRAVELER
   );
 
-  const itineraryDetails = useAppSelector(
-    (state: any) => state.itineraryDetails
+  const { itineraryDetails } = useAppSelector(
+    (state: any) => state.itineraryData
   );
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const params = useParams();
+  const dispatch = useAppDispatch();
+  const params = useParams();
 
-  // useEffect(() => {
-  //   const { itineraryRef } = params;
-  //   Fetch(API.ITINERARY_DETAILS, { itineraryRef })(dispatch);
-  // }, [params, dispatch]);
+  useEffect(() => {
+    const { formRef } = params;
+    dispatch(Fetch(API.ITINERARY_DETAILS, { formRef }));
+  }, [params, dispatch]);
 
   return (
     <main className="content-container">
       <section className="content-top">
         <h2
           className="content-heading"
-          onClick={() => navigate("/itineraries")}
+          onClick={() => navigate("/itinerary/list")}
           style={{ cursor: "pointer" }}
         >
           <BsChevronLeft />
@@ -99,7 +98,7 @@ const ItineraryDetailsPage = () => {
       </div>
 
       {tabSelected === TRAVELER_ITINERARY_DETAILS.TRAVELER ? (
-        <DetailsPage itineraryDetails={itineraryDetails} />
+        <DetailsPage />
       ) : (
         <ItineraryDetail />
       )}

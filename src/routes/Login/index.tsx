@@ -8,19 +8,14 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import LoginSpinner from "../../components/LoginSpinner";
-import { login } from "../../store/Actions/login";
+import { login } from "../../store/actions/login";
 import { ICON } from "../../constants";
-import Nav from "../../components/Header/index";
 import "./index.scss";
 
-type Props = {
-  showUserData?: boolean;
-};
-
-const LandingPage = ({ showUserData }: Props) => {
+const Login = () => {
   const [passVisibleStatus, setPassVisibleStatus] = useState(false);
   const accessToken = useAppSelector((state) => state.login.accessToken);
-  const show = useAppSelector((state) => state.loader.value);
+  const loaderActive = useAppSelector((state) => state.loader.active);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -41,8 +36,11 @@ const LandingPage = ({ showUserData }: Props) => {
 
   return (
     <section className="loginPage" id="loginPage">
-      {" "}
-      <img className="signin-image" src={ICON.SIGNIN} alt="signinImage" />
+      <div className="loginPageLeft">
+        <div className="loginPage-logo">
+          <img src={ICON.APP_LOGO} alt="logo" loading="lazy" />
+        </div>
+      </div>
       <div className="login-form">
         <div className="heading">
           Welcome to <strong className="strong-heading">Onsite Travel</strong>
@@ -95,7 +93,7 @@ const LandingPage = ({ showUserData }: Props) => {
           </div>
 
           <div className="button-login">
-            {show ? (
+            {loaderActive ? (
               <LoginSpinner />
             ) : (
               <button className="button">Log In</button>
@@ -107,4 +105,4 @@ const LandingPage = ({ showUserData }: Props) => {
   );
 };
 
-export default LandingPage;
+export default Login;

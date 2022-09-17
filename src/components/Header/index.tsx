@@ -8,10 +8,10 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { FiChevronDown } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import NotificationPopup from "../NotificationPopup/index";
-import Toast from "../Toast/index";
+
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { IMAGE } from "../../constants";
-import { profile } from "../../store/Actions/profile";
+import { API, IMAGE } from "../../constants";
+import { Fetch } from "../../api/Fetch";
 type Props = {
   showUserData?: boolean;
 };
@@ -22,33 +22,30 @@ const Nav = ({ showUserData = true }: Props) => {
   const profileData = useAppSelector(
     (state: {
       profile: {
-        data: {
-          name: string;
-          email: string;
-          phoneNumber: string;
-          picture: string;
-          device: string;
-          fcmToken: string;
-          _id: string;
-        };
+        name: string;
+        email: string;
+        phoneNumber: string;
+        picture: string;
+        device: string;
+        fcmToken: string;
+        _id: string;
       };
-    }) => state.profile.data
+    }) => state.profile
   );
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!profileData._id && showUserData) {
-      dispatch(profile());
+      dispatch(Fetch(API.PROFILE));
     }
-  }, []);
+  }, [dispatch, profileData._id, showUserData]);
 
   return (
     <header className={styles["header"]} id="navBar">
       <div className={styles["header-left"]}>
         <h1 className={styles["header-logo"]}>Onsite Travel</h1>
       </div>
-      <Toast />
 
       <div className={styles["header-right"]}>
         <div className={styles["notification"]}>

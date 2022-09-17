@@ -11,6 +11,11 @@
   // flex-direction: column;
 }
 
+.content {
+  // min-width: fit-content;
+  min-height: fit-content;
+}
+
 .content-top,
 .content-mid {
   flex-wrap: wrap;
@@ -26,4 +31,5 @@
 
 .content-bottom {
   flex-direction: column;
+  min-width: 54rem;
 }

@@ -1,18 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 
-import * as reducers from "./Slice/AllReducers";
+import * as reducers from "./slices";
 
 export const store = configureStore({
   reducer: {
+    apiMessage: reducers.apiMessage,
+    appData: reducers.appData,
     dashboard: reducers.dashboard,
     itineraries: reducers.itineraries,
-    itineraryDetails: reducers.itineraryDetails,
+    itineraryData: reducers.itineraryData,
     loader: reducers.loader,
     login: reducers.login,
-    popup: reducers.popup,
-    profile: reducers.profile,
     navigation: reducers.navigation,
+    profile: reducers.profile,
+    transportation: reducers.transportation,
+    allTickets: reducers.allTickets,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>

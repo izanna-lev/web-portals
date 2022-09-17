@@ -4,25 +4,32 @@
  */
 
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
 import { useEffect } from "react";
-import "./index.scss";
+import moment from "moment";
 
-import { setItineraryDetails } from "../../store/Slice/itineraryDetails";
-import { IMAGE, ITINERARY_STATUS, ICON } from "../../constants";
+import {
+  IMAGE,
+  ITINERARY_STATUS,
+  ICON,
+  API,
+  PLANNED_TRAVELLER,
+} from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { itineraries } from "../../store/Actions/itineraries";
+import { setFormRef } from "../../store/slices/appData";
 import { Pagination } from "../../components/Pagination";
-import { SerialNum } from "../../util";
+import { getFormattedDate, SerialNum } from "../../util";
+import { Fetch } from "../../api/Fetch";
+import "./index.scss";
 
 const TableHead = () => (
   <thead className="table-head">
     <tr className="head-tr">
       <th>Sr.No.</th>
       <th>Name</th>
-      <th>No. of Days</th>
-      <th>No. of Guests</th>
-      <th>Assigned Date</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Planned Date</th>
+      <th className="custom-head">How much have you already planned?</th>
       <th>Status</th>
       <th>Actions</th>
     </tr>
@@ -38,12 +45,12 @@ const TableRow = (
   dispatch: any
 ) => {
   const itineraryDetailsPage = (item: any) => {
-    dispatch(setItineraryDetails(item));
-    navigate(`/itinerary/${item._id}`);
+    dispatch(setFormRef(item._id));
+    navigate(`/itinerary/detail/${item._id}`);
   };
 
   return (
-    <tr className="body-tr" key={item._id}>
+    <tr className="body-tr" key={index}>
       <td>{SerialNum(limit, page, index)}</td>
       <td>
         <div className="name-image-cell">
@@ -55,26 +62,33 @@ const TableRow = (
               e.target.src = ICON.USER_PLACEHOLDER;
             }}
           />
-          <span className="table-user-name">{item.name}</span>
+          <span className="table-user-name">{item.location}</span>
         </div>
       </td>
-      <td>{item.duration}</td>
-      <td>{item.guests}</td>
-      <td>{moment(item.fromDate).format("D-MMM-YYYY")}</td>
+      <td>{item.userName}</td>
+      <td>
+        {item.travellerEmail ? (
+          <a href={`mailto:${item.travellerEmail}`}>{item.travellerEmail}</a>
+        ) : (
+          "NA"
+        )}
+      </td>
+      <td>{getFormattedDate(item.plannedDate)}</td>
+      <td>{PLANNED_TRAVELLER[item.plannedTraveller - 1 || 0].name}</td>
       <td>
         <div className="table-data-status">
           {ITINERARY_STATUS[item.itineraryStatus]}
         </div>
       </td>
       <td>
-        <div
-          className="table-data-details"
+        <button
+          className=" btn view-button"
           onClick={() => {
             itineraryDetailsPage(item);
           }}
         >
           View Details
-        </div>
+        </button>
       </td>
     </tr>
   );
@@ -87,7 +101,7 @@ const ItineraryPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(itineraries());
+    dispatch(Fetch(API.ITINERARIES, {}, 1, 10));
   }, [dispatch]);
 
   return (
@@ -101,8 +115,9 @@ const ItineraryPage = () => {
             limit,
             total,
             size,
-            nextPage: () => dispatch(itineraries(page + 1, limit)),
-            previousPage: () => dispatch(itineraries(page - 1, limit)),
+            nextPage: () => dispatch(Fetch(API.PROFILE, {}, page + 1, limit)),
+            previousPage: () =>
+              dispatch(Fetch(API.PROFILE, {}, page - 1, limit)),
           })
         : null}
       <section className="table-container">

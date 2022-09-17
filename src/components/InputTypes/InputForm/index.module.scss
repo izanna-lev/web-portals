@@ -1,0 +1,39 @@
+@import "../../../styles/configs/colors";
+@import "../../../styles/configs/ui";
+
+.input-form {
+  display: flex;
+  width: 100%;
+  height: 72px;
+  margin-top: 0.5rem;
+  flex-direction: column;
+  flex-basis: max-content;
+}
+
+.feild-heading {
+  margin-top: 0.5rem;
+  height: 20px;
+  font-size: 0.9rem;
+  padding: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.field-value {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  background-color: $theme_color_light_blue_3x !important;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 14px;
+  color: $theme_color_3;
+  text-overflow: ellipsis;
+  height: 44px;
+}
+
+input:focus {
+  outline: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px $theme_color_light_blue_3x inset !important;
+}
