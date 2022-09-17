@@ -40,7 +40,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build GENERATE_SOURCEMAP=false",
     "webpack": "webpack serve --env BRANCH=development API_URL=http://44.209.25.93:3000/api/ S3_URL=https://app-onsite.s3.amazonaws.com/ --config ./webpack.config.dev.js",
-    "build-webpack": "webpack"
+    "build-webpack": "webpack --env BRANCH=development API_URL=http://44.209.25.93:3000/api/ S3_URL=https://app-onsite.s3.amazonaws.com/"
   },
   "eslintConfig": {
     "extends": [

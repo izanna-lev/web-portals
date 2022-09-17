@@ -17,7 +17,7 @@ import styles from "./index.module.scss";
 import { useState } from "react";
 import EditFlight from "../../TransportationEdit/EditFlight";
 
-const AddActivitiesPage = () => {
+const FlightDetails = ({ nextTab }: any) => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
@@ -114,10 +114,7 @@ const AddActivitiesPage = () => {
         </div>
       </section>
 
-      <div
-        onClick={() => console.log("continue")}
-        className={styles["continue-button"]}
-      >
+      <div onClick={() => nextTab(2)} className={styles["continue-button"]}>
         Continue
       </div>
       {addMore ? (
@@ -136,4 +133,4 @@ const AddActivitiesPage = () => {
   );
 };
 
-export default AddActivitiesPage;
+export default FlightDetails;

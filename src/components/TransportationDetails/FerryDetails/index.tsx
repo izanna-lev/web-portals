@@ -17,7 +17,7 @@ import styles from "./index.module.scss";
 import { useState } from "react";
 import EditFerry from "../../TransportationEdit/EditFerry";
 
-const AddActivitiesPage = () => {
+const FerryDetails = ({ nextTab }: any) => {
   const ferryList = useAppSelector((state: any) => state.transportation.ferry);
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
@@ -109,10 +109,7 @@ const AddActivitiesPage = () => {
         </div>
       </section>
 
-      <div
-        onClick={() => console.log("continue")}
-        className={styles["continue-button"]}
-      >
+      <div onClick={() => nextTab(4)} className={styles["continue-button"]}>
         Continue
       </div>
       {addMore ? (
@@ -131,4 +128,4 @@ const AddActivitiesPage = () => {
   );
 };
 
-export default AddActivitiesPage;
+export default FerryDetails;
