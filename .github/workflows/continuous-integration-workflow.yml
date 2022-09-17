@@ -1,0 +1,77 @@
+name: Deploy to Amazon ECS
+on:
+  push:
+    branches: [development, staging, production]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Extract branch name
+        uses: actions/checkout@v2
+        id: extract_branch
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
+
+          [ "${GITHUB_REF##*/}" == "development" ] && development=true || development=false
+
+          [ "${GITHUB_REF##*/}" == "staging" ] && staging=true || staging=false
+
+          [ "${GITHUB_REF##*/}" == "production" ] && production=true || production=false
+
+          if $development; then
+            SERVER="${{ secrets.DEVELOPMENT_URL }}"
+          elif $staging; then
+            SERVER="${{ secrets.STAGING_URL }}"
+          elif $production; then
+            SERVER="${{ secrets.PRODUCTION_URL }}"
+          fi
+            S3_URL="${{ secrets.S3_URL }}"
+            GOOGLE_PLACES_KEY="${{ secrets.GOOGLE_PLACES_KEY }}"
+
+          echo "Installing dependencies"
+          npm install --legacy-peer-deps
+
+          echo "Triggering Build"
+          webpack --env NODE_ENV="${GITHUB_REF##*/}" API_URL="$SERVER" S3_URL="$S3_URL"
+
+          echo "Build Completed"
+
+          docker build -t $ECR_REGISTRY/admin:${GITHUB_REF##*/} .
+          docker push $ECR_REGISTRY/admin:${GITHUB_REF##*/}
+
+          echo "::set-output name=image::$ECR_REGISTRY/admin:${GITHUB_REF##*/}"
+
+          aws ecs update-service --cluster ${GITHUB_REF##*/} --task-definition admin-${GITHUB_REF##*/} --service admin --force-new-deployment
+
+          aws ecr list-images --repository-name admin --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name admin --image-ids imageDigest=$line; done

@@ -1,11 +1,16 @@
 /**
  * This file defines application level constants
  */
-
 // Global Environment Variables
-const API_URL = "http://44.209.25.93:3000/api/";
-const ICONS_URL = "https://onsite-travel-assets.s3.amazonaws.com/";
-const IMAGE_URL = "https://app-onsite.s3.amazonaws.com/development/images/";
+
+const SERVER_TYPE = `${process.env.NODE_ENV}/`;
+const API_URL = process.env.API_URL;
+const S3_URL = process.env.S3_URL;
+
+const ICONS_URL = `${S3_URL}assets/`;
+const IMAGE_URL = `${S3_URL}${SERVER_TYPE}images/`;
+
+console.log(SERVER_TYPE, API_URL, S3_URL);
 
 // Google Places Api Key
 export const GOOGLE_API = "AIzaSyByy1LrT-5ZQ642PzXM4m_WCQ-fS6GO-9s";
