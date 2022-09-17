@@ -62,19 +62,19 @@ app.get("*.css", function (req, res, next) {
 
 // For each request for .map file return the compressed version .gz
 app.get("*.map", function (req, res, next) {
-  // try {
-  //   // Check if .gz file exists
-  //   if (fileExists(req.url)) {
-  //     // Change the requested .js to return the compressed version - filename.js.gz
-  //     if (req.url.includes("?")) req.url = req.url.split("?").join(".gz?");
-  //     else req.url = req.url + ".gz?";
-  //     // Tell the browser the file is compressed and it should decompress it. You will get a blank screen without this header because it will try to parse the compressed file.
-  //     res.set("Content-Encoding", "gzip");
-  //     res.set("Content-Type", "text/javascript");
-  //   }
-  // } catch (err) {
-  //   console.error(err);
-  // }
+  try {
+    // Check if .gz file exists
+    if (fileExists(req.url)) {
+      // Change the requested .js to return the compressed version - filename.js.gz
+      if (req.url.includes("?")) req.url = req.url.split("?").join(".gz?");
+      else req.url = req.url + ".gz?";
+      // Tell the browser the file is compressed and it should decompress it. You will get a blank screen without this header because it will try to parse the compressed file.
+      res.set("Content-Encoding", "gzip");
+      res.set("Content-Type", "text/javascript");
+    }
+  } catch (err) {
+    console.error(err);
+  }
   next();
 });
 
