@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import LoginSpinner from "../../components/LoginSpinner";
-import { login } from "../../store/actions/login";
+import { login } from "../../store/login";
 import { ICON } from "../../constants";
 import "./index.scss";
 
