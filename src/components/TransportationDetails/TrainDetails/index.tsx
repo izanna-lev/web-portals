@@ -17,7 +17,7 @@ import styles from "./index.module.scss";
 import { useState } from "react";
 import EditTrain from "../../TransportationEdit/EditTrain";
 
-const AddActivitiesPage = () => {
+const TrainDetails = ({ nextTab }: any) => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
   const trainsList = useAppSelector((state: any) => state.transportation.train);
@@ -109,10 +109,7 @@ const AddActivitiesPage = () => {
         </div>
       </section>
 
-      <div
-        onClick={() => console.log("continue")}
-        className={styles["continue-button"]}
-      >
+      <div onClick={() => nextTab(3)} className={styles["continue-button"]}>
         Continue
       </div>
       {addMore ? (
@@ -131,4 +128,4 @@ const AddActivitiesPage = () => {
   );
 };
 
-export default AddActivitiesPage;
+export default TrainDetails;

@@ -70,9 +70,15 @@ const AddItineraryPage = () => {
       </div>
 
       <div className="TransportationData">
-        {detailType === TRANSPORTATION_TYPE.FLIGHT ? <FlightDetails /> : null}
-        {detailType === TRANSPORTATION_TYPE.TRAIN ? <TrainDetails /> : null}
-        {detailType === TRANSPORTATION_TYPE.FERRY ? <FerryDetails /> : null}
+        {detailType === TRANSPORTATION_TYPE.FLIGHT ? (
+          <FlightDetails nextTab={setDetailType} />
+        ) : null}
+        {detailType === TRANSPORTATION_TYPE.TRAIN ? (
+          <TrainDetails nextTab={setDetailType} />
+        ) : null}
+        {detailType === TRANSPORTATION_TYPE.FERRY ? (
+          <FerryDetails nextTab={setDetailType} />
+        ) : null}
         {detailType === TRANSPORTATION_TYPE.CAR ? <CarDetails /> : null}
       </div>
     </section>

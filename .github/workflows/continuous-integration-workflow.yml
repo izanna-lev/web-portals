@@ -67,11 +67,11 @@ jobs:
 
           echo "Build Completed"
 
-          docker build -t $ECR_REGISTRY/admin:${GITHUB_REF##*/} .
-          docker push $ECR_REGISTRY/admin:${GITHUB_REF##*/}
+          docker build -t $ECR_REGISTRY/web:${GITHUB_REF##*/} .
+          docker push $ECR_REGISTRY/web:${GITHUB_REF##*/}
 
-          echo "::set-output name=image::$ECR_REGISTRY/admin:${GITHUB_REF##*/}"
+          echo "::set-output name=image::$ECR_REGISTRY/web:${GITHUB_REF##*/}"
 
-          aws ecs update-service --cluster ${GITHUB_REF##*/} --task-definition admin-${GITHUB_REF##*/} --service admin --force-new-deployment
+          aws ecs update-service --cluster ${GITHUB_REF##*/} --task-definition web-${GITHUB_REF##*/} --service web --force-new-deployment
 
-          aws ecr list-images --repository-name admin --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name admin --image-ids imageDigest=$line; done
+          aws ecr list-images --repository-name web --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name web --image-ids imageDigest=$line; done
