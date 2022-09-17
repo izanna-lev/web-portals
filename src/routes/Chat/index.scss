@@ -60,7 +60,9 @@
   justify-self: center;
   align-self: center;
   position: relative;
+  display: flex;
 }
+
 .user-image {
   width: 2.5rem;
   height: 2.5rem;

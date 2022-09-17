@@ -9,3 +9,5 @@ export { default as login } from "./login";
 export { default as profile } from "./profile";
 export { default as transportation } from "./transportation";
 export { default as allTickets } from "./allTickets";
+export { default as chatList } from "./chatList";
+

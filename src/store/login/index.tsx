@@ -46,7 +46,6 @@ export const login = ({
           type: "error",
         })
       );
-      //   dispatch(setLoader(false));
     }
   };
 };

@@ -74,7 +74,7 @@ const ChatPage = () => {
             <BsPlus className="img" />
           </label>
         </div>
-        <input type="text" className="socket-input" />
+        <div contentEditable="true"  className="socket-input" />
         <div className="send-icon">
           <IoSend className="send-img" />
         </div>

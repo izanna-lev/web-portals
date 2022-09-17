@@ -4,33 +4,32 @@
  */
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-import { SET_NAVIGATION } from "../../store/slices/navigation";
-import { useAppDispatch } from "../../store/hooks";
 import MessagesPage from "./MessageList/index";
-import { NAVIGATE } from "../../constants";
-import { DUMMY } from "./dummy";
+import { IMAGE, ITINERARY_STATUS, ICON, API } from "../../constants";
 import "./index.scss";
+import { chatList } from "../../store/Actions/chat";
+import dayjs from "dayjs";
 
-type Props = {
-  navPaths: Array<{
-    key: number;
-    path: string;
-    name: string;
-    state: number;
-    element: JSX.Element;
-    icon: JSX.Element;
-  }>;
-};
+import Socket from "../../services/socket";
+
 const ChatPage = () => {
   const navigate = useNavigate();
   const listInnerRef = useRef(null);
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(SET_NAVIGATION({ value: NAVIGATE.CHAT }));
-  }, [dispatch]);
 
+  const chatData = useAppSelector((state) => state.chatList);
+  const { page, limit, size, total, data } = chatData;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(chatList());
+  }, []);
+
+  setInterval(() => {
+    Socket.sendMessage()
+  }, 10000)
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
@@ -50,7 +49,7 @@ const ChatPage = () => {
         </div>
 
         <ul className="chat-user-list" onScroll={onScroll} ref={listInnerRef}>
-          {DUMMY.map((element, index) => {
+          {data.map((element, index) => {
             return (
               <li
                 className="user-chat"
@@ -61,14 +60,14 @@ const ChatPage = () => {
                 }}
               >
                 <div className="image-view">
-                  <img className="user-image" src={element.image} alt="d" />
-                  {element.unseen > 0 && (
+                  <img className="user-image" src={IMAGE.SMALL + element.otherUser.image} alt="d" />
+                  {element.unseenMessages > 0 && (
                     <div className="unseen-messages"></div>
                   )}
                 </div>
                 <div className="user-chat-data">
-                  <div className="user-chat-name">{element.name}</div>
-                  <div className="user-chat-time">{element.date}</div>
+                  <div className="user-chat-name">{element.otherUser.name}</div>
+                  <div className="user-chat-time">{dayjs(element.createdOn).format('HH:mm')}</div>
                   <div className="user-chat-message">{element.message}</div>
                 </div>
               </li>

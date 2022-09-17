@@ -42,7 +42,11 @@ export const API = {
   EDIT_FLIGHT: `${API_URL}transportation/editFlight`,
   EDIT_TRAIN: `${API_URL}transportation/editTrainFerry`,
 
+<<<<<<< HEAD
   IMAGE_UPLOAD: `${API_URL}transportation/upload`,
+=======
+  CHAT_LIST: `${API_URL}chat/chatList`,
+>>>>>>> chat: added socket
 };
 
 export const IMAGE = {

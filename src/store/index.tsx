@@ -16,7 +16,9 @@ export const store = configureStore({
     profile: reducers.profile,
     transportation: reducers.transportation,
     allTickets: reducers.allTickets,
+    chatList: reducers.chatList,
   },
+  
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
     process.env.NODE_ENV === "production"
