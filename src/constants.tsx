@@ -3,7 +3,7 @@
  */
 // Global Environment Variables
 
-const SERVER_TYPE = `${process.env.NODE_ENV}/`;
+const SERVER_TYPE = `${process.env.BRANCH}/`;
 const API_URL = process.env.API_URL;
 const S3_URL = process.env.S3_URL;
 
