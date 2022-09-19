@@ -1,14 +1,11 @@
 import io from 'socket.io-client'
 
-const socket = io("http://localhost:3001/", {
+export const socket = io("http://localhost:3001/", {
     transports: ["websocket"],
   reconnectionDelayMax: 10000,
   auth: {
     token: localStorage.getItem('accessToken')
   },
-  query: {
-    "my-key": "my-value"
-  }
 });
 
 socket.on('connect', () => console.log('server connected', socket.id))
@@ -22,11 +19,15 @@ export default class Socket {
         console.log("constructor>>>>>>>")
     }
 
-    static sendMessage() {
+    static sendMessage(data) {
         console.log("subscribe_channel>>>>>>>")
-        socket.emit("subscribe_channel", {
-            data: "po"
-        })
+        socket.emit("message", data)
+    }
+
+    static subscribeChannel(data) {
+        console.log("subscribe channel")
+        socket.emit("subscribe_channel", data)
     }
 
 }
+

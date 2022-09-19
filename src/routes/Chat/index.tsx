@@ -18,7 +18,6 @@ const ChatPage = () => {
   const navigate = useNavigate();
   const listInnerRef = useRef(null);
 
-
   const chatData = useAppSelector((state) => state.chatList);
   const { page, limit, size, total, data } = chatData;
   const dispatch = useAppDispatch();
@@ -27,9 +26,14 @@ const ChatPage = () => {
     dispatch(chatList());
   }, []);
 
-  setInterval(() => {
-    Socket.sendMessage()
-  }, 10000)
+
+  useEffect(() => {
+    if (page === 1 && data.length) {
+      let path = `/chat/${data[0].channelRef}`;
+      navigate(path);
+    }
+  }, [page]);
+  
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
@@ -55,7 +59,7 @@ const ChatPage = () => {
                 className="user-chat"
                 key={index}
                 onClick={() => {
-                  let path = `/chat/${index}`;
+                  let path = `/chat/${element.channelRef}`;
                   navigate(path);
                 }}
               >
