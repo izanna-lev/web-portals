@@ -41,7 +41,6 @@ const chatList = createSlice({
     initialState,
     reducers: {
         getChat: (state: ChatList, action: { payload: ChatList }) => {
-            console.log("action.payload--->", action.payload)
             Object.assign(state, action.payload);
         },
     },

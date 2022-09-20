@@ -42,11 +42,11 @@ export const API = {
   EDIT_FLIGHT: `${API_URL}transportation/editFlight`,
   EDIT_TRAIN: `${API_URL}transportation/editTrainFerry`,
 
-<<<<<<< HEAD
+
   IMAGE_UPLOAD: `${API_URL}transportation/upload`,
-=======
   CHAT_LIST: `${API_URL}chat/chatList`,
->>>>>>> chat: added socket
+  MESSAGE_LIST: `${API_URL}chat/messageList`,
+  CHAT_IMAGE: `${API_URL}chat/chatImage`
 };
 
 export const IMAGE = {
@@ -166,3 +166,14 @@ export const PLANNED_TRAVELLER = [
     value: 3,
   },
 ];
+
+export const PLANNED_TRVELLER = {
+  HAVENT_STARTED: 1,
+  FEW_THINGS: 2,
+  IMPORTANT_STUFF: 3,
+};
+
+export const TYPE_OF_MESSAGE = {
+	TEXT: 1,
+	IMAGE: 2,
+};

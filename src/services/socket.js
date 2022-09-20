@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import { useParams } from "react-router-dom";
 
 export const socket = io("http://localhost:3001/", {
     transports: ["websocket"],
@@ -8,11 +9,17 @@ export const socket = io("http://localhost:3001/", {
   },
 });
 
-socket.on('connect', () => console.log('server connected', socket.id))
+socket.on('connect', () => {
+      console.log('server connected', socket.id)
+})
 
 socket.on('disconnect', () => console.log('server disconnected'))
 
-socket.on('yo', () => console.log('server yo oy'))
+//  socket.on('message', (data) => {
+//     console.log("Message data----->", data)
+//  })
+
+
 
 export default class Socket {
     constructor() {
@@ -20,12 +27,10 @@ export default class Socket {
     }
 
     static sendMessage(data) {
-        console.log("subscribe_channel>>>>>>>")
         socket.emit("message", data)
     }
 
     static subscribeChannel(data) {
-        console.log("subscribe channel")
         socket.emit("subscribe_channel", data)
     }
 

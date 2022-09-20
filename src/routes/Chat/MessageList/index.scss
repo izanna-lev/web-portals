@@ -61,15 +61,30 @@
 .user-message {
   margin-bottom: 20px;
   max-width: 55%;
-  padding: 0.5rem 0.5rem;
-  background-color: $theme_color_light_blue_3x;
   word-break: break-all;
-  border-radius: 0.5rem;
   font-size: 14px;
   font-weight: 400;
-  color: $theme_color_dark_grey;
   line-height: 20px;
   position: relative;
+  align-self: flex-end;
+  // border-radius: 0.5rem 0.5rem 0px 0.5rem;
+  // padding: 0.5rem 0.5rem;
+  // border: 2px solid $theme_color_light_blue_2x;
+  background-color: #ffffff;
+}
+
+.other-user {
+  align-self: flex-start;
+  // background-color: $theme_color_light_blue_3x;
+  color: $theme_color_dark_grey;
+}
+
+.message {
+  border-radius: 0.5rem 0.5rem 0px 0.5rem;
+  padding: 0.5rem 0.5rem;
+  border: 2px solid $theme_color_light_blue_2x;
+  background-color: $theme_color_light_blue_3x;
+
 }
 
 .message-date {
@@ -81,12 +96,6 @@
   font-weight: 600;
 }
 
-.other-user {
-  align-self: flex-end;
-  border-radius: 0.5rem 0.5rem 0px 0.5rem;
-  background-color: #ffffff;
-  border: 2px solid $theme_color_light_blue_2x;
-}
 
 .socket {
   display: flex;

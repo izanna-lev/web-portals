@@ -17,6 +17,7 @@ export const store = configureStore({
     transportation: reducers.transportation,
     allTickets: reducers.allTickets,
     chatList: reducers.chatList,
+    messageList: reducers.messageList
   },
   
   devTools: process.env.NODE_ENV !== "production",
