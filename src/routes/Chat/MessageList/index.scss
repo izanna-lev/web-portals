@@ -65,7 +65,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  position: relative;
+
   align-self: flex-end;
   // border-radius: 0.5rem 0.5rem 0px 0.5rem;
   // padding: 0.5rem 0.5rem;
@@ -75,7 +75,7 @@
 
 .other-user {
   align-self: flex-start;
-  // background-color: $theme_color_light_blue_3x;
+  background-color: $theme_color_light_blue_3x;
   color: $theme_color_dark_grey;
 }
 
@@ -83,15 +83,13 @@
   border-radius: 0.5rem 0.5rem 0px 0.5rem;
   padding: 0.5rem 0.5rem;
   border: 2px solid $theme_color_light_blue_2x;
-  background-color: $theme_color_light_blue_3x;
-
 }
 
 .message-date {
   position: absolute;
   width: 52px;
   font-size: 10px;
-  right: 0;
+  right: -8px;
   bottom: -24px;
   font-weight: 600;
 }

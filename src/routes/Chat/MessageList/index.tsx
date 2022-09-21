@@ -48,7 +48,7 @@ const MessagePage = () => {
       })
       dispatch(messageList(channelId));
     }
-  }, [channelId]);
+  }, [channelId, socket.id]);
 
 
 
@@ -56,6 +56,7 @@ const MessagePage = () => {
     newMessage([{
       userRef: data.userId,
       message: data.message,
+      messageType: data.messageType,
       createdOn: new Date()
     }, ...messages])
     console.log("Message data----->", data)
@@ -126,13 +127,15 @@ const MessagePage = () => {
       <ul className="message-data" onScroll={onScroll} ref={listInnerRef}>
         {messages.map((element: any, index: number) => {
           return (
+            <>
             <li
               key={element._id}
-              className={`user-message ${element.userRef === profileData._id ? "" : "other-user"} ${element.messageType === TYPE_OF_MESSAGE.IMAGE ? "" :"message"} `}
+              className={`user-message ${element.userRef !== profileData._id ? "" : "other-user"} ${element.messageType === TYPE_OF_MESSAGE.IMAGE ? "" :"message"} `}
             >
-              {element.messageType === TYPE_OF_MESSAGE.IMAGE ? <Image imageUrl={IMAGE.SMALL +  element.message}/>: element.message }
-              <div className="message-date">{dayjs(element.createdOn).format('hh:mmA')}</div>
+              {element.messageType === TYPE_OF_MESSAGE.IMAGE ? <Image imageUrl={IMAGE.AVERAGE +  element.message}/>: element.message }
             </li>
+            <div className="message-date">{dayjs(element.createdOn).format('hh:mmA')}</div>
+            </>
           );
         })}
       </ul>
