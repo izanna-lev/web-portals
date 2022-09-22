@@ -27,7 +27,6 @@ const MessagePage = () => {
   const messageData = useAppSelector((state) => state.messageList);
   const socketData = useAppSelector((state) => state.socket);
 
-  console.log("MESSAGE-------", socketData.socket)
 
   const show = useAppSelector(
     (state: { loader: { active: boolean } }) => state.loader.active
@@ -46,39 +45,26 @@ const MessagePage = () => {
 
   useEffect(() => {
     if (socketData?.socket?.id && channelId && profileData._id) {
-      socketData.socket.emit("subscribe_user",{
+      socketData.socket.emit("subscribe_channel",{
         channelRef: channelId,
         id: profileData._id
       })
       dispatch(messageList(channelId));
     }
 
-
-    // if (socketData?.socket?.id) {
-    //   socketData.socket.on('message', (data: any) => {
-    //     newMessage([{
-    //       _id: data._id,
-    //       userRef: data.userId,
-    //       message: data.message,
-    //       messageType: data.messageType,
-    //       createdOn: new Date()
-    //     }, ...messages])
-    //   })
-    // }
-
   }, [channelId, socketData?.socket?.id, profileData._id]);
 
 
 
-  // socketData.socket.on('message', (data: any) => {
-  //   newMessage([{
-  //     _id: data._id,
-  //     userRef: data.userId,
-  //     message: data.message,
-  //     messageType: data.messageType,
-  //     createdOn: new Date()
-  //   }, ...messages])
-  // })
+  socketData.socket.on('message', (data: any) => {
+    newMessage([{
+      _id: data._id,
+      userRef: data.userId,
+      message: data.message,
+      messageType: data.messageType,
+      createdOn: new Date()
+    }, ...messages])
+  })
 
 
   const imageChange = (e: any) => {
@@ -106,16 +92,16 @@ const MessagePage = () => {
   };
 
   const handleKeyPress = (event: any, key: string) => {
-    // if ((event.key === 'Enter' || key === 'Enter') && message) {
-    //   Socket.sendMessage({
-    //     channelRef: channelId,
-    //     message,
-    //     id: profileData._id,
-    //     messageType: TYPE_OF_MESSAGE.TEXT,
-    //     type: 2 //specialist
-    //   })
-    //   document.getElementsByClassName('socket-input')[0].innerHTML = '';
-    // }
+    if ((event.key === 'Enter' || key === 'Enter') && message) {
+      socketData.socket.emit("message",{
+        channelRef: channelId,
+        message,
+        id: profileData._id,
+        messageType: TYPE_OF_MESSAGE.TEXT,
+        type: 2 //specialist
+      })
+      document.getElementsByClassName('socket-input')[0].innerHTML = '';
+    }
   }
 
 

@@ -26,12 +26,12 @@ export const store = configureStore({
     process.env.NODE_ENV === "production"
       ? getDefaultMiddleware({
         serializableCheck: {
-          ignoredActions: ['socket/setSocket'],
+          ignoredPaths: ['socket.socket'],
         },
       }).concat([])
       : getDefaultMiddleware({
         serializableCheck: {
-          ignoredActions: ['socket/setSocket'],
+          ignoredPaths: ['socket.socket'],
         },
       }).concat(createLogger()),
 });
