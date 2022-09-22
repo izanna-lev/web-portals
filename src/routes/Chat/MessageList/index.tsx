@@ -5,13 +5,12 @@
 import LoginSpinner from "../../../components/LoginSpinner";
 import Image from "../../../components/Image";
 import { IoSend } from "react-icons/io5";
-import { DUMMY } from "./dummy";
 import { messageList } from "../../../store/Actions/messageList";
 import { uploadImage } from "../../../store/Actions/uploadImage";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { useEffect, useRef, useState } from "react";
 import { BsPlus } from "react-icons/bs";
-import Socket, { socket } from "../../../services/socket";
+// import Socket, { socket } from "../../../services/socket";
 
 import "./index.scss";
 import { useParams } from "react-router-dom";
@@ -26,6 +25,10 @@ const MessagePage = () => {
 
   const profileData = useAppSelector((state) => state.profile);
   const messageData = useAppSelector((state) => state.messageList);
+  const socketData = useAppSelector((state) => state.socket);
+
+  console.log("MESSAGE-------", socketData.socket)
+
   const show = useAppSelector(
     (state: { loader: { active: boolean } }) => state.loader.active
   );
@@ -40,27 +43,42 @@ const MessagePage = () => {
     }
   }, [messageData.data.messages]);
 
+
   useEffect(() => {
-    if (channelId) {
-      Socket.subscribeChannel({
+    if (socketData?.socket?.id && channelId && profileData._id) {
+      socketData.socket.emit("subscribe_user",{
         channelRef: channelId,
         id: profileData._id
       })
       dispatch(messageList(channelId));
     }
-  }, [channelId, socket.id]);
+
+
+    // if (socketData?.socket?.id) {
+    //   socketData.socket.on('message', (data: any) => {
+    //     newMessage([{
+    //       _id: data._id,
+    //       userRef: data.userId,
+    //       message: data.message,
+    //       messageType: data.messageType,
+    //       createdOn: new Date()
+    //     }, ...messages])
+    //   })
+    // }
+
+  }, [channelId, socketData?.socket?.id, profileData._id]);
 
 
 
-  socket.on('message', (data) => {
-    newMessage([{
-      userRef: data.userId,
-      message: data.message,
-      messageType: data.messageType,
-      createdOn: new Date()
-    }, ...messages])
-    console.log("Message data----->", data)
-  })
+  // socketData.socket.on('message', (data: any) => {
+  //   newMessage([{
+  //     _id: data._id,
+  //     userRef: data.userId,
+  //     message: data.message,
+  //     messageType: data.messageType,
+  //     createdOn: new Date()
+  //   }, ...messages])
+  // })
 
 
   const imageChange = (e: any) => {
@@ -87,55 +105,62 @@ const MessagePage = () => {
     // }
   };
 
-  const handleKeyPress = (event: { key: string; }) => {
-    if (event.key === 'Enter' && message) {
-      Socket.sendMessage({
-        channelRef: channelId,
-        message,
-        id: profileData._id,
-        messageType: TYPE_OF_MESSAGE.TEXT,
-        type: 2 //specialist
-      })
-      document.getElementsByClassName('socket-input')[0].innerHTML = '';
-    }
+  const handleKeyPress = (event: any, key: string) => {
+    // if ((event.key === 'Enter' || key === 'Enter') && message) {
+    //   Socket.sendMessage({
+    //     channelRef: channelId,
+    //     message,
+    //     id: profileData._id,
+    //     messageType: TYPE_OF_MESSAGE.TEXT,
+    //     type: 2 //specialist
+    //   })
+    //   document.getElementsByClassName('socket-input')[0].innerHTML = '';
+    // }
   }
 
 
   return (
     <section className="MessagePage" id="MessagePage">
-      <div className="user-data">
-        <img
-          className="user-image"
-          src={IMAGE.SMALL + messageData.data.itinerary.image}
-          alt="msg"
-        />
-        <div className="user-name">{messageData.data.itinerary.name}</div>
-      </div>
+      { messageData.data && 
+      <>
+            <div className="user-data">
+            <img
+              className="chat-user-image"
+              src={IMAGE.SMALL + messageData.data.itinerary.image}
+              alt="msg"
+            />
+            <div className="chat-user-name">{messageData.data.itinerary.name}</div>
+          </div>
+    
+          <div className="chat-itinerary-details">
+            <img
+              className="chat-user-image"
+              src={IMAGE.SMALL + messageData.data.itinerary.image}
+              alt="msg"
+            />
+            <div className="itinerary-data">
+              <div className="chat-itinerary-text date">{dayjs(messageData.data.itinerary.fromDate).format('DD-MMM-YYYY')}</div>
+              <div className="chat-itinerary-text">{messageData.data.itinerary.location.location}</div>
+            </div>
+            {show && <LoginSpinner position="relative" />}
+          </div>
+          </>
+    }
 
-      <div className="itinerary-details">
-        <img
-          className="user-image"
-          src={IMAGE.SMALL + messageData.data.itinerary.image}
-          alt="msg"
-        />
-        <div className="itinerary-data">
-          <div className="itinerary-text date">{dayjs(messageData.data.itinerary.fromDate).format('DD-MMM-YYYY')}</div>
-          <div className="itinerary-text">{messageData.data.itinerary.location.location}</div>
-        </div>
-        {show && <LoginSpinner position="relative" />}
-      </div>
       <ul className="message-data" onScroll={onScroll} ref={listInnerRef}>
         {messages.map((element: any, index: number) => {
           return (
-            <>
-            <li
-              key={element._id}
-              className={`user-message ${element.userRef !== profileData._id ? "" : "other-user"} ${element.messageType === TYPE_OF_MESSAGE.IMAGE ? "" :"message"} `}
-            >
-              {element.messageType === TYPE_OF_MESSAGE.IMAGE ? <Image imageUrl={IMAGE.AVERAGE +  element.message}/>: element.message }
-            </li>
-            <div className="message-date">{dayjs(element.createdOn).format('hh:mmA')}</div>
-            </>
+            <div className={`message-container ${element.userRef === profileData._id ? "" : "other-user-container"}`}>
+
+              <li
+                key={element._id}
+                className={`user-message ${element.userRef === profileData._id ? "" : "other-user"} ${element.messageType === TYPE_OF_MESSAGE.IMAGE ? "" : "message"} `}
+              >
+                {element.messageType === TYPE_OF_MESSAGE.IMAGE ? <Image imageUrl={IMAGE.AVERAGE + element.message} /> : element.message}
+              </li>
+              <div className="message-date">{dayjs(element.createdOn).format('hh:mmA')}</div>
+
+            </div>
           );
         })}
       </ul>
@@ -151,9 +176,9 @@ const MessagePage = () => {
         </div>
         <div contentEditable="true"
           className="socket-input"
-          onInput={e => setMessage(e.currentTarget.textContent || "")} onKeyPress={handleKeyPress} />
+          onInput={e => setMessage(e.currentTarget.textContent || "")} onKeyPress={e => handleKeyPress(e,  "")}  />
         <div className="send-icon">
-          <IoSend className="send-img" />
+          <IoSend  onClick={e => handleKeyPress(e,  "Enter")} className="send-img" />
         </div>
       </div>
     </section>

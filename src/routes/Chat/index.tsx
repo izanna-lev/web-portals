@@ -12,7 +12,7 @@ import "./index.scss";
 import { chatList } from "../../store/Actions/chat";
 import dayjs from "dayjs";
 
-import Socket from "../../services/socket";
+// import Socket from "../../services/socket";
 
 const ChatPage = () => {
   const navigate = useNavigate();

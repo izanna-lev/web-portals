@@ -5,7 +5,7 @@
 .ChatPage {
   height: calc(92vh);
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 35% 65%;
   width: 100%;
 }
 
@@ -63,7 +63,7 @@
   display: flex;
 }
 
-.user-image {
+.chat-user-image {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;

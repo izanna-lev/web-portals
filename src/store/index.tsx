@@ -17,14 +17,23 @@ export const store = configureStore({
     transportation: reducers.transportation,
     allTickets: reducers.allTickets,
     chatList: reducers.chatList,
-    messageList: reducers.messageList
+    messageList: reducers.messageList,
+    socket: reducers.socket
   },
   
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
     process.env.NODE_ENV === "production"
-      ? getDefaultMiddleware().concat([])
-      : getDefaultMiddleware().concat(createLogger()),
+      ? getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: ['socket/setSocket'],
+        },
+      }).concat([])
+      : getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: ['socket/setSocket'],
+        },
+      }).concat(createLogger()),
 });
 
 export type AppDispatch = typeof store.dispatch;

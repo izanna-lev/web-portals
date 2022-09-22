@@ -9,7 +9,7 @@ export const socket = io("http://localhost:3001/", {
 });
 
 socket.on('connect', () => {
-    console.log('server connected', socket.id)
+    console.log('server connededededcted', socket.id)
 })
 
 socket.on('disconnect', () => console.log('server disconnected'))

@@ -18,7 +18,7 @@
   justify-items: center;
 }
 
-.itinerary-details {
+.chat-itinerary-details {
   height: 64px;
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@
   flex-direction: column;
 }
 
-.itinerary-text {
+.chat-itinerary-text {
   padding: 2px;
   font-size: 0.75rem;
 }
@@ -43,12 +43,13 @@
   font-weight: 600;
 }
 
+
 .message-data {
   display: flex;
   height: calc(92vh - 128px);
   flex-direction: column-reverse;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 1rem;
   overflow: auto;
   scroll-behavior: smooth;
   margin-left: 1rem;
@@ -58,25 +59,35 @@
   transition: all 1.5s ease-out;
 }
 
-.user-message {
-  margin-bottom: 20px;
+.message-container {
   max-width: 55%;
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+.other-user-container {
+  align-self: flex-start;
+}
+
+.user-message {
+  max-width: 100%;
   word-break: break-all;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-
   align-self: flex-end;
-  // border-radius: 0.5rem 0.5rem 0px 0.5rem;
-  // padding: 0.5rem 0.5rem;
-  // border: 2px solid $theme_color_light_blue_2x;
   background-color: #ffffff;
 }
 
 .other-user {
   align-self: flex-start;
-  background-color: $theme_color_light_blue_3x;
   color: $theme_color_dark_grey;
+}
+
+.other-user.message {
+  background-color: $theme_color_light_blue_3x;
 }
 
 .message {
@@ -86,12 +97,13 @@
 }
 
 .message-date {
-  position: absolute;
-  width: 52px;
+  width: 48px;
   font-size: 10px;
-  right: -8px;
-  bottom: -24px;
   font-weight: 600;
+  text-align: right;
+  align-self: flex-end;
+  color: $theme_color_dark_grey;
+
 }
 
 
@@ -140,6 +152,7 @@
   width: 2rem;
   height: 2rem;
   color: $white;
+  cursor: pointer;
 }
 
 .socket-input {
