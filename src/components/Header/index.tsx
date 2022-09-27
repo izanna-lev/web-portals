@@ -25,7 +25,7 @@ const Nav = ({ showUserData = true }: Props) => {
         name: string;
         email: string;
         phoneNumber: string;
-        picture: string;
+        image: string;
         device: string;
         fcmToken: string;
         _id: string;
@@ -64,7 +64,7 @@ const Nav = ({ showUserData = true }: Props) => {
         <div className={styles["user-data"]}>
           <div className={styles["image-container"]}>
             <img
-              src={IMAGE.SMALL + profileData.picture}
+              src={`${IMAGE.SMALL}${profileData.image}`}
               className={styles["user-image"]}
               alt="profile"
             />

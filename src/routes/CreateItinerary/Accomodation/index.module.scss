@@ -2,8 +2,9 @@
 @import "../../../styles/configs/_colors.scss";
 @import "../../../styles/configs/_ui.scss";
 
-.AddCarsPage {
+.AddFlightsPage {
   min-height: 350px;
+  max-height: 550px;
   margin-top: 1rem;
   margin-left: 0.5rem;
   overflow: auto;
@@ -12,9 +13,9 @@
 }
 
 .flightDetails-table {
+  min-width: 100rem;
   width: 100%;
-  min-width: 78rem;
-  min-height: 4.5rem;
+  min-height: 4.75rem;
   background-image: linear-gradient(
     to right,
     $theme_color_lime,
@@ -23,11 +24,10 @@
   display: grid;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  grid-template-columns: 1fr 2fr 1.2fr 1.2fr 2fr 3.5fr 2fr;
+  grid-template-columns: 0.8fr 1.5fr 1.5fr 2fr 1.5fr 1.3fr 1.3fr 1.3fr 1.3fr 3fr 2.5fr;
   align-items: center;
-
   > div {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem;
   }
 }
 
@@ -70,9 +70,9 @@
 }
 
 .empty-table {
-  height: 50px;
+  height: 4rem;
   display: flex;
-  min-width: 78rem;
+  min-width: 100rem;
   align-items: center;
   font-size: 14px;
   justify-content: center;

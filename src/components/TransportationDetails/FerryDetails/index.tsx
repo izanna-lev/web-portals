@@ -16,11 +16,16 @@ import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
 import EditFerry from "../../TransportationEdit/EditFerry";
+import { Pagination } from "../../Pagination";
+import { Fetch } from "../../../api/Fetch";
 
 const FerryDetails = ({ nextTab }: any) => {
-  const ferryList = useAppSelector((state: any) => state.transportation.ferry);
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
+
+  const { list, page, limit, total, size } = useAppSelector(
+    (state: any) => state.transportation.ferry
+  );
 
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
@@ -44,8 +49,44 @@ const FerryDetails = ({ nextTab }: any) => {
       );
   };
 
+  const nextPage = () =>
+    dispatch(
+      Fetch(
+        API.TRANSPORTATION_DATA,
+        {
+          itineraryRef: _id,
+        },
+        page + 1,
+        limit,
+        { transportationType: 3 }
+      )
+    );
+
+  const previousPage = () =>
+    dispatch(
+      Fetch(
+        API.TRANSPORTATION_DATA,
+        {
+          itineraryRef: _id,
+        },
+        page - 1,
+        limit,
+        { transportationType: 3 }
+      )
+    );
+
   return (
     <>
+      {list.length
+        ? Pagination({
+            page,
+            limit,
+            total,
+            size,
+            nextPage,
+            previousPage,
+          })
+        : null}
       <section className={styles["AddTrainsPage"]}>
         <div className={styles["flightDetails-table"]}>
           <div>Day</div>
@@ -60,8 +101,8 @@ const FerryDetails = ({ nextTab }: any) => {
         </div>
 
         <div className={styles["forms"]}>
-          {ferryList.list?.length ? (
-            ferryList.list.map((element: any, index: number) => (
+          {list.length ? (
+            list.map((element: any, index: number) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
                 key={index}
@@ -98,18 +139,17 @@ const FerryDetails = ({ nextTab }: any) => {
             </div>
           )}
         </div>
-
-        <div
-          className={styles["add-more"]}
-          onClick={() => {
-            setAddMore(true);
-          }}
-        >
-          + Add Ferry Details
-        </div>
       </section>
+      <span
+        className={styles["add-more"]}
+        onClick={() => {
+          setAddMore(true);
+        }}
+      >
+        + Add Ferry Details
+      </span>
 
-      <div onClick={() => nextTab(4)} className={styles["continue-button"]}>
+      <div onClick={() => nextTab(4)} className="continue-button">
         Continue
       </div>
       {addMore ? (

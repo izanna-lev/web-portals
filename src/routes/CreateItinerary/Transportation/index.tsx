@@ -26,7 +26,6 @@ const AddItineraryPage = () => {
       Fetch(
         API.TRANSPORTATION_DATA,
         {
-          // itineraryRef: "62ee21fd1c1b49fec72ce115",
           itineraryRef: _id,
         },
         1,

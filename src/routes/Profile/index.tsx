@@ -28,7 +28,7 @@ const ProfilePage = () => {
       <section className="profile">
         <img
           className="profile-image"
-          src={IMAGE.AVERAGE + profileData.picture}
+          src={`${IMAGE.SMALL}${profileData.image}`}
           alt={profileData.name}
         />
         <div className="profile-details">

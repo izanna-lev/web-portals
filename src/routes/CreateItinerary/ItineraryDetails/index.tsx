@@ -14,6 +14,8 @@ import { useEffect, useRef, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { Create } from "../../../api/Create";
 import "./index.scss";
+import { setBackground } from "../../../util";
+import { useNavigate } from "react-router-dom";
 
 const AddItineraryPage = () => {
   const [selectedImage, setSelectedImage] = useState();
@@ -31,7 +33,9 @@ const AddItineraryPage = () => {
   const itineraryTypeRef = useRef();
 
   const { formRef } = useAppSelector((state) => state.appData);
+  const apiMessage = useAppSelector((state) => state.apiMessage);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { ref } = usePlacesWidget({
     apiKey: GOOGLE_API,
@@ -46,6 +50,7 @@ const AddItineraryPage = () => {
   const imageChange = (e: any) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(e.target.files[0]);
+      setBackground(URL.createObjectURL(e.target.files[0]), "itineraryImage");
     }
   };
 
@@ -60,7 +65,7 @@ const AddItineraryPage = () => {
     const newLocationObj = {
       location: `${address_components[0].long_name}, ${address_components[3].long_name}`,
       type: "Point",
-      coordinates: [lat(), lng()],
+      coordinates: [Math.abs(lng()), Math.abs(lat())],
     };
     setLocation(newLocationObj);
   };
@@ -71,6 +76,7 @@ const AddItineraryPage = () => {
 
     const data = {
       email: getInputValue(emailRef),
+      itineraryEmail: getInputValue(emailRef),
       fromDate: getInputValue(fromDateRef),
       isDrivingLicense: getInputValue(drivingRef) === "on",
       isPassport: getInputValue(passportRef) === "on",
@@ -85,8 +91,14 @@ const AddItineraryPage = () => {
       formRef,
       travellerRef: formRef,
     };
+
+    if (!selectedImage) {
+      return alert("Please select an image!");
+    }
     dispatch(Create(API.ITINERARY_ADD, data, true, selectedImage));
   };
+
+  if (apiMessage.type === "success") navigate("/itinerary/add/summary");
 
   return (
     <section className="AddItineraryPage" id="formTop">
@@ -104,16 +116,9 @@ const AddItineraryPage = () => {
         className={`upload-image ${
           selectedImage ? "" : "not-selected-preview"
         }`}
+        id="itineraryImage"
       >
-        {selectedImage ? (
-          <img
-            src={URL.createObjectURL(selectedImage)}
-            className="image-preview"
-            alt="Thumb"
-          />
-        ) : (
-          <IoImageOutline className="image-placeholder" />
-        )}
+        <IoImageOutline className="image-placeholder" />
       </label>
 
       <form
@@ -214,7 +219,7 @@ const AddItineraryPage = () => {
               ref: noteRef,
               name: "Specialist Note",
               id: "note",
-              maxlength: 350,
+              maxlength: 1000,
               type: "text",
             }}
           />

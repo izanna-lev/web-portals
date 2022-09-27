@@ -5,6 +5,7 @@ import * as reducers from "./slices";
 
 export const store = configureStore({
   reducer: {
+    allTickets: reducers.allTickets,
     apiMessage: reducers.apiMessage,
     appData: reducers.appData,
     dashboard: reducers.dashboard,
@@ -12,10 +13,11 @@ export const store = configureStore({
     itineraryData: reducers.itineraryData,
     loader: reducers.loader,
     login: reducers.login,
+    notes: reducers.notes,
     navigation: reducers.navigation,
     profile: reducers.profile,
+    reservation: reducers.reservation,
     transportation: reducers.transportation,
-    allTickets: reducers.allTickets,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>

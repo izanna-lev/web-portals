@@ -46,7 +46,7 @@
 .login-form {
   padding: 28px;
   width: 60%;
-  box-shadow: 4px 0.5rem 2rem 4px #e5f7ff;
+  // box-shadow: 4px 0.5rem 2rem 4px #e5f7ff;
   backdrop-filter: blur(15.5px);
   border-radius: 10px;
   background: rgba(229, 247, 255, 0.05);
@@ -119,12 +119,7 @@
   transition: all 1.5s ease-out;
   background-color: #fff;
   background-size: 120% auto;
-  background-image: linear-gradient(
-    45deg,
-    $theme_color_lime 0%,
-    $theme_color_light_blue 51%,
-    $light_blue 100%
-  );
+  background-color: $theme_color_light_blue;
   color: white;
   font-size: large;
   -webkit-transition: 1s;

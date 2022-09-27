@@ -3,10 +3,10 @@ import { API } from "../../constants";
 import { TRANSPORTATION_TYPE } from "../../constants";
 
 const initialState: any = {
-  flight: {},
-  train: {},
-  ferry: {},
-  car: {},
+  flight: { list: [], page: 0, limit: 10, total: 0, size: 0 },
+  train: { list: [], page: 0, limit: 10, total: 0, size: 0 },
+  ferry: { list: [], page: 0, limit: 10, total: 0, size: 0 },
+  car: { list: [], page: 0, limit: 10, total: 0, size: 0 },
 };
 
 const transportation = createSlice({

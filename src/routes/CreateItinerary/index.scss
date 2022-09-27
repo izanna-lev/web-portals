@@ -91,3 +91,26 @@
   color: #000000;
   background-color: #73d8bb;
 }
+
+.itineraryImage {
+  max-width: 6rem;
+  border-radius: 15px;
+  max-height: 4rem;
+  padding: 0.25rem;
+}
+
+.continue-button {
+  padding: 10px 30px;
+  background-color: #0b9dd8;
+  color: white;
+  width: 200px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 4px 0.5rem 0px 0.5rem;
+
+  &:hover {
+    filter: brightness(1.05);
+  }
+}

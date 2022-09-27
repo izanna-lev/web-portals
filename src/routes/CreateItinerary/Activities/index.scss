@@ -1,12 +1,13 @@
 @import "../../../styles/globals.scss";
 
 .AddActivitiesPage {
-  height: calc(92vh - 158px);
+  height: 350px;
   margin-top: 1rem;
   margin-left: 0.5rem;
   overflow: auto;
   display: flex;
   flex-direction: column;
+  min-width: 80rem;
 }
 
 .add-activities {
@@ -17,10 +18,14 @@
     $theme_color_light_blue
   );
   display: grid;
+  min-height: 4.75rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  grid-template-columns: 0.25fr 0.75fr 0.9fr 0.6fr 0.6fr 0.9fr 1fr 1fr;
+  grid-template-columns: 0.8fr 1.5fr 1.5fr 1.3fr 1.3fr 1.3fr 3fr 2.5fr;
   align-items: center;
+  > div {
+    padding: 0.25rem;
+  }
 }
 
 .add-data {
@@ -36,8 +41,9 @@
 .add-activities > div {
   font-size: 0.75rem;
   margin-left: 0.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .forms {
@@ -127,4 +133,18 @@ input:focus {
   font-weight: 500;
   margin-top: 0.5rem;
   cursor: pointer;
+}
+
+.table-item {
+  background-image: none;
+  background-color: #f0f0f0;
+}
+
+.empty-table {
+  height: 4rem;
+  display: flex;
+  min-width: 80rem;
+  align-items: center;
+  font-size: 14px;
+  justify-content: center;
 }

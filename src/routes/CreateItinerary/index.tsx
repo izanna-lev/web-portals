@@ -33,12 +33,12 @@ const NavigationOptions = [
   {
     number: 5,
     name: "Activities",
-    path: "activities",
+    path: "activity",
   },
   {
     number: 6,
     name: "Notes",
-    path: "notes",
+    path: "note",
   },
   {
     number: 7,

@@ -13,7 +13,7 @@ const DetailsPage = () => {
     (state: any) => state.itineraryData
   );
 
-  const { name, phoneNumber, picture } = useAppSelector(
+  const { name, phoneNumber, image } = useAppSelector(
     (state: any) => state.profile
   );
 
@@ -59,7 +59,7 @@ const DetailsPage = () => {
           <div className="assigned-specialist">
             <img
               className="specialist-image"
-              src={`${IMAGE.SMALL}${picture}`}
+              src={`${IMAGE.SMALL}${image}`}
               alt="signinImage"
             />
             <div className="specialist-details">

@@ -95,10 +95,12 @@ const TableRow = (
 };
 
 const ItineraryPage = () => {
-  const itinerariesData = useAppSelector((state) => state.itineraries);
-  const { page, limit, size, total, list } = itinerariesData;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { page, limit, size, total, list } = useAppSelector(
+    (state) => state.itineraries
+  );
 
   useEffect(() => {
     dispatch(Fetch(API.ITINERARIES, {}, 1, 10));
@@ -115,9 +117,10 @@ const ItineraryPage = () => {
             limit,
             total,
             size,
-            nextPage: () => dispatch(Fetch(API.PROFILE, {}, page + 1, limit)),
+            nextPage: () =>
+              dispatch(Fetch(API.ITINERARIES, {}, page + 1, limit)),
             previousPage: () =>
-              dispatch(Fetch(API.PROFILE, {}, page - 1, limit)),
+              dispatch(Fetch(API.ITINERARIES, {}, page - 1, limit)),
           })
         : null}
       <section className="table-container">

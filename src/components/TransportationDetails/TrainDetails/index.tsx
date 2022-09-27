@@ -16,11 +16,16 @@ import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
 import EditTrain from "../../TransportationEdit/EditTrain";
+import { Fetch } from "../../../api/Fetch";
+import { Pagination } from "../../Pagination";
 
 const TrainDetails = ({ nextTab }: any) => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
-  const trainsList = useAppSelector((state: any) => state.transportation.train);
+
+  const { list, page, limit, total, size } = useAppSelector(
+    (state: any) => state.transportation.train
+  );
 
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
@@ -44,8 +49,44 @@ const TrainDetails = ({ nextTab }: any) => {
       );
   };
 
+  const nextPage = () =>
+    dispatch(
+      Fetch(
+        API.TRANSPORTATION_DATA,
+        {
+          itineraryRef: _id,
+        },
+        page + 1,
+        limit,
+        { transportationType: 2 }
+      )
+    );
+
+  const previousPage = () =>
+    dispatch(
+      Fetch(
+        API.TRANSPORTATION_DATA,
+        {
+          itineraryRef: _id,
+        },
+        page - 1,
+        limit,
+        { transportationType: 2 }
+      )
+    );
+
   return (
     <>
+      {list.length
+        ? Pagination({
+            page,
+            limit,
+            total,
+            size,
+            nextPage,
+            previousPage,
+          })
+        : null}
       <section className={styles["AddTrainsPage"]}>
         <div className={styles["flightDetails-table"]}>
           <div>Day</div>
@@ -60,8 +101,8 @@ const TrainDetails = ({ nextTab }: any) => {
         </div>
 
         <div className={styles["forms"]}>
-          {trainsList.list?.length ? (
-            trainsList.list.map((element: any, index: number) => (
+          {list.length ? (
+            list.map((element: any, index: number) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
                 key={index}
@@ -98,18 +139,16 @@ const TrainDetails = ({ nextTab }: any) => {
             </div>
           )}
         </div>
-
-        <div
-          className={styles["add-more"]}
-          onClick={() => {
-            setAddMore(true);
-          }}
-        >
-          + Add Train Details
-        </div>
       </section>
-
-      <div onClick={() => nextTab(3)} className={styles["continue-button"]}>
+      <span
+        className={styles["add-more"]}
+        onClick={() => {
+          setAddMore(true);
+        }}
+      >
+        + Add Train Details
+      </span>
+      <div onClick={() => nextTab(3)} className="continue-button">
         Continue
       </div>
       {addMore ? (

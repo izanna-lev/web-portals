@@ -5,7 +5,7 @@ interface Profile {
   name: string;
   email: string;
   phoneNumber: string;
-  picture: string;
+  image: string;
   device: string;
   fcmToken: string;
   _id: string;
@@ -15,7 +15,7 @@ const initialState: Profile = {
   name: "",
   email: "",
   phoneNumber: "",
-  picture: "",
+  image: "",
   device: "",
   fcmToken: "",
   _id: "",

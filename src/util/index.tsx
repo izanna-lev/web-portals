@@ -35,3 +35,17 @@ export const getFormattedTime = (dateTimeString: string) => {
   }
   return "NA";
 };
+
+export const compareDateRange = (fromDateTime: string, toDateTime: string) => {
+  if (fromDateTime && toDateTime) {
+    const startDateTime = new Date(fromDateTime);
+    const endDateTime = new Date(toDateTime);
+    if (startDateTime.getTime() >= endDateTime.getTime()) {
+      return 0;
+    }
+    return 1;
+  }
+  return 0;
+};
+
+export const getRefValue = (ref: any) => ref.current.value;

@@ -37,7 +37,6 @@ app.get("*.js", function (req, res, next) {
   } catch (err) {
     console.error(err);
   }
-  console.log(req.url);
   next();
 });
 
@@ -56,7 +55,6 @@ app.get("*.css", function (req, res, next) {
   } catch (err) {
     console.error(err);
   }
-  console.log(req.url);
   next();
 });
 

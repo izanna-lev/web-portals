@@ -91,10 +91,12 @@ const ItineraryDetailsPage = () => {
           </div>
         </div>
 
-        <div className="chat">
-          <BsChatRightDots />
-          <div>Chat</div>
-        </div>
+        {tabSelected === TRAVELER_ITINERARY_DETAILS.TRAVELER ? (
+          <div className="chat">
+            <BsChatRightDots />
+            <span>Chat</span>
+          </div>
+        ) : null}
       </div>
 
       {tabSelected === TRAVELER_ITINERARY_DETAILS.TRAVELER ? (

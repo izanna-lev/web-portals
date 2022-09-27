@@ -16,14 +16,20 @@ import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Pagination } from "../../Pagination";
+import { Fetch } from "../../../api/Fetch";
 
 const AddActivitiesPage = () => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const carDataList = useAppSelector((state: any) => state.transportation.car);
+  const { list, page, limit, total, size } = useAppSelector(
+    (state: any) => state.transportation.car
+  );
 
   const { _id } = useAppSelector(
     (state) => state.itineraryData.itineraryDetails
@@ -46,8 +52,44 @@ const AddActivitiesPage = () => {
       );
   };
 
+  const nextPage = () =>
+    dispatch(
+      Fetch(
+        API.TRANSPORTATION_DATA,
+        {
+          itineraryRef: _id,
+        },
+        page + 1,
+        limit,
+        { transportationType: 4 }
+      )
+    );
+
+  const previousPage = () =>
+    dispatch(
+      Fetch(
+        API.TRANSPORTATION_DATA,
+        {
+          itineraryRef: _id,
+        },
+        page - 1,
+        limit,
+        { transportationType: 4 }
+      )
+    );
+
   return (
     <>
+      {list.length
+        ? Pagination({
+            page,
+            limit,
+            total,
+            size,
+            nextPage,
+            previousPage,
+          })
+        : null}
       <section className={styles["AddCarsPage"]}>
         <div className={styles["flightDetails-table"]}>
           <div>Day</div>
@@ -60,8 +102,8 @@ const AddActivitiesPage = () => {
         </div>
 
         <div className={styles["forms"]}>
-          {carDataList.list?.length ? (
-            carDataList.list.map((element: any, index: number) => (
+          {list.length ? (
+            list.map((element: any, index: number) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
                 key={index}
@@ -98,20 +140,19 @@ const AddActivitiesPage = () => {
             </div>
           )}
         </div>
-
-        <div
-          className={styles["add-more"]}
-          onClick={() => {
-            setAddMore(true);
-          }}
-        >
-          + Add Car Details
-        </div>
       </section>
+      <span
+        className={styles["add-more"]}
+        onClick={() => {
+          setAddMore(true);
+        }}
+      >
+        + Add Car Details
+      </span>
 
       <div
-        onClick={() => console.log("continue")}
-        className={styles["continue-button"]}
+        onClick={() => navigate("/itinerary/add/accomodation")}
+        className="continue-button"
       >
         Continue
       </div>

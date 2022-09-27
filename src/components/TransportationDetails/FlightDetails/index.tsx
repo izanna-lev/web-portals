@@ -16,6 +16,8 @@ import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
 import EditFlight from "../../TransportationEdit/EditFlight";
+import { Pagination } from "../../Pagination";
+import { Fetch } from "../../../api/Fetch";
 
 const FlightDetails = ({ nextTab }: any) => {
   const [addMore, setAddMore] = useState(false);
@@ -23,7 +25,7 @@ const FlightDetails = ({ nextTab }: any) => {
 
   const dispatch = useAppDispatch();
 
-  const flightList = useAppSelector(
+  const { list, page, limit, total, size } = useAppSelector(
     (state: any) => state.transportation.flight
   );
   const { _id } = useAppSelector(
@@ -47,8 +49,44 @@ const FlightDetails = ({ nextTab }: any) => {
       );
   };
 
+  const nextPage = () =>
+    dispatch(
+      Fetch(
+        API.TRANSPORTATION_DATA,
+        {
+          itineraryRef: _id,
+        },
+        page + 1,
+        limit,
+        { transportationType: 1 }
+      )
+    );
+
+  const previousPage = () =>
+    dispatch(
+      Fetch(
+        API.TRANSPORTATION_DATA,
+        {
+          itineraryRef: _id,
+        },
+        page - 1,
+        limit,
+        { transportationType: 1 }
+      )
+    );
+
   return (
     <>
+      {list.length
+        ? Pagination({
+            page,
+            limit,
+            total,
+            size,
+            nextPage,
+            previousPage,
+          })
+        : null}
       <section className={styles["AddFlightsPage"]}>
         <div className={styles["flightDetails-table"]}>
           <div>Day</div>
@@ -64,8 +102,8 @@ const FlightDetails = ({ nextTab }: any) => {
         </div>
 
         <div className={styles["forms"]}>
-          {flightList.list?.length ? (
-            flightList.list.map((element: any, index: number) => (
+          {list.length ? (
+            list.map((element: any, index: number) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
                 key={index}
@@ -103,18 +141,16 @@ const FlightDetails = ({ nextTab }: any) => {
             </div>
           )}
         </div>
-
-        <div
-          className={styles["add-more"]}
-          onClick={() => {
-            setAddMore(true);
-          }}
-        >
-          + Add Flight Details
-        </div>
       </section>
-
-      <div onClick={() => nextTab(2)} className={styles["continue-button"]}>
+      <span
+        className={styles["add-more"]}
+        onClick={() => {
+          setAddMore(true);
+        }}
+      >
+        + Add Flight Details
+      </span>
+      <div onClick={() => nextTab(2)} className="continue-button">
         Continue
       </div>
       {addMore ? (

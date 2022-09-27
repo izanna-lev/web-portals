@@ -80,7 +80,7 @@ const EditFlight = (props: props) => {
     const newLocationObj = {
       location: formatted_address,
       type: "Point",
-      coordinates: [lat(), lng()],
+      coordinates: [Math.abs(lng()), Math.abs(lat())],
     };
     if (type === "depart") setDepart(newLocationObj);
     else setArrival(newLocationObj);

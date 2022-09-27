@@ -14,6 +14,7 @@
 .table-container {
   overflow: auto;
   margin: 1rem auto;
+  max-height: calc(100vh - 250px);
 }
 
 .table {
