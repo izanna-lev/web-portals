@@ -52,6 +52,8 @@ const ChatPage = () => {
           <div className="heading-text">Chat</div>
         </div>
 
+
+
         <ul className="chat-user-list" onScroll={onScroll} ref={listInnerRef}>
           {data.map((element, index) => {
             return (
@@ -79,7 +81,7 @@ const ChatPage = () => {
           })}
         </ul>
       </div>
-      <MessagesPage />
+      { data.length > 0 && <MessagesPage />}
     </section>
   );
 };
