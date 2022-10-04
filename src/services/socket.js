@@ -1,6 +1,7 @@
 import io from 'socket.io-client'
+import { API_URL } from '../constants'
 
-export const socket = io("http://localhost:3001/", {
+export const socket = io(API_URL, {
     transports: ["websocket"],
     reconnectionDelayMax: 10000,
     auth: {

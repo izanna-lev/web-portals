@@ -177,3 +177,8 @@ export const TYPE_OF_MESSAGE = {
 	TEXT: 1,
 	IMAGE: 2,
 };
+
+export const USER_TYPE = {
+  USER: 1,
+  SPECIALIST: 2,
+};

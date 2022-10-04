@@ -10,12 +10,12 @@ import { uploadImage } from "../../../store/Actions/uploadImage";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { useEffect, useRef, useState } from "react";
 import { BsPlus } from "react-icons/bs";
-// import Socket, { socket } from "../../../services/socket";
+
 
 import "./index.scss";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import { IMAGE, TYPE_OF_MESSAGE } from "../../../constants";
+import { IMAGE, TYPE_OF_MESSAGE, USER_TYPE } from "../../../constants";
 
 const MessagePage = () => {
   const dispatch = useAppDispatch();
@@ -26,14 +26,11 @@ const MessagePage = () => {
   const profileData = useAppSelector((state) => state.profile);
   const messageData = useAppSelector((state) => state.messageList);
   const socketData = useAppSelector((state) => state.socket);
-
-
   const show = useAppSelector(
     (state: { loader: { active: boolean } }) => state.loader.active
   );
 
   const listInnerRef = useRef(null);
-
   const { channelId } = useParams();
 
   useEffect(() => {
@@ -75,7 +72,7 @@ const MessagePage = () => {
         channelRef: channelId,
         id: profileData._id,
         messageType: TYPE_OF_MESSAGE.IMAGE,
-        type: 2 //specialist
+        type: USER_TYPE.SPECIALIST
       }));
       e.target.value = null;
     }
@@ -98,7 +95,7 @@ const MessagePage = () => {
         message,
         id: profileData._id,
         messageType: TYPE_OF_MESSAGE.TEXT,
-        type: 2 //specialist
+        type: USER_TYPE.SPECIALIST
       })
       document.getElementsByClassName('socket-input')[0].innerHTML = '';
     }

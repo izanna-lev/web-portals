@@ -14,7 +14,6 @@ const socket = createSlice({
   initialState,
   reducers: {
     setSocket: (state, action) => {
-        console.log(state.socket, "--------", action.payload)
       state.socket = action.payload;
     },
   },

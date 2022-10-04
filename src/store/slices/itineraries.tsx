@@ -45,7 +45,6 @@ const itineraries = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(API.ITINERARIES, (state, action: any) => {
-      console.log(" action.payload=====",  action.payload)
       Object.assign(state, action.payload);
     });
   },
