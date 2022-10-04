@@ -8,11 +8,12 @@
 
 import { useNavigate } from "react-router-dom";
 import { IoImageOutline } from "react-icons/io5";
+import { useAppSelector } from "../../../store/hooks";
 
-import "./index.scss";
 
 const ItineraryDetailsPage = () => {
   const navigate = useNavigate();
+  const profileData = useAppSelector((state) => state.profile);
 
   return (
     <section className="itinerary-details">
@@ -22,17 +23,22 @@ const ItineraryDetailsPage = () => {
           <IoImageOutline className="image" />
         </div>
         <div className="itinerary-heading">No Itinerary Created</div>
-        <div className="itinerary-text">
-          Please create itinerary for the user below.
-        </div>
-        <div
-          className="create-itinerary-btn"
-          onClick={() => {
-            navigate("/itinerary/add/details");
-          }}
-        >
-          Create Itinerary
-        </div>
+        {
+          profileData.access?.createItinerary &&         <>
+          <div className="itinerary-text">
+            Please create itinerary for the user below.
+          </div>
+          <div
+            className="create-itinerary-btn"
+            onClick={() => {
+              navigate("/itinerary/add/details");
+            }}
+          >
+            Create Itinerary
+          </div>
+          </>
+        }
+
       </div>
     </section>
   );

@@ -5,7 +5,7 @@ import LoadingOverlay from "../../components/LoadingOverlay";
 import SideNavBar from "../../components/SideNavBar";
 import Header from "../../components/Header";
 import styles from "./index.module.scss";
-
+ import Socket from "../../components/Socket"
 const Account = () => {
   const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ const Account = () => {
   return (
     <div className={styles["page"]}>
       <LoadingOverlay />
+      <Socket/>
       <Header />
       <section className={styles["page--bottom"]}>
         <SideNavBar />

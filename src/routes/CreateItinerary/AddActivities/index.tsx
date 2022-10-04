@@ -35,7 +35,6 @@ const AddActivitiesPage = () => {
   console.log("activityChangedData----", activityChangedData);
 
   const dataChange = (index: number, e: any) => {
-    console.log(e.target.files)
     if (e.target.files && e.target.files.length > 0) {
       changedData({
         ...activityChangedData,
