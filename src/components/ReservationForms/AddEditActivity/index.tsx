@@ -106,7 +106,7 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
     };
 
     if (location.type) payload = { ...payload, location };
-    console.log(payload);
+    // console.log(payload);
 
     if (data.day) {
       payload = { ...payload, reservationRef: data._id };

@@ -28,8 +28,6 @@ const FlightDetails = (props: any) => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
-  console.log(status);
-
   return (
     <>
       {list.length

@@ -74,7 +74,7 @@ const AddEditNotes = ({ data = {}, handleAddEdit }: any) => {
       description: getRefValue(noteRef),
     };
 
-    console.log(payload, selectedImage);
+    // console.log(payload, selectedImage);
 
     if (data.day) {
       payload = { ...payload, noteRef: data._id };

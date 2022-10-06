@@ -7,11 +7,11 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import MessagesPage from "./MessageList/index";
-import { IMAGE, ITINERARY_STATUS, ICON, API } from "../../constants";
+import { IMAGE, ITINERARY_STATUS, ICON, API, NAVIGATE } from "../../constants";
 import "./index.scss";
 import { chatList } from "../../store/Actions/chat";
 import dayjs from "dayjs";
-
+import { SET_NAVIGATION } from "../../store/slices/navigation";
 
 const ChatPage = () => {
   const navigate = useNavigate();
@@ -23,16 +23,16 @@ const ChatPage = () => {
 
   useEffect(() => {
     dispatch(chatList());
-  }, []);
-
+    dispatch(SET_NAVIGATION({ value: NAVIGATE.CHAT }));
+  }, [dispatch]);
 
   useEffect(() => {
     if (page === 1 && data.length) {
       let path = `/chat/${data[0].channelRef}`;
       navigate(path);
     }
-  }, [page]);
-  
+  }, [page, data, navigate]);
+
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
@@ -51,8 +51,6 @@ const ChatPage = () => {
           <div className="heading-text">Chat</div>
         </div>
 
-
-
         <ul className="chat-user-list" onScroll={onScroll} ref={listInnerRef}>
           {data.map((element, index) => {
             return (
@@ -65,14 +63,20 @@ const ChatPage = () => {
                 }}
               >
                 <div className="image-view">
-                  <img className="user-image" src={IMAGE.SMALL + element.otherUser.image} alt="d" />
+                  <img
+                    className="user-image"
+                    src={IMAGE.SMALL + element.otherUser.image}
+                    alt="d"
+                  />
                   {element.unseenMessages > 0 && (
                     <div className="unseen-messages"></div>
                   )}
                 </div>
                 <div className="user-chat-data">
                   <div className="user-chat-name">{element.otherUser.name}</div>
-                  <div className="user-chat-time">{dayjs(element.createdOn).format('HH:mm')}</div>
+                  <div className="user-chat-time">
+                    {dayjs(element.createdOn).format("HH:mm")}
+                  </div>
                   <div className="user-chat-message">{element.message}</div>
                 </div>
               </li>
@@ -80,7 +84,7 @@ const ChatPage = () => {
           })}
         </ul>
       </div>
-      { data.length > 0 && <MessagesPage />}
+      {data.length > 0 && <MessagesPage />}
     </section>
   );
 };

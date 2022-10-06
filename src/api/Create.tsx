@@ -42,11 +42,11 @@ export const Create =
       });
 
       const { code, message } = response.data;
-      console.log("submit", response);
+      // console.log("submit", response);
 
       if (code !== 100) throw new Error(message);
       if (code === 100) {
-        console.log(response);
+        // console.log(response);
         dispatch(setLoader(false));
 
         dispatch(

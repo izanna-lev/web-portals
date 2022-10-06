@@ -5,7 +5,7 @@
 // Global Environment Variables
 
 const SERVER_TYPE = `${process.env.BRANCH}/`;
-const API_URL = process.env.API_URL;
+export const API_URL = process.env.API_URL || "";
 const S3_URL = process.env.S3_URL;
 
 // const SERVER_TYPE = "development/";
@@ -102,6 +102,12 @@ export const API = {
   // Upload Image
 
   IMAGE_UPLOAD: `${API_URL}transportation/upload`,
+
+  // Socket
+
+  MESSAGE_LIST: `${API_URL}chat/messageList`,
+  CHAT_LIST: `${API_URL}chat/chatList`,
+  CHAT_IMAGE: `${API_URL}chat/chatImage`,
 };
 
 type IconOptions = {
@@ -226,4 +232,14 @@ export const NAVIGATE = {
   CANCELLED_ITINERARIES: 4,
   NOTIFICATION: 5,
   PROFILE: 6,
+};
+
+export const TYPE_OF_MESSAGE = {
+  TEXT: 1,
+  IMAGE: 2,
+};
+
+export const USER_TYPE = {
+  USER: 1,
+  SPECIALIST: 2,
 };

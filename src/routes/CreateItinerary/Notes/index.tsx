@@ -123,7 +123,7 @@ const NotesDetails = () => {
                 );
               })
             ) : (
-              <div className={`empty-table "table-item`}>Nothing Added</div>
+              <div className={`empty-table table-item`}>Nothing Added</div>
             )}
           </div>
         </div>
