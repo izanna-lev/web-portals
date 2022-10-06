@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import io  from 'socket.io-client'
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { setSocket } from "../../store/slices/socket";
+import {API_URL} from "../../constants"
 
 const Socket = () => {
     const dispatch = useAppDispatch();
@@ -9,7 +10,7 @@ const Socket = () => {
     const socketData = useAppSelector((state) => state.socket);
 
     useEffect(() => {
-        const socketIO = io("http://localhost:3001/", {
+        const socketIO = io(API_URL, {
             transports: ["websocket"],
             reconnectionDelayMax: 10000,
             auth: {
@@ -36,6 +37,6 @@ const Socket = () => {
         }
     }, [socketData?.socket?.id])
 
-    return <></>;
+    return null;
 }
 export default Socket;
