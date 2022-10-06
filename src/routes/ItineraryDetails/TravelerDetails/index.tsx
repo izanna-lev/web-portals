@@ -7,13 +7,14 @@ import { useAppSelector } from "../../../store/hooks";
 import { IMAGE, PLANNED_TRAVELLER } from "../../../constants";
 import moment from "moment";
 import "./index.scss";
+import { UserIcon } from "../../../components/UserIcon";
 
 const DetailsPage = () => {
   const { itineraryDetails, travellerDetails } = useAppSelector(
-    (state: any) => state.itineraryData
+    (state: any) => state.itinerary
   );
 
-  const { name, phoneNumber, picture } = useAppSelector(
+  const { name, phoneNumber, image } = useAppSelector(
     (state: any) => state.profile
   );
 
@@ -23,13 +24,9 @@ const DetailsPage = () => {
         <div className="trip-details-heading">Trip Request Form Details</div>
         <div className="trip-details-data">
           <div>
-            <div className="key">Location</div>
+            <div className="key">Name</div>
             <div className="value">
-              <img
-                className="specialist-image"
-                src={`${IMAGE.SMALL}${itineraryDetails.image}`}
-                alt="signinImage"
-              />
+              <UserIcon image={itineraryDetails.image} />
               <span>{itineraryDetails.location?.location || "NA"}</span>
             </div>
           </div>
@@ -57,11 +54,7 @@ const DetailsPage = () => {
 
         <div className="trip-details-data">
           <div className="assigned-specialist">
-            <img
-              className="specialist-image"
-              src={`${IMAGE.SMALL}${picture}`}
-              alt="signinImage"
-            />
+            <UserIcon image={image} />
             <div className="specialist-details">
               <div className="key">{name || "NA"}</div>
               <a

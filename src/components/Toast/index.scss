@@ -11,8 +11,8 @@
 }
 
 .toast {
-  height: 80px;
-  padding: 20px;
+  height: 6rem;
+  padding: 1rem;
   background-color: #f5f5f5;
   border-radius: 7px;
   display: grid;
@@ -108,12 +108,24 @@
   }
 }
 
-//   @-webkit-keyframes fadeout {
-//     from {top: 30px; opacity: 1;}
-//     to {top: 0; opacity: 0;}
+// @-webkit-keyframes fadeout {
+//   from {
+//     top: 30px;
+//     opacity: 1;
 //   }
+//   to {
+//     top: 0;
+//     opacity: 0;
+//   }
+// }
 
-//   @keyframes fadeout {
-//     from {top: 30px; opacity: 1;}
-//     to {top: 0; opacity: 0;}
-//   }
+@keyframes fadeout {
+  from {
+    top: 30px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}

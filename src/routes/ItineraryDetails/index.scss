@@ -3,27 +3,44 @@
 @import "../../styles/configs/_ui.scss";
 
 .tab-group {
-  gap: 1rem;
+  // gap: 1rem;
   display: grid;
-  height: 3.5rem;
+  min-height: 3.5rem;
+  max-height: 4.5rem;
   align-items: center;
   margin-bottom: 1rem;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+  // background-color: $theme_color_5;
+  background-image: linear-gradient(
+    to right,
+    $theme_color_light_lime,
+    $theme_color_light_blue_2x
+  );
+  border-radius: 0.5rem;
+}
+
+.itinerary-pending {
+  grid-template-columns: auto auto;
+  width: fit-content;
+  min-width: 12rem !important;
 }
 
 .tab-option {
-  padding: 1rem 1.25rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   font-weight: 500;
-  color: #000000;
   text-align: center;
   font-size: 0.8rem;
   border-radius: 0.5rem;
-  background-color: $theme_color_5;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5rem;
 }
 
 .tab-selected {
-  background-color: $theme_color_blue;
+  background-color: #73d8bb;
   color: $white;
 }
 
@@ -66,8 +83,6 @@
   display: flex;
   font-size: 14px;
   align-items: center;
-  justify-self: end;
-  gap: 0.5rem;
   padding: 0.75rem 44px;
   justify-self: flex-end;
   color: $white;
@@ -77,7 +92,7 @@
 
 .trip-details {
   width: 100%;
-  max-height: 15rem;
+  max-height: 17rem;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
@@ -129,4 +144,10 @@
 
 .specialist-detail {
   align-self: baseline;
+}
+
+.itinerary-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }

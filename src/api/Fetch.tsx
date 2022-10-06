@@ -33,9 +33,13 @@ export const Fetch =
 
       if (code !== 100) throw new Error(message);
 
+      const responseIsArray = Array.isArray(response.data.data);
+
       dispatch({
         type: endpoint,
-        payload: { ...response.data.data, ...customPayload },
+        payload: responseIsArray
+          ? [...response.data.data]
+          : { ...response.data.data, ...customPayload },
       });
       dispatch(setLoader(false));
     } catch (error: any) {

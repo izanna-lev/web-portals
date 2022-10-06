@@ -117,9 +117,7 @@ const NewTransportationForm = (props: props) => {
   const [depart, setDepart] = useState({});
 
   const dispatch = useAppDispatch();
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
   const dayRef = useRef();
   const pickupTimeRef = useRef();
   const pickupDateRef = useRef();
@@ -138,7 +136,6 @@ const NewTransportationForm = (props: props) => {
   const checkPlace = (type: string, place: any) => {
     const {
       formatted_address,
-
       geometry: {
         location: { lat, lng },
       },
@@ -147,7 +144,7 @@ const NewTransportationForm = (props: props) => {
     const newLocationObj = {
       location: formatted_address,
       type: "Point",
-      coordinates: [lat(), lng()],
+      coordinates: [Math.abs(lng()), Math.abs(lat())],
     };
     if (type === "depart") setDepart(newLocationObj);
     else setArrival(newLocationObj);
@@ -205,10 +202,7 @@ const NewTransportationForm = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
-        <form
-          className={styles["form-block"]}
-          onSubmit={(e) => saveCarDetails(e)}
-        >
+        <form className="form-block" onSubmit={(e) => saveCarDetails(e)}>
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             Basic Details
           </div>
@@ -283,10 +277,7 @@ const NewTransportationForm = (props: props) => {
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             User Car Details
           </div>
-          <div
-            className={styles["form-required-feilds"]}
-            style={{ maxHeight: "400px", overflow: "auto" }}
-          >
+          <div className={styles["form-required-feilds"]}>
             {UserTicket(
               1,
               saveUserTicketsData,

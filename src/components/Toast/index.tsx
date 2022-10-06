@@ -31,7 +31,7 @@ const Toast = () => {
             message: "",
           })
         );
-      }, 2000);
+      }, 3000);
     }
   }, [dispatch, type]);
 

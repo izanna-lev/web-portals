@@ -23,7 +23,9 @@ interface props {
 }
 
 const NewTransportationForm = (props: props) => {
-  const [ticketsData, setTicketsData] = useState<any>([]);
+  const [ticketsData, setTicketsData] = useState<any>([
+    { name: "", image: "" },
+  ]);
   const [showImage, setshowImage] = useState(false);
   const [imageUrl, setimageUrl] = useState("");
   const [depart, setDepart] = useState({});
@@ -31,9 +33,7 @@ const NewTransportationForm = (props: props) => {
   const dispatch = useAppDispatch();
 
   const { handleAddPopup } = props;
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   const dayRef = useRef();
   const airlineRef = useRef();
@@ -65,7 +65,7 @@ const NewTransportationForm = (props: props) => {
     const newLocationObj = {
       location: formatted_address,
       type: "Point",
-      coordinates: [lat(), lng()],
+      coordinates: [Math.abs(lng()), Math.abs(lat())],
     };
     if (type === "depart") setDepart(newLocationObj);
     else setArrival(newLocationObj);
@@ -98,10 +98,6 @@ const NewTransportationForm = (props: props) => {
     else newObj[length].image = image;
     setTicketsData(newObj);
   };
-
-  useEffect(() => {
-    addMoreTickets();
-  }, []);
 
   const addMoreTickets = () => {
     const addNewTicketInArr = [...ticketsData];
@@ -144,10 +140,7 @@ const NewTransportationForm = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
-        <form
-          className={styles["form-block"]}
-          onSubmit={(e) => saveFlightDetails(e)}
-        >
+        <form className="form-block" onSubmit={(e) => saveFlightDetails(e)}>
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             Basic Details
           </div>
@@ -247,10 +240,7 @@ const NewTransportationForm = (props: props) => {
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             User Flight Details
           </div>
-          <div
-            className={styles["form-required-feilds"]}
-            style={{ maxHeight: "400px", overflow: "auto" }}
-          >
+          <div className={styles["form-required-feilds"]}>
             {ticketsData.map((element: any, index: number) =>
               NewTicket(
                 index,

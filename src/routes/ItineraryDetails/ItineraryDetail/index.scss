@@ -5,6 +5,7 @@
   padding: 1rem 0;
   border-radius: 0.5rem;
   background-color: $theme_color_light_blue_2x;
+  margin-bottom: 1rem;
 }
 
 .itinerary-details-heading {
@@ -19,6 +20,50 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 0.75rem;
+}
+
+.basic-itinerary-details {
+  padding: 1rem;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+
+  .details-row {
+    padding: 0rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.75fr;
+    gap: 1rem;
+
+    .detail-item {
+      max-height: 3.5rem;
+      .item-name {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+    }
+  }
+  .height-max {
+    .detail-item {
+      max-height: fit-content;
+    }
+  }
+}
+
+.additional-itinerary-details {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+
+  .details-row {
+    padding: 0rem;
+
+    .detail-item {
+      .item-name {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+    }
+  }
 }
 
 .image-background {

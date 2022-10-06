@@ -1,6 +1,43 @@
 @import "../../../styles/configs/colors";
 @import "../../../styles/configs/ui";
 
+.edit-itinerary {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: $theme_color_dark_grey;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .edit-form-container {
+    width: 70%;
+    max-width: 50rem;
+    background-color: $white;
+    max-height: 90%;
+    padding: 2rem;
+    border-radius: 1.5rem;
+
+    .AddItineraryPage {
+      background-color: $white;
+      max-height: 90%;
+      padding: 0.5rem;
+      margin-top: 0;
+    }
+
+    .cross {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: $white;
+      background-color: $theme_color_dark_grey;
+      border-radius: 50%;
+      left: 97%;
+      position: relative;
+    }
+  }
+}
+
 .AddItineraryPage {
   display: flex;
   overflow: auto;

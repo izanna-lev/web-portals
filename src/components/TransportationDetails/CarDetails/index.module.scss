@@ -9,14 +9,11 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
-
-  > div {
-    min-width: 78rem;
-  }
 }
 
 .flightDetails-table {
   width: 100%;
+  min-width: 78rem;
   min-height: 4.5rem;
   background-image: linear-gradient(
     to right,
@@ -73,25 +70,10 @@
 }
 
 .empty-table {
-  height: 50px;
+  height: 3rem;
   display: flex;
+  min-width: 78rem;
   align-items: center;
   font-size: 14px;
   justify-content: center;
-}
-
-.continue-button {
-  padding: 10px 30px;
-  background-color: #0b9dd8;
-  color: white;
-  width: 200px;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  margin: 4px 0.5rem 0px 0.5rem;
-
-  &:hover {
-    filter: brightness(1.05);
-  }
 }

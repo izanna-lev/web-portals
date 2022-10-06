@@ -1,5 +1,5 @@
-@import "../../styles/configs/colors";
-@import "../../styles/configs/ui";
+@import "../../../styles/configs/colors";
+@import "../../../styles/configs/ui";
 
 .add-itinerary-data-form {
   position: fixed;
@@ -13,25 +13,13 @@
 }
 
 .form-background {
-  width: 88vw;
-  height: 90vh;
+  width: 60rem;
+  height: 45rem;
   border-radius: 0.75rem;
   background-color: $white;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.form-block {
-  width: 90%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 0.75rem;
-  font-weight: 500;
-  gap: 4px;
-  position: relative;
 }
 
 .form-image {
@@ -84,10 +72,9 @@
   color: $white;
   background-color: $theme_color_dark_grey;
   border-radius: 50%;
-  justify-self: end;
-  align-self: baseline;
-  margin-top: 2rem;
-  margin-left: 0.75rem;
+  bottom: 45%;
+  right: -1%;
+  position: relative;
 }
 
 .button-save {
@@ -118,4 +105,36 @@
 
 .form-button-text:hover {
   cursor: pointer;
+}
+
+// React-phone-input-2 styles
+
+.input-tel {
+  display: flex !important;
+  width: 100% !important;
+  height: 72px !important;
+  margin-top: 0.5rem !important;
+  flex-direction: column !important;
+  flex-basis: max-content !important;
+
+  .field-value {
+    margin-top: 4px !important;
+    font-size: 0.75rem !important;
+    background-color: $theme_color_light_blue_3x !important;
+    border: none !important;
+    border-radius: 0.5rem !important;
+    padding: 14px 14px 14px 60px !important;
+    color: $theme_color_3 !important;
+    text-overflow: ellipsis !important;
+    height: 44px !important;
+    width: 100% !important;
+  }
+}
+
+.field-heading {
+  margin-top: 0.5rem;
+  height: 20px;
+  font-size: 0.9rem;
+  padding: 0 0 0.5rem;
+  font-weight: 600;
 }
