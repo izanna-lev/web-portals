@@ -9,6 +9,12 @@ interface Profile {
   device: string;
   fcmToken: string;
   _id: string;
+  access?: {
+    createItinerary: boolean
+    deleteItinerary: boolean
+    editItinerary: boolean
+    sendNotifications: boolean
+  }
 }
 
 const initialState: Profile = {

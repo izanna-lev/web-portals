@@ -16,7 +16,6 @@ const Form = ({ onClickOutside }: InputProps) => {
       onClickOutside()
     }
   }, [isComponentVisible]);
-  console.log(isComponentVisible)
   return (
     <div ref={ref} id="notification-popup" className={styles["notification-popup"]}>
       <div className={`${styles.box} ${styles.arrow}`}>

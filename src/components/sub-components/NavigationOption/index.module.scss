@@ -24,3 +24,23 @@
       brightness(89%) contrast(92%);
   }
 }
+
+
+.sidebar-count {
+  flex: 1;
+  padding: 4px;
+  font-size: large;
+  display: flex;
+  justify-content: end;
+}
+
+.sidebar-count-view {
+  border-radius: 50%;
+  text-align: center;
+  background: white;
+  color: $theme_color_blue;
+  align-self: center;
+  height: 28px;
+  width: 28px;
+  margin-right: 16px;
+}
