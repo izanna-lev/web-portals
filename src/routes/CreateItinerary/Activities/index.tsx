@@ -10,35 +10,45 @@ import { Pagination } from "../../../components/Pagination";
 import { DeleteEntity } from "../../../api/Delete";
 import { MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Fetch } from "../../../api/Fetch";
 import { FaRegEdit } from "react-icons/fa";
 import "./index.scss";
-import { getFormattedDate, getFormattedTime } from "../../../util";
+import {
+  editListItem,
+  getFormattedDate,
+  getFormattedTime,
+} from "../../../util";
+import { EDIT_ACTIVITY } from "../../../store/slices/itinerary";
 
 const ActivityDetails = () => {
   const [addMore, setAddMore] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
+
   const { list, page, limit, total, size } = useAppSelector(
-    (state) => state.reservation.activity
+    (state) => state.itinerary.activity
   );
 
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const editActivity = (id: any = "") =>
+    editListItem(dispatch, list, EDIT_ACTIVITY, id);
 
-  const fetchData = (page: number = 1, limit: number = 10) =>
-    dispatch(
-      Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, page, limit, {
-        reservationType: RESERVATION_TYPE.ACTIVITY,
-      })
-    );
+  const fetchData = useCallback(
+    (page: number = 1, limit: number = 10) => {
+      dispatch(
+        Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, page, limit, {
+          reservationType: RESERVATION_TYPE.ACTIVITY,
+        })
+      );
+    },
+    [_id, dispatch]
+  );
 
   useEffect(() => {
     fetchData(1, 10);
-  }, []);
+  }, [fetchData]);
 
   const nextPage = () => fetchData(page + 1, limit);
   const previousPage = () => fetchData(page - 1, limit);
@@ -85,7 +95,7 @@ const ActivityDetails = () => {
             <div>Date</div>
             <div>Location</div>
             <div>Note</div>
-            <div>Actions</div>
+            <div>Action</div>
           </div>
 
           <div className="forms">
@@ -93,7 +103,10 @@ const ActivityDetails = () => {
             {list.length ? (
               list.map((element: any, index: number) => {
                 return element.edit ? (
-                  <AddEditActivity handleAddEdit={setAddMore} data={element} />
+                  <AddEditActivity
+                    handleAddEdit={editActivity}
+                    data={element}
+                  />
                 ) : (
                   <div className={`add-activities table-item`} key={index}>
                     <div>{element.day}</div>
@@ -112,7 +125,7 @@ const ActivityDetails = () => {
                     <div className="add-activity-buttons">
                       <button
                         className="btn edit-button"
-                        onClick={() => console.log(element)}
+                        onClick={() => editActivity(element._id)}
                       >
                         <FaRegEdit />
                         &nbsp;<span>Edit</span>

@@ -3,38 +3,107 @@
  * @author Jagmohan Singh
  */
 
-// import { GiSandsOfTime } from "react-icons/gi";
-// import logo from "../../../images/placeholder.png";
-
-import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../store/hooks";
 import { IoImageOutline } from "react-icons/io5";
-
+import { useNavigate } from "react-router-dom";
 import "./index.scss";
+import { getFormattedDate } from "../../../util";
+import { ITINERARY_TYPE, PAYMENT_STATUS } from "../../../constants";
+
+const NoItinerary = ({ navigate }: any) => (
+  <section className="itinerary-details">
+    <div className="itinerary-details-heading">Itinerary Details</div>
+    <div className="no-itenary">
+      <div className="image-background">
+        <IoImageOutline className="image" />
+      </div>
+      <div className="itinerary-heading">No Itinerary Created</div>
+      <div className="itinerary-text">
+        Please create itinerary for the user below.
+      </div>
+      <div
+        className="create-itinerary-btn"
+        onClick={() => {
+          navigate("/itinerary/add/details");
+        }}
+      >
+        Create Itinerary
+      </div>
+    </div>
+  </section>
+);
+
+const AvailableItinerary = ({ navigate, data }: any) => {
+  const detail = (title: string, value: string) => (
+    <div className="detail-item">
+      <h3 className="item-name">{title}</h3>
+      <p className="item-value">{value}</p>
+    </div>
+  );
+  return (
+    <>
+      <section className="itinerary-details">
+        <div className="itinerary-details-heading">Itinerary Details</div>
+        <div className="basic-itinerary-details">
+          <div className="details-row">
+            {detail("Title", data.name)}
+            {detail("Price", `$${data.price}`)}
+            {detail("No. Of Days", data.duration)}
+            {detail(
+              "Date Of Trip",
+              `${getFormattedDate(data.fromDate)} | ${getFormattedDate(
+                data.toDate
+              )}`
+            )}
+            {detail("No. Of Rooms", data.guests)}
+          </div>
+          <div className="details-row">
+            {detail(
+              "Payment Status",
+              PAYMENT_STATUS[data.paymentStatus - 1].name
+            )}
+            {detail(
+              "Licenses",
+              data.isDrivingLicense ? "Required" : "Not Required"
+            )}
+            {detail("Passports", data.isPassport ? "Required" : "Not Required")}
+            {detail(
+              "Itinerary Type",
+              ITINERARY_TYPE[data.itineraryType - 1].name
+            )}
+          </div>
+        </div>
+        <div className="basic-itinerary-details">
+          <div className="details-row height-max">
+            {detail("Specialist Note", data.specialistNote)}
+            {detail("Email", data.email)}
+            {detail("Location", data.location?.location)}
+          </div>
+        </div>
+      </section>
+      <section className="itinerary-details">
+        <div className="itinerary-details-heading">Additional Information</div>
+        <div className="additional-itinerary-details">
+          <div className="details-row">
+            {detail(
+              "Specific Restrictions and Regulations",
+              data.specificRestrictionsAndRegulations
+            )}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
 
 const ItineraryDetailsPage = () => {
   const navigate = useNavigate();
+  const { itineraryDetails } = useAppSelector((state: any) => state.itinerary);
 
-  return (
-    <section className="itinerary-details">
-      <div className="itinerary-details-heading">Itinerary Details</div>
-      <div className="no-itenary">
-        <div className="image-background">
-          <IoImageOutline className="image" />
-        </div>
-        <div className="itinerary-heading">No Itinerary Created</div>
-        <div className="itinerary-text">
-          Please create itinerary for the user below.
-        </div>
-        <div
-          className="create-itinerary-btn"
-          onClick={() => {
-            navigate("/itinerary/add/details");
-          }}
-        >
-          Create Itinerary
-        </div>
-      </div>
-    </section>
+  return itineraryDetails.itineraryStatus === 4 ? (
+    <NoItinerary navigate={navigate} />
+  ) : (
+    <AvailableItinerary navigate={navigate} data={itineraryDetails} />
   );
 };
 

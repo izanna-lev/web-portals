@@ -1,8 +1,9 @@
+import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { BiEdit } from "react-icons/bi";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { RiContactsBookLine, RiDeleteBin6Line } from "react-icons/ri";
 import { Create } from "../../../api/Create";
 import { API, GOOGLE_API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -23,34 +24,31 @@ type InputProps = {
 };
 
 const Input = ({ inputFields }: InputProps) => (
-  <input
-    name={inputFields.name}
-    type={inputFields.type}
-    maxLength={inputFields.maxlength}
-    className={`day-blank ${
-      inputFields.default ? "fixed-background" : "edit-background"
-    }`}
-    ref={inputFields.ref}
-    onChange={(e) =>
-      inputFields.onChange && inputFields.onChange(e.target.value)
-    }
-    placeholder={inputFields.placeholder}
-    defaultValue={inputFields.default}
-    autoFocus
-    required
-  />
+  <div>
+    <input
+      name={inputFields.name}
+      type={inputFields.type}
+      maxLength={inputFields.maxlength}
+      className={`day-blank edit-background`}
+      ref={inputFields.ref}
+      onChange={(e) =>
+        inputFields.onChange && inputFields.onChange(e.target.value)
+      }
+      placeholder={inputFields.placeholder}
+      defaultValue={inputFields.default}
+      required
+    />
+  </div>
 );
 
-const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
+const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
   const [defaultData, setdefaultData] = useState<any>({});
   const [location, setlocation] = useState({ type: "" });
   const [selectedImage, setSelectedImage] = useState();
 
   const dispatch = useAppDispatch();
 
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   const dayRef = useRef();
   const noteRef = useRef();
@@ -111,7 +109,7 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
     console.log(payload);
 
     if (data.day) {
-      payload = { ...payload, activityRef: data._id };
+      payload = { ...payload, reservationRef: data._id };
       dispatch(
         Create(
           API.ACTIVITY_EDIT,
@@ -126,9 +124,8 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
         )
       );
     } else {
-      if (!selectedImage) {
-        return alert("Please select an image!");
-      }
+      if (!selectedImage) return alert("Please select an image!");
+
       payload = { ...payload, itineraryRef: _id };
       dispatch(
         Create(
@@ -148,7 +145,11 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
   };
 
   return (
-    <form className="add-activities add-data" onSubmit={saveActivityDetails}>
+    <form
+      className="add-activities add-data"
+      onSubmit={saveActivityDetails}
+      key={data._id}
+    >
       <Input
         inputFields={{
           ref: dayRef,
@@ -159,21 +160,23 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
         }}
       />
 
-      <div className="day-blank image" id="activity_image">
-        <input
-          type="file"
-          id="activity-upload"
-          accept="image/*"
-          name="image"
-          onChange={(e) => imageChange(e)}
-          hidden
-        />
-        <label
-          htmlFor="activity-upload"
-          className={` ${defaultData.image ? "" : "not-selected-preview"}`}
-        >
-          <IoCloudUploadOutline className="activity-image-placeholder" />
-        </label>
+      <div>
+        <div className="day-blank image itineraryImage" id="activity_image">
+          <input
+            type="file"
+            id="activity-upload"
+            accept="image/*"
+            name="image"
+            onChange={(e) => imageChange(e)}
+            hidden
+          />
+          <label
+            htmlFor="activity-upload"
+            className={` ${defaultData.image ? "" : "not-selected-preview"}`}
+          >
+            <IoCloudUploadOutline className="activity-image-placeholder" />
+          </label>
+        </div>
       </div>
 
       <Input
@@ -182,7 +185,7 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
           name: "title",
           maxlength: 365,
           type: "text",
-          default: defaultData.title,
+          default: defaultData.name,
         }}
       />
 
@@ -191,7 +194,11 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
           ref: timeRef,
           name: "time",
           type: "time",
-          default: defaultData.time,
+          default: data.dateTime
+            ? moment(new Date(data.dateTime).toISOString())
+                .format()
+                .slice(11, 16)
+            : "",
         }}
       />
 
@@ -200,7 +207,11 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
           ref: dateRef,
           name: "date",
           type: "date",
-          default: defaultData.date,
+          default: data.dateTime
+            ? moment(new Date(data.dateTime).toISOString())
+                .format()
+                .slice(0, 10)
+            : "",
         }}
       />
 
@@ -220,7 +231,7 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
           name: "note",
           maxlength: 1000,
           type: "text",
-          default: defaultData.note,
+          default: defaultData.description,
         }}
       />
 
@@ -231,6 +242,7 @@ const AddEditActivity = ({ data = {}, handleAddEdit }: any) => {
         <button
           className="btn delete-button"
           onClick={() => handleAddEdit(false)}
+          type="button"
         >
           <span>Cancel</span>
         </button>

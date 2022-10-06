@@ -24,9 +24,7 @@ const AccomodationDetails = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   useEffect(() => {
     dispatch(
@@ -50,9 +48,9 @@ const AccomodationDetails = () => {
       })
     );
 
-  const {
-    accomodation: { list, page, limit, total, size },
-  } = useAppSelector((state) => state.reservation);
+  const { list, page, limit, total, size } = useAppSelector(
+    (state) => state.itinerary.accomodation
+  );
 
   const deleteReservation = (reservationRef: string) => {
     const confirmDelete = window.confirm(
@@ -99,7 +97,7 @@ const AccomodationDetails = () => {
             <div>Check Out Time</div>
             <div>Check Out Date</div>
             <div>Description</div>
-            <div>Actions</div>
+            <div>Action</div>
           </div>
 
           <div className={styles["forms"]}>

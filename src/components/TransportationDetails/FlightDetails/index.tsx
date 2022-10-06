@@ -1,79 +1,34 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable array-callback-return */
 /**
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
 
-import { API, FLIGHT_CLASS, TRANSPORTATION_TYPE } from "../../../constants";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { getFormattedDate, getFormattedTime } from "../../../util";
+import EditFlight from "../../TransportationEdit/EditFlight";
 import NewFlight from "../../TransportationAdd/AddFlight";
-import { DeleteEntity } from "../../../api/Delete";
 import { Modal } from "../../../components/Portal";
+import { FLIGHT_CLASS } from "../../../constants";
 import { MdDeleteOutline } from "react-icons/md";
+import { Pagination } from "../../Pagination";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
-import EditFlight from "../../TransportationEdit/EditFlight";
-import { Pagination } from "../../Pagination";
-import { Fetch } from "../../../api/Fetch";
 
-const FlightDetails = ({ nextTab }: any) => {
+const FlightDetails = (props: any) => {
+  const {
+    flight,
+    deleteTransportation,
+    nextPage,
+    previousPage,
+    nextTab,
+    status,
+  } = props;
+  const { list, page, limit, total, size } = flight;
+
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
-  const dispatch = useAppDispatch();
-
-  const { list, page, limit, total, size } = useAppSelector(
-    (state: any) => state.transportation.flight
-  );
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
-
-  const deleteTransportation = (transportationRef: string) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this?"
-    );
-    if (confirmDelete)
-      dispatch(
-        DeleteEntity(
-          API.TRANSPORTATION_DELETE,
-          { transportationRef },
-          API.TRANSPORTATION_DATA,
-          { transportationType: TRANSPORTATION_TYPE.FLIGHT, itineraryRef: _id },
-          1,
-          10
-        )
-      );
-  };
-
-  const nextPage = () =>
-    dispatch(
-      Fetch(
-        API.TRANSPORTATION_DATA,
-        {
-          itineraryRef: _id,
-        },
-        page + 1,
-        limit,
-        { transportationType: 1 }
-      )
-    );
-
-  const previousPage = () =>
-    dispatch(
-      Fetch(
-        API.TRANSPORTATION_DATA,
-        {
-          itineraryRef: _id,
-        },
-        page - 1,
-        limit,
-        { transportationType: 1 }
-      )
-    );
+  console.log(status);
 
   return (
     <>
@@ -98,7 +53,7 @@ const FlightDetails = ({ nextTab }: any) => {
           <div>Arrival</div>
           <div>Arrival Time</div>
           <div>Specialist Note</div>
-          <div>Actions</div>
+          <div>Action</div>
         </div>
 
         <div className={styles["forms"]}>
@@ -142,17 +97,21 @@ const FlightDetails = ({ nextTab }: any) => {
           )}
         </div>
       </section>
-      <span
-        className={styles["add-more"]}
-        onClick={() => {
-          setAddMore(true);
-        }}
-      >
-        + Add Flight Details
-      </span>
-      <div onClick={() => nextTab(2)} className="continue-button">
-        Continue
-      </div>
+      {!status ? (
+        <>
+          <span
+            className={styles["add-more"]}
+            onClick={() => {
+              setAddMore(true);
+            }}
+          >
+            + Add Flight Details
+          </span>
+          <div onClick={() => nextTab(2)} className="continue-button">
+            Continue
+          </div>
+        </>
+      ) : null}
       {addMore ? (
         <Modal
           modal={<NewFlight handleAddPopup={setAddMore} />}

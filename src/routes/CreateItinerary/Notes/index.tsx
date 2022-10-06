@@ -10,35 +10,45 @@ import { DeleteEntity } from "../../../api/Delete";
 import { MdDeleteOutline } from "react-icons/md";
 import { API, IMAGE } from "../../../constants";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { Fetch } from "../../../api/Fetch";
 import "./index.scss";
+import { EDIT_NOTES } from "../../../store/slices/itinerary";
+import {
+  editListItem,
+  getFormattedDate,
+  getFormattedTime,
+} from "../../../util";
 
-const ActivityDetails = () => {
+const NotesDetails = () => {
   const [addMore, setAddMore] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { list, page, limit, total, size } = useAppSelector(
-    (state) => state.notes
+    (state) => state.itinerary.notes
   );
 
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
-  const fetchData = (page: number = 1, limit: number = 10) =>
-    dispatch(Fetch(API.NOTES_LIST, { itineraryRef: _id }, page, limit, {}));
+  const editNote = (id: any = "") =>
+    editListItem(dispatch, list, EDIT_NOTES, id);
+
+  const fetchData = useCallback(
+    (page: number = 1, limit: number = 10) =>
+      dispatch(Fetch(API.NOTES_LIST, { itineraryRef: _id }, page, limit, {})),
+    [_id, dispatch]
+  );
 
   useEffect(() => {
     fetchData(1, 10);
-  }, []);
+  }, [fetchData]);
 
   const nextPage = () => fetchData(page + 1, limit);
   const previousPage = () => fetchData(page - 1, limit);
 
-  const deleteReservation = (reservationRef: string) => {
+  const deleteNote = (noteRef: string) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this reservation?"
     );
@@ -46,7 +56,7 @@ const ActivityDetails = () => {
       dispatch(
         DeleteEntity(
           API.NOTE_DELETE,
-          { reservationRef },
+          { noteRef },
           API.NOTES_LIST,
           { itineraryRef: _id },
           page,
@@ -73,14 +83,15 @@ const ActivityDetails = () => {
             <div>Day</div>
             <div>Image</div>
             <div>Description</div>
-            <div>Actions</div>
+            <div>Action</div>
           </div>
 
           <div className="forms">
+            {addMore ? <AddEditNote handleAddEdit={setAddMore} /> : null}
             {list.length ? (
               list.map((element: any, index: number) => {
                 return element.edit ? (
-                  <AddEditNote handleAddEdit={setAddMore} data={element} />
+                  <AddEditNote handleAddEdit={editNote} data={element} />
                 ) : (
                   <div className={`add-notes table-item`} key={index}>
                     <div>{element.day}</div>
@@ -95,14 +106,14 @@ const ActivityDetails = () => {
                     <div className="add-activity-buttons">
                       <button
                         className="btn edit-button"
-                        onClick={() => console.log(element)}
+                        onClick={() => editNote(element._id)}
                       >
                         <FaRegEdit />
                         &nbsp;<span>Edit</span>
                       </button>
                       <button
                         className="btn delete-button"
-                        onClick={() => deleteReservation(element._id)}
+                        onClick={() => deleteNote(element._id)}
                       >
                         <MdDeleteOutline />
                         &nbsp;<span>Delete</span>
@@ -114,7 +125,6 @@ const ActivityDetails = () => {
             ) : (
               <div className={`empty-table "table-item`}>Nothing Added</div>
             )}
-            {addMore ? <AddEditNote handleAddEdit={setAddMore} /> : null}
           </div>
         </div>
       </section>
@@ -136,4 +146,4 @@ const ActivityDetails = () => {
   );
 };
 
-export default ActivityDetails;
+export default NotesDetails;

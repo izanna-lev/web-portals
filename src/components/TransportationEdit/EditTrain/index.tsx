@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { NewTicket } from "../../TransportationAdd/NewTicket";
 import { OldTicket } from "../OldTicket";
 import { Create } from "../../../api/Create";
+import moment from "moment";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -38,9 +39,7 @@ const EditTrain = (props: props) => {
 
   const { handleEditPopup, data } = props;
 
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   const dayRef = useRef();
   const trainClassRef = useRef();
@@ -199,10 +198,7 @@ const EditTrain = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
-        <form
-          className={styles["form-block"]}
-          onSubmit={(e) => saveTrainDetails(e)}
-        >
+        <form className="form-block" onSubmit={(e) => saveTrainDetails(e)}>
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             Basic Details
           </div>
@@ -239,7 +235,11 @@ const EditTrain = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  default: data.arrivalDateTime.slice(0, 10),
+                  default: data.arrivalDateTime
+                    ? moment(new Date(data.arrivalDateTime).toISOString())
+                        .format()
+                        .slice(0, 10)
+                    : "",
                   ref: arrivalDateRef,
                   name: "Arrival Date",
                   id: "date",
@@ -251,7 +251,11 @@ const EditTrain = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  default: data.arrivalDateTime.slice(11, 16),
+                  default: data.arrivalDateTime
+                    ? moment(new Date(data.arrivalDateTime).toISOString())
+                        .format()
+                        .slice(11, 16)
+                    : "",
                   ref: arrivalTimeRef,
                   name: "Arrival Time",
                   id: "time",
@@ -272,7 +276,11 @@ const EditTrain = (props: props) => {
               />
               <InputForm
                 inputFields={{
-                  default: data.departDateTime.slice(11, 16),
+                  default: data.departDateTime
+                    ? moment(new Date(data.departDateTime).toISOString())
+                        .format()
+                        .slice(11, 16)
+                    : "",
                   ref: departTimeRef,
                   name: "Depart Time",
                   id: "time",
@@ -296,10 +304,7 @@ const EditTrain = (props: props) => {
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             User Train Details
           </div>
-          <div
-            className={styles["form-required-feilds"]}
-            style={{ maxHeight: "400px", overflow: "auto" }}
-          >
+          <div className={styles["form-required-feilds"]}>
             {data.tickets.map((element: any, index: number) =>
               OldTicket(
                 index,

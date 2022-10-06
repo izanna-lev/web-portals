@@ -22,7 +22,7 @@ const NavigationOptions = [
   },
   {
     number: 3,
-    name: "Accommodation",
+    name: "Accommodations",
     path: "accomodation",
   },
   {
@@ -93,7 +93,7 @@ const CreateItinerary = () => {
         <section className="content-top">
           <h2
             className="content-heading"
-            onClick={() => navigate("/itinerary/list")}
+            onClick={() => navigate(`/itinerary/detail/${formRef}`)}
             style={{ cursor: "pointer" }}
           >
             <BsChevronLeft />
@@ -105,10 +105,14 @@ const CreateItinerary = () => {
             FormNavigation(item, index, setTabNum, tabNum)
           )}
         </section>
-        <div className="content-bottom">
-          <h4 className="form-request">Please fill the form below</h4>
+        <section className="content-bottom">
+          <h4 className="form-request">
+            {tabNum !== "summary"
+              ? "Please fill the form below"
+              : "Please review the details below"}
+          </h4>
           <Outlet />
-        </div>
+        </section>
       </section>
     </section>
   );

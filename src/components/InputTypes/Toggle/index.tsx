@@ -18,6 +18,7 @@ const Toggle = ({ inputFields }: InputProps) => {
         name={inputFields.id}
         type={inputFields.type}
         ref={inputFields.ref}
+        defaultChecked={inputFields.default}
         className="field-toggle-value"
         autoFocus
         required

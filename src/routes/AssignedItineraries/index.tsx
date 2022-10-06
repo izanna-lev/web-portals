@@ -20,6 +20,7 @@ import { Pagination } from "../../components/Pagination";
 import { getFormattedDate, SerialNum } from "../../util";
 import { Fetch } from "../../api/Fetch";
 import "./index.scss";
+import { UserIcon } from "../../components/UserIcon";
 
 const TableHead = () => (
   <thead className="table-head">
@@ -41,27 +42,14 @@ const TableRow = (
   index: number,
   limit: number,
   page: number,
-  navigate: any,
-  dispatch: any
+  itineraryDetailsPage: any
 ) => {
-  const itineraryDetailsPage = (item: any) => {
-    dispatch(setFormRef(item._id));
-    navigate(`/itinerary/detail/${item._id}`);
-  };
-
   return (
     <tr className="body-tr" key={index}>
       <td>{SerialNum(limit, page, index)}</td>
       <td>
         <div className="name-image-cell">
-          <img
-            className="user-image"
-            src={IMAGE.SMALL + item.image}
-            alt={item.name}
-            onError={(e: any) => {
-              e.target.src = ICON.USER_PLACEHOLDER;
-            }}
-          />
+          <UserIcon image={item.image} />
           <span className="table-user-name">{item.location}</span>
         </div>
       </td>
@@ -84,7 +72,7 @@ const TableRow = (
         <button
           className=" btn view-button"
           onClick={() => {
-            itineraryDetailsPage(item);
+            itineraryDetailsPage(item._id);
           }}
         >
           View Details
@@ -105,6 +93,11 @@ const ItineraryPage = () => {
   useEffect(() => {
     dispatch(Fetch(API.ITINERARIES, {}, 1, 10));
   }, [dispatch]);
+
+  const itineraryDetailsPage = (item: any) => {
+    dispatch(setFormRef(item));
+    navigate(`/itinerary/detail/${item}`);
+  };
 
   return (
     <main className="content-container">
@@ -129,7 +122,7 @@ const ItineraryPage = () => {
           <tbody className="body-tr">
             {list.length ? (
               list.map((item, index) =>
-                TableRow(item, index, limit, page, navigate, dispatch)
+                TableRow(item, index, limit, page, itineraryDetailsPage)
               )
             ) : (
               <tr className="table-empty">

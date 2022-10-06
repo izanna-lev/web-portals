@@ -46,7 +46,10 @@ export const API = {
 
   ITINERARIES: `${API_URL}itinerary/list`,
   ITINERARY_ADD: `${API_URL}itinerary/add`,
+  ITINERARY_EDIT: `${API_URL}itinerary/edit`,
   ITINERARY_DETAILS: `${API_URL}itinerary/details`,
+  ITINERARY_COMPLETE: `${API_URL}itinerary/complete`,
+  ITINERARY_CANCEL: `${API_URL}itinerary/cancel`,
 
   // Itinerary Transportation (List & Actions)
 
@@ -83,6 +86,18 @@ export const API = {
   NOTE_DELETE: `${API_URL}note/delete`,
   NOTE_EDIT: `${API_URL}note/edit`,
   NOTES_LIST: `${API_URL}note/list`,
+
+  // Trip Summary (List)
+
+  TRIP_LIST: `${API_URL}trip/list`,
+
+  // Trip Days (List)
+
+  DAYS_LIST: `${API_URL}trip/dayList`,
+
+  // Submit Itinerary (List)
+
+  SUBMIT_ITINERARY: `${API_URL}itinerary/submit`,
 
   // Upload Image
 
@@ -143,10 +158,21 @@ export const ITINERARY_STATUS: ItineraryOptions = {
   5: "Completed",
 };
 
-export const TRAVELER_ITINERARY_DETAILS = {
+export const ITINERARY_SECTION = {
   TRAVELER: 1,
   ITINERARY: 2,
+  TRANSPORTATION: 3,
+  ACCOMODATIONS: 4,
+  RESTAURANT: 5,
+  ACTIVITIES: 6,
+  NOTES: 7,
+  SUMMARY: 8,
 };
+
+export const PAYMENT_STATUS = [
+  { name: "Unpaid", value: 1 },
+  { name: "Paid", value: 2 },
+];
 
 export const RESERVATION_TYPE = {
   ACCOMMODATION: 1,

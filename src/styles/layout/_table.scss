@@ -105,17 +105,11 @@
   display: flex;
 }
 
-.user-image {
-  border-radius: 50%;
-  max-width: 3.5rem;
-  height: 3.5rem;
-}
-
-@include tableXL {
-  .table {
-    // min-width: 1250px;
-  }
-}
+// @include tableXL {
+//   .table {
+//     min-width: 1250px;
+//   }
+// }
 
 @include tableL {
   .table-subContainer {

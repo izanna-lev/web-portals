@@ -27,9 +27,7 @@ const RestaurantDetails = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   useEffect(() => {
     dispatch(
@@ -53,9 +51,9 @@ const RestaurantDetails = () => {
       })
     );
 
-  const {
-    restaurant: { list, page, limit, total, size },
-  } = useAppSelector((state) => state.reservation);
+  const { list, page, limit, total, size } = useAppSelector(
+    (state) => state.itinerary.restaurant
+  );
 
   const deleteReservation = (reservationRef: string) => {
     const confirmDelete = window.confirm(
@@ -100,7 +98,7 @@ const RestaurantDetails = () => {
             <div>Time</div>
             <div>Date</div>
             <div>Description</div>
-            <div>Actions</div>
+            <div>Action</div>
           </div>
 
           <div className={styles["forms"]}>
@@ -170,7 +168,7 @@ const RestaurantDetails = () => {
       </span>
 
       <div
-        onClick={() => navigate("/itinerary/add/restaurant")}
+        onClick={() => navigate("/itinerary/add/activity")}
         className="continue-button"
       >
         Continue

@@ -49,3 +49,16 @@ export const compareDateRange = (fromDateTime: string, toDateTime: string) => {
 };
 
 export const getRefValue = (ref: any) => ref.current.value;
+
+export const editListItem = (
+  dispatch: any,
+  list: [],
+  setList: any,
+  id: string
+) => {
+  const updatedList = list.map((item: any) => {
+    if (item._id === id) return { ...item, edit: true };
+    return { ...item, edit: false };
+  });
+  dispatch(setList(updatedList));
+};

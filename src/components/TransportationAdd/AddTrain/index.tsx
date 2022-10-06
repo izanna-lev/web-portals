@@ -25,16 +25,16 @@ interface props {
 }
 
 const NewTransportationForm = (props: props) => {
-  const [ticketsData, setTicketsData] = useState<any>([]);
+  const [ticketsData, setTicketsData] = useState<any>([
+    { name: "", image: "" },
+  ]);
   const [showImage, setshowImage] = useState(false);
   const [imageUrl, setimageUrl] = useState("");
   const [arrival, setArrival] = useState({});
   const [depart, setDepart] = useState({});
 
   const dispatch = useAppDispatch();
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   const dayRef = useRef();
   const trainClassRef = useRef();
@@ -99,10 +99,6 @@ const NewTransportationForm = (props: props) => {
     setTicketsData(filteredTickets);
   };
 
-  useEffect(() => {
-    addMoreTickets();
-  }, []);
-
   const addMoreTickets = () => {
     const addNewTicketInArr = [...ticketsData];
     addNewTicketInArr.push({ name: "", image: "" });
@@ -146,10 +142,7 @@ const NewTransportationForm = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
-        <form
-          className={styles["form-block"]}
-          onSubmit={(e) => saveTrainDetails(e)}
-        >
+        <form className="form-block" onSubmit={(e) => saveTrainDetails(e)}>
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             Basic Details
           </div>
@@ -242,10 +235,7 @@ const NewTransportationForm = (props: props) => {
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             User Train Details
           </div>
-          <div
-            className={styles["form-required-feilds"]}
-            style={{ maxHeight: "400px", overflow: "auto" }}
-          >
+          <div className={styles["form-required-feilds"]}>
             {ticketsData.map((element: any, index: number) =>
               NewTicket(
                 index,

@@ -24,7 +24,7 @@ export const Create =
 
     dispatch(setLoader(true));
 
-    let data = { ...payload, page, limit };
+    let data = { ...payload };
 
     if (multipart) {
       const formData = new FormData();
@@ -42,10 +42,13 @@ export const Create =
       });
 
       const { code, message } = response.data;
-      if (code !== 100) throw new Error(message);
+      console.log("submit", response);
 
+      if (code !== 100) throw new Error(message);
       if (code === 100) {
+        console.log(response);
         dispatch(setLoader(false));
+
         dispatch(
           setApiMessage({
             type: "success",

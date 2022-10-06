@@ -12,6 +12,8 @@ import NotificationPopup from "../NotificationPopup/index";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { API, IMAGE } from "../../constants";
 import { Fetch } from "../../api/Fetch";
+import { UserIcon } from "../UserIcon";
+
 type Props = {
   showUserData?: boolean;
 };
@@ -63,10 +65,10 @@ const Nav = ({ showUserData = true }: Props) => {
         </div>
         <div className={styles["user-data"]}>
           <div className={styles["image-container"]}>
-            <img
-              src={`${IMAGE.SMALL}${profileData.image}`}
-              className={styles["user-image"]}
-              alt="profile"
+            <UserIcon
+              image={profileData.image}
+              width={"100%"}
+              height={"100%"}
             />
           </div>
           <div className={styles["user-info"]}>

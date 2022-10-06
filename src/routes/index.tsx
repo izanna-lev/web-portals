@@ -20,6 +20,7 @@ const AddItinerary = loadable(
   () => import("./CreateItinerary/ItineraryDetails")
 );
 const Notes = loadable(() => import("./CreateItinerary/Notes"));
+const TripSummary = loadable(() => import("./CreateItinerary/TripSummary"));
 
 const Restaurant = loadable(() => import("./CreateItinerary/Restaurant"));
 const Transportation = loadable(
@@ -44,7 +45,7 @@ const App = () => (
           <Route path="restaurant" element={<Restaurant />} />
           <Route path="activity" element={<Activities />} />
           <Route path="note" element={<Notes />} />
-          <Route path="summary" element={<Activities />} />
+          <Route path="summary" element={<TripSummary />} />
         </Route>
       </Route>
       <Route path="profile" element={<Profile />} />

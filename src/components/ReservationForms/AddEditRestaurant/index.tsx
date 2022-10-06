@@ -11,6 +11,7 @@ import { usePlacesWidget } from "react-google-autocomplete";
 import { API, GOOGLE_API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Create } from "../../../api/Create";
+import moment from "moment";
 
 const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   const [selectedImage, setSelectedImage] = useState();
@@ -19,9 +20,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
 
   const dispatch = useAppDispatch();
 
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   const dayRef = useRef();
   const nameRef = useRef();
@@ -71,7 +70,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
     e.preventDefault();
 
     let payload: any;
-
     payload = {
       contactNumber: phone,
       day: getRefValue(dayRef),
@@ -81,6 +79,10 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
         `${getRefValue(reservationDateRef)}T${getRefValue(reservationTimeRef)}`
       ).toISOString(),
     };
+
+    if (payload.contactNumber.length < 10) {
+      return alert("Please enter a valid phone number!");
+    }
 
     if (location.type) payload = { ...payload, location };
 
@@ -125,10 +127,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
-        <form
-          className={styles["form-block"]}
-          onSubmit={saveAccomodationDetails}
-        >
+        <form className="form-block" onSubmit={saveAccomodationDetails}>
           <div className={styles["form-image"]} id="accomodationImage">
             <input
               type="file"
@@ -141,7 +140,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
             <label
               htmlFor="activity-upload"
               className={styles["not-selected-preview"]}
-              // className={styles[{` ${activityChangedData?.[index]?.image ? "" : "not-selected-preview"}`}
             >
               <IoCloudUploadOutline
                 className={styles["activity-image-placeholder"]}
@@ -188,7 +186,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <div className={`${styles["field-heading"]}`}>Contact Number</div>
               <PhoneInput
                 inputProps={{
-                  name: "contact number",
                   required: true,
                   autoFocus: true,
                 }}
@@ -202,7 +199,11 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  default: data.dateTime?.slice(0, 10),
+                  default: data.dateTime
+                    ? moment(new Date(data.dateTime).toISOString())
+                        .format()
+                        .slice(0, 10)
+                    : "",
                   ref: reservationDateRef,
                   name: "Date",
                   id: "date",
@@ -212,7 +213,11 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               />
               <InputForm
                 inputFields={{
-                  default: data.dateTime?.slice(11, 16),
+                  default: data.dateTime
+                    ? moment(new Date(data.dateTime).toISOString())
+                        .format()
+                        .slice(11, 16)
+                    : "",
                   ref: reservationTimeRef,
                   name: "Time",
                   id: "time",

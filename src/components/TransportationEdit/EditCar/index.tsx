@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { UploadImage } from "../../../api/uploadImage";
 import { setBackground } from "../../../util";
 import { Create } from "../../../api/Create";
+import moment from "moment";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -131,9 +132,7 @@ const EditCar = (props: props) => {
   const [depart, setDepart] = useState({ type: "" });
 
   const dispatch = useAppDispatch();
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   const dayRef = useRef();
   const pickupTimeRef = useRef();
@@ -233,10 +232,7 @@ const EditCar = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
-        <form
-          className={styles["form-block"]}
-          onSubmit={(e) => saveCarDetails(e)}
-        >
+        <form className="form-block" onSubmit={(e) => saveCarDetails(e)}>
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             Basic Details
           </div>
@@ -265,7 +261,11 @@ const EditCar = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  default: data.departDateTime.slice(0, 10),
+                  default: data.departDateTime
+                    ? moment(new Date(data.departDateTime).toISOString())
+                        .format()
+                        .slice(0, 10)
+                    : "",
                   ref: pickupDateRef,
                   name: "Pickup Date",
                   id: "date",
@@ -275,7 +275,11 @@ const EditCar = (props: props) => {
               />
               <InputForm
                 inputFields={{
-                  default: data.departDateTime.slice(11, 16),
+                  default: data.departDateTime
+                    ? moment(new Date(data.departDateTime).toISOString())
+                        .format()
+                        .slice(11, 16)
+                    : "",
                   ref: pickupTimeRef,
                   name: "Pickup Time",
                   id: "time",
@@ -311,10 +315,7 @@ const EditCar = (props: props) => {
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             User Car Details
           </div>
-          <div
-            className={styles["form-required-feilds"]}
-            style={{ maxHeight: "400px", overflow: "auto" }}
-          >
+          <div className={styles["form-required-feilds"]}>
             {UserTicket(
               1,
               saveUserTicketsData,

@@ -7,7 +7,7 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
-  min-width: 80rem;
+  min-width: 82rem;
 }
 
 .add-activities {
@@ -18,14 +18,22 @@
     $theme_color_light_blue
   );
   display: grid;
-  min-height: 4.75rem;
+  min-height: 4rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  grid-template-columns: 0.8fr 1.5fr 1.5fr 1.3fr 1.3fr 1.3fr 3fr 2.5fr;
+  grid-template-columns: 1fr 3fr 4fr 2fr 2fr 3fr 5fr 4fr;
   align-items: center;
   > div {
     padding: 0.25rem;
   }
+}
+
+.add-activities > div {
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .add-data {
@@ -36,14 +44,10 @@
   border-radius: 4px;
   gap: 2px;
   height: 90px;
-}
-
-.add-activities > div {
-  font-size: 0.75rem;
-  margin-left: 0.5rem;
-  height: 100%;
-  display: flex;
-  align-items: center;
+  > div {
+    // padding: 0;
+    // margin-right: 0.5rem;
+  }
 }
 
 .forms {
@@ -143,7 +147,7 @@ input:focus {
 .empty-table {
   height: 4rem;
   display: flex;
-  min-width: 80rem;
+  min-width: 82rem;
   align-items: center;
   font-size: 14px;
   justify-content: center;

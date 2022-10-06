@@ -1,6 +1,6 @@
 @import "../../../styles/globals.scss";
 
-.AddNotesPage {
+.TripSummaryPage {
   height: 350px;
   margin-top: 1rem;
   margin-left: 0.5rem;
@@ -9,7 +9,7 @@
   flex-direction: column;
 }
 
-.add-notes {
+.add-trip {
   width: 100%;
   background-image: linear-gradient(
     to right,
@@ -20,7 +20,7 @@
   min-height: 4rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  grid-template-columns: 0.5fr 1fr 3fr 1.3fr;
+  grid-template-columns: 2fr 3fr 1.3fr 1.3fr 5fr;
   align-items: center;
   > div {
     padding: 0.25rem;
@@ -37,7 +37,7 @@
   height: 90px;
 }
 
-.add-notes > div {
+.add-trip > div {
   font-size: 0.75rem;
   margin-left: 0.5rem;
   height: 100%;
@@ -59,7 +59,7 @@
   background: $light_blue !important;
 }
 
-.add-notes .day-blank {
+.add-trip .day-blank {
   font-size: 0.75rem;
   margin-left: 0px;
   width: 100%;
@@ -146,4 +146,18 @@ input:focus {
   align-items: center;
   font-size: 14px;
   justify-content: center;
+}
+
+.days-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .feild-heading {
+    margin: 0.5rem 1rem;
+  }
+
+  .field-value {
+    min-width: 10rem;
+  }
 }
