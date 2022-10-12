@@ -5,12 +5,9 @@
 
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import moment from "moment";
 
 import {
-  IMAGE,
   ITINERARY_STATUS,
-  ICON,
   API,
   PLANNED_TRAVELLER,
 } from "../../constants";

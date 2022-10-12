@@ -1,7 +1,6 @@
 import { setLoader } from "../store/slices/loader";
 import { setApiMessage } from "../store/slices/apiMessage";
 import axios from "axios";
-import { Fetch } from "./Fetch";
 import { API } from "../constants";
 
 // Upload Image to server

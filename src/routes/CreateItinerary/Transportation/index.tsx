@@ -53,7 +53,7 @@ const TransportationPage = ({ status }: { status?: string }) => {
   } = useAppSelector((state: any) => state.itinerary);
 
   const fetchData = useCallback(
-    (page: number = 1, limit: number = 10, transportationType: number = 1) => {
+    (page = 1, limit = 10, transportationType = 1) => {
       dispatch(
         Fetch(
           API.TRANSPORTATION_DATA,
@@ -73,10 +73,10 @@ const TransportationPage = ({ status }: { status?: string }) => {
     fetchData(1, 10, detailType);
   }, [fetchData, detailType]);
 
-  const nextPage = (page: number = 0, limit: number = 10) =>
+  const nextPage = (page = 0, limit = 10) =>
     fetchData(page + 1, limit, detailType);
 
-  const previousPage = (page: number = 2, limit: number = 10) =>
+  const previousPage = (page = 2, limit = 10) =>
     fetchData(page - 1, limit, detailType);
 
   const deleteTransportation = (transportationRef: string) => {

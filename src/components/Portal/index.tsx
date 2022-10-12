@@ -1,6 +1,5 @@
 import { createPortal } from 'react-dom';
-import React, { ReactNode } from "react";
-import ReactDOM from "react-dom";
+import { ReactNode } from "react";
 
 
 export const Modal = ({

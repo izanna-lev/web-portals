@@ -15,7 +15,7 @@ import { Fetch } from "../../../api/Fetch";
 import "./index.scss";
 import { Modal } from "../../../components/Portal";
 
-const TripSummary = () => {
+const TripSummary = ({ status }: { status?: string }) => {
   const [dayFilter, setdayFilter] = useState("1");
   const [submitPopup, setSubmitPopup] = useState(false);
   const dispatch = useAppDispatch();
@@ -25,19 +25,12 @@ const TripSummary = () => {
     days,
     trip: { list, page, limit, total, size },
   } = useAppSelector((state) => state.itinerary);
-
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
   const { formRef } = useAppSelector((state) => state.appData);
-
   const { type } = useAppSelector((state) => state.apiMessage);
 
   const fetchData = useCallback(
-    (
-      endpoint: string,
-      page: number = 1,
-      limit: number = 10,
-      dayFilter: number = 1
-    ) =>
+    (endpoint: string, page = 1, limit = 10, dayFilter = 1) =>
       dispatch(
         Fetch(endpoint, { itineraryRef: _id, dayFilter }, page, limit, {})
       ),
@@ -132,9 +125,11 @@ const TripSummary = () => {
         </div>
       </section>
 
-      <div onClick={() => submitItinerary()} className="continue-button">
-        Submit
-      </div>
+      {status ? null : (
+        <div onClick={() => submitItinerary()} className="continue-button">
+          Submit
+        </div>
+      )}
       {submitPopup ? (
         <Modal
           modal={<SubmitPopup navigate={navigate} location={formRef} />}

@@ -4,7 +4,7 @@
  */
 
 import { useAppSelector } from "../../../store/hooks";
-import { IMAGE, PLANNED_TRAVELLER } from "../../../constants";
+import { PLANNED_TRAVELLER } from "../../../constants";
 import moment from "moment";
 import "./index.scss";
 import { UserIcon } from "../../../components/UserIcon";

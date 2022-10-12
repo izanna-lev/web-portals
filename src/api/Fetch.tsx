@@ -5,10 +5,10 @@ import axios from "axios";
 // Fetch API
 export const Fetch =
   (
-    endpoint: string = "",
+    endpoint = "",
     payload: any = {},
-    page: number = 1,
-    limit: number = 10,
+    page = 1,
+    limit = 10,
     customPayload?: any
   ) =>
   async (dispatch: any) => {

@@ -17,7 +17,7 @@ import { Fetch } from "../../../api/Fetch";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 
-const AccomodationDetails = () => {
+const AccomodationDetails = ({ status }: { status?: string }) => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
@@ -159,21 +159,24 @@ const AccomodationDetails = () => {
           </div>
         </div>
       </section>
-      <span
-        className={styles["add-more"]}
-        onClick={() => {
-          setAddMore(true);
-        }}
-      >
-        + Add Days
-      </span>
-
-      <div
-        onClick={() => navigate("/itinerary/add/restaurant")}
-        className="continue-button"
-      >
-        Continue
-      </div>
+      {status ? null : (
+        <>
+          <span
+            className={styles["add-more"]}
+            onClick={() => {
+              setAddMore(true);
+            }}
+          >
+            + Add Days
+          </span>
+          <div
+            onClick={() => navigate("/itinerary/add/restaurant")}
+            className="continue-button"
+          >
+            Continue
+          </div>
+        </>
+      )}
       {addMore ? (
         <Modal
           modal={<AddEditAccomodation handleAddPopup={setAddMore} />}

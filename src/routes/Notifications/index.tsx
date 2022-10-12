@@ -1,6 +1,6 @@
 import { SET_NAVIGATION } from "../../store/slices/navigation";
 import { useEffect, useState, useLayoutEffect, Key } from "react";
-import { API, IMAGE, ICON, NAVIGATE } from "../../constants";
+import { IMAGE, NAVIGATE } from "../../constants";
 import { useAppDispatch } from "../../store/hooks";
 import "./index.scss";
 

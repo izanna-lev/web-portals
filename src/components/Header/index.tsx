@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import NotificationPopup from "../NotificationPopup/index";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { API, IMAGE } from "../../constants";
+import { API } from "../../constants";
 import { Fetch } from "../../api/Fetch";
 import { UserIcon } from "../UserIcon";
 

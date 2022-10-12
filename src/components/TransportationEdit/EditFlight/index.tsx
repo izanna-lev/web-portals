@@ -92,7 +92,7 @@ const EditFlight = (props: props) => {
     }
   };
 
-  const removeUserTicket = (id: string, index: number, type: string = "") => {
+  const removeUserTicket = (id: string, index: number, type = "") => {
     modifyTicket(id);
 
     const elementToRemove = document.getElementById(
