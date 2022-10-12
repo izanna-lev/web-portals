@@ -210,10 +210,13 @@ const ItineraryDetailsPage = () => {
                 </>
               ) : null}
 
-              <div className="chat">
-                <BsChatRightDots />
-                <span>Chat</span>
-              </div>
+              {itineraryDetails.itineraryStatus === 2 ||
+              itineraryDetails.itineraryStatus === 4 ? (
+                <div className="chat">
+                  <BsChatRightDots />
+                  <span>Chat</span>
+                </div>
+              ) : null}
             </div>
           ) : null}
 

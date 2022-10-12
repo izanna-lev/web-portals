@@ -61,7 +61,7 @@
 
 .strong-heading {
   color: $theme_color_blue;
-  font-size: 1.5rem;
+  // font-size: 1.5rem;
 }
 
 .label {
@@ -83,6 +83,10 @@
   border-radius: 0.5rem;
   padding-left: 0.75rem;
   color: $theme_color_3;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .password {
@@ -93,10 +97,11 @@
   position: absolute;
   top: 30%;
   right: 10px;
+  cursor: pointer;
 }
 
 .input-icon {
-  transform: scale(0.7);
+  // transform: scale(0.7);
 }
 
 .button-login {
@@ -117,18 +122,16 @@
   border: none;
   border-radius: 0.5rem;
   transition: all 1.5s ease-out;
-  background-color: #fff;
   background-size: 120% auto;
-  background-color: $theme_color_light_blue;
+  background-color: $theme_color_blue;
   color: white;
   font-size: large;
   -webkit-transition: 1s;
   box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, 0.1);
-}
 
-.button:hover {
-  background-position: right center;
-  cursor: pointer;
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 .signin-image {

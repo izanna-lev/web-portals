@@ -15,15 +15,17 @@ const Account = () => {
   }, [navigate]);
 
   return (
-    <div className={styles["page"]}>
-      <LoadingOverlay />
+    <>
+      <div className={styles["page"]}>
+        <Header />
+        <section className={styles["page--bottom"]}>
+          <SideNavBar />
+          <Outlet />
+        </section>
+      </div>
       <Socket />
-      <Header />
-      <section className={styles["page--bottom"]}>
-        <SideNavBar />
-        <Outlet />
-      </section>
-    </div>
+      <LoadingOverlay />
+    </>
   );
 };
 
