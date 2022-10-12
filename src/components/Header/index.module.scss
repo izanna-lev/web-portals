@@ -5,16 +5,30 @@
 .header {
   height: 5rem;
   display: flex;
-  padding: 0 2rem;
+  padding-right: 2rem;
   align-items: center;
   justify-content: space-between;
   border-bottom: 4px solid #e1e1e18f;
+
+  &-left {
+    display: flex;
+    min-width: fit-content;
+    align-items: center;
+  }
+
+  &__menu--icon {
+    margin: auto 1.25rem;
+    font-size: 2.5rem;
+    color: $theme_color_blue;
+    cursor: pointer;
+  }
 }
 
 .header-logo {
   font-weight: 800;
   font-size: 1.5rem;
   color: $theme_color_blue;
+  cursor: default;
 }
 
 .header-right {

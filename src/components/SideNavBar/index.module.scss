@@ -11,11 +11,12 @@
 }
 
 .small-navigation-sidebar {
-  min-width: 75px;
+  min-width: 5rem;
 
   a {
-    span {
-      font-size: 0;
+    span,
+    div {
+      display: none;
     }
 
     img {
