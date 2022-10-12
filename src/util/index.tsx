@@ -2,13 +2,14 @@ import moment from "moment";
 
 // For table serial numbers
 export const SerialNum = (limit: number, page: number, index: number) => {
-  let value = limit * page - limit + index + 1;
+  const value = limit * page - limit + index + 1;
   if (value < 10) {
     return "0" + value;
   }
   return value;
 };
 
+// Set background image to an element
 export const setBackground = (image: string, id: string) => {
   const imageElement = document.getElementById(id);
   if (imageElement) {
@@ -18,6 +19,7 @@ export const setBackground = (image: string, id: string) => {
   }
 };
 
+// Get formatted date from UTC to Locale
 export const getFormattedDate = (dateTimeString: string) => {
   if (dateTimeString) {
     const getUTCDate = new Date(dateTimeString).toISOString();
@@ -27,6 +29,7 @@ export const getFormattedDate = (dateTimeString: string) => {
   return "NA";
 };
 
+// Get formatted time from UTC to Locale
 export const getFormattedTime = (dateTimeString: string) => {
   if (dateTimeString) {
     const getUTCTime = new Date(dateTimeString).toISOString();
@@ -36,6 +39,7 @@ export const getFormattedTime = (dateTimeString: string) => {
   return "NA";
 };
 
+// Compare two dates
 export const compareDateRange = (fromDateTime: string, toDateTime: string) => {
   if (fromDateTime && toDateTime) {
     const startDateTime = new Date(fromDateTime);
@@ -48,8 +52,19 @@ export const compareDateRange = (fromDateTime: string, toDateTime: string) => {
   return 0;
 };
 
-export const getRefValue = (ref: any) => ref.current.value;
+// Get no. of days within two dates
+export const getDays = (fromDateTime: string, toDateTime: string) => {
+  if (fromDateTime && toDateTime) {
+    const startDateTime = new Date(fromDateTime);
+    const endDateTime = new Date(toDateTime);
+    const timeDifference = endDateTime.getTime() - startDateTime.getTime();
+    // To calculate the no. of days between two dates
+    return timeDifference / (1000 * 3600 * 24);
+  }
+  return -1;
+};
 
+// Edit list item in redux global state
 export const editListItem = (
   dispatch: any,
   list: [],
@@ -62,3 +77,6 @@ export const editListItem = (
   });
   dispatch(setList(updatedList));
 };
+
+// Get value of ref
+export const getRefValue = (ref: any) => ref.current.value;

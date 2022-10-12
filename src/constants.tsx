@@ -4,13 +4,13 @@
 
 // Global Environment Variables
 
-const SERVER_TYPE = `${process.env.BRANCH}/`;
-export const API_URL = process.env.API_URL || "";
-const S3_URL = process.env.S3_URL;
+// const SERVER_TYPE = `${process.env.BRANCH}/`;
+// export const API_URL = process.env.API_URL || "";
+// const S3_URL = process.env.S3_URL;
 
-// const SERVER_TYPE = "development/";
-// const API_URL = "http://44.209.25.93:3000/api/";
-// const S3_URL = "https://app-onsite.s3.amazonaws.com/";
+const SERVER_TYPE = "development/";
+export const API_URL = "http://44.209.25.93:3000/api/";
+const S3_URL = "https://app-onsite.s3.amazonaws.com/";
 
 // Custom Environment Variables
 
@@ -148,6 +148,7 @@ export const ICON: IconOptions = {
   PENDING: `${STATUS_ICON}ic_pending.svg`,
   UPCOMING: `${STATUS_ICON}ic_upcoming.svg`,
   COMPLETED: `${STATUS_ICON}ic_completed.svg`,
+  CANCELLED: `${STATUS_ICON}ic_cancel.svg`,
 };
 
 // Custom Constants

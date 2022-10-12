@@ -21,7 +21,7 @@ import {
 } from "../../../util";
 import { EDIT_ACTIVITY } from "../../../store/slices/itinerary";
 
-const ActivityDetails = () => {
+const ActivityDetails = ({ status }: { status?: string }) => {
   const [addMore, setAddMore] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const ActivityDetails = () => {
     editListItem(dispatch, list, EDIT_ACTIVITY, id);
 
   const fetchData = useCallback(
-    (page: number = 1, limit: number = 10) => {
+    (page = 1, limit = 10) => {
       dispatch(
         Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, page, limit, {
           reservationType: RESERVATION_TYPE.ACTIVITY,
@@ -142,25 +142,29 @@ const ActivityDetails = () => {
                 );
               })
             ) : (
-              <div className={`empty-table "table-item`}>Nothing Added</div>
+              <div className={`empty-table table-item`}>Nothing Added</div>
             )}
           </div>
         </div>
       </section>
-      <span
-        className="add-more"
-        onClick={() => {
-          setAddMore(true);
-        }}
-      >
-        + Add More
-      </span>
-      <div
-        onClick={() => navigate("/itinerary/add/note")}
-        className="continue-button"
-      >
-        Continue
-      </div>
+      {status ? null : (
+        <>
+          <span
+            className="add-more"
+            onClick={() => {
+              setAddMore(true);
+            }}
+          >
+            + Add More
+          </span>
+          <div
+            onClick={() => navigate("/itinerary/add/note")}
+            className="continue-button"
+          >
+            Continue
+          </div>
+        </>
+      )}
     </>
   );
 };

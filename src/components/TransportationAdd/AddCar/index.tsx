@@ -5,7 +5,7 @@ import TextArea from "../../InputTypes/TextArea/index";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
 import ImagePopup from "../../sub-components/ImagePopup";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { API, GOOGLE_API, TRANSPORTATION_TYPE } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";

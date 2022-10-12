@@ -1,21 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { API } from "../../constants";
 
 interface chatListObject {
     otherUser: {
-        _id: String
-        name: String
-        image: String
+        _id: string
+        name: string
+        image: string
     },
-    _id: String
-    userRef: String
-    channelRef: String
-    lastMessageReadAt: String 
-    message: String
+    _id: string
+    userRef: string
+    channelRef: string
+    lastMessageReadAt: string 
+    message: string
     createdOn: string
-    updatedOn: String
-    itineraryStatus: Number
-    unseenMessages: Number
+    updatedOn: string
+    itineraryStatus: number
+    unseenMessages: number
 }
 
 interface ChatList {

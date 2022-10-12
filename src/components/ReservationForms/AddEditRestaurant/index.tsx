@@ -6,7 +6,7 @@ import PhoneInput from "react-phone-input-2";
 
 import "react-phone-input-2/lib/plain.css";
 import { useEffect, useRef, useState } from "react";
-import { compareDateRange, getRefValue, setBackground } from "../../../util";
+import { getRefValue, setBackground } from "../../../util";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { API, GOOGLE_API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";

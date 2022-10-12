@@ -24,6 +24,11 @@ import "./index.scss";
 import { IoCloseOutline } from "react-icons/io5";
 import { setFormRef } from "../../store/slices/appData";
 import TransportationDetails from "../CreateItinerary/Transportation";
+import AccomodationDetails from "../CreateItinerary/Accomodation";
+import RestaurantDetails from "../CreateItinerary/Restaurant";
+import ActivitiesDetails from "../CreateItinerary/Activities";
+import NotesDetails from "../CreateItinerary/Notes";
+import TripSummaryDetails from "../CreateItinerary/TripSummary";
 
 const EditDetailsContainer = ({ children, setedit }: any) => {
   return (
@@ -53,7 +58,7 @@ const ItineraryDetailsPage = () => {
     dispatch(setFormRef(formRef));
   }, [params, dispatch]);
 
-  const handleItineraryStatus = (status: string = "cancel") => {
+  const handleItineraryStatus = (status = "cancel") => {
     const endpoint =
       status === "complete" ? API.ITINERARY_COMPLETE : API.ITINERARY_CANCEL;
     dispatch(
@@ -232,6 +237,21 @@ const ItineraryDetailsPage = () => {
         ) : null}
         {tabSelected === ITINERARY_SECTION.TRANSPORTATION ? (
           <TransportationDetails status={"upcoming"} />
+        ) : null}
+        {tabSelected === ITINERARY_SECTION.ACCOMODATIONS ? (
+          <AccomodationDetails status={"upcoming"} />
+        ) : null}
+        {tabSelected === ITINERARY_SECTION.RESTAURANT ? (
+          <RestaurantDetails status={"upcoming"} />
+        ) : null}
+        {tabSelected === ITINERARY_SECTION.ACTIVITIES ? (
+          <ActivitiesDetails status={"upcoming"} />
+        ) : null}
+        {tabSelected === ITINERARY_SECTION.NOTES ? (
+          <NotesDetails status={"upcoming"} />
+        ) : null}
+        {tabSelected === ITINERARY_SECTION.SUMMARY ? (
+          <TripSummaryDetails status={"upcoming"} />
         ) : null}
       </main>
 

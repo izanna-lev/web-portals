@@ -14,7 +14,7 @@ import { useEffect, useRef, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { Create } from "../../../api/Create";
 import "./index.scss";
-import { setBackground } from "../../../util";
+import { getRefValue, setBackground } from "../../../util";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
@@ -76,21 +76,20 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
 
   const saveItinerary = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const getInputValue = (ref: any) => ref.current.value;
     let payload;
 
     payload = {
-      itineraryEmail: getInputValue(emailRef),
-      fromDate: new Date(getInputValue(fromDateRef)).toISOString(),
-      isDrivingLicense: getInputValue(drivingRef) === "on",
-      isPassport: getInputValue(passportRef) === "on",
-      itineraryType: getInputValue(itineraryTypeRef),
-      name: getInputValue(nameRef),
-      price: getInputValue(priceRef),
-      rooms: getInputValue(roomsRef),
-      specialistNote: getInputValue(noteRef),
-      specificRestrictionsAndRegulations: getInputValue(regulationsRef),
-      toDate: new Date(getInputValue(toDateRef)).toISOString(),
+      itineraryEmail: getRefValue(emailRef),
+      fromDate: new Date(getRefValue(fromDateRef)).toISOString(),
+      isDrivingLicense: getRefValue(drivingRef) === "on",
+      isPassport: getRefValue(passportRef) === "on",
+      itineraryType: getRefValue(itineraryTypeRef),
+      name: getRefValue(nameRef),
+      price: getRefValue(priceRef),
+      rooms: getRefValue(roomsRef),
+      specialistNote: getRefValue(noteRef),
+      specificRestrictionsAndRegulations: getRefValue(regulationsRef),
+      toDate: new Date(getRefValue(toDateRef)).toISOString(),
     };
 
     if (location.type) {

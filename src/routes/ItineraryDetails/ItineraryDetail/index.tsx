@@ -33,7 +33,7 @@ const NoItinerary = ({ navigate }: any) => (
   </section>
 );
 
-const AvailableItinerary = ({ navigate, data }: any) => {
+const AvailableItinerary = ({ navigate, data = {} }: any) => {
   const detail = (title: string, value: string) => (
     <div className="detail-item">
       <h3 className="item-name">{title}</h3>
@@ -60,7 +60,7 @@ const AvailableItinerary = ({ navigate, data }: any) => {
           <div className="details-row">
             {detail(
               "Payment Status",
-              PAYMENT_STATUS[data.paymentStatus - 1].name
+              PAYMENT_STATUS[data.paymentStatus - 1 || 0].name
             )}
             {detail(
               "Licenses",

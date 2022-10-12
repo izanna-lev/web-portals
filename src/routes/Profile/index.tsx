@@ -4,12 +4,11 @@
  */
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { API, IMAGE, NAVIGATE } from "../../constants";
+import { NAVIGATE } from "../../constants";
 
 import "./index.scss";
 import { useEffect } from "react";
 import { SET_NAVIGATION } from "../../store/slices/navigation";
-import { Fetch } from "../../api/Fetch";
 import { UserIcon } from "../../components/UserIcon";
 
 const ProfilePage = () => {

@@ -15,7 +15,7 @@ export const uploadImage = (
   ) => {
     try {
       const Authorization = localStorage.getItem("accessToken") || "";
-      let data = new FormData();
+      const data = new FormData();
       data.append("image", payload.file);
       const response = await axios.post(API.CHAT_IMAGE, data, {
         headers: {

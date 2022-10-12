@@ -1,8 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { usePlacesWidget } from "react-google-autocomplete";
-import { BiEdit } from "react-icons/bi";
+import { useEffect, useRef, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { Create } from "../../api/Create";
 import { API, IMAGE } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";

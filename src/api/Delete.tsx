@@ -6,12 +6,12 @@ import { Fetch } from "./Fetch";
 // Delete API
 export const DeleteEntity =
   (
-    endpoint: string = "",
+    endpoint = "",
     payload: any = {},
-    listingEndpoint: string = "",
+    listingEndpoint = "",
     listingPayload: any = {},
-    page: number = 1,
-    limit: number = 10
+    page = 1,
+    limit = 10
   ) =>
   async (dispatch: any) => {
     const Authorization = localStorage.getItem("accessToken") || "";

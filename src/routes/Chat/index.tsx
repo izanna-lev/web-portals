@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import MessagesPage from "./MessageList/index";
-import { IMAGE, ITINERARY_STATUS, ICON, API, NAVIGATE } from "../../constants";
+import { IMAGE, NAVIGATE } from "../../constants";
 import "./index.scss";
 import { chatList } from "../../store/Actions/chat";
 import dayjs from "dayjs";
@@ -28,7 +28,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     if (page === 1 && data.length) {
-      let path = `/chat/${data[0].channelRef}`;
+      const path = `/chat/${data[0].channelRef}`;
       navigate(path);
     }
   }, [page, data, navigate]);
@@ -58,7 +58,7 @@ const ChatPage = () => {
                 className="user-chat"
                 key={index}
                 onClick={() => {
-                  let path = `/chat/${element.channelRef}`;
+                  const path = `/chat/${element.channelRef}`;
                   navigate(path);
                 }}
               >

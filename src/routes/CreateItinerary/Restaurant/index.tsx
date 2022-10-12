@@ -20,7 +20,7 @@ import { Fetch } from "../../../api/Fetch";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "../../../components/Pagination";
 
-const RestaurantDetails = () => {
+const RestaurantDetails = ({ status }: { status?: string }) => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
@@ -158,21 +158,25 @@ const RestaurantDetails = () => {
           </div>
         </div>
       </section>
-      <span
-        className={styles["add-more"]}
-        onClick={() => {
-          setAddMore(true);
-        }}
-      >
-        + Add Days
-      </span>
+      {status ? null : (
+        <>
+          <span
+            className={styles["add-more"]}
+            onClick={() => {
+              setAddMore(true);
+            }}
+          >
+            + Add Days
+          </span>
 
-      <div
-        onClick={() => navigate("/itinerary/add/activity")}
-        className="continue-button"
-      >
-        Continue
-      </div>
+          <div
+            onClick={() => navigate("/itinerary/add/activity")}
+            className="continue-button"
+          >
+            Continue
+          </div>
+        </>
+      )}
       {addMore ? (
         <Modal
           modal={<AddEditRestaurant handleAddPopup={setAddMore} />}

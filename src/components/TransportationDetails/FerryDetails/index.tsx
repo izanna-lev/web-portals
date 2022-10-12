@@ -6,7 +6,6 @@
 import { getFormattedDate, getFormattedTime } from "../../../util";
 import EditFerry from "../../TransportationEdit/EditFerry";
 import NewFerry from "../../TransportationAdd/AddFerry";
-import { useAppSelector } from "../../../store/hooks";
 import { Modal } from "../../../components/Portal";
 import { MdDeleteOutline } from "react-icons/md";
 import { FERRY_CLASS } from "../../../constants";

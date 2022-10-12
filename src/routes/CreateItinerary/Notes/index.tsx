@@ -15,13 +15,9 @@ import { FaRegEdit } from "react-icons/fa";
 import { Fetch } from "../../../api/Fetch";
 import "./index.scss";
 import { EDIT_NOTES } from "../../../store/slices/itinerary";
-import {
-  editListItem,
-  getFormattedDate,
-  getFormattedTime,
-} from "../../../util";
+import { editListItem } from "../../../util";
 
-const NotesDetails = () => {
+const NotesDetails = ({ status }: { status?: string }) => {
   const [addMore, setAddMore] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -36,7 +32,7 @@ const NotesDetails = () => {
     editListItem(dispatch, list, EDIT_NOTES, id);
 
   const fetchData = useCallback(
-    (page: number = 1, limit: number = 10) =>
+    (page = 1, limit = 10) =>
       dispatch(Fetch(API.NOTES_LIST, { itineraryRef: _id }, page, limit, {})),
     [_id, dispatch]
   );
@@ -128,20 +124,24 @@ const NotesDetails = () => {
           </div>
         </div>
       </section>
-      <span
-        className="add-more"
-        onClick={() => {
-          setAddMore(true);
-        }}
-      >
-        + Add More
-      </span>
-      <div
-        onClick={() => navigate("/itinerary/add/summary")}
-        className="continue-button"
-      >
-        Continue
-      </div>
+      {status ? null : (
+        <>
+          <span
+            className="add-more"
+            onClick={() => {
+              setAddMore(true);
+            }}
+          >
+            + Add More
+          </span>
+          <div
+            onClick={() => navigate("/itinerary/add/summary")}
+            className="continue-button"
+          >
+            Continue
+          </div>
+        </>
+      )}
     </>
   );
 };

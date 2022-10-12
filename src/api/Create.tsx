@@ -6,14 +6,14 @@ import { Fetch } from "./Fetch";
 // Create API
 export const Create =
   (
-    endpoint: string = "",
+    endpoint = "",
     payload: any = {},
-    multipart: boolean = false,
+    multipart = false,
     image: any = null,
-    listingEndpoint: string = "",
+    listingEndpoint = "",
     listingPayload: any = {},
-    page: number = 1,
-    limit: number = 10
+    page = 1,
+    limit = 10
   ) =>
   async (dispatch: any) => {
     const Authorization = localStorage.getItem("accessToken") || "";

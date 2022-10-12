@@ -1,11 +1,10 @@
-import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
-import { MdZoomOutMap } from "react-icons/md";
+import { IoCloseOutline } from "react-icons/io5";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
 import ImagePopup from "../../sub-components/ImagePopup";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Dropdown from "../../InputTypes/Dropdown";
 import {
   API,

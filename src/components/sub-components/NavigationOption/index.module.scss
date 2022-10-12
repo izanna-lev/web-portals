@@ -1,6 +1,4 @@
-@import "../../../styles/configs/_fonts.scss";
 @import "../../../styles/configs/_colors.scss";
-@import "../../../styles/configs/_ui.scss";
 
 .sidebar {
   &-item {
@@ -25,19 +23,18 @@
   }
 }
 
-
 .sidebar-count {
   flex: 1;
   padding: 4px;
   font-size: large;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .sidebar-count-view {
   border-radius: 50%;
   text-align: center;
-  background: white;
+  background: $white;
   color: $theme_color_blue;
   align-self: center;
   height: 28px;

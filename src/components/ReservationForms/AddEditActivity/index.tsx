@@ -1,9 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
-import { BiEdit } from "react-icons/bi";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import { RiContactsBookLine, RiDeleteBin6Line } from "react-icons/ri";
 import { Create } from "../../../api/Create";
 import { API, GOOGLE_API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
