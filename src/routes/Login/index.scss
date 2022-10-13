@@ -17,7 +17,7 @@
   height: 100%;
   width: 100%;
   // background: #f0f3f3;
-  background-image: url("https://onsite-travel-assets.s3.amazonaws.com/ic_login-background.png");
+  background-image: url("../../assets/ic_login-background.png");
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -35,7 +35,7 @@
       font-weight: 500;
     }
 
-    > img {
+    >img {
       width: 80%;
       max-width: 500px;
       object-fit: contain;
