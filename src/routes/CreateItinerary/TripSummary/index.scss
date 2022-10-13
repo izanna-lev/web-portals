@@ -1,4 +1,4 @@
-@import "../../../styles/globals.scss";
+@import "../../../styles/configs/colors";
 
 .TripSummaryPage {
   height: 350px;
@@ -11,11 +11,8 @@
 
 .add-trip {
   width: 100%;
-  background-image: linear-gradient(
-    to right,
-    $theme_color_lime,
-    $theme_color_light_blue
-  );
+  background-color: $theme_color_blue;
+  color: $white;
   display: grid;
   min-height: 4rem;
   border-top-left-radius: 0.5rem;
@@ -135,8 +132,10 @@ input:focus {
 }
 
 .table-item {
-  background-image: none;
-  background-color: #f0f0f0;
+  background-color: $gray-200;
+  color: $dark;
+  border-radius: 0;
+  margin-top: 0.15rem;
 }
 
 .empty-table {

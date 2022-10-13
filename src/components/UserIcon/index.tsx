@@ -1,5 +1,6 @@
 import React from "react";
-import { ICON, IMAGE } from "../../constants";
+import { IMAGE } from "../../constants";
+import { ICON } from "../../assets/index";
 
 const styles = (width: string, height: string) => {
   return {
