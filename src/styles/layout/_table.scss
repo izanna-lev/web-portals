@@ -46,12 +46,9 @@
     top: 0px;
     height: 3rem;
     position: sticky;
-
-    background-image: linear-gradient(
-      to right,
-      $theme_color_lime,
-      $theme_color_light_blue
-    );
+    font-size: 0.95rem;
+    background-color: $theme_color_blue;
+    color: $white;
   }
 
   .head-tr {

@@ -4,12 +4,12 @@
 .notification-popup {
   position: absolute;
   width: 400px;
-  top: 4rem;
-  right: 13rem;
+  top: 5.4rem;
+  right: 16.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 2;
 }
 
 .box {
@@ -32,10 +32,10 @@
   content: "";
   position: absolute;
   right: 18px;
-  top: -15px;
-  border-right: 7px solid transparent;
-  border-left: 14px solid transparent;
-  border-bottom: 15px solid $theme_color_light_blue_3x;
+  top: -25px;
+  border-right: 16px solid transparent;
+  border-left: 16px solid transparent;
+  border-bottom: 25px solid $theme_color_light_blue_3x;
 }
 
 .notification-heading {

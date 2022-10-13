@@ -3,12 +3,7 @@
  * @author Jagmohan Singh
  */
 
-import {
-  ITINERARY_SECTION,
-  ITINERARY_STATUS,
-  ICON,
-  API,
-} from "../../constants";
+import { ITINERARY_SECTION, ITINERARY_STATUS, API } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { BsChevronLeft, BsChatRightDots } from "react-icons/bs";
 import EditItinerary from "../CreateItinerary/ItineraryDetails";
@@ -16,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ItineraryDetail from "./ItineraryDetail/index";
 import DetailsPage from "./TravelerDetails/index";
 import { Modal } from "../../components/Portal";
+import { ICON } from "../../assets/index";
 import { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { Create } from "../../api/Create";
@@ -98,7 +94,7 @@ const ItineraryDetailsPage = () => {
             }`}
             onClick={() => setTabSelected(ITINERARY_SECTION.TRAVELER)}
           >
-            Traveller Details
+            Traveler Details
           </div>
           <div
             className={`tab-option ${

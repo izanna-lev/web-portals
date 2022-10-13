@@ -8,7 +8,8 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { FiChevronDown } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
-import NotificationPopup from "../NotificationPopup/index";
+import NotificationPopup from "../NotificationPopup";
+import Logout from "../Logout";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { API } from "../../constants";
@@ -34,15 +35,10 @@ type ProfileData = {
 
 const Header = ({ showUserData = true }: Props) => {
   const [notificationvisibility, setNotificationvisibility] = useState(false);
+  const [logoutVisibility, setLogoutVisibility] = useState(false);
   const profileData = useAppSelector((state: ProfileData) => state.profile);
   const sidebar = useAppSelector((state) => state.appData.sidebarSmall);
   const dispatch = useAppDispatch();
-
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    // window.location = "/login";
-    // navigate("/login");
-  };
 
   useEffect(() => {
     if (!profileData._id && showUserData) dispatch(Fetch(API.PROFILE));
@@ -60,10 +56,12 @@ const Header = ({ showUserData = true }: Props) => {
 
       <div className={styles["header-right"]}>
         <div className={styles["notification"]}>
-          <IoIosNotificationsOutline
-            className={styles["notification-icon"]}
-            onClick={() => setNotificationvisibility(!notificationvisibility)}
-          />
+          <div>
+            <IoIosNotificationsOutline
+              className={styles["notification-icon"]}
+              onClick={() => setNotificationvisibility(!notificationvisibility)}
+            />
+          </div>
           {notificationvisibility && (
             <NotificationPopup
               onClickOutside={() => {
@@ -72,6 +70,7 @@ const Header = ({ showUserData = true }: Props) => {
             />
           )}
         </div>
+
         <div className={styles["user-data"]}>
           <div className={styles["image-container"]}>
             <UserIcon
@@ -84,9 +83,20 @@ const Header = ({ showUserData = true }: Props) => {
             <div className={styles["user-welcome"]}>Welcome,</div>
             <div className={styles["user-name"]}>{profileData.name}</div>
           </div>
-          <div className={styles["logout-container"]}>
-            <FiChevronDown className={styles["down-icon"]} />
-          </div>
+        </div>
+
+        <div className={styles["logout-container"]}>
+          <FiChevronDown
+            className={styles["down-icon"]}
+            onClick={() => setLogoutVisibility(!logoutVisibility)}
+          />
+          {logoutVisibility && (
+            <Logout
+              onClickOutside={() => {
+                setLogoutVisibility(false);
+              }}
+            />
+          )}
         </div>
       </div>
     </header>

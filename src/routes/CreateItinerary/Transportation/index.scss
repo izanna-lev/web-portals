@@ -1,4 +1,4 @@
-@import "../../../styles/globals.scss";
+@import "../../../styles/configs/colors";
 
 .AddActivitiesPage {
   height: calc(92vh - 158px);
@@ -12,16 +12,19 @@
 .TransportationOptions {
   display: flex;
   margin: 10px 0 10px 0.5rem;
-  background-color: #f0eded;
+  background-color: $gray-200;
   width: fit-content;
-  border-radius: 5px;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
 
   .option {
     padding: 10px 20px;
     border: none;
+    cursor: pointer;
   }
   #active {
-    background-color: #bcebd9;
+    background-color: $theme_color_blue;
     border-radius: 5px;
+    color: $white;
   }
 }

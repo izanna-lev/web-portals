@@ -29,14 +29,14 @@ const TransportationTab = (
   index: number
 ) => {
   return (
-    <button
+    <div
       className="option"
       key={index}
       id={`${detailType === type && "active"}`}
       onClick={() => setDetailType(type)}
     >
       {title}
-    </button>
+    </div>
   );
 };
 

@@ -14,18 +14,11 @@ const S3_URL = "https://app-onsite.s3.amazonaws.com/";
 
 // Custom Environment Variables
 
-const ICONS_URL = `${S3_URL}assets/`;
 const IMAGE_URL = `${S3_URL}${SERVER_TYPE}images/`;
 
 // Google Places Api Key
 
 export const GOOGLE_API = "AIzaSyByy1LrT-5ZQ642PzXM4m_WCQ-fS6GO-9s";
-
-// Available Icon Prefix Variables
-
-const ACTION_ICON = `${ICONS_URL}action/`;
-const NAVIGATION_ICON = `${ICONS_URL}navigation/`;
-const STATUS_ICON = `${ICONS_URL}status/`;
 
 // Available Image Quality Prefixes
 
@@ -108,47 +101,6 @@ export const API = {
   MESSAGE_LIST: `${API_URL}chat/messageList`,
   CHAT_LIST: `${API_URL}chat/chatList`,
   CHAT_IMAGE: `${API_URL}chat/chatImage`,
-};
-
-type IconOptions = {
-  [key: string]: string;
-};
-
-// All Icon Endpoints
-
-export const ICON: IconOptions = {
-  SIGNIN: `${ICONS_URL}signin.png`,
-  LOGOUT: `${ACTION_ICON}ic_logout.svg`,
-  USER_PLACEHOLDER: `${ICONS_URL}placeholder.png`,
-
-  // APP LOGO & BANNER
-  APP_LOGO: `${ICONS_URL}logo.png`,
-  APP_LOGO_BACKGROUND: `${ICONS_URL}ic_login-background.png`,
-
-  // CHAT SCREEN ICONS
-  CHAT_SEND: `${ACTION_ICON}ic_send.svg`,
-  CHAT_ADD: `${ACTION_ICON}ic_add.svg`,
-
-  // NAVBAR ICONS INACTIVE
-  ACCESS_MANAGEMENT_INACTIVE: `${NAVIGATION_ICON}ic_access-management-inactive.svg`,
-  CANCELLED_ITINERARIES_INACTIVE: `${NAVIGATION_ICON}ic_cancel-requests_inactive.svg`,
-  CHAT_INACTIVE: `${NAVIGATION_ICON}ic_chat-inactive.svg`,
-  DASHBOARD_INACTIVE: `${NAVIGATION_ICON}ic_home-inactive.svg`,
-  ITINERARIES_INACTIVE: `${NAVIGATION_ICON}ic_itinerary-inactive.svg`,
-  NOTIFICATIONS_INACTIVE: `${NAVIGATION_ICON}ic_notification_inactive.svg`,
-  PROFILE_INACTIVE: `${NAVIGATION_ICON}ic_profile_inactive.svg`,
-  SETTINGS_INACTIVE: `${NAVIGATION_ICON}ic_settings-inactive.svg`,
-  TRAVELLERS_INACTIVE: `${NAVIGATION_ICON}ic_travellers-inactive.svg`,
-
-  // PAGINATION ICONS
-  NEXT_PAGE: `${ACTION_ICON}ic_next.svg`,
-  PREV_PAGE: `${ACTION_ICON}ic_previous.svg`,
-
-  // STATUS ICONS
-  PENDING: `${STATUS_ICON}ic_pending.svg`,
-  UPCOMING: `${STATUS_ICON}ic_upcoming.svg`,
-  COMPLETED: `${STATUS_ICON}ic_completed.svg`,
-  CANCELLED: `${STATUS_ICON}ic_cancel.svg`,
 };
 
 // Custom Constants

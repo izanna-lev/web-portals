@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.018" height="21" viewBox="0 0 17.018 21">
+  <g id="ic_notification_inactive" transform="translate(0.509 0.5)">
+    <g id="Group_10513" data-name="Group 10513" transform="translate(0)">
+      <g id="notification_4_" data-name="notification (4)" transform="translate(0)">
+        <g id="Group_10448" data-name="Group 10448">
+          <g id="Group_10447" data-name="Group 10447">
+            <path id="Path_10129" data-name="Path 10129" d="M58.618,16.7l-1.374-2.361a7.177,7.177,0,0,1-.97-3.608V8.661a5.76,5.76,0,0,0-4-5.53V1.65a1.6,1.6,0,1,0-3.2,0V3.13a5.76,5.76,0,0,0-4,5.53v2.068a7.181,7.181,0,0,1-.969,3.607L42.732,16.7a.423.423,0,0,0,0,.416.4.4,0,0,0,.347.21h15.2a.4.4,0,0,0,.348-.209A.425.425,0,0,0,58.618,16.7Z" transform="translate(-42.675)" fill="none" stroke="#fff" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_10450" data-name="Group 10450" transform="translate(5.188 17.321)">
+          <g id="Group_10449" data-name="Group 10449" transform="translate(0)">
+            <path id="Path_10130" data-name="Path 10130" d="M188.815,469.333c.5,1.578,1.57,2.679,2.812,2.679s2.308-1.1,2.812-2.679Z" transform="translate(-188.815 -469.333)" fill="none" stroke="#fff" stroke-width="1"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

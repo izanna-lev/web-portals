@@ -69,7 +69,7 @@ const DetailsPage = () => {
       </div>
 
       <div className="trip-details">
-        <div className="trip-details-heading">Travler Details</div>
+        <div className="trip-details-heading">Traveler Details</div>
         <div className="trip-details-data">
           <div>
             <div className="key">Name</div>

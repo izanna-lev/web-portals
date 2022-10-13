@@ -1,6 +1,4 @@
-@import "../../styles/configs/_fonts.scss";
 @import "../../styles/configs/_colors.scss";
-@import "../../styles/configs/_ui.scss";
 
 .tab-group {
   // gap: 1rem;
@@ -9,14 +7,9 @@
   max-height: 4.5rem;
   align-items: center;
   margin-bottom: 1rem;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
-  // background-color: $theme_color_5;
-  background-image: linear-gradient(
-    to right,
-    $theme_color_light_lime,
-    $theme_color_light_blue_2x
-  );
   border-radius: 0.5rem;
+  background-color: $gray-200;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
 }
 
 .itinerary-pending {
@@ -40,7 +33,7 @@
 }
 
 .tab-selected {
-  background-color: #73d8bb;
+  background-color: $theme_color_blue;
   color: $white;
 }
 
@@ -96,7 +89,7 @@
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  background-color: $theme_color_light_blue_2x;
+  background-color: $gray-200;
 }
 
 .trip-details-heading {
