@@ -2,6 +2,7 @@ import styles from "./index.module.scss";
 import useComponentVisible from "../outsideClickHandler/index";
 import { useEffect } from "react";
 import { ICON } from "../../assets/index";
+import { useNavigate } from "react-router-dom";
 
 type InputProps = {
   onClickOutside: Function;
@@ -9,9 +10,11 @@ type InputProps = {
 
 const Logout = ({ onClickOutside }: InputProps) => {
   const { ref, isComponentVisible } = useComponentVisible(true);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
+    navigate("/login");
   };
 
   useEffect(() => {
