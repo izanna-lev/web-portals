@@ -47,25 +47,35 @@ const NavigationOptions = [
   },
 ];
 
-const FormNavigation = (item: any, index: number, setTab: any, tab: string) => (
-  <Link
-    to={item.path}
-    key={index}
-    className="step"
-    onClick={() => setTab(item.path)}
-  >
-    <div className="step-number-background">
-      <span className="step-number">{item.number}</span>
-    </div>
-    <div
-      className={`step-name-background ${
-        tab === item.path ? "tab-active" : ""
-      }`}
+const FormNavigation = (
+  item: any,
+  index: number,
+  setTab: any,
+  tab: string,
+  detailsSubmission: boolean = false
+) => {
+  const handleClick = () => (detailsSubmission ? setTab(item.path) : null);
+
+  return (
+    <Link
+      to={detailsSubmission ? item.path : "details"}
+      key={index}
+      className="step"
+      onClick={handleClick}
     >
-      <span className={`step-name`}>{item.name}</span>
-    </div>
-  </Link>
-);
+      <div className="step-number-background">
+        <span className="step-number">{item.number}</span>
+      </div>
+      <div
+        className={`step-name-background ${
+          tab === item.path ? "tab-active" : ""
+        }`}
+      >
+        <span className={`step-name`}>{item.name}</span>
+      </div>
+    </Link>
+  );
+};
 
 const CreateItinerary = () => {
   const navigate = useNavigate();
@@ -73,19 +83,16 @@ const CreateItinerary = () => {
   const [tabNum, setTabNum] = useState("details");
 
   const { formRef } = useAppSelector((state) => state.appData);
-
-  // useEffect(() => {
-  // const container =   document.getElementById("itineraryDetailPage").scrollTo(0, 0);
-  // }, [])
+  const { details } = useAppSelector((state) => state.itinerary);
 
   useEffect(() => {
     !formRef && navigate("/itinerary/list");
   }, [formRef, navigate]);
 
-  useEffect(() => {
-    const currentLocation = location.pathname.split("/")[3];
-    setTabNum(currentLocation);
-  }, [location]);
+  // useEffect(() => {
+  //   const currentLocation = location.pathname.split("/")[3];
+  //   setTabNum(currentLocation);
+  // }, [location]);
 
   return (
     <section className="content-container" id="itineraryDetailPage">
@@ -102,7 +109,7 @@ const CreateItinerary = () => {
         </section>
         <section className="createItineraryNav">
           {NavigationOptions.map((item: any, index: number) =>
-            FormNavigation(item, index, setTabNum, tabNum)
+            FormNavigation(item, index, setTabNum, tabNum, details)
           )}
         </section>
         <section className="content-bottom">

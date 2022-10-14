@@ -3,9 +3,9 @@
 @import "../../../styles/configs/_ui.scss";
 
 .AddTrainsPage {
-  min-height: 350px;
+  min-height: 20rem;
   margin-top: 1rem;
-  margin-left: 0.5rem;
+
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@
   grid-template-columns: 0.5fr 2.5fr 1.1fr 1.3fr 1.3fr 2.5fr 1fr 3.5fr 2.5fr;
   align-items: center;
 
-  > div {
+  >div {
     padding: 0.25rem 0.5rem;
   }
 }
@@ -38,7 +38,7 @@
   height: 90px;
 }
 
-.flightDetails-table > div {
+.flightDetails-table>div {
   font-size: 14px;
   margin-left: 0.5rem;
   height: 100%;
@@ -55,10 +55,10 @@
 }
 
 .add-more {
-  font-size: 14px;
-  font-weight: 500;
-  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  margin: 0.5rem 0rem 1rem;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .table-item {

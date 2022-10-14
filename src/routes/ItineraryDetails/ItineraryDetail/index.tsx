@@ -12,7 +12,7 @@ import { ITINERARY_TYPE, PAYMENT_STATUS } from "../../../constants";
 
 const NoItinerary = ({ navigate }: any) => (
   <section className="itinerary-details">
-    <div className="itinerary-details-heading">Itinerary Details</div>
+    <h2 className="itinerary-details-heading">Itinerary Details</h2>
     <div className="no-itenary">
       <div className="image-background">
         <IoImageOutline className="image" />
@@ -43,7 +43,7 @@ const AvailableItinerary = ({ navigate, data = {} }: any) => {
   return (
     <>
       <section className="itinerary-details">
-        <div className="itinerary-details-heading">Itinerary Details</div>
+        <h2 className="itinerary-details-heading">Itinerary Details</h2>
         <div className="basic-itinerary-details">
           <div className="details-row">
             {detail("Title", data.name)}
@@ -103,7 +103,8 @@ const ItineraryDetailsPage = () => {
   return itineraryDetails.itineraryStatus === 4 ? (
     <NoItinerary navigate={navigate} />
   ) : (
-    <AvailableItinerary navigate={navigate} data={itineraryDetails} />
+    <NoItinerary navigate={navigate} />
+    // <AvailableItinerary navigate={navigate} data={itineraryDetails} />
   );
 };
 

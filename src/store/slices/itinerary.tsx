@@ -15,6 +15,8 @@ const initialState: any = {
   days: { list: [] },
   itineraryDetails: { _id: "" },
   travellerDetails: {},
+  details: false,
+  _id: "",
 };
 
 const itinerary = createSlice({
@@ -27,6 +29,9 @@ const itinerary = createSlice({
 
     EDIT_NOTES: (state, action) => {
       state.notes.list = action.payload;
+    },
+    INITIAL_STATE: (state, action) => {
+      Object.assign(state, { ...initialState });
     },
   },
   extraReducers(builder) {
@@ -63,6 +68,6 @@ const itinerary = createSlice({
   },
 });
 
-export const { EDIT_ACTIVITY, EDIT_NOTES } = itinerary.actions;
+export const { EDIT_ACTIVITY, EDIT_NOTES, INITIAL_STATE } = itinerary.actions;
 
 export default itinerary.reducer;

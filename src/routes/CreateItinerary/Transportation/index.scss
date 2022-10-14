@@ -3,7 +3,7 @@
 .AddActivitiesPage {
   height: calc(92vh - 158px);
   margin-top: 1rem;
-  margin-left: 0.5rem;
+
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
 
 .TransportationOptions {
   display: flex;
-  margin: 10px 0 10px 0.5rem;
+  margin: 10px 0 10px 0rem;
   background-color: $gray-200;
   width: fit-content;
   border-radius: 0.5rem;
@@ -22,6 +22,7 @@
     border: none;
     cursor: pointer;
   }
+
   #active {
     background-color: $theme_color_blue;
     border-radius: 5px;

@@ -21,9 +21,9 @@
 .tab-option {
   padding: 0.5rem 1rem;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   border-radius: 0.5rem;
   height: 100%;
   display: flex;
@@ -58,14 +58,14 @@
 }
 
 .status {
-  font-size: 1rem;
+  font-size: 0.9rem;
   text-align: start;
   // margin-top: 4px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .status-text {
-  font-size: 14px;
+  font-size: 0.9rem;
   align-self: flex-end;
   font-weight: 500;
   padding-bottom: 4px;
@@ -95,7 +95,7 @@
 .trip-details-heading {
   padding: 1rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .trip-details-data {
@@ -116,6 +116,7 @@
 .value {
   font-size: 0.75rem;
 }
+
 .assigned-specialist {
   display: grid;
   grid-template-columns: max-content max-content;

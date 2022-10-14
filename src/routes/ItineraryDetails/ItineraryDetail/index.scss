@@ -11,7 +11,7 @@
 .itinerary-details-heading {
   padding: 1rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .no-itenary {
@@ -37,12 +37,15 @@
 
     .detail-item {
       max-height: 3.5rem;
+      font-size: 0.9rem;
+
       .item-name {
         font-weight: 600;
-        font-size: 1rem;
+        font-size: inherit;
       }
     }
   }
+
   .height-max {
     .detail-item {
       max-height: fit-content;
