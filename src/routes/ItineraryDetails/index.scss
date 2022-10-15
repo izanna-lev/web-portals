@@ -60,7 +60,7 @@
 .status {
   font-size: 0.9rem;
   text-align: start;
-  // margin-top: 4px;
+  // margin-top: 0.25rem ;
   font-weight: 600;
 }
 
@@ -68,13 +68,13 @@
   font-size: 0.9rem;
   align-self: flex-end;
   font-weight: 500;
-  padding-bottom: 4px;
+  padding-bottom: 0.25rem;
   color: $theme_color_3;
 }
 
 .chat {
   display: flex;
-  font-size: 14px;
+  font-size: 0.95rem;
   align-items: center;
   padding: 0.75rem 44px;
   justify-self: flex-end;
@@ -102,7 +102,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding-left: 1rem;
-  font-size: 14px;
+  font-size: 0.95rem;
   margin-bottom: 0.5rem;
   justify-items: start;
   align-items: center;

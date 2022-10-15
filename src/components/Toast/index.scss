@@ -43,6 +43,7 @@
 
 .successicon {
   color: #47d764;
+
   svg {
     fill: #47d764 !important;
   }
@@ -61,7 +62,7 @@
 }
 
 .inner-container p:last-child {
-  font-size: 14px;
+  font-size: 0.95rem;
   font-weight: 400;
   color: #656565;
 }
@@ -124,6 +125,7 @@
     top: 30px;
     opacity: 1;
   }
+
   to {
     top: 0;
     opacity: 0;

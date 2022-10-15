@@ -17,15 +17,15 @@
 .item-active {
   background: $white;
   color: $light-blue;
+
   img {
-    filter: invert(61%) sepia(52%) saturate(4519%) hue-rotate(162deg)
-      brightness(89%) contrast(92%);
+    filter: invert(61%) sepia(52%) saturate(4519%) hue-rotate(162deg) brightness(89%) contrast(92%);
   }
 }
 
 .sidebar-count {
   flex: 1;
-  padding: 4px;
+  padding: 0.25rem;
   font-size: large;
   display: flex;
   justify-content: flex-end;
