@@ -11,6 +11,7 @@ type InputProps = {
     ref?: any;
     default?: string;
     onChange?: Function;
+    disabled?: false;
   };
 };
 
@@ -32,6 +33,7 @@ const InputForm = ({ inputFields }: InputProps) => {
         defaultValue={inputFields.default}
         autoFocus
         required
+        disabled={inputFields.disabled}
       />
     </div>
   );

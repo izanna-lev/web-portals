@@ -43,6 +43,7 @@ export const API = {
   ITINERARY_DETAILS: `${API_URL}itinerary/details`,
   ITINERARY_COMPLETE: `${API_URL}itinerary/complete`,
   ITINERARY_CANCEL: `${API_URL}itinerary/cancel`,
+  ITINERARY_CANCEL_REQUESTS: `${API_URL}itinerary/cancellationRequest`,
 
   // Itinerary Transportation (List & Actions)
 

@@ -1,4 +1,4 @@
-import "./index.scss";
+import styles from "./index.module.scss";
 
 type InputProps = {
   name: string;
@@ -12,11 +12,19 @@ type InputProps = {
 
 const Dropdown = ({ inputFields, name, refe, checkedVal }: InputProps) => {
   return (
-    <div className="input-form">
-      <div className="feild-heading">{name}</div>
-      <select className="field-value" ref={refe} defaultValue={checkedVal}>
+    <div className={styles["input-form"]}>
+      <div className={styles["feild-heading"]}>{name}</div>
+      <select
+        className={styles["field-value"]}
+        ref={refe}
+        defaultValue={checkedVal}
+      >
         {inputFields.map((element, index) => (
-          <option className="dropdown-option" value={element.value} key={index}>
+          <option
+            className={styles["dropdown-option"]}
+            value={element.value}
+            key={index}
+          >
             {element.name}
           </option>
         ))}
