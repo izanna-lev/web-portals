@@ -1,10 +1,10 @@
 @import "../../../styles/configs/_colors.scss";
 
 .AddFlightsPage {
-  min-height: 350px;
-  max-height: 550px;
+  min-height: 20rem;
+  max-height: 25rem;
   margin-top: 1rem;
-  margin-left: 0.5rem;
+
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -21,10 +21,13 @@
   border-top-right-radius: 0.5rem;
   grid-template-columns: 0.8fr 1.5fr 1.5fr 2fr 1.5fr 1.3fr 1.3fr 1.3fr 1.3fr 3fr 2.5fr;
   align-items: center;
-  > div {
+
+  >div {
     padding: 0.25rem;
   }
 }
+
+.forms {}
 
 .add-data {
   border-top-left-radius: 0px;
@@ -36,7 +39,7 @@
   height: 90px;
 }
 
-.flightDetails-table > div {
+.flightDetails-table>div {
   font-size: 14px;
   margin-left: 0.5rem;
   height: 100%;
@@ -53,10 +56,10 @@
 }
 
 .add-more {
-  font-size: 14px;
-  font-weight: 500;
-  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  margin: 0.5rem 0rem 1rem;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .table-item {

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { Navigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
 

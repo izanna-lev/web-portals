@@ -35,7 +35,7 @@ const DetailsPage = () => {
             <div className="key">Planned Date</div>
             <div className="value">
               {itineraryDetails.toDate
-                ? moment(itineraryDetails.toDate).format("DD-MM-YYYY")
+                ? moment(travellerDetails.plannedDate).format("DD-MM-YYYY")
                 : "NA"}
             </div>
           </div>
@@ -44,7 +44,7 @@ const DetailsPage = () => {
             <div className="key">How much have you already planned?</div>
             <div className="value">
               {
-                PLANNED_TRAVELLER[itineraryDetails.plannedTraveller - 1 || 0]
+                PLANNED_TRAVELLER[travellerDetails.plannedTraveller - 1 || 0]
                   .name
               }
             </div>

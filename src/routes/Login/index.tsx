@@ -54,7 +54,7 @@ const Login = () => {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="example@abc.com"
+                placeholder="example@mail.com"
                 className="custom-field"
                 autoFocus
                 autoComplete="email"

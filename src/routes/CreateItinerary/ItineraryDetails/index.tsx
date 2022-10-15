@@ -13,10 +13,10 @@ import Toggle from "../../../components/InputTypes/Toggle/index";
 import { useEffect, useRef, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { Create } from "../../../api/Create";
-import "./index.scss";
 import { getRefValue, setBackground } from "../../../util";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import "./index.scss";
 
 const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   const [selectedImage, setSelectedImage] = useState();
@@ -218,9 +218,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           />
 
           <button className="button-submit-itinerary">
-            <div className="button">
-              {data.duration ? "Save" : "Save & Next"}
-            </div>
+            {data.duration ? "Save" : "Save & Next"}
           </button>
         </div>
 

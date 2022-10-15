@@ -25,6 +25,7 @@ import RestaurantDetails from "../CreateItinerary/Restaurant";
 import ActivitiesDetails from "../CreateItinerary/Activities";
 import NotesDetails from "../CreateItinerary/Notes";
 import TripSummaryDetails from "../CreateItinerary/TripSummary";
+import { INITIAL_STATE } from "../../store/slices/itinerary";
 
 const EditDetailsContainer = ({ children, setedit }: any) => {
   return (
@@ -69,13 +70,18 @@ const ItineraryDetailsPage = () => {
     );
   };
 
+  const handleBack = () => {
+    navigate("/itinerary/list");
+    dispatch(INITIAL_STATE({}));
+  };
+
   return (
     <>
       <main className="content-container">
         <section className="content-top">
           <h2
             className="content-heading"
-            onClick={() => navigate("/itinerary/list")}
+            onClick={handleBack}
             style={{ cursor: "pointer" }}
           >
             <BsChevronLeft />

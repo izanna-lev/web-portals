@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   travellerRef: "",
   formRef: "",
-  sidebarSmall: false,
+  sidebarSmall: window.innerWidth <= 1280 ? true : false,
 };
 
 const appData = createSlice({
