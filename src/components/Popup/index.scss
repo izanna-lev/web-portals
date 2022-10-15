@@ -1,0 +1,47 @@
+@import "../../styles/configs/_fonts.scss";
+@import "../../styles/configs/_colors.scss";
+@import "../../styles/configs/_ui.scss";
+
+.popup {
+  width: 100vw;
+  background-color: rgba(195, 190, 190, 0.5);
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.popup-container {
+  width: 30%;
+  max-height: 40%;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: $theme_color_white;
+  opacity: 1;
+  text-align: center;
+  z-index: 20;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.popup-heading {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.popup-text {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.popup-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+}

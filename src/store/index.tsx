@@ -18,6 +18,7 @@ export const store = configureStore({
     chatList: reducers.chatList,
     messageList: reducers.messageList,
     socket: reducers.socket,
+    cancelItineraryList: reducers.cancelItineraryList
   },
 
   devTools: process.env.NODE_ENV !== "production",
