@@ -1,0 +1,162 @@
+@import "../../../styles/configs/colors";
+
+.TripSummaryPage {
+  height: 350px;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-trip {
+  width: 100%;
+  background-color: $theme_color_blue;
+  color: $white;
+  display: grid;
+  min-height: 4rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  grid-template-columns: 2fr 3fr 1.3fr 1.3fr 5fr;
+  align-items: center;
+  > div {
+    padding: 0.25rem;
+  }
+}
+
+.add-data {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-image: none;
+  margin-top: 2px;
+  border-radius: 4px;
+  gap: 2px;
+  height: 90px;
+}
+
+.add-trip > div {
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.forms {
+  width: 100%;
+  max-height: calc(92vh - 248px);
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $light_blue !important;
+}
+
+.add-trip .day-blank {
+  font-size: 0.75rem;
+  margin-left: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  height: 100%;
+  border-radius: 0.5rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.edit-background {
+  border: 2px solid $theme_color_blue;
+  background-color: $white;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid $theme_color_light_blue;
+  background-color: $white;
+}
+
+.fixed-background {
+  background-color: $theme_color_light_blue_3x !important;
+  border: none;
+}
+
+.day-blank.image {
+  justify-content: space-around;
+  background-color: $theme_color_light_blue_3x;
+
+  .not-selected-preview {
+    width: 80%;
+    height: 70%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $theme_color_blue;
+    border-radius: 0.5rem;
+  }
+}
+
+.activity-image-preview {
+  max-width: 100%;
+  max-height: 78px;
+  justify-self: center;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.activity-image-placeholder {
+  width: 20px;
+  height: 20px;
+  color: $theme_color_blue;
+}
+
+.add-more-error {
+  font-size: 0.5rem;
+  color: red;
+}
+
+.add-more {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.table-item {
+  background-color: $gray-200;
+  color: $dark;
+  border-radius: 0;
+  margin-top: 0.15rem;
+}
+
+.empty-table {
+  height: 3rem;
+  display: flex;
+  min-width: 50rem;
+  align-items: center;
+  font-size: 14px;
+  justify-content: center;
+}
+
+.days-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .feild-heading {
+    margin: 0.5rem 1rem;
+  }
+
+  .field-value {
+    min-width: 10rem;
+  }
+}

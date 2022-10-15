@@ -1,0 +1,78 @@
+@import "../../../styles/configs/_fonts.scss";
+@import "../../../styles/configs/_colors.scss";
+@import "../../../styles/configs/_ui.scss";
+
+.AddFlightsPage {
+  min-height: 350px;
+  max-height: 550px;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.flightDetails-table {
+  min-width: 90rem;
+  width: 100%;
+  min-height: 4rem;
+  background-color: $theme_color_blue;
+  color: $white;
+  display: grid;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  grid-template-columns: 0.8fr 1.5fr 1.5fr 2fr 1.5fr 1.3fr 1.3fr 3fr 2.5fr;
+  align-items: center;
+  > div {
+    padding: 0.25rem;
+  }
+}
+
+.add-data {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-image: none;
+  margin-top: 2px;
+  border-radius: 4px;
+  gap: 2px;
+  height: 90px;
+}
+
+.flightDetails-table > div {
+  font-size: 14px;
+  margin-left: 0.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $light_blue !important;
+}
+
+.add-more {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.table-item {
+  background-color: $gray-200;
+  color: $dark;
+  border-radius: 0;
+  margin-top: 0.15rem;
+}
+
+.empty-table {
+  height: 3rem;
+  display: flex;
+  min-width: 90rem;
+  align-items: center;
+  font-size: 14px;
+  justify-content: center;
+}

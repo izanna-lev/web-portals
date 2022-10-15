@@ -17,7 +17,7 @@
   height: 100%;
   width: 100%;
   // background: #f0f3f3;
-  background-image: url("https://onsite-travel-assets.s3.amazonaws.com/ic_login-background.png");
+  background-image: url("../../assets/ic_login-background.png");
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -35,7 +35,7 @@
       font-weight: 500;
     }
 
-    > img {
+    >img {
       width: 80%;
       max-width: 500px;
       object-fit: contain;
@@ -46,7 +46,7 @@
 .login-form {
   padding: 28px;
   width: 60%;
-  box-shadow: 4px 0.5rem 2rem 4px #e5f7ff;
+  // box-shadow: 4px 0.5rem 2rem 4px #e5f7ff;
   backdrop-filter: blur(15.5px);
   border-radius: 10px;
   background: rgba(229, 247, 255, 0.05);
@@ -61,7 +61,7 @@
 
 .strong-heading {
   color: $theme_color_blue;
-  font-size: 1.5rem;
+  // font-size: 1.5rem;
 }
 
 .label {
@@ -83,6 +83,10 @@
   border-radius: 0.5rem;
   padding-left: 0.75rem;
   color: $theme_color_3;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .password {
@@ -93,10 +97,11 @@
   position: absolute;
   top: 30%;
   right: 10px;
+  cursor: pointer;
 }
 
 .input-icon {
-  transform: scale(0.7);
+  // transform: scale(0.7);
 }
 
 .button-login {
@@ -117,23 +122,16 @@
   border: none;
   border-radius: 0.5rem;
   transition: all 1.5s ease-out;
-  background-color: #fff;
   background-size: 120% auto;
-  background-image: linear-gradient(
-    45deg,
-    $theme_color_lime 0%,
-    $theme_color_light_blue 51%,
-    $light_blue 100%
-  );
-  color: white;
+  background-color: $theme_color_blue;
+  color: $white;
   font-size: large;
   -webkit-transition: 1s;
   box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, 0.1);
-}
 
-.button:hover {
-  background-position: right center;
-  cursor: pointer;
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 .signin-image {

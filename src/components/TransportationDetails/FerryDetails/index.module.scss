@@ -15,11 +15,8 @@
   min-width: 90rem;
   width: 100%;
   min-height: 4.5rem;
-  background-image: linear-gradient(
-    to right,
-    $theme_color_lime,
-    $theme_color_light_blue
-  );
+  background-color: $theme_color_blue;
+  color: $white;
   display: grid;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
@@ -65,30 +62,17 @@
 }
 
 .table-item {
-  background-image: none;
-  background-color: #f0f0f0;
+  background-color: $gray-200;
+  color: $dark;
+  border-radius: 0;
+  margin-top: 0.15rem;
 }
 
 .empty-table {
-  height: 50px;
+  height: 3rem;
+  min-width: 90rem;
   display: flex;
   align-items: center;
   font-size: 14px;
   justify-content: center;
-}
-
-.continue-button {
-  padding: 10px 30px;
-  background-color: #0b9dd8;
-  color: white;
-  width: 200px;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  margin: 4px 0.5rem 0px 0.5rem;
-
-  &:hover {
-    filter: brightness(1.05);
-  }
 }

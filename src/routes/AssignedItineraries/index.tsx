@@ -5,12 +5,9 @@
 
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import moment from "moment";
 
 import {
-  IMAGE,
   ITINERARY_STATUS,
-  ICON,
   API,
   PLANNED_TRAVELLER,
 } from "../../constants";
@@ -20,6 +17,7 @@ import { Pagination } from "../../components/Pagination";
 import { getFormattedDate, SerialNum } from "../../util";
 import { Fetch } from "../../api/Fetch";
 import "./index.scss";
+import { UserIcon } from "../../components/UserIcon";
 
 const TableHead = () => (
   <thead className="table-head">
@@ -41,27 +39,14 @@ const TableRow = (
   index: number,
   limit: number,
   page: number,
-  navigate: any,
-  dispatch: any
+  itineraryDetailsPage: any
 ) => {
-  const itineraryDetailsPage = (item: any) => {
-    dispatch(setFormRef(item._id));
-    navigate(`/itinerary/detail/${item._id}`);
-  };
-
   return (
     <tr className="body-tr" key={index}>
       <td>{SerialNum(limit, page, index)}</td>
       <td>
         <div className="name-image-cell">
-          <img
-            className="user-image"
-            src={IMAGE.SMALL + item.image}
-            alt={item.name}
-            onError={(e: any) => {
-              e.target.src = ICON.USER_PLACEHOLDER;
-            }}
-          />
+          <UserIcon image={item.image} />
           <span className="table-user-name">{item.location}</span>
         </div>
       </td>
@@ -84,7 +69,7 @@ const TableRow = (
         <button
           className=" btn view-button"
           onClick={() => {
-            itineraryDetailsPage(item);
+            itineraryDetailsPage(item._id);
           }}
         >
           View Details
@@ -95,14 +80,21 @@ const TableRow = (
 };
 
 const ItineraryPage = () => {
-  const itinerariesData = useAppSelector((state) => state.itineraries);
-  const { page, limit, size, total, list } = itinerariesData;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { page, limit, size, total, list } = useAppSelector(
+    (state) => state.itineraries
+  );
 
   useEffect(() => {
     dispatch(Fetch(API.ITINERARIES, {}, 1, 10));
   }, [dispatch]);
+
+  const itineraryDetailsPage = (item: any) => {
+    dispatch(setFormRef(item));
+    navigate(`/itinerary/detail/${item}`);
+  };
 
   return (
     <main className="content-container">
@@ -115,9 +107,10 @@ const ItineraryPage = () => {
             limit,
             total,
             size,
-            nextPage: () => dispatch(Fetch(API.PROFILE, {}, page + 1, limit)),
+            nextPage: () =>
+              dispatch(Fetch(API.ITINERARIES, {}, page + 1, limit)),
             previousPage: () =>
-              dispatch(Fetch(API.PROFILE, {}, page - 1, limit)),
+              dispatch(Fetch(API.ITINERARIES, {}, page - 1, limit)),
           })
         : null}
       <section className="table-container">
@@ -126,7 +119,7 @@ const ItineraryPage = () => {
           <tbody className="body-tr">
             {list.length ? (
               list.map((item, index) =>
-                TableRow(item, index, limit, page, navigate, dispatch)
+                TableRow(item, index, limit, page, itineraryDetailsPage)
               )
             ) : (
               <tr className="table-empty">

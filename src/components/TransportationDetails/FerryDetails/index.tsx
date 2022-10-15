@@ -1,51 +1,45 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable array-callback-return */
 /**
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
 
-import { API, FERRY_CLASS, TRANSPORTATION_TYPE } from "../../../constants";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { getFormattedDate, getFormattedTime } from "../../../util";
+import EditFerry from "../../TransportationEdit/EditFerry";
 import NewFerry from "../../TransportationAdd/AddFerry";
 import { Modal } from "../../../components/Portal";
-import { DeleteEntity } from "../../../api/Delete";
 import { MdDeleteOutline } from "react-icons/md";
+import { FERRY_CLASS } from "../../../constants";
+import { Pagination } from "../../Pagination";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
-import EditFerry from "../../TransportationEdit/EditFerry";
 
-const FerryDetails = ({ nextTab }: any) => {
-  const ferryList = useAppSelector((state: any) => state.transportation.ferry);
+const FerryDetails = (props: any) => {
+  const {
+    deleteTransportation,
+    nextPage,
+    previousPage,
+    nextTab,
+    ferry,
+    status,
+  } = props;
+  const { list, page, limit, total, size } = ferry;
+
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
-  const dispatch = useAppDispatch();
-
-  const deleteTransportation = (transportationRef: string) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this?"
-    );
-    if (confirmDelete)
-      dispatch(
-        DeleteEntity(
-          API.TRANSPORTATION_DELETE,
-          { transportationRef },
-          API.TRANSPORTATION_DATA,
-          { transportationType: TRANSPORTATION_TYPE.FERRY, itineraryRef: _id },
-          1,
-          10
-        )
-      );
-  };
-
   return (
     <>
+      {list.length
+        ? Pagination({
+            page,
+            limit,
+            total,
+            size,
+            nextPage,
+            previousPage,
+          })
+        : null}
       <section className={styles["AddTrainsPage"]}>
         <div className={styles["flightDetails-table"]}>
           <div>Day</div>
@@ -56,12 +50,12 @@ const FerryDetails = ({ nextTab }: any) => {
           <div>Depart Station</div>
           <div>Depart Time</div>
           <div>Specialist Note</div>
-          <div>Actions</div>
+          <div>Action</div>
         </div>
 
         <div className={styles["forms"]}>
-          {ferryList.list?.length ? (
-            ferryList.list.map((element: any, index: number) => (
+          {list.length ? (
+            list.map((element: any, index: number) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
                 key={index}
@@ -98,20 +92,22 @@ const FerryDetails = ({ nextTab }: any) => {
             </div>
           )}
         </div>
-
-        <div
-          className={styles["add-more"]}
-          onClick={() => {
-            setAddMore(true);
-          }}
-        >
-          + Add Ferry Details
-        </div>
       </section>
-
-      <div onClick={() => nextTab(4)} className={styles["continue-button"]}>
-        Continue
-      </div>
+      {!status ? (
+        <>
+          <span
+            className={styles["add-more"]}
+            onClick={() => {
+              setAddMore(true);
+            }}
+          >
+            + Add Ferry Details
+          </span>
+          <div onClick={() => nextTab(4)} className="continue-button">
+            Continue
+          </div>
+        </>
+      ) : null}
       {addMore ? (
         <Modal
           modal={<NewFerry handleAddPopup={setAddMore} />}

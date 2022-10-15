@@ -1,0 +1,7 @@
+<svg id="ic_upcoming" xmlns="http://www.w3.org/2000/svg" width="69" height="69" viewBox="0 0 69 69">
+  <rect id="Rectangle_2466" data-name="Rectangle 2466" width="69" height="69" rx="34.5" fill="#ef9f00"/>
+  <g id="clock_1_" data-name="clock (1)" transform="translate(19 19)">
+    <path id="Path_23418" data-name="Path 23418" d="M16,32A16,16,0,1,1,32,16,16.018,16.018,0,0,1,16,32ZM16,2A14,14,0,1,0,30,16,14.015,14.015,0,0,0,16,2Zm0,0" fill="#fff"/>
+    <path id="Path_23419" data-name="Path 23419" d="M248.679,118.624a1.164,1.164,0,0,1-.767-.277l-7.594-6.6a.886.886,0,0,1-.318-.666v-8.8a1.1,1.1,0,0,1,2.17,0v8.412l7.276,6.326a.859.859,0,0,1,0,1.334,1.164,1.164,0,0,1-.767.277Zm0,0" transform="translate(-225.498 -94.516)" fill="#fff"/>
+  </g>
+</svg>

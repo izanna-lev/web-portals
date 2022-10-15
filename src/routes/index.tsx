@@ -14,13 +14,18 @@ const Profile = loadable(() => import("./Profile"));
 const SendNotifications = loadable(() => import("./Notifications"));
 const CancelledItineraries = loadable(() => import("./CancelledItineraries"));
 
+const Activities = loadable(() => import("./CreateItinerary/Activities"));
+const Accomodation = loadable(() => import("./CreateItinerary/Accomodation"));
 const AddItinerary = loadable(
-  () => import("./CreateItinerary/AddItineraryDetails")
+  () => import("./CreateItinerary/ItineraryDetails")
 );
-const AddTransportation = loadable(
-  () => import("./CreateItinerary/AddTransportation")
+const Notes = loadable(() => import("./CreateItinerary/Notes"));
+const TripSummary = loadable(() => import("./CreateItinerary/TripSummary"));
+
+const Restaurant = loadable(() => import("./CreateItinerary/Restaurant"));
+const Transportation = loadable(
+  () => import("./CreateItinerary/Transportation")
 );
-const AddActivities = loadable(() => import("./CreateItinerary/AddActivities"));
 
 const App = () => (
   <Routes>
@@ -35,12 +40,12 @@ const App = () => (
         <Route path="add" element={<CreateItinerary />}>
           <Route index element={<AddItinerary />} />
           <Route path="details" element={<AddItinerary />} />
-          <Route path="transportation" element={<AddTransportation />} />
-          <Route path="accomodation" element={<h3>accomodation</h3>} />
-          <Route path="restaurant" element={<h3>restaurant</h3>} />
-          <Route path="activities" element={<AddActivities />} />
-          <Route path="notes" element={<h3>notes</h3>} />
-          <Route path="summary" element={<AddActivities />} />
+          <Route path="transportation" element={<Transportation />} />
+          <Route path="accomodation" element={<Accomodation />} />
+          <Route path="restaurant" element={<Restaurant />} />
+          <Route path="activity" element={<Activities />} />
+          <Route path="note" element={<Notes />} />
+          <Route path="summary" element={<TripSummary />} />
         </Route>
       </Route>
       <Route path="profile" element={<Profile />} />

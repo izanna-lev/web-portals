@@ -4,7 +4,7 @@
  * @since 24th october 2020
  */
 import React from "react";
-import { ICON } from "../../constants";
+import { ICON } from "../../assets/index";
 import "./index.scss";
 
 interface PaginationProps {

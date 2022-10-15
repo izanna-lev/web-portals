@@ -1,11 +1,10 @@
-import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
-import { MdZoomOutMap } from "react-icons/md";
+import { IoCloseOutline } from "react-icons/io5";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
 import ImagePopup from "../../sub-components/ImagePopup";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Dropdown from "../../InputTypes/Dropdown";
 import {
   API,
@@ -15,8 +14,6 @@ import {
 } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { usePlacesWidget } from "react-google-autocomplete";
-import { UploadImage } from "../../../api/uploadImage";
-import { setBackground } from "../../../util";
 import { Create } from "../../../api/Create";
 import { NewTicket } from "../NewTicket";
 
@@ -25,16 +22,16 @@ interface props {
 }
 
 const NewTransportationForm = (props: props) => {
-  const [ticketsData, setTicketsData] = useState<any>([]);
+  const [ticketsData, setTicketsData] = useState<any>([
+    { name: "", image: "" },
+  ]);
   const [showImage, setshowImage] = useState(false);
   const [imageUrl, setimageUrl] = useState("");
   const [arrival, setArrival] = useState({});
   const [depart, setDepart] = useState({});
 
   const dispatch = useAppDispatch();
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
+  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
   const dayRef = useRef();
   const ferryClassRef = useRef();
@@ -65,7 +62,7 @@ const NewTransportationForm = (props: props) => {
     const newLocationObj = {
       location: formatted_address,
       type: "Point",
-      coordinates: [lat(), lng()],
+      coordinates: [Math.abs(lng()), Math.abs(lat())],
     };
     if (type === "depart") setDepart(newLocationObj);
     else setArrival(newLocationObj);
@@ -98,10 +95,6 @@ const NewTransportationForm = (props: props) => {
 
     setTicketsData(filteredTickets);
   };
-
-  useEffect(() => {
-    addMoreTickets();
-  }, []);
 
   const addMoreTickets = () => {
     const addNewTicketInArr = [...ticketsData];
@@ -146,10 +139,7 @@ const NewTransportationForm = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
-        <form
-          className={styles["form-block"]}
-          onSubmit={(e) => saveFerryDetails(e)}
-        >
+        <form className="form-block" onSubmit={(e) => saveFerryDetails(e)}>
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             Basic Details
           </div>
@@ -242,10 +232,7 @@ const NewTransportationForm = (props: props) => {
           <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
             User Ferry Details
           </div>
-          <div
-            className={styles["form-required-feilds"]}
-            style={{ maxHeight: "400px", overflow: "auto" }}
-          >
+          <div className={styles["form-required-feilds"]}>
             {ticketsData.map((element: any, index: number) =>
               NewTicket(
                 index,

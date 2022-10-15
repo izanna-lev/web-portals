@@ -3,10 +3,20 @@
   align-items: center;
 }
 
+.itinerary-details-container {
+  overflow: auto;
+}
+
 .content-container {
   flex: 1;
   overflow: auto;
-  padding: 1.5rem;
+  padding: 1rem;
+  max-height: calc(100vh - 5rem);
+
+  > section,
+  > div {
+    min-width: 1000px;
+  }
   // display: flex;
   // flex-direction: column;
 }

@@ -5,10 +5,10 @@ import axios from "axios";
 // Fetch API
 export const Fetch =
   (
-    endpoint: string = "",
+    endpoint = "",
     payload: any = {},
-    page: number = 1,
-    limit: number = 10,
+    page = 1,
+    limit = 10,
     customPayload?: any
   ) =>
   async (dispatch: any) => {
@@ -33,9 +33,13 @@ export const Fetch =
 
       if (code !== 100) throw new Error(message);
 
+      const responseIsArray = Array.isArray(response.data.data);
+
       dispatch({
         type: endpoint,
-        payload: { ...response.data.data, ...customPayload },
+        payload: responseIsArray
+          ? [...response.data.data]
+          : { ...response.data.data, ...customPayload },
       });
       dispatch(setLoader(false));
     } catch (error: any) {

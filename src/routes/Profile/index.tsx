@@ -4,12 +4,12 @@
  */
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { API, IMAGE, NAVIGATE } from "../../constants";
+import { NAVIGATE } from "../../constants";
 
 import "./index.scss";
 import { useEffect } from "react";
 import { SET_NAVIGATION } from "../../store/slices/navigation";
-import { Fetch } from "../../api/Fetch";
+import { UserIcon } from "../../components/UserIcon";
 
 const ProfilePage = () => {
   const profileData = useAppSelector((state) => state.profile);
@@ -26,11 +26,7 @@ const ProfilePage = () => {
       </section>
 
       <section className="profile">
-        <img
-          className="profile-image"
-          src={IMAGE.AVERAGE + profileData.picture}
-          alt={profileData.name}
-        />
+        <UserIcon image={profileData.image} width={"10rem"} height={"10rem"} />
         <div className="profile-details">
           <h4 className="profile-name">{profileData.name}</h4>
           <a href={`mailto:${profileData.email}`} className="profile-text">

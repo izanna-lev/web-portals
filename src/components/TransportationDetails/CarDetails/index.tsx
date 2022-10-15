@@ -1,53 +1,39 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable array-callback-return */
 /**
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
 
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { getFormattedDate, getFormattedTime } from "../../../util";
-import { API, TRANSPORTATION_TYPE } from "../../../constants";
 import EditCar from "../../TransportationEdit/EditCar";
 import NewCar from "../../TransportationAdd/AddCar";
 import { Modal } from "../../../components/Portal";
-import { DeleteEntity } from "../../../api/Delete";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Pagination } from "../../Pagination";
 
-const AddActivitiesPage = () => {
+const CarDetails = (props: any) => {
+  const { deleteTransportation, nextPage, previousPage, car, status } = props;
+  const { list, page, limit, total, size } = car;
+
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
-
-  const dispatch = useAppDispatch();
-
-  const carDataList = useAppSelector((state: any) => state.transportation.car);
-
-  const { _id } = useAppSelector(
-    (state) => state.itineraryData.itineraryDetails
-  );
-
-  const deleteTransportation = (transportationRef: string) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this?"
-    );
-    if (confirmDelete)
-      dispatch(
-        DeleteEntity(
-          API.TRANSPORTATION_DELETE,
-          { transportationRef },
-          API.TRANSPORTATION_DATA,
-          { transportationType: TRANSPORTATION_TYPE.CAR, itineraryRef: _id },
-          1,
-          10
-        )
-      );
-  };
+  const navigate = useNavigate();
 
   return (
     <>
+      {list.length
+        ? Pagination({
+            page,
+            limit,
+            total,
+            size,
+            nextPage,
+            previousPage,
+          })
+        : null}
       <section className={styles["AddCarsPage"]}>
         <div className={styles["flightDetails-table"]}>
           <div>Day</div>
@@ -56,12 +42,12 @@ const AddActivitiesPage = () => {
           <div>Arrival Time</div>
           <div>Dropoff Location</div>
           <div>Specialist Note</div>
-          <div>Actions</div>
+          <div>Action</div>
         </div>
 
         <div className={styles["forms"]}>
-          {carDataList.list?.length ? (
-            carDataList.list.map((element: any, index: number) => (
+          {list.length ? (
+            list.map((element: any, index: number) => (
               <div
                 className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
                 key={index}
@@ -98,23 +84,26 @@ const AddActivitiesPage = () => {
             </div>
           )}
         </div>
-
-        <div
-          className={styles["add-more"]}
-          onClick={() => {
-            setAddMore(true);
-          }}
-        >
-          + Add Car Details
-        </div>
       </section>
+      {!status ? (
+        <>
+          <span
+            className={styles["add-more"]}
+            onClick={() => {
+              setAddMore(true);
+            }}
+          >
+            + Add Car Details
+          </span>
 
-      <div
-        onClick={() => console.log("continue")}
-        className={styles["continue-button"]}
-      >
-        Continue
-      </div>
+          <div
+            onClick={() => navigate("/itinerary/add/accomodation")}
+            className="continue-button"
+          >
+            Continue
+          </div>
+        </>
+      ) : null}
       {addMore ? (
         <Modal
           modal={<NewCar handleAddPopup={setAddMore} />}
@@ -131,4 +120,4 @@ const AddActivitiesPage = () => {
   );
 };
 
-export default AddActivitiesPage;
+export default CarDetails;

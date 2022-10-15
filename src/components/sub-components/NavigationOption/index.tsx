@@ -22,11 +22,11 @@ const NavigationOption = (
     >
       <img src={Icon} alt={name} className={styles["sidebar-icon"]} />
       <span className={styles["sidebar-icon--name"]}>{name}</span>
-      {
-        name === "Chat" && <div className={styles["sidebar-count"]}><div
-        className={styles["sidebar-count-view"]}>5</div></div>
-      }
-
+      {name === "Chat" && (
+        <div className={styles["sidebar-count"]}>
+          <span className={styles["sidebar-count-view"]}>5</span>
+        </div>
+      )}
     </NavLink>
   );
 };

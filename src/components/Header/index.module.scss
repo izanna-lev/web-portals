@@ -5,24 +5,43 @@
 .header {
   height: 5rem;
   display: flex;
-  padding: 0 2rem;
   align-items: center;
   justify-content: space-between;
   border-bottom: 4px solid #e1e1e18f;
-}
 
-.header-logo {
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: $theme_color_blue;
-}
+  &-left {
+    display: flex;
+    min-width: fit-content;
+    align-items: center;
+  }
 
-.header-right {
-  display: flex;
+  &__menu--icon {
+    margin: auto 1.25rem;
+    font-size: 2.5rem;
+    color: $theme_color_blue;
+    cursor: pointer;
+  }
+
+  &-right {
+    gap: 1rem;
+    height: 100%;
+    display: grid;
+    cursor: default;
+    justify-items: center;
+    grid-template-columns: 3rem 12rem 1rem 1rem;
+  }
+
+  &-logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: $theme_color_blue;
+    cursor: default;
+  }
 }
 
 .notification {
-  margin: 1rem 2rem;
+  margin: auto 1rem;
+  max-width: 3rem;
 }
 
 .notification-icon {
@@ -36,6 +55,8 @@
   align-items: center;
   justify-content: center;
   grid-template-columns: auto auto auto;
+  border-left: 2px solid $gray-300;
+  padding-left: 1rem;
 }
 
 .image-container {
@@ -44,16 +65,11 @@
   justify-self: flex-end;
 }
 
-.user-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
-
 .user-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 6rem;
 }
 
 .user-welcome {
@@ -64,4 +80,14 @@
 .user-name {
   font-size: 1rem;
   font-weight: 600;
+}
+
+.logout-container {
+  display: flex;
+  align-items: center;
+
+  .down-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
 }

@@ -6,7 +6,7 @@ type InputProps = {
     name: string;
     value: number;
   }>;
-  refe: any;
+  refe?: any;
   checkedVal?: any;
 };
 
@@ -16,7 +16,7 @@ const Dropdown = ({ inputFields, name, refe, checkedVal }: InputProps) => {
       <div className="feild-heading">{name}</div>
       <select className="field-value" ref={refe} defaultValue={checkedVal}>
         {inputFields.map((element, index) => (
-          <option value={element.value} key={index}>
+          <option className="dropdown-option" value={element.value} key={index}>
             {element.name}
           </option>
         ))}

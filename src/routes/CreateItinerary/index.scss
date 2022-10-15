@@ -33,7 +33,7 @@
 
 .form-request {
   font-size: 0.75rem;
-  margin: 4px 0.5rem 0px 0rem;
+  margin: 0.5rem 0.5rem 0px 0rem;
 }
 
 .step {
@@ -90,4 +90,20 @@
 .tab-active {
   color: #000000;
   background-color: #73d8bb;
+}
+
+.continue-button {
+  padding: 10px 30px;
+  background-color: #0b9dd8;
+  color: white;
+  width: 200px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 4px 0.5rem 0px 0.5rem;
+
+  &:hover {
+    filter: brightness(1.05);
+  }
 }

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   travellerRef: "",
   formRef: "",
+  sidebarSmall: false,
 };
 
 const appData = createSlice({
@@ -15,9 +16,12 @@ const appData = createSlice({
     setFormRef: (state, action) => {
       state.formRef = action.payload;
     },
+    setSidebar: (state, action) => {
+      state.sidebarSmall = action.payload;
+    },
   },
 });
 
-export const { setTravellerRef, setFormRef } = appData.actions;
+export const { setTravellerRef, setFormRef, setSidebar } = appData.actions;
 
 export default appData.reducer;

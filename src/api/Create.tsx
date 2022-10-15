@@ -6,14 +6,14 @@ import { Fetch } from "./Fetch";
 // Create API
 export const Create =
   (
-    endpoint: string = "",
+    endpoint = "",
     payload: any = {},
-    multipart: boolean = false,
+    multipart = false,
     image: any = null,
-    listingEndpoint: string = "",
+    listingEndpoint = "",
     listingPayload: any = {},
-    page: number = 1,
-    limit: number = 10
+    page = 1,
+    limit = 10
   ) =>
   async (dispatch: any) => {
     const Authorization = localStorage.getItem("accessToken") || "";
@@ -24,7 +24,7 @@ export const Create =
 
     dispatch(setLoader(true));
 
-    let data = { ...payload, page, limit };
+    let data = { ...payload };
 
     if (multipart) {
       const formData = new FormData();
@@ -42,10 +42,13 @@ export const Create =
       });
 
       const { code, message } = response.data;
-      if (code !== 100) throw new Error(message);
+      // console.log("submit", response);
 
+      if (code !== 100) throw new Error(message);
       if (code === 100) {
+        // console.log(response);
         dispatch(setLoader(false));
+
         dispatch(
           setApiMessage({
             type: "success",

@@ -128,7 +128,7 @@ module.exports = (env) => {
       new webpack.ProvidePlugin({ process: "process/browser" }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
-        favicon: "./public/logo.png",
+        favicon: "./public/favicon.png",
       }),
     ],
   };

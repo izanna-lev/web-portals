@@ -15,7 +15,7 @@ body {
   height: 100vh;
   direction: ltr;
   line-height: 1.5;
-  font-family: $font-sans-serif;
+  font-family: $font-popins;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -51,3 +51,24 @@ h6 {
 // [data-css-lj0up9] {
 // background-color: #00a0ad !important;
 // }
+
+.form-block {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  gap: 4px;
+  overflow: auto;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.itineraryImage {
+  max-width: 8.5rem;
+  border-radius: 15px;
+  max-height: 5rem;
+  padding: 0.25rem;
+}
