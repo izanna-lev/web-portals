@@ -8,8 +8,7 @@ import { useEffect, useState } from "react";
 import { BsChatRightDots } from "react-icons/bs";
 import dayjs from "dayjs";
 
-import { IMAGE, API, NAVIGATE } from "../../constants";
-import { ICON } from "../../assets/index";
+import { API, NAVIGATE } from "../../constants";
 import { Modal } from "../../components/Portal";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -21,6 +20,7 @@ import { DeleteEntity } from "../../api/Delete";
 import "./index.scss";
 import Popup from "../../components/Popup";
 import { SET_NAVIGATION } from "../../store/slices/navigation";
+import { UserIcon } from "../../components/UserIcon";
 
 const TableHead = () => (
   <thead className="table-head">
@@ -49,14 +49,7 @@ const TableRow = (
       <td>{SerialNum(limit, page, index)}</td>
       <td>
         <div className="name-image-cell">
-          <img
-            className="user-image"
-            src={IMAGE.SMALL + item.image}
-            alt={item.name}
-            onError={(e: any) => {
-              e.target.src = ICON.USER_PLACEHOLDER;
-            }}
-          />
+          <UserIcon image={item.image} />
           <span className="access-management">{item.name}</span>
         </div>
       </td>
