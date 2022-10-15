@@ -2,16 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import { API } from "../../constants";
 
 interface listObject {
-  _id: string
-  name: string
-  email: string
-  phoneNumber: string
-  userName: string
-  image: string
-  blocked: boolean
-  guests: number
-  assignedDate: string
-  channelRef: string
+  _id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  userName: string;
+  image: string;
+  blocked: boolean;
+  guests: number;
+  assignedDate: string;
+  channelRef: string;
 }
 
 interface CancelItineraryRequests {
@@ -37,7 +37,7 @@ const cancelItineraryList = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(API.CANCEL_REQUESTS, (state, action: any) => {
+    builder.addCase(API.ITINERARY_CANCEL_REQUESTS, (state, action: any) => {
       Object.assign(state, action.payload);
     });
   },

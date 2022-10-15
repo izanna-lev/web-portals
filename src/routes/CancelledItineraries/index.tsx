@@ -5,14 +5,11 @@
 
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { BsChatRightDots } from 'react-icons/bs'
+import { BsChatRightDots } from "react-icons/bs";
 import dayjs from "dayjs";
 
-import {
-  IMAGE,
-  ICON,
-  API,
-} from "../../constants";
+import { IMAGE, API, NAVIGATE } from "../../constants";
+import { ICON } from "../../assets/index";
 import { Modal } from "../../components/Portal";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -23,7 +20,7 @@ import { Fetch } from "../../api/Fetch";
 import { DeleteEntity } from "../../api/Delete";
 import "./index.scss";
 import Popup from "../../components/Popup";
-
+import { SET_NAVIGATION } from "../../store/slices/navigation";
 
 const TableHead = () => (
   <thead className="table-head">
@@ -45,10 +42,8 @@ const TableRow = (
   page: number,
   navigate: any,
   dispatch: any,
-  popupUpdate: any,
+  popupUpdate: any
 ) => {
-
-
   return (
     <tr className="body-tr" key={index}>
       <td>{SerialNum(limit, page, index)}</td>
@@ -67,13 +62,12 @@ const TableRow = (
       </td>
       <td>
         <div className="access-management-user">
-        <span className="access-management text">{item.email}</span>
-        <span className="access-management text">{item.phoneNumber}</span>
-      </div></td>
-      <td>
-        {item.guests || 0}
+          <span className="access-management text">{item.email}</span>
+          <span className="access-management text">{item.phoneNumber}</span>
+        </div>
       </td>
-      <td>{dayjs(item.plannedDate).format('DD-MMM-YYYY')}</td>
+      <td>{item.guests || 0}</td>
+      <td>{dayjs(item.plannedDate).format("DD-MMM-YYYY")}</td>
       <td className="specialist-actions">
         <button
           className="btn view-button chat-specialist"
@@ -85,24 +79,22 @@ const TableRow = (
                 email: item.email,
                 phoneNumber: item.phoneNumber,
                 permissions: item.permissions,
-                image: item.image
-              }
+                image: item.image,
+              },
             });
           }}
         >
-            <BsChatRightDots />
+          <BsChatRightDots />
           Chat
         </button>
         <button
           className="btn view-button cancel-itinerary"
-          onClick={() => popupUpdate(true, item._id)
-          }
+          onClick={() => popupUpdate(true, item._id)}
         >
           Cancel Itinerary
         </button>
       </td>
     </tr>
-
   );
 };
 
@@ -115,52 +107,50 @@ const CancelItinerary = () => {
   );
   const [popup, setPopup] = useState({
     id: "",
-    show: false
+    show: false,
   });
 
-
   const popupUpdate = (show: boolean, id: string) => {
-    setPopup({ ...popup, show, id })
+    setPopup({ ...popup, show, id });
   };
 
   const cancel = () => {
-    setPopup({ ...popup, show: false, id: "" })
+    setPopup({ ...popup, show: false, id: "" });
   };
 
   const cancelItinerary = () => {
-    dispatch(DeleteEntity(API.CANCEL_ITINERARY, { itineraryRef: popup.id }));
-    cancel()
-    window.location.reload()
+    dispatch(
+      DeleteEntity(
+        API.ITINERARY_CANCEL,
+        { itineraryRef: popup.id },
+        API.ITINERARY_CANCEL_REQUESTS
+      )
+    );
+    cancel();
+    // window.location.reload();
   };
 
   useEffect(() => {
-    dispatch(Fetch(API.CANCEL_REQUESTS, {}, 1, 10));
+    dispatch(Fetch(API.ITINERARY_CANCEL_REQUESTS, {}, 1, 10));
+    dispatch(SET_NAVIGATION({ value: NAVIGATE.CANCELLED_ITINERARIES }));
   }, [dispatch]);
 
   return (
     <main className="content-container">
       <section className="content-top">
         <h2 className="content-heading">Cancel requests</h2>
-        <button
-          className=" btn view-button create-specialist"
-          onClick={() => {
-            navigate(`/admin/createSpecialist`);
-          }}
-        >
-          Create Specialist
-        </button>
       </section>
       {list.length
         ? Pagination({
-          page,
-          limit,
-          total,
-          size,
-          nextPage: () =>
-            dispatch(Fetch(API.ITINERARIES, {}, page + 1, limit)),
-          previousPage: () =>
-            dispatch(Fetch(API.ITINERARIES, {}, page - 1, limit)),
-        })
+            page,
+            limit,
+            total,
+            size,
+            nextPage: () =>
+              dispatch(Fetch(API.ITINERARIES, {}, page + 1, limit)),
+            previousPage: () =>
+              dispatch(Fetch(API.ITINERARIES, {}, page - 1, limit)),
+          })
         : null}
       <section className="table-container">
         <table className="itinerary-table table">
@@ -168,7 +158,15 @@ const CancelItinerary = () => {
           <tbody className="body-tr">
             {list.length ? (
               list.map((item, index) =>
-                TableRow(item, index, limit, page, navigate, dispatch, popupUpdate)
+                TableRow(
+                  item,
+                  index,
+                  limit,
+                  page,
+                  navigate,
+                  dispatch,
+                  popupUpdate
+                )
               )
             ) : (
               <tr className="table-empty">
@@ -180,17 +178,21 @@ const CancelItinerary = () => {
           </tbody>
         </table>
       </section>
-      {popup.show && <Modal
-        modal={<Popup
-          heading="Cancel Itinerary"
-          text="Are you sure you want to cancel this itinerary. This can`t be undone"
-          firstButtonText="Ok"
-          secondButtonText="Cancel"
-          firstButtonAction={cancelItinerary}
-          secondButtonAction={cancel}
-        />}
-        root={document.getElementById("overlay-root") as HTMLElement}
-      />}
+      {popup.show && (
+        <Modal
+          modal={
+            <Popup
+              heading="Cancel Itinerary"
+              text="Are you sure you want to cancel this itinerary. This can`t be undone"
+              firstButtonText="Ok"
+              secondButtonText="Cancel"
+              firstButtonAction={cancelItinerary}
+              secondButtonAction={cancel}
+            />
+          }
+          root={document.getElementById("overlay-root") as HTMLElement}
+        />
+      )}
     </main>
   );
 };
