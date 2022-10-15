@@ -30,13 +30,13 @@
   border-top-right-radius: 0px;
   background-image: none;
   margin-top: 2px;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   gap: 2px;
   height: 90px;
 }
 
 .add-trip>div {
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   margin-left: 0.5rem;
   height: 100%;
   display: flex;
@@ -50,7 +50,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 0.25rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -63,7 +63,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 4px;
+  padding: 0.25rem;
   height: 100%;
   border-radius: 0.5rem;
 }
@@ -144,7 +144,7 @@ input:focus {
   display: flex;
   min-width: 50rem;
   align-items: center;
-  font-size: 14px;
+  font-size: 0.95rem;
   justify-content: center;
 }
 
@@ -158,6 +158,15 @@ input:focus {
   }
 
   .field-value {
-    min-width: 10rem;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    background-color: $theme_color_light_blue_3x;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.95rem;
+    color: $theme_color_3;
+    text-overflow: ellipsis;
+    max-height: 80px;
+    min-width: 8rem;
   }
 }
