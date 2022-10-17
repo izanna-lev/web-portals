@@ -11,7 +11,7 @@ type InputProps = {
     ref?: any;
     default?: string;
     onChange?: Function;
-    disabled?: false;
+    disabled?: boolean;
   };
 };
 

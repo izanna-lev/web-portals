@@ -140,7 +140,9 @@ const NewTransportationForm = (props: props) => {
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
         <form className="form-block" onSubmit={(e) => saveTrainDetails(e)}>
-          <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
+          <div
+            className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
+          >
             Basic Details
           </div>
           <div className={styles["form-required-feilds"]}>
@@ -229,7 +231,9 @@ const NewTransportationForm = (props: props) => {
               />
             </div>
           </div>
-          <div className={`${styles["form-heading"]} ${styles["bold"]}`}>
+          <div
+            className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
+          >
             User Train Details
           </div>
           <div className={styles["form-required-feilds"]}>
