@@ -89,10 +89,10 @@ const CreateItinerary = () => {
     !formRef && navigate("/itinerary/list");
   }, [formRef, navigate]);
 
-  // useEffect(() => {
-  //   const currentLocation = location.pathname.split("/")[3];
-  //   setTabNum(currentLocation);
-  // }, [location]);
+  useEffect(() => {
+    const currentLocation = location.pathname.split("/")[3];
+    setTabNum(currentLocation);
+  }, [location]);
 
   return (
     <section className="content-container" id="itineraryDetailPage">

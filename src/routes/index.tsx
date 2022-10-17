@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
+import { useAppSelector } from "../store/hooks";
 
 const Account = loadable(() => import("./Account"));
 const AssignedItineraries = loadable(() => import("./AssignedItineraries"));
@@ -26,37 +27,43 @@ const Transportation = loadable(
   () => import("./CreateItinerary/Transportation")
 );
 
-const App = () => (
-  <Routes>
-    <Route path="/" element={<Account />}>
-      <Route index element={<Dashboard />} />
-      <Route path="dashboard" element={<Dashboard />} />
-      <Route path="itinerary" element={<Itinerary />}>
-        <Route index element={<AssignedItineraries />} />
-        <Route path="list" element={<AssignedItineraries />} />
-        <Route path="cancelled" element={<CancelledItineraries />} />
-        <Route path="detail/:formRef" element={<ItineraryDetails />} />
-        <Route path="add" element={<CreateItinerary />}>
-          <Route index element={<AddItinerary />} />
-          <Route path="details" element={<AddItinerary />} />
-          <Route path="transportation" element={<Transportation />} />
-          <Route path="accomodation" element={<Accomodation />} />
-          <Route path="restaurant" element={<Restaurant />} />
-          <Route path="activity" element={<Activities />} />
-          <Route path="note" element={<Notes />} />
-          <Route path="summary" element={<TripSummary />} />
+const App = () => {
+  const { itineraryDetails } = useAppSelector((state) => state.itinerary);
+  return (
+    <Routes>
+      <Route path="/" element={<Account />}>
+        <Route index element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="itinerary" element={<Itinerary />}>
+          <Route index element={<AssignedItineraries />} />
+          <Route path="list" element={<AssignedItineraries />} />
+          <Route path="cancelled" element={<CancelledItineraries />} />
+          <Route path="detail/:formRef" element={<ItineraryDetails />} />
+          <Route path="add" element={<CreateItinerary />}>
+            <Route index element={<AddItinerary data={itineraryDetails} />} />
+            <Route
+              path="details"
+              element={<AddItinerary data={itineraryDetails} />}
+            />
+            <Route path="transportation" element={<Transportation />} />
+            <Route path="accomodation" element={<Accomodation />} />
+            <Route path="restaurant" element={<Restaurant />} />
+            <Route path="activity" element={<Activities />} />
+            <Route path="note" element={<Notes />} />
+            <Route path="summary" element={<TripSummary />} />
+          </Route>
         </Route>
+        <Route path="profile" element={<Profile />} />
+        <Route path="notifications" element={<SendNotifications />} />
+        <Route path="chat">
+          <Route index element={<Chat />} />
+          <Route path=":channelId" element={<Chat />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/dashboard" replace={true} />} />
       </Route>
-      <Route path="profile" element={<Profile />} />
-      <Route path="notifications" element={<SendNotifications />} />
-      <Route path="chat">
-        <Route index element={<Chat />} />
-        <Route path=":channelId" element={<Chat />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/dashboard" replace={true} />} />
-    </Route>
-    <Route path="login" element={<Login />} />
-  </Routes>
-);
+      <Route path="login" element={<Login />} />
+    </Routes>
+  );
+};
 
 export default App;

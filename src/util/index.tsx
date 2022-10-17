@@ -3,9 +3,7 @@ import moment from "moment";
 // For table serial numbers
 export const SerialNum = (limit: number, page: number, index: number) => {
   const value = limit * page - limit + index + 1;
-  if (value < 10) {
-    return "0" + value;
-  }
+  if (value < 10) return "0" + value;
   return value;
 };
 
@@ -16,7 +14,9 @@ export const setBackground = (image: string, id: string) => {
     imageElement.style.backgroundImage = `url(${image})`;
     imageElement.style.backgroundPosition = "center";
     imageElement.style.backgroundSize = "100%";
+    return 1;
   }
+  return 0;
 };
 
 // Get formatted date from UTC to Locale
@@ -64,7 +64,7 @@ export const getDays = (fromDateTime: string, toDateTime: string) => {
   return -1;
 };
 
-// Edit list item in redux global state
+// Edit item in list in redux global state
 export const editListItem = (
   dispatch: any,
   list: [],
