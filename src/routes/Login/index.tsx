@@ -93,11 +93,7 @@ const Login = () => {
           </div>
 
           <div className="button-login">
-            {loaderActive ? (
-              <LoginSpinner />
-            ) : (
-              <button className="button">Log In</button>
-            )}
+            {loaderActive ? <LoginSpinner /> : <button>Log In</button>}
           </div>
         </form>
       </div>
