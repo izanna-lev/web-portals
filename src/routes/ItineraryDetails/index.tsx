@@ -50,10 +50,9 @@ const ItineraryDetailsPage = () => {
   const params = useParams();
 
   useEffect(() => {
-    const { formRef } = params;
-    dispatch(Fetch(API.ITINERARY_DETAILS, { formRef }));
-    dispatch(setFormRef(formRef));
-  }, [params, dispatch]);
+    dispatch(Fetch(API.ITINERARY_DETAILS, { formRef: params.formRef }));
+    dispatch(setFormRef(params.formRef));
+  }, [params.formRef, dispatch]);
 
   const handleItineraryStatus = (status = "cancel") => {
     const endpoint =
