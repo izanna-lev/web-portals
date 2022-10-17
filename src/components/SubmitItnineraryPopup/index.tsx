@@ -10,7 +10,10 @@ const AddEditNotes = ({ navigate, location }: any) => {
         <p className={`${styles["popup-text"]}`}>
           Your Itinerary has been submitted successfully.
         </p>
-        <div className={`continue-button`} onClick={handleRedirection}>
+        <div
+          className={`continue-button ${styles["continue-button"]}`}
+          onClick={handleRedirection}
+        >
           Go to Itinerary Details
         </div>
       </div>
