@@ -103,8 +103,8 @@ const ItineraryDetailsPage = () => {
   return itineraryDetails.itineraryStatus === 4 ? (
     <NoItinerary navigate={navigate} />
   ) : (
-    <NoItinerary navigate={navigate} />
-    // <AvailableItinerary navigate={navigate} data={itineraryDetails} />
+    // <NoItinerary navigate={navigate} />
+    <AvailableItinerary navigate={navigate} data={itineraryDetails} />
   );
 };
 
