@@ -127,7 +127,7 @@ const TripSummary = ({ status }: { status?: string }) => {
 
       {status ? null : (
         <div onClick={() => submitItinerary()} className="continue-button">
-          Submit
+          Submit Itinerary
         </div>
       )}
       {submitPopup ? (

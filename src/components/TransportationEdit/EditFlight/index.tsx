@@ -349,7 +349,7 @@ const EditFlight = (props: props) => {
           </div>
 
           <div className={styles["button-save"]}>
-            <button className={styles["form-button-text"]} type="submit">
+            <button className={`continue-button no-border`} type="submit">
               Save
             </button>
           </div>

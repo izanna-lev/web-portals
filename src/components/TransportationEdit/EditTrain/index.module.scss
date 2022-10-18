@@ -76,8 +76,8 @@
 }
 
 .cross {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   color: $white;
   background-color: $theme_color_dark_grey;
   border-radius: 50%;
@@ -85,6 +85,7 @@
   align-self: baseline;
   margin-top: 2rem;
   margin-left: 0.75rem;
+  cursor: pointer;
 }
 
 .button-save {

@@ -16,7 +16,7 @@ type InputProps = {
 const TextArea = ({ inputFields }: InputProps) => {
   return (
     <div className={styles["input-form"]}>
-      <div className={styles["feild_heading"]}>{inputFields.name}</div>
+      <div className={styles["feild-heading"]}>{inputFields.name}</div>
       <textarea
         name={inputFields.id}
         maxLength={inputFields.maxlength}

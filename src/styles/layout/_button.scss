@@ -146,14 +146,15 @@ button {
 
 .no-border {
   border: none !important;
-  &:hover {
-    background-color: $white !important;
-    color: $blue !important;
-  }
+  // &:hover {
+  //   background-color: $white !important;
+  //   color: $blue !important;
+  // }
 }
 
 .add-activity-buttons {
   gap: 0.5rem;
+
   button {
     min-width: 6rem;
   }

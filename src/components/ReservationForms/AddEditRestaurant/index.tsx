@@ -147,7 +147,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
             </label>
           </div>
 
-          <div>Upload Image</div>
+          <div className="bold underline">Upload Image</div>
           <div className={styles["form-required-feilds"]}>
             <div className={styles["form-left-details"]}>
               <InputForm
@@ -240,7 +240,9 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
           </div>
 
           <div className={styles["button-save"]}>
-            <button className={styles["form-button-text"]}>Save</button>
+            <button className={`continue-button no-border`} type="submit">
+              Save
+            </button>
           </div>
         </form>
 
