@@ -186,13 +186,16 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <div className={`${styles["field-heading"]}`}>Contact Number</div>
               <PhoneInput
                 inputProps={{
+                  name: "contact number",
                   required: true,
                   autoFocus: true,
                 }}
                 country="us"
                 value={phone}
+                specialLabel="Contact Number"
                 inputClass={`${styles["field-value"]}`}
                 containerClass={`${styles["input-tel"]}`}
+                buttonClass={`${styles["flag-dropdown"]}`}
                 onChange={(value) => setPhone(value)}
               />
             </div>

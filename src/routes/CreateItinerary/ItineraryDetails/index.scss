@@ -19,7 +19,7 @@
     padding: 2rem;
     border-radius: 1.5rem;
 
-    .AddItineraryPage {
+    .AddItineraryDetailsPage {
       background-color: $white;
       max-height: 90%;
       padding: 0.5rem;
@@ -38,11 +38,11 @@
   }
 }
 
-.AddItineraryPage {
+.AddItineraryDetailsPage {
   display: flex;
   overflow: auto;
   margin-top: 1rem;
-  max-height: 40rem;
+  // max-height: 40rem;
   padding-right: 1rem;
   flex-direction: column;
 
@@ -100,7 +100,7 @@
 .create-itinerary-form {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   margin-top: 0.5rem;
   gap: 5rem;
 }

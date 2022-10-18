@@ -45,12 +45,36 @@ const App = () => {
               path="details"
               element={<AddItinerary data={itineraryDetails} />}
             />
-            <Route path="transportation" element={<Transportation />} />
-            <Route path="accomodation" element={<Accomodation />} />
-            <Route path="restaurant" element={<Restaurant />} />
-            <Route path="activity" element={<Activities />} />
-            <Route path="note" element={<Notes />} />
-            <Route path="summary" element={<TripSummary />} />
+            <Route
+              path="transportation"
+              element={
+                <Transportation status={itineraryDetails.itineraryStatus} />
+              }
+            />
+            <Route
+              path="accomodation"
+              element={
+                <Accomodation status={itineraryDetails.itineraryStatus} />
+              }
+            />
+            <Route
+              path="restaurant"
+              element={<Restaurant status={itineraryDetails.itineraryStatus} />}
+            />
+            <Route
+              path="activity"
+              element={<Activities status={itineraryDetails.itineraryStatus} />}
+            />
+            <Route
+              path="note"
+              element={<Notes status={itineraryDetails.itineraryStatus} />}
+            />
+            <Route
+              path="summary"
+              element={
+                <TripSummary status={itineraryDetails.itineraryStatus} />
+              }
+            />
           </Route>
         </Route>
         <Route path="profile" element={<Profile />} />

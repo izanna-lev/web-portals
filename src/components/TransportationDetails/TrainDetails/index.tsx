@@ -71,13 +71,15 @@ const TrainDetails = (props: any) => {
                 <div>{getFormattedTime(element.departDateTime)}</div>
                 <div>{element.specialistNote || "NA"}</div>
                 <div className="add-activity-buttons">
-                  <button
-                    className="btn edit-button"
-                    onClick={() => setEdit(element)}
-                  >
-                    <FaRegEdit />
-                    &nbsp;<span>Edit</span>
-                  </button>
+                  {status === 3 || status === 5 ? null : (
+                    <button
+                      className="btn edit-button"
+                      onClick={() => setEdit(element)}
+                    >
+                      <FaRegEdit />
+                      &nbsp;<span>Edit</span>
+                    </button>
+                  )}
                   <button
                     className="btn delete-button"
                     onClick={() => deleteTransportation(element._id)}
@@ -95,7 +97,7 @@ const TrainDetails = (props: any) => {
           )}
         </div>
       </section>
-      {!status ? (
+      {status === 4 ? (
         <>
           <span
             className={styles["add-more"]}

@@ -78,7 +78,7 @@ const UserTicket = (
               id={`Ticket${length}`}
             >
               <IoCloudUploadOutline
-                className={styles["activity-image-default"]}
+                className={styles["activity-image-placeholder"]}
               />
             </label>
           </div>

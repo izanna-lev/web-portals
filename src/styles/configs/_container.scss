@@ -5,6 +5,7 @@
 
 .itinerary-details-container {
   overflow: auto;
+  margin-bottom: 0.5rem;
 }
 
 .content-container {
@@ -13,10 +14,11 @@
   padding: 1rem;
   max-height: calc(100vh - 5rem);
 
-  > section,
-  > div {
+  >section,
+  >div {
     min-width: 1000px;
   }
+
   // display: flex;
   // flex-direction: column;
 }
