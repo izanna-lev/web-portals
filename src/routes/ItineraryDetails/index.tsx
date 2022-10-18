@@ -74,6 +74,10 @@ const ItineraryDetailsPage = () => {
     dispatch(INITIAL_STATE({}));
   };
 
+  const itineraryProps = {
+    status: itineraryDetails.itineraryStatus,
+  };
+
   return (
     <>
       <main className="content-container">
@@ -240,22 +244,22 @@ const ItineraryDetailsPage = () => {
           <ItineraryDetail />
         ) : null}
         {tabSelected === ITINERARY_SECTION.TRANSPORTATION ? (
-          <TransportationDetails status={"upcoming"} />
+          <TransportationDetails {...itineraryProps} />
         ) : null}
         {tabSelected === ITINERARY_SECTION.ACCOMODATIONS ? (
-          <AccomodationDetails status={"upcoming"} />
+          <AccomodationDetails {...itineraryProps} />
         ) : null}
         {tabSelected === ITINERARY_SECTION.RESTAURANT ? (
-          <RestaurantDetails status={"upcoming"} />
+          <RestaurantDetails {...itineraryProps} />
         ) : null}
         {tabSelected === ITINERARY_SECTION.ACTIVITIES ? (
-          <ActivitiesDetails status={"upcoming"} />
+          <ActivitiesDetails {...itineraryProps} />
         ) : null}
         {tabSelected === ITINERARY_SECTION.NOTES ? (
-          <NotesDetails status={"upcoming"} />
+          <NotesDetails {...itineraryProps} />
         ) : null}
         {tabSelected === ITINERARY_SECTION.SUMMARY ? (
-          <TripSummaryDetails status={"upcoming"} />
+          <TripSummaryDetails {...itineraryProps} />
         ) : null}
       </main>
 

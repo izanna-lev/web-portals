@@ -332,7 +332,9 @@ const EditCar = (props: props) => {
           </div>
 
           <div className={styles["button-save"]}>
-            <button className={styles["form-button-text"]}>Save</button>
+            <button className={`continue-button no-border`} type="submit">
+              Save
+            </button>
           </div>
         </form>
 
