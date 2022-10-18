@@ -100,7 +100,7 @@ const AddEditNotes = ({ data = {}, handleAddEdit }: any) => {
   };
 
   return (
-    <form className="add-notes add-data" onSubmit={saveNoteDetails}>
+    <form className="add-notes add-data table-item" onSubmit={saveNoteDetails}>
       <Input
         inputFields={{
           ref: dayRef,

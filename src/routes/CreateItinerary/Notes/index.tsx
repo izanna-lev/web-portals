@@ -17,7 +17,7 @@ import "./index.scss";
 import { EDIT_NOTES } from "../../../store/slices/itinerary";
 import { editListItem } from "../../../util";
 
-const NotesDetails = ({ status }: { status?: string }) => {
+const NotesDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -100,13 +100,15 @@ const NotesDetails = ({ status }: { status?: string }) => {
                     </div>
                     <div>{element.description}</div>
                     <div className="add-activity-buttons">
-                      <button
-                        className="btn edit-button"
-                        onClick={() => editNote(element._id)}
-                      >
-                        <FaRegEdit />
-                        &nbsp;<span>Edit</span>
-                      </button>
+                      {status === 3 || status === 5 ? null : (
+                        <button
+                          className="btn edit-button"
+                          onClick={() => editNote(element._id)}
+                        >
+                          <FaRegEdit />
+                          &nbsp;<span>Edit</span>
+                        </button>
+                      )}
                       <button
                         className="btn delete-button"
                         onClick={() => deleteNote(element._id)}
@@ -124,7 +126,7 @@ const NotesDetails = ({ status }: { status?: string }) => {
           </div>
         </div>
       </section>
-      {status ? null : (
+      {status !== 4 ? null : (
         <>
           <span
             className="add-more"

@@ -45,8 +45,8 @@
 }
 
 .activity-image-placeholder {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   color: $theme_color_light_blue;
 }
 
@@ -118,7 +118,7 @@
   flex-basis: max-content !important;
 
   .field-value {
-    margin-top: 0.25rem !important;
+    // margin-top: 0.25rem !important;
     font-size: 0.75rem !important;
     background-color: $theme_color_light_blue_3x !important;
     border: none !important;
@@ -131,10 +131,14 @@
   }
 }
 
+.flag-dropdown {
+  border: 1px solid #bee3f4 !important;
+  border-radius: 5px !important;
+}
+
 .field-heading {
   margin-top: 0.5rem;
   height: 20px;
   font-size: 0.9rem;
   padding: 0 0 0.5rem;
-  font-weight: 600;
 }

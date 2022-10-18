@@ -20,7 +20,7 @@ import { Fetch } from "../../../api/Fetch";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "../../../components/Pagination";
 
-const RestaurantDetails = ({ status }: { status?: string }) => {
+const RestaurantDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
@@ -131,13 +131,15 @@ const RestaurantDetails = ({ status }: { status?: string }) => {
                   <div>{getFormattedDate(element.dateTime)}</div>
                   <div>{element.description || "NA"}</div>
                   <div className="add-activity-buttons">
-                    <button
-                      className="btn edit-button"
-                      onClick={() => setEdit(element)}
-                    >
-                      <FaRegEdit />
-                      &nbsp;<span>Edit</span>
-                    </button>
+                    {status === 3 || status === 5 ? null : (
+                      <button
+                        className="btn edit-button"
+                        onClick={() => setEdit(element)}
+                      >
+                        <FaRegEdit />
+                        &nbsp;<span>Edit</span>
+                      </button>
+                    )}
                     <button
                       className="btn delete-button"
                       onClick={() => deleteReservation(element._id)}
@@ -158,7 +160,7 @@ const RestaurantDetails = ({ status }: { status?: string }) => {
           </div>
         </div>
       </section>
-      {status ? null : (
+      {status !== 4 ? null : (
         <>
           <span
             className={styles["add-more"]}

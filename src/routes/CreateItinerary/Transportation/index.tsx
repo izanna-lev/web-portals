@@ -40,7 +40,7 @@ const TransportationTab = (
   );
 };
 
-const TransportationPage = ({ status }: { status?: string }) => {
+const TransportationPage = ({ status }: { status?: number }) => {
   const [detailType, setDetailType] = useState(1);
   const dispatch = useAppDispatch();
 

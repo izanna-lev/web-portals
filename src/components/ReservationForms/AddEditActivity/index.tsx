@@ -144,7 +144,7 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
 
   return (
     <form
-      className="add-activities add-data"
+      className="add-activities add-data table-item"
       onSubmit={saveActivityDetails}
       key={data._id}
     >

@@ -1,12 +1,10 @@
-@import "../../../styles/configs/_fonts.scss";
 @import "../../../styles/configs/_colors.scss";
-@import "../../../styles/configs/_ui.scss";
 
 .AddFlightsPage {
-  min-height: 20rem;
+  // min-height: 20rem;
   max-height: 550px;
   margin-top: 1rem;
-
+  border-radius: 0.5rem;
   overflow: auto;
   display: flex;
   flex-direction: column;

@@ -21,7 +21,7 @@ import {
 } from "../../../util";
 import { EDIT_ACTIVITY } from "../../../store/slices/itinerary";
 
-const ActivityDetails = ({ status }: { status?: string }) => {
+const ActivityDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -123,13 +123,15 @@ const ActivityDetails = ({ status }: { status?: string }) => {
                     <div>{element.location?.location}</div>
                     <div>{element.description}</div>
                     <div className="add-activity-buttons">
-                      <button
-                        className="btn edit-button"
-                        onClick={() => editActivity(element._id)}
-                      >
-                        <FaRegEdit />
-                        &nbsp;<span>Edit</span>
-                      </button>
+                      {status === 3 || status === 5 ? null : (
+                        <button
+                          className="btn edit-button"
+                          onClick={() => editActivity(element._id)}
+                        >
+                          <FaRegEdit />
+                          &nbsp;<span>Edit</span>
+                        </button>
+                      )}
                       <button
                         className="btn delete-button"
                         onClick={() => deleteReservation(element._id)}
@@ -147,7 +149,7 @@ const ActivityDetails = ({ status }: { status?: string }) => {
           </div>
         </div>
       </section>
-      {status ? null : (
+      {status !== 4 ? null : (
         <>
           <span
             className="add-more"

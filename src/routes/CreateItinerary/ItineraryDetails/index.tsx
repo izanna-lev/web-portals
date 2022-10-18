@@ -120,7 +120,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   };
 
   return (
-    <section className="AddItineraryPage" id="formTop">
+    <section className="AddItineraryDetailsPage" id="formTop">
       <div className="feild-heading">Upload Image</div>
 
       <input

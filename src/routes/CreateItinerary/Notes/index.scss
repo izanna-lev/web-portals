@@ -1,9 +1,10 @@
 @import "../../../styles/configs/colors";
 
 .AddNotesPage {
-  height: 350px;
+  max-height: 25rem;
   margin-top: 1rem;
-
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -44,9 +45,9 @@
 }
 
 .forms {
-  width: 100%;
-  max-height: calc(92vh - 248px);
-  overflow: auto;
+  // width: 100%;
+  // max-height: calc(92vh - 248px);
+  // overflow: auto;
 }
 
 ::-webkit-scrollbar {

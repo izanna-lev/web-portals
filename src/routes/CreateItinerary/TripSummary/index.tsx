@@ -15,7 +15,7 @@ import { Fetch } from "../../../api/Fetch";
 import "./index.scss";
 import { Modal } from "../../../components/Portal";
 
-const TripSummary = ({ status }: { status?: string }) => {
+const TripSummary = ({ status }: { status?: number }) => {
   const [dayFilter, setdayFilter] = useState("1");
   const [submitPopup, setSubmitPopup] = useState(false);
   const dispatch = useAppDispatch();
@@ -125,7 +125,7 @@ const TripSummary = ({ status }: { status?: string }) => {
         </div>
       </section>
 
-      {status ? null : (
+      {status !== 4 ? null : (
         <div onClick={() => submitItinerary()} className="continue-button">
           Submit Itinerary
         </div>

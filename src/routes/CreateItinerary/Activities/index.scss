@@ -1,17 +1,18 @@
 @import "../../../styles/configs/colors";
 
 .AddActivitiesPage {
-  height: 350px;
+  max-height: 25rem;
+  margin-bottom: 0.5rem;
   margin-top: 1rem;
-
+  border-radius: 0.5rem;
   overflow: auto;
   display: flex;
   flex-direction: column;
-  min-width: 82rem;
 }
 
 .add-activities {
-  width: 100%;
+  min-width: 82rem;
+  // width: 100%;
   background-color: $theme_color_blue;
   color: $white;
   display: grid;
@@ -50,9 +51,9 @@
 }
 
 .forms {
-  width: 100%;
-  max-height: calc(92vh - 248px);
-  overflow: auto;
+  // width: 100%;
+  // max-height: calc(92vh - 248px);
+  // overflow: auto;
 }
 
 ::-webkit-scrollbar {

@@ -154,7 +154,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
             <label
               htmlFor="activity-upload"
               className={styles["not-selected-preview"]}
-              // className={styles[{` ${activityChangedData?.[index]?.image ? "" : "not-selected-preview"}`}
             >
               <IoCloudUploadOutline
                 className={styles["activity-image-placeholder"]}
@@ -207,8 +206,10 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                 }}
                 country="us"
                 value={phone}
+                specialLabel="Contact Number"
                 inputClass={`${styles["field-value"]}`}
                 containerClass={`${styles["input-tel"]}`}
+                buttonClass={`${styles["flag-dropdown"]}`}
                 onChange={(value) => setPhone(value)}
               />
 

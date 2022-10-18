@@ -17,7 +17,7 @@ import { Fetch } from "../../../api/Fetch";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 
-const AccomodationDetails = ({ status }: { status?: string }) => {
+const AccomodationDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
   const [edit, setEdit] = useState(undefined);
 
@@ -132,13 +132,15 @@ const AccomodationDetails = ({ status }: { status?: string }) => {
                   <div>{getFormattedDate(element.checkOutDateTime)}</div>
                   <div>{element.description || "NA"}</div>
                   <div className="add-activity-buttons">
-                    <button
-                      className="btn edit-button"
-                      onClick={() => setEdit(element)}
-                    >
-                      <FaRegEdit />
-                      &nbsp;<span>Edit</span>
-                    </button>
+                    {status === 3 || status === 5 ? null : (
+                      <button
+                        className="btn edit-button"
+                        onClick={() => setEdit(element)}
+                      >
+                        <FaRegEdit />
+                        &nbsp;<span>Edit</span>
+                      </button>
+                    )}
                     <button
                       className="btn delete-button"
                       onClick={() => deleteReservation(element._id)}
@@ -159,14 +161,9 @@ const AccomodationDetails = ({ status }: { status?: string }) => {
           </div>
         </div>
       </section>
-      {status ? null : (
+      {status !== 4 ? null : (
         <>
-          <span
-            className={styles["add-more"]}
-            onClick={() => {
-              setAddMore(true);
-            }}
-          >
+          <span className={styles["add-more"]} onClick={() => setAddMore(true)}>
             + Add Days
           </span>
           <div
