@@ -106,6 +106,11 @@ export const API = {
   MESSAGE_LIST: `${API_URL}chat/messageList`,
   CHAT_LIST: `${API_URL}chat/chatList`,
   CHAT_IMAGE: `${API_URL}chat/chatImage`,
+
+  // Notifications
+  TRAVELLER_LIST: `${API_URL}specialist/travellerList`,
+  BROADCAST: `${API_URL}specialist/broadcast`,
+
 };
 
 // Custom Constants
@@ -189,6 +194,7 @@ export const NAVIGATE = {
   CHAT: 3,
   CANCELLED_ITINERARIES: 4,
   NOTIFICATION: 5,
+  PROFILE_WITHOUT_NOTIFICATION: 5,
   PROFILE: 6,
 };
 

@@ -1,8 +1,11 @@
 import { SET_NAVIGATION } from "../../store/slices/navigation";
 import { useEffect, useState, useLayoutEffect, Key } from "react";
-import { IMAGE, NAVIGATE } from "../../constants";
-import { useAppDispatch } from "../../store/hooks";
+import { API, IMAGE } from "../../constants";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import "./index.scss";
+import { Fetch } from "../../api/Fetch";
+import { setApiMessage } from "../../store/slices/apiMessage";
+import { Create } from "../../api/Create";
 
 const User = (
   user: any,
@@ -30,7 +33,7 @@ const User = (
         loading="lazy"
       />
       <div className="user-selection-info">
-        <div className="user-selection-name">{user.firstName}</div>
+        <div className="user-selection-name">{user.name}</div>
         <div className="user-selection-email">{user.email}</div>
       </div>
     </div>
@@ -40,94 +43,96 @@ const User = (
 let selectedUsers: any[] = [];
 
 const Notifications = (props: any) => {
-  const [newUserList, setnewUserList] = useState<any>([]);
+  const [selectedAll, setSelectedAll] = useState(false);
   const dispatch = useAppDispatch();
+  const { page, limit, size, total, list } = useAppSelector(
+    (state) => state.notificationUserList
+  );
 
-  useLayoutEffect(() => {
-    document.title = "Notifications";
-    selectedUsers = [];
-  }, []);
 
   useEffect(() => {
-    dispatch(SET_NAVIGATION({ value: NAVIGATE.NOTIFICATION }));
-  }, [dispatch]);
+    setSelectedAll(false)
+    dispatch(
+      Fetch(
+        API.TRAVELLER_LIST,
+        {
+          notificationList: true,
+        },
+        1,
+        10000000
+      ));
+      unselectAll()
+  }, []);
 
-  // useEffect(() => {
-  //   FetchEntity(
-  //     API.USERS,
-  //     {
-  //       notificationList: true,
-  //     },
-  //     1,
-  //     100000000
-  //   );
-  // }, []);
+  const handleSelect = () => {
+    selectedAll ? unselectAll() : selectAll();
+    setSelectedAll(!selectedAll)
+  }
 
   const selectAll = () => {
     const checkboxes = document.querySelectorAll("input.checkbox");
-    if (selectedUsers.length === newUserList.length) {
-      unselectAll(checkboxes);
-    } else {
-      for (let index = 0; index < newUserList.length; index++) {
-        if (selectedUsers.indexOf(newUserList[index]._id) === -1) {
-          selectedUsers.push(newUserList[index]._id);
+      for (let index = 0; index < list.length; index++) {
+        if (selectedUsers.indexOf(list[index]._id) === -1) {
+          selectedUsers.push(list[index]._id);
         }
       }
       checkboxes.forEach((checkbox: any) => {
         checkbox.checked = true;
       });
-      // handleActiveState(NOTIFICATION_LIST.ALL);
-    }
   };
 
-  const unselectAll = (checkboxes: any[] | NodeListOf<Element>) => {
+  const unselectAll = () => {
+    const checkboxes = document.querySelectorAll("input.checkbox");
     selectedUsers = [];
     checkboxes.forEach((checkbox: any) => {
       checkbox.checked = false;
     });
-    // handleActiveState(NOTIFICATION_LIST.NONE);
   };
 
   const selectOne = (id: any) => {
     if (selectedUsers.indexOf(id) > -1) {
+      setSelectedAll(false)
       selectedUsers.splice(selectedUsers.indexOf(id), 1);
     } else {
       selectedUsers.push(id);
     }
-
-    // if (selectedUsers.length === newUserList.length) {
-    // } else handleActiveState(NOTIFICATION_LIST.SELECTED);
   };
+
 
   const sendNotifications = () => {
-    // if (!selectedUsers.length) {
-    //   return toast.warn("Please select some users to send notifications to!");
-    // }
-    // if (!document.getElementById("notificationText").value) {
-    //   return toast.warn("Notification message cannot be empty!");
-    // }
-    // props.triggerGenericApiHit(API.NOTIFICATION_BROADCAST, {
-    //   userIds: selectedUsers,
-    //   message: document.getElementById("notificationText").value,
-    // });
-    // document.getElementsByClassName("user-selection-list")[0].scrollTo(0, 0);
+    if (!selectedUsers.length && !selectedAll) {
+      dispatch(
+        setApiMessage({
+          type: "error",
+          message: "Please select some users to send notifications to!",
+        })
+      );
+      return;
+    }
+    if (!(document.getElementById("notificationText") as HTMLInputElement).value) {
+      dispatch(
+        setApiMessage({
+          type: "error",
+          message: "Notification message cannot be empty!",
+        })
+      );
+      return;
+    }
+
+
+    dispatch(
+      Create(
+        API.BROADCAST,
+        {
+          message: (document.getElementById("notificationText") as HTMLInputElement).value,
+          selectedAll,
+          userIds: selectedAll ? [] : selectedUsers,
+        },
+        false,
+      )
+    );
+
   };
-
-  // if (apiMessage.message) {
-  //   // eslint-disable-next-line no-unused-expressions
-
-  //   if (apiMessage.code === 100) {
-  //     selectedUsers = [];
-  //     const checkboxes = document.querySelectorAll("input.checkbox");
-  //     checkboxes.forEach((checkbox) => {
-  //       checkbox.checked = false;
-  //     });
-
-  //     document.getElementById("notificationText").value = "";
-  //   } else {
-  //   }
-  //   triggerNullifyApiMessage();
-  // }
 
   return (
     <section className="content-container">
@@ -156,20 +161,34 @@ const Notifications = (props: any) => {
             </div>
             <div className="user-selection-main-div">
               <div className="user-selection-header">
-                <div className="user-selection-left">Travellers List</div>
-
+                <div className="user-selection-left">
+                  <div>Users List</div>
+                  <div className="select-all">
+                  <input
+                    id={`checkbox-x`}
+                    type="checkbox"
+                    className="checkbox"
+                    onClick={() => handleSelect()} 
+                    checked={selectedAll}
+                  />
+                  <div>Select All</div></div>
+                </div>
                 <div
                   title="Select all users"
                   onClick={selectAll}
                   className="user-selection-right"
                 >
-                  {/* {value !== 0 ? "Select All" : "Unselect All"} */}
+                </div>
+                <div
+
+                  className="user-selection-right"
+                >
                 </div>
               </div>
 
               <div className="user-selection-list">
-                {newUserList &&
-                  newUserList.map((user: any, index: number) =>
+                {list.length &&
+                  list.map((user: any, index: number) =>
                     User(user, index, selectOne)
                   )}
               </div>
@@ -182,3 +201,4 @@ const Notifications = (props: any) => {
 };
 
 export default Notifications;
+
