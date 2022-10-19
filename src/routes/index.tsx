@@ -11,7 +11,7 @@ const Itinerary = loadable(() => import("./Itinerary"));
 const ItineraryDetails = loadable(() => import("./ItineraryDetails"));
 const Login = loadable(() => import("./Login"));
 const Profile = loadable(() => import("./Profile"));
-const SendNotifications = loadable(() => import("./Notifications"));
+const Notifications = loadable(() => import("./Notifications"));
 const CancelledItineraries = loadable(() => import("./CancelledItineraries"));
 
 const Activities = loadable(() => import("./CreateItinerary/Activities"));
@@ -78,7 +78,7 @@ const App = () => {
           </Route>
         </Route>
         <Route path="profile" element={<Profile />} />
-        <Route path="notifications" element={<SendNotifications />} />
+        <Route path="notifications" element={<Notifications />} />
         <Route path="chat">
           <Route index element={<Chat />} />
           <Route path=":channelId" element={<Chat />} />

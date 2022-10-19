@@ -4,16 +4,16 @@
 
 // Global Environment Variables
 
-const SERVER_TYPE = `${process.env.BRANCH}/`;
-export const API_URL = process.env.API_URL || "";
-export const SOCKET_URL = process.env.SOCKET_URL || ""
-const S3_URL = process.env.S3_URL;
+// const SERVER_TYPE = `${process.env.BRANCH}/`;
+// export const API_URL = process.env.API_URL || "";
+// export const SOCKET_URL = process.env.SOCKET_URL || ""
+// const S3_URL = process.env.S3_URL;
 
 
-// const SERVER_TYPE = "development/";
-// export const API_URL = "http://44.209.25.93:3000/api/";
-// export const SOCKET_URL = "http://44.209.25.93:3000/";
-// const S3_URL = "https://app-onsite.s3.amazonaws.com/";
+const SERVER_TYPE = "development/";
+export const API_URL = "http://44.209.25.93:3000/api/";
+export const SOCKET_URL = "http://44.209.25.93:3000/";
+const S3_URL = "https://app-onsite.s3.amazonaws.com/";
 
 
 // Custom Environment Variables
@@ -106,6 +106,11 @@ export const API = {
   MESSAGE_LIST: `${API_URL}chat/messageList`,
   CHAT_LIST: `${API_URL}chat/chatList`,
   CHAT_IMAGE: `${API_URL}chat/chatImage`,
+
+  // Notifications
+  TRAVELLER_LIST: `${API_URL}specialist/travellerList`,
+  BROADCAST: `${API_URL}specialist/broadcast`,
+
 };
 
 // Custom Constants
@@ -189,6 +194,7 @@ export const NAVIGATE = {
   CHAT: 3,
   CANCELLED_ITINERARIES: 4,
   NOTIFICATION: 5,
+  PROFILE_WITHOUT_NOTIFICATION: 5,
   PROFILE: 6,
 };
 

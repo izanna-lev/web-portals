@@ -78,6 +78,9 @@
 
 .user-selection-left {
   margin-left: 10px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
 }
 
 .user-selection-right {
@@ -205,4 +208,9 @@
 
 .data-button:hover {
   filter: brightness(110%);
+}
+
+.select-all {
+  display: flex;
+  gap:4px;
 }

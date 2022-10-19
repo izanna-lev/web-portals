@@ -41,7 +41,7 @@ const SideNavBar = () => {
             "notifications"
           )
         : null}
-      {NavigationOption("Profile", ICON.PROFILE_INACTIVE, NAVIGATE.PROFILE)}
+      {NavigationOption("Profile", ICON.PROFILE_INACTIVE, profileData.access?.sendNotifications ? NAVIGATE.PROFILE : NAVIGATE.PROFILE_WITHOUT_NOTIFICATION)}
     </nav>
   );
 };
