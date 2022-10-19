@@ -50,7 +50,6 @@ const Notifications = (props: any) => {
   );
 
 
-  console.log("data------>", list)
   useEffect(() => {
     setSelectedAll(false)
     dispatch(

@@ -33,15 +33,22 @@ const SideNavBar = () => {
         "itinerary/cancelled"
       )}
 
+{
+  NavigationOption(
+    "Send Notifications",
+    ICON.NOTIFICATIONS_INACTIVE,
+    NAVIGATE.NOTIFICATION,
+    "notifications"
+  )
+}
       {profileData.access?.sendNotifications
-        ? NavigationOption(
+        && NavigationOption(
             "Send Notifications",
             ICON.NOTIFICATIONS_INACTIVE,
             NAVIGATE.NOTIFICATION,
             "notifications"
-          )
-        : null}
-      {NavigationOption("Profile", ICON.PROFILE_INACTIVE, profileData.access?.sendNotifications ? NAVIGATE.PROFILE : NAVIGATE.PROFILE_WITHOUT_NOTIFICATION)}
+          )}
+      {NavigationOption("Profile", ICON.PROFILE_INACTIVE, NAVIGATE.PROFILE)}
     </nav>
   );
 };
