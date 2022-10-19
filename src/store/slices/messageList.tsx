@@ -26,6 +26,7 @@ interface MessageList {
                 location: string,
             },
             name: string
+            otherUserName: string
             image: string
             fromDate: string
         }
@@ -46,7 +47,8 @@ const initialState: MessageList = {
             },
             name: '',
             image: '',
-            fromDate: ''
+            fromDate: '',
+            otherUserName: ''
         },
     },
     hasMore: false,

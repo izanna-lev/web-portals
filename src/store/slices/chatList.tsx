@@ -10,7 +10,11 @@ interface chatListObject {
     userRef: string
     channelRef: string
     lastMessageReadAt: string 
-    message: string
+    message: {
+        message: string
+        userRef: string
+        createdOn: string
+    },
     createdOn: string
     updatedOn: string
     itineraryStatus: number
@@ -39,7 +43,7 @@ const chatList = createSlice({
     name: "chatList",
     initialState,
     reducers: {
-        getChat: (state: ChatList, action: { payload: ChatList }) => {
+        getChat: (state, action: { payload: ChatList }) => {
             Object.assign(state, action.payload);
         },
     },

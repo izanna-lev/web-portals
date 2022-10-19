@@ -112,7 +112,7 @@ const MessagePage = () => {
               src={IMAGE.SMALL + messageData.data.itinerary.image}
               alt="msg"
             />
-            <div className="chat-user-name">{messageData.data.itinerary.name}</div>
+            <div className="chat-user-name">{messageData.data.itinerary.otherUserName}</div>
           </div>
     
           <div className="chat-itinerary-details">

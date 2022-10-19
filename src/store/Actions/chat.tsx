@@ -14,8 +14,7 @@ export const chatList = (): ThunkAction<void, RootState, unknown, AnyAction> => 
     getState: any
   ) => {
     try {
-        const Authorization = localStorage.getItem("accessToken") || ""
-        console.log(Authorization)
+      const Authorization = localStorage.getItem("accessToken") || ""
       dispatch(setLoader(true));
       const response = await axios.post(API.CHAT_LIST, {}, {
         headers: {
@@ -24,11 +23,9 @@ export const chatList = (): ThunkAction<void, RootState, unknown, AnyAction> => 
       });
       dispatch(setLoader(false));
       if (response.data.code !== 100) throw new Error(response.data.message);
-
       dispatch(getChat(response.data));
     } catch (err: any) {
         dispatch(setLoader(false));
-
       dispatch(
         setApiMessage({
           data: {
