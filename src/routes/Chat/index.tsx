@@ -20,6 +20,8 @@ const ChatPage = () => {
   const chatData = useAppSelector((state) => state.chatList);
   const { page, limit, size, total, data } = chatData;
   const dispatch = useAppDispatch();
+  console.log("chatData---------->",chatData)
+
 
   useEffect(() => {
     dispatch(chatList());
@@ -31,7 +33,7 @@ const ChatPage = () => {
       const path = `/chat/${data[0].channelRef}`;
       navigate(path);
     }
-  }, [page, data, navigate]);
+  }, []);
 
   const onScroll = () => {
     if (listInnerRef.current) {
@@ -64,27 +66,27 @@ const ChatPage = () => {
               >
                 <div className="image-view">
                   <img
-                    className="user-image"
+                    className="chat-user-image"
                     src={IMAGE.SMALL + element.otherUser.image}
                     alt="d"
                   />
-                  {element.unseenMessages > 0 && (
+                  { element.unseenMessages > 0 && 
                     <div className="unseen-messages"></div>
-                  )}
+                  }
                 </div>
                 <div className="user-chat-data">
                   <div className="user-chat-name">{element.otherUser.name}</div>
                   <div className="user-chat-time">
-                    {dayjs(element.createdOn).format("HH:mm")}
+                    {dayjs(element.message?.createdOn).format("HH:mm")}
                   </div>
-                  <div className="user-chat-message">{element.message}</div>
+                  <div className="user-chat-message">{element.message?.message || ""}</div>
                 </div>
               </li>
             );
           })}
         </ul>
       </div>
-      {data.length > 0 && <MessagesPage />}
+      {data.length && <MessagesPage />}
     </section>
   );
 };

@@ -63,7 +63,7 @@ const TableRow = (
       <td>{dayjs(item.plannedDate).format("DD-MMM-YYYY")}</td>
       <td className="specialist-actions">
         <button
-          className="btn view-button chat-specialist"
+          className={`btn view-button chat-specialist ${item.cancelled ? "cancelled-itinerary": ""} `}
           onClick={() => {
             navigate(`/chat/${item.channelRef}`, {
               state: {
@@ -81,7 +81,7 @@ const TableRow = (
           Chat
         </button>
         <button
-          className="btn view-button cancel-itinerary"
+          className={`btn view-button cancel-itinerary ${item.cancelled ? "cancelled-itinerary": ""} `}
           onClick={() => popupUpdate(true, item._id)}
         >
           Cancel Itinerary
