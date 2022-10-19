@@ -160,8 +160,10 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               />
             </label>
           </div>
+          <label htmlFor="activity-upload" className="bold underline">
+            Upload Image
+          </label>
 
-          <div className="bold underline">Upload Image</div>
           <div className={styles["form-required-feilds"]}>
             <div className={styles["form-left-details"]}>
               <InputForm
