@@ -51,6 +51,7 @@ jobs:
 
           if $development; then
             SERVER="${{ secrets.DEVELOPMENT_URL }}"
+            SOCKET_URL="${{ secrets.DEVELOPMENT_SOCKET_URL }}"
           elif $staging; then
             SERVER="${{ secrets.STAGING_URL }}"
           elif $production; then
@@ -63,7 +64,7 @@ jobs:
           npm install --legacy-peer-deps
 
           echo "Triggering Build"
-          webpack --env BRANCH="${GITHUB_REF##*/}" API_URL="$SERVER" S3_URL="$S3_URL"
+          webpack --env BRANCH="${GITHUB_REF##*/}" API_URL="$SERVER" S3_URL="$S3_URL" SOCKET_URL="$SOCKET_URL"
 
           echo "Build Completed"
 
