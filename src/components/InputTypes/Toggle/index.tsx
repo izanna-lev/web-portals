@@ -20,7 +20,6 @@ const Toggle = ({ inputFields }: InputProps) => {
         ref={inputFields.ref}
         defaultChecked={inputFields.default}
         className={styles["field-toggle-value"]}
-        autoFocus
         required
       />
     </div>

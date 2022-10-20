@@ -31,7 +31,6 @@ const InputForm = ({ inputFields }: InputProps) => {
         }
         placeholder={inputFields.placeholder}
         defaultValue={inputFields.default}
-        autoFocus
         required
         disabled={inputFields.disabled}
       />
