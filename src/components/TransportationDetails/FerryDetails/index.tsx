@@ -64,7 +64,7 @@ const FerryDetails = (props: any) => {
                 <div>{element.arrival || "NA"}</div>
                 <div>{FERRY_CLASS[element.trainClass - 1 || 0].name}</div>
                 <div>{getFormattedDate(element.arrivalDateTime)}</div>
-                <div>{getFormattedDate(element.arrivalDateTime)}</div>
+                <div>{getFormattedTime(element.arrivalDateTime)}</div>
                 <div>{element.depart || "NA"}</div>
                 <div>{getFormattedTime(element.departDateTime)}</div>
                 <div>{element.specialistNote || "NA"}</div>
