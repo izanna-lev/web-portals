@@ -18,6 +18,7 @@ import { Modal } from "../../../components/Portal";
 const TripSummary = ({ status }: { status?: number }) => {
   const [dayFilter, setdayFilter] = useState("1");
   const [submitPopup, setSubmitPopup] = useState(false);
+  const [isItinerarySubmitted, setisItinerarySubmitted] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -47,6 +48,8 @@ const TripSummary = ({ status }: { status?: number }) => {
         API.ITINERARIES
       )
     );
+    setSubmitPopup(false);
+    setisItinerarySubmitted(true);
   };
 
   useEffect(() => {
@@ -130,7 +133,7 @@ const TripSummary = ({ status }: { status?: number }) => {
           Submit Itinerary
         </div>
       )}
-      {submitPopup ? (
+      {isItinerarySubmitted && submitPopup ? (
         <Modal
           modal={<SubmitPopup navigate={navigate} location={formRef} />}
           root={document.getElementById("overlay-root") as HTMLElement}

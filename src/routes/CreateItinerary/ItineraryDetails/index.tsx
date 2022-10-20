@@ -114,10 +114,20 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
       payload = { ...payload, formRef };
 
       if (!selectedImage) return alert("Please select an image!");
-      dispatch(Create(API.ITINERARY_ADD, payload, true, selectedImage));
-      if (apiMessage.type === "success") navigate("/itinerary/add/summary");
+      dispatch(
+        Create(
+          API.ITINERARY_ADD,
+          payload,
+          true,
+          selectedImage,
+          API.ITINERARY_DETAILS,
+          { formRef }
+        )
+      );
     }
   };
+
+  if (apiMessage.type === "success") navigate("/itinerary/add/summary");
 
   return (
     <section className="AddItineraryDetailsPage" id="formTop">
