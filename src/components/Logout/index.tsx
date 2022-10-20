@@ -14,7 +14,7 @@ const Logout = ({ onClickOutside }: InputProps) => {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    navigate("/login");
+    window.location.replace("/login");
   };
 
   useEffect(() => {
