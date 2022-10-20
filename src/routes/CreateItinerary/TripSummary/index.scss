@@ -20,7 +20,7 @@
   grid-template-columns: 2fr 3fr 1.3fr 1.3fr 5fr;
   align-items: center;
 
-  >div {
+  > div {
     padding: 0.25rem;
   }
 }
@@ -35,7 +35,7 @@
   height: 90px;
 }
 
-.add-trip>div {
+.add-trip > div {
   font-size: 0.95rem;
   margin-left: 0.5rem;
   height: 100%;
@@ -43,11 +43,11 @@
   align-items: center;
 }
 
-.forms {
-  width: 100%;
-  max-height: calc(92vh - 248px);
-  overflow: auto;
-}
+// .forms {
+//   width: 100%;
+//   max-height: calc(92vh - 248px);
+//   overflow: auto;
+// }
 
 ::-webkit-scrollbar {
   width: 0.25rem;
