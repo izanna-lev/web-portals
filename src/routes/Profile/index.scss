@@ -53,3 +53,23 @@
 .profile-text {
   font-size: 0.95rem;
 }
+
+.profile-image-container {
+  max-width: 10rem;
+  max-height: 10rem;
+}
+
+.profile-edit-container {
+  padding: 0.5rem 0.4rem 0.4rem 0.6rem;
+  background-color: $theme_color_blue;
+  max-width: fit-content;
+  border-radius: 0.5rem;
+  position: relative;
+  left: 7rem;
+  bottom: 3rem;
+}
+
+.profile-edit--icon {
+  font-size: 1.5rem;
+  color: $white;
+}

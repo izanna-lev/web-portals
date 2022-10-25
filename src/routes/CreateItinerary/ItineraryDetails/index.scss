@@ -18,6 +18,12 @@
     max-height: 90%;
     padding: 2rem;
     border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+
+    .edit-form-wrapper {
+      overflow: auto;
+    }
 
     .AddItineraryDetailsPage {
       background-color: $white;
@@ -27,8 +33,8 @@
     }
 
     .cross {
-      width: 1.5rem;
-      height: 1.5rem;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
       color: $white;
       background-color: $theme_color_dark_grey;
       border-radius: 50%;

@@ -77,7 +77,7 @@
   text-decoration: none;
 }
 
-.step>.selected {
+.step > .selected {
   background-color: $theme_color_blue;
   color: $white;
   border-radius: 0.5rem;
@@ -86,20 +86,4 @@
 .tab-active {
   color: $white;
   background-color: $theme_color_blue;
-}
-
-.continue-button {
-  padding: 0.6rem 1.9rem;
-  background-color: #0b9dd8;
-  color: white;
-  width: 15rem;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 0.95rem;
-  margin: 2rem 0.5rem 0rem 0rem;
-
-  &:hover {
-    filter: brightness(1.05);
-  }
 }

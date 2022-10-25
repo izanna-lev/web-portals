@@ -32,7 +32,7 @@ const EditDetailsContainer = ({ children, setedit }: any) => {
     <div className="edit-itinerary">
       <div className="edit-form-container">
         <IoCloseOutline className="cross" onClick={() => setedit(null)} />
-        {children}
+        <div className="edit-form-wrapper">{children}</div>
       </div>
     </div>
   );

@@ -14,20 +14,20 @@ export const NewTicket = (
   dispatch: any,
   removeUserTicket: Function
 ) => {
-  let newImageUrl = "";
+  const inputId = `new${length}`;
+  const divId = `new-bg-img-${length}`;
+  const imgDiv = document.getElementById(divId);
 
   const handleImageChange = async (file: any, id: string) => {
     if (file[0]) {
-      newImageUrl = URL.createObjectURL(file[0]);
-      setBackground(newImageUrl, id);
+      setBackground(URL.createObjectURL(file[0]), id);
       const response = await dispatch(UploadImage(undefined, file[0]));
       saveData({ length, image: response.data, type: "new" });
     }
   };
 
-  const handleNameChange = (name: string) => {
+  const handleNameChange = (name: string) =>
     saveData({ length, name, type: "new" });
-  };
 
   return (
     <div
@@ -37,19 +37,17 @@ export const NewTicket = (
     >
       <div className="form-heading">Upload Ticket Image</div>
       <div style={{ display: "flex" }}>
-        <div className={styles["form-image"]} id={`new-bg-img-${length}`}>
+        <div className={styles["form-image"]} id={divId}>
           <input
             type="file"
-            id={`new${length}`}
+            id={inputId}
             accept="image/*"
             name={`newTicket${length}`}
-            onChange={(e) => {
-              handleImageChange(e.target.files, `new-bg-img-${length}`);
-            }}
+            onChange={(e) => handleImageChange(e.target.files, divId)}
             hidden
           />
           <label
-            htmlFor={`new${length}`}
+            htmlFor={inputId}
             className={styles["not-selected-preview"]}
             id={`Ticket${length}`}
           >
@@ -63,7 +61,7 @@ export const NewTicket = (
           className={styles["activity-image-popup"]}
           onClick={() => {
             setshowImage(true);
-            setimageUrl(newImageUrl);
+            if (imgDiv) setimageUrl(imgDiv.style.backgroundImage.slice(5, -2));
           }}
         >
           <MdZoomOutMap />
