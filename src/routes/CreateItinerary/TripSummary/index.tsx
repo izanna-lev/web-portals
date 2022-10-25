@@ -116,8 +116,8 @@ const TripSummary = ({ status }: { status?: number }) => {
                     />
                   </div>
                   <div>{element.title}</div>
-                  <div>{getFormattedTime(element.dateTime)}</div>
-                  <div>{getFormattedDate(element.dateTime)}</div>
+                  <div>{element.dateTime ? getFormattedTime(element.dateTime): "NA"}</div>
+                  <div>{element.dateTime ? getFormattedDate(element.dateTime): "NA"}</div>
                   <div>{element.description}</div>
                 </div>
               ))
