@@ -11,7 +11,7 @@
 }
 
 .flightDetails-table {
-  min-width: 90rem;
+  min-width: 100rem;
   width: 100%;
   min-height: 4rem;
   background-color: $theme_color_blue;
@@ -19,10 +19,10 @@
   display: grid;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  grid-template-columns: 0.8fr 1.5fr 1.5fr 2fr 1.5fr 1.3fr 1.3fr 3fr 2.5fr;
+  grid-template-columns: 3rem 9rem 10rem 13rem 10rem 8rem 8rem 22rem 14rem;
   align-items: center;
 
-  >div {
+  > div {
     padding: 0.25rem;
   }
 }
@@ -37,7 +37,7 @@
   height: 90px;
 }
 
-.flightDetails-table>div {
+.flightDetails-table > div {
   font-size: 0.95rem;
   margin-left: 0.5rem;
   height: 100%;
@@ -70,7 +70,7 @@
 .empty-table {
   height: 3rem;
   display: flex;
-  min-width: 90rem;
+  min-width: 100rem;
   align-items: center;
   font-size: 0.95rem;
   justify-content: center;

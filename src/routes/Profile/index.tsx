@@ -4,12 +4,14 @@
  */
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { NAVIGATE } from "../../constants";
+import { API, NAVIGATE } from "../../constants";
 
 import "./index.scss";
 import { useEffect } from "react";
 import { SET_NAVIGATION } from "../../store/slices/navigation";
 import { UserIcon } from "../../components/UserIcon";
+import { FaRegEdit } from "react-icons/fa";
+import { Create } from "../../api/Create";
 
 const ProfilePage = () => {
   const profileData = useAppSelector((state) => state.profile);
@@ -19,6 +21,21 @@ const ProfilePage = () => {
     dispatch(SET_NAVIGATION({ value: NAVIGATE.PROFILE }));
   }, [dispatch]);
 
+  const updateProfileImage = (e: any) => {
+    const selectedImage = e.target.files;
+    if (selectedImage[0]) {
+      dispatch(
+        Create(
+          API.UPDATE_PROFILE_IMAGE,
+          {},
+          true,
+          selectedImage[0],
+          API.PROFILE
+        )
+      );
+    }
+  };
+
   return (
     <main className="content-container" id="profilePage">
       <section className="content-top">
@@ -26,7 +43,25 @@ const ProfilePage = () => {
       </section>
 
       <section className="profile">
-        <UserIcon image={profileData.image} width={"10rem"} height={"10rem"} />
+        <div className="profile-image-container">
+          <UserIcon
+            image={profileData.image}
+            width={"10rem"}
+            height={"10rem"}
+          />
+          <div className="profile-edit-container">
+            <input
+              type="file"
+              id="upload"
+              accept="image/*"
+              onChange={updateProfileImage}
+              hidden
+            />
+            <label htmlFor="upload" id="profileImage">
+              <FaRegEdit className="profile-edit--icon" />
+            </label>
+          </div>
+        </div>
         <div className="profile-details">
           <h4 className="profile-name">{profileData.name}</h4>
           <a href={`mailto:${profileData.email}`} className="profile-text">

@@ -4,17 +4,15 @@
 
 // Global Environment Variables
 
-const SERVER_TYPE = `${process.env.BRANCH}/`;
-export const API_URL = process.env.API_URL || "";
-export const SOCKET_URL = process.env.SOCKET_URL || ""
-const S3_URL = process.env.S3_URL;
+// const SERVER_TYPE = `${process.env.BRANCH}/`;
+// export const API_URL = process.env.API_URL || "";
+// export const SOCKET_URL = process.env.SOCKET_URL || ""
+// const S3_URL = process.env.S3_URL;
 
-
-// const SERVER_TYPE = "development/";
-// export const API_URL = "http://44.209.25.93:3000/api/";
-// export const SOCKET_URL = "http://44.209.25.93:3000/";
-// const S3_URL = "https://app-onsite.s3.amazonaws.com/";
-
+const SERVER_TYPE = "development/";
+export const API_URL = "http://44.209.25.93:3000/api/";
+export const SOCKET_URL = "http://44.209.25.93:3000/";
+const S3_URL = "https://app-onsite.s3.amazonaws.com/";
 
 // Custom Environment Variables
 
@@ -38,6 +36,7 @@ export const API = {
   LOGIN: `${API_URL}specialist/login`,
   PROFILE: `${API_URL}specialist/details`,
   DASHBOARD: `${API_URL}specialist/dashboard`,
+  UPDATE_PROFILE_IMAGE: `${API_URL}specialist/update`,
 
   // Itinerary (List & Actions)
 
@@ -109,8 +108,8 @@ export const API = {
 
   // Notifications
   TRAVELLER_LIST: `${API_URL}specialist/travellerList`,
+  NOTIFICATION_LIST: `${API_URL}notification/specialistList`,
   BROADCAST: `${API_URL}specialist/broadcast`,
-
 };
 
 // Custom Constants
