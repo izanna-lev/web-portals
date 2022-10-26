@@ -6,6 +6,7 @@ import SideNavBar from "../../components/SideNavBar";
 import Header from "../../components/Header";
 import styles from "./index.module.scss";
 import Socket from "../../components/Socket";
+
 const Account = () => {
   const navigate = useNavigate();
 

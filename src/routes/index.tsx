@@ -27,8 +27,15 @@ const Transportation = loadable(
   () => import("./CreateItinerary/Transportation")
 );
 
+const ProtectedRoute = ({ children, check }: any) => {
+  if (check) return children;
+  return <Navigate to="dashboard" />;
+};
+
 const App = () => {
   const { itineraryDetails } = useAppSelector((state) => state.itinerary);
+  const { sendNotifications } = useAppSelector((state) => state.profile.access);
+
   return (
     <Routes>
       <Route path="/" element={<Account />}>
@@ -81,7 +88,14 @@ const App = () => {
           element={<CancelledItineraries />}
         />
         <Route path="profile" element={<Profile />} />
-        <Route path="notifications" element={<Notifications />} />
+        <Route
+          path="notifications"
+          element={
+            <ProtectedRoute check={sendNotifications}>
+              <Notifications />
+            </ProtectedRoute>
+          }
+        />
         <Route path="chat">
           <Route index element={<Chat />} />
           <Route path=":channelId" element={<Chat />} />
