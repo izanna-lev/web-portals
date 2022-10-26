@@ -9,12 +9,13 @@ interface Profile {
   device: string;
   fcmToken: string;
   _id: string;
-  access?: {
-    createItinerary: boolean
-    deleteItinerary: boolean
-    editItinerary: boolean
-    sendNotifications: boolean
-  }
+  access: {
+    createItinerary: boolean;
+    deleteItinerary: boolean;
+    editItinerary: boolean;
+    sendNotifications: boolean;
+    cancelItinerary: boolean;
+  };
 }
 
 const initialState: Profile = {
@@ -25,6 +26,13 @@ const initialState: Profile = {
   device: "",
   fcmToken: "",
   _id: "",
+  access: {
+    createItinerary: false,
+    deleteItinerary: false,
+    editItinerary: false,
+    sendNotifications: false,
+    cancelItinerary: false,
+  },
 };
 
 const profile = createSlice({

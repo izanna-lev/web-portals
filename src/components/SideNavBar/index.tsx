@@ -4,7 +4,7 @@ import { ICON } from "../../assets/index";
 import styles from "./index.module.scss";
 
 const SideNavBar = () => {
-  const profileData = useAppSelector((state) => state.profile);
+  const { access } = useAppSelector((state) => state.profile);
   const sidebar = useAppSelector((state) => state.appData.sidebarSmall);
 
   return (
@@ -26,11 +26,14 @@ const SideNavBar = () => {
         "itineraries/cancelled"
       )}
 
-      {NavigationOption(
-        "Send Notifications",
-        ICON.NOTIFICATIONS_INACTIVE,
-        "notifications"
-      )}
+      {access.sendNotifications
+        ? NavigationOption(
+            "Send Notifications",
+            ICON.NOTIFICATIONS_INACTIVE,
+            "notifications"
+          )
+        : null}
+
       {NavigationOption("Profile", ICON.PROFILE_INACTIVE)}
     </nav>
   );
