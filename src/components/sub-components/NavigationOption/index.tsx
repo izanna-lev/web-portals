@@ -4,20 +4,13 @@ import { useAppSelector } from "../../../store/hooks";
 
 const NavURL = (url: string) => `/${url.replace(" ", "").toLowerCase()}`;
 
-const NavigationOption = (
-  name: string,
-  Icon: string,
-  value: number,
-  url?: string
-) => {
-  const ActiveNav = useAppSelector((state) => state.navigation.value);
-
+const NavigationOption = (name: string, Icon: string, url?: string) => {
   return (
     <NavLink
       to={NavURL(url || name)}
-      className={`${styles["sidebar-item"]} ${
-        ActiveNav === value && styles["item-active"]
-      }`}
+      className={({ isActive }) =>
+        `${styles["sidebar-item"]} ${isActive && styles["item-active"]}`
+      }
       title={name}
     >
       <img src={Icon} alt={name} className={styles["sidebar-icon"]} />

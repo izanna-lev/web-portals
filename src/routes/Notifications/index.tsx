@@ -1,5 +1,4 @@
-import { SET_NAVIGATION } from "../../store/slices/navigation";
-import { useEffect, useState, useLayoutEffect, Key } from "react";
+import { useEffect, useState, Key } from "react";
 import { API, IMAGE } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import "./index.scss";
@@ -49,9 +48,8 @@ const Notifications = (props: any) => {
     (state) => state.notificationUserList
   );
 
-
   useEffect(() => {
-    setSelectedAll(false)
+    setSelectedAll(false);
     dispatch(
       Fetch(
         API.TRAVELLER_LIST,
@@ -60,25 +58,26 @@ const Notifications = (props: any) => {
         },
         1,
         10000000
-      ));
-      unselectAll()
+      )
+    );
+    unselectAll();
   }, []);
 
   const handleSelect = () => {
     selectedAll ? unselectAll() : selectAll();
-    setSelectedAll(!selectedAll)
-  }
+    setSelectedAll(!selectedAll);
+  };
 
   const selectAll = () => {
     const checkboxes = document.querySelectorAll("input.checkbox");
-      for (let index = 0; index < list.length; index++) {
-        if (selectedUsers.indexOf(list[index]._id) === -1) {
-          selectedUsers.push(list[index]._id);
-        }
+    for (let index = 0; index < list.length; index++) {
+      if (selectedUsers.indexOf(list[index]._id) === -1) {
+        selectedUsers.push(list[index]._id);
       }
-      checkboxes.forEach((checkbox: any) => {
-        checkbox.checked = true;
-      });
+    }
+    checkboxes.forEach((checkbox: any) => {
+      checkbox.checked = true;
+    });
   };
 
   const unselectAll = () => {
@@ -91,13 +90,12 @@ const Notifications = (props: any) => {
 
   const selectOne = (id: any) => {
     if (selectedUsers.indexOf(id) > -1) {
-      setSelectedAll(false)
+      setSelectedAll(false);
       selectedUsers.splice(selectedUsers.indexOf(id), 1);
     } else {
       selectedUsers.push(id);
     }
   };
-
 
   const sendNotifications = () => {
     if (!selectedUsers.length && !selectedAll) {
@@ -109,7 +107,9 @@ const Notifications = (props: any) => {
       );
       return;
     }
-    if (!(document.getElementById("notificationText") as HTMLInputElement).value) {
+    if (
+      !(document.getElementById("notificationText") as HTMLInputElement).value
+    ) {
       dispatch(
         setApiMessage({
           type: "error",
@@ -119,19 +119,19 @@ const Notifications = (props: any) => {
       return;
     }
 
-
     dispatch(
       Create(
         API.BROADCAST,
         {
-          message: (document.getElementById("notificationText") as HTMLInputElement).value,
+          message: (
+            document.getElementById("notificationText") as HTMLInputElement
+          ).value,
           selectedAll,
           userIds: selectedAll ? [] : selectedUsers,
         },
-        false,
+        false
       )
     );
-
   };
 
   return (
@@ -164,26 +164,22 @@ const Notifications = (props: any) => {
                 <div className="user-selection-left">
                   <div>Users List</div>
                   <div className="select-all">
-                  <input
-                    id={`checkbox-x`}
-                    type="checkbox"
-                    className="checkbox"
-                    onClick={() => handleSelect()} 
-                    checked={selectedAll}
-                  />
-                  <div>Select All</div></div>
+                    <input
+                      id={`checkbox-x`}
+                      type="checkbox"
+                      className="checkbox"
+                      onClick={() => handleSelect()}
+                      checked={selectedAll}
+                    />
+                    <div>Select All</div>
+                  </div>
                 </div>
                 <div
                   title="Select all users"
                   onClick={selectAll}
                   className="user-selection-right"
-                >
-                </div>
-                <div
-
-                  className="user-selection-right"
-                >
-                </div>
+                ></div>
+                <div className="user-selection-right"></div>
               </div>
 
               <div className="user-selection-list">
@@ -201,4 +197,3 @@ const Notifications = (props: any) => {
 };
 
 export default Notifications;
-

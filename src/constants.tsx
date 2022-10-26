@@ -185,18 +185,6 @@ export const PLANNED_TRAVELLER = [
   },
 ];
 
-// ////////// NAVIGATION CONSTANT ///////////
-
-export const NAVIGATE = {
-  DASHBOARD: 1,
-  ITINERARY: 2,
-  CHAT: 3,
-  CANCELLED_ITINERARIES: 4,
-  NOTIFICATION: 5,
-  PROFILE_WITHOUT_NOTIFICATION: 5,
-  PROFILE: 6,
-};
-
 export const TYPE_OF_MESSAGE = {
   TEXT: 1,
   IMAGE: 2,
