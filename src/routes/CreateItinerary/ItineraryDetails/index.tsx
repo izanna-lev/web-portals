@@ -60,14 +60,14 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
 
   const checkPlace = (place: any) => {
     const {
-      address_components,
+      formatted_address,
       geometry: {
         location: { lat, lng },
       },
     } = place;
 
     const newLocationObj = {
-      location: `${address_components[0].long_name}, ${address_components[3].long_name}`,
+      location: formatted_address,
       type: "Point",
       coordinates: [Math.abs(lng()), Math.abs(lat())],
     };

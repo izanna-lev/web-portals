@@ -217,7 +217,21 @@ const ItineraryDetailsPage = () => {
 
               {itineraryDetails.itineraryStatus === 2 ||
               itineraryDetails.itineraryStatus === 4 ? (
-                <div className="chat">
+                <div
+                  className="chat"
+                  onClick={() => {
+                    navigate(`/chat/${itineraryDetails.channelRef}`, {
+                      state: {
+                        id: itineraryDetails._id,
+                        name: itineraryDetails.name,
+                        email: itineraryDetails.email,
+                        phoneNumber: itineraryDetails.phoneNumber,
+                        permissions: itineraryDetails.permissions,
+                        image: itineraryDetails.image,
+                      },
+                    });
+                  }}
+                >
                   <BsChatRightDots />
                   <span>Chat</span>
                 </div>
@@ -233,7 +247,7 @@ const ItineraryDetailsPage = () => {
                 onClick={() => setedit(itineraryDetails)}
               >
                 <FaRegEdit />
-                &nbsp;<span>Edit</span>
+                &nbsp;<span>Edit Itinerary</span>
               </div>
             </div>
           ) : null}
