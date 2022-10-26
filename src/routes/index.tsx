@@ -32,15 +32,14 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Account />}>
-        <Route index element={<Dashboard />} />
+        <Route index element={<Navigate to="dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="itinerary" element={<Itinerary />}>
-          <Route index element={<AssignedItineraries />} />
+          <Route index element={<Navigate to="list" />} />
           <Route path="list" element={<AssignedItineraries />} />
-          <Route path="cancelled" element={<CancelledItineraries />} />
           <Route path="detail/:formRef" element={<ItineraryDetails />} />
           <Route path="add" element={<CreateItinerary />}>
-            <Route index element={<AddItinerary data={itineraryDetails} />} />
+            <Route index element={<Navigate to="details" />} />
             <Route
               path="details"
               element={<AddItinerary data={itineraryDetails} />}
@@ -77,6 +76,10 @@ const App = () => {
             />
           </Route>
         </Route>
+        <Route
+          path="itineraries/cancelled"
+          element={<CancelledItineraries />}
+        />
         <Route path="profile" element={<Profile />} />
         <Route path="notifications" element={<Notifications />} />
         <Route path="chat">

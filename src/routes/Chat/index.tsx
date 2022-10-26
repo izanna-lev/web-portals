@@ -7,11 +7,10 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import MessagesPage from "./MessageList/index";
-import { IMAGE, NAVIGATE } from "../../constants";
+import { IMAGE } from "../../constants";
 import "./index.scss";
 import { chatList } from "../../store/Actions/chat";
 import dayjs from "dayjs";
-import { SET_NAVIGATION } from "../../store/slices/navigation";
 
 const ChatPage = () => {
   const navigate = useNavigate();
@@ -20,12 +19,10 @@ const ChatPage = () => {
   const chatData = useAppSelector((state) => state.chatList);
   const { page, limit, size, total, data } = chatData;
   const dispatch = useAppDispatch();
-  console.log("chatData---------->",chatData)
-
+  console.log("chatData---------->", chatData);
 
   useEffect(() => {
     dispatch(chatList());
-    dispatch(SET_NAVIGATION({ value: NAVIGATE.CHAT }));
   }, [dispatch]);
 
   useEffect(() => {
@@ -70,16 +67,18 @@ const ChatPage = () => {
                     src={IMAGE.SMALL + element.otherUser.image}
                     alt="d"
                   />
-                  { element.unseenMessages > 0 && 
+                  {element.unseenMessages > 0 && (
                     <div className="unseen-messages"></div>
-                  }
+                  )}
                 </div>
                 <div className="user-chat-data">
                   <div className="user-chat-name">{element.otherUser.name}</div>
                   <div className="user-chat-time">
                     {dayjs(element.message?.createdOn).format("HH:mm")}
                   </div>
-                  <div className="user-chat-message">{element.message?.message || ""}</div>
+                  <div className="user-chat-message">
+                    {element.message?.message || ""}
+                  </div>
                 </div>
               </li>
             );

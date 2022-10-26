@@ -1,8 +1,7 @@
 import NavigationOption from "../sub-components/NavigationOption";
+import { useAppSelector } from "../../store/hooks";
 import { ICON } from "../../assets/index";
 import styles from "./index.module.scss";
-import { NAVIGATE } from "../../constants";
-import { useAppSelector } from "../../store/hooks";
 
 const SideNavBar = () => {
   const profileData = useAppSelector((state) => state.profile);
@@ -14,34 +13,25 @@ const SideNavBar = () => {
         sidebar ? styles["small-navigation-sidebar"] : ""
       }`}
     >
-      {NavigationOption(
-        "Dashboard",
-        ICON.DASHBOARD_INACTIVE,
-        NAVIGATE.DASHBOARD
-      )}
+      {NavigationOption("Dashboard", ICON.DASHBOARD_INACTIVE)}
       {NavigationOption(
         "Assigned Itineraries",
         ICON.ITINERARIES_INACTIVE,
-        NAVIGATE.ITINERARY,
-        "itinerary/list"
+        "itinerary"
       )}
-      {NavigationOption("Chat", ICON.CHAT_INACTIVE, NAVIGATE.CHAT)}
+      {NavigationOption("Chat", ICON.CHAT_INACTIVE)}
       {NavigationOption(
         "Cancel Request",
         ICON.CANCELLED_ITINERARIES_INACTIVE,
-        NAVIGATE.CANCELLED_ITINERARIES,
-        "itinerary/cancelled"
+        "itineraries/cancelled"
       )}
 
-{
-  NavigationOption(
-    "Send Notifications",
-    ICON.NOTIFICATIONS_INACTIVE,
-    NAVIGATE.NOTIFICATION,
-    "notifications"
-  )
-}
-      {NavigationOption("Profile", ICON.PROFILE_INACTIVE, NAVIGATE.PROFILE)}
+      {NavigationOption(
+        "Send Notifications",
+        ICON.NOTIFICATIONS_INACTIVE,
+        "notifications"
+      )}
+      {NavigationOption("Profile", ICON.PROFILE_INACTIVE)}
     </nav>
   );
 };

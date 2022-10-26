@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { BsChatRightDots } from "react-icons/bs";
 import dayjs from "dayjs";
 
-import { API, NAVIGATE } from "../../constants";
+import { API,  } from "../../constants";
 import { Modal } from "../../components/Portal";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -19,7 +19,6 @@ import { Fetch } from "../../api/Fetch";
 import { DeleteEntity } from "../../api/Delete";
 import "./index.scss";
 import Popup from "../../components/Popup";
-import { SET_NAVIGATION } from "../../store/slices/navigation";
 import { UserIcon } from "../../components/UserIcon";
 
 const TableHead = () => (
@@ -125,7 +124,6 @@ const CancelItinerary = () => {
 
   useEffect(() => {
     dispatch(Fetch(API.ITINERARY_CANCEL_REQUESTS, {}, 1, 10));
-    dispatch(SET_NAVIGATION({ value: NAVIGATE.CANCELLED_ITINERARIES }));
   }, [dispatch]);
 
   return (

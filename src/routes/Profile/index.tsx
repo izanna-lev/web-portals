@@ -4,22 +4,15 @@
  */
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { API, NAVIGATE } from "../../constants";
-
-import "./index.scss";
-import { useEffect } from "react";
-import { SET_NAVIGATION } from "../../store/slices/navigation";
 import { UserIcon } from "../../components/UserIcon";
 import { FaRegEdit } from "react-icons/fa";
 import { Create } from "../../api/Create";
+import { API } from "../../constants";
+import "./index.scss";
 
 const ProfilePage = () => {
   const profileData = useAppSelector((state) => state.profile);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(SET_NAVIGATION({ value: NAVIGATE.PROFILE }));
-  }, [dispatch]);
 
   const updateProfileImage = (e: any) => {
     const selectedImage = e.target.files;
