@@ -21,6 +21,7 @@ import "./index.scss";
 const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   const [selectedImage, setSelectedImage] = useState();
   const [location, setLocation] = useState({ type: "" });
+  console.log(data, handleEditPopup);
 
   const nameRef = useRef();
   const emailRef = useRef();
@@ -109,7 +110,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           { formRef }
         )
       );
-      handleEditPopup(null);
+      handleEditPopup && handleEditPopup(null);
     } else {
       payload = { ...payload, formRef };
 
@@ -127,7 +128,9 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
     }
   };
 
-  if (apiMessage.type === "success") navigate("/itinerary/add/summary");
+  useEffect(() => {
+    if (apiMessage.type === "success") navigate("/itinerary/add/summary");
+  }, [apiMessage.type, navigate]);
 
   return (
     <section className="AddItineraryDetailsPage" id="formTop">

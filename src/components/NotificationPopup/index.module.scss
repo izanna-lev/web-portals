@@ -47,7 +47,8 @@
 }
 
 .list-container {
-  height: 400px;
+  min-height: 4rem;
+  max-height: 30rem;
   overflow: auto;
 }
 

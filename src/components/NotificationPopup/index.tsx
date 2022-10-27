@@ -1,26 +1,74 @@
 import styles from "./index.module.scss";
 import useComponentVisible from "../outsideClickHandler/index";
-import { useEffect } from "react";
-import { useAppDispatch } from "../../store/hooks";
+import { useEffect, useRef } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Fetch } from "../../api/Fetch";
-import { API } from "../../constants";
+import { API, IMAGE, NOTIFICATION } from "../../constants";
+import { getFormattedTime } from "../../util";
+import { ICON } from "../../assets/index";
+import { useNavigate } from "react-router-dom";
 
 type InputProps = {
   onClickOutside: Function;
 };
 
-const Form = ({ onClickOutside }: InputProps) => {
+type NotificationProps = {
+  channelRef?: string;
+  sourceRef?: string;
+  text: string;
+  image: string;
+  createdOn: string;
+  type: number;
+  onClick: Function;
+  _id: string;
+};
+
+const Notification = (props: NotificationProps) => (
+  <div
+    className={styles["notification-user-data"]}
+    onClick={() => props.onClick(props)}
+    key={props._id}
+  >
+    <div className={styles["notification-image-container"]}>
+      <img
+        src={
+          props.type !== NOTIFICATION.MESSAGE
+            ? ICON.ADMIN
+            : `${IMAGE.SMALL}${props.image}`
+        }
+        className={styles["notification-user-image"]}
+        alt="profile"
+      />
+    </div>
+    <div className={styles["notification-user-info"]}>
+      <div className={styles["notification-user-message"]}>{props.text}</div>
+      <div className={styles["notification-user-time"]}>
+        {getFormattedTime(props.createdOn)}
+      </div>
+    </div>
+  </div>
+);
+
+const NotificationPopup = ({ onClickOutside }: InputProps) => {
   const { ref, isComponentVisible } = useComponentVisible(true);
+
+  const notifications = useAppSelector((state) => state.notifications.list);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleClick = (type: number, sourceRef: string) => {
+    if (type === NOTIFICATION.ASSIGN_SPECIALIST)
+      navigate(`itinerary/detail/${sourceRef}`);
+    else if (type === NOTIFICATION.MESSAGE) navigate(`chat/${sourceRef}`);
+    else console.log("null");
+  };
 
   useEffect(() => {
-    dispatch(Fetch(API.NOTIFICATION_LIST));
+    dispatch(Fetch(API.NOTIFICATION_LIST, {}, 1, 1000000));
   }, [dispatch]);
 
   useEffect(() => {
-    if (!isComponentVisible) {
-      onClickOutside();
-    }
+    if (!isComponentVisible) onClickOutside();
   }, [isComponentVisible]);
 
   return (
@@ -32,145 +80,13 @@ const Form = ({ onClickOutside }: InputProps) => {
       <div className={`${styles.box} ${styles.arrow}`}>
         <div className={styles["notification-heading"]}>Notifications</div>
         <div className={styles["list-container"]}>
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>{" "}
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>{" "}
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>{" "}
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>{" "}
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>{" "}
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>{" "}
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>{" "}
-          <div className={styles["notification-user-data"]}>
-            <div className={styles["notification-image-container"]}>
-              <img
-                src="https://sneakers-app.s3.amazonaws.com/staging/images/small/staging-image-1658749914901-223"
-                className={styles["notification-user-image"]}
-                alt="profile"
-              />
-            </div>
-            <div className={styles["notification-user-info"]}>
-              <div className={styles["notification-user-message"]}>
-                Admin has sent you a message.
-              </div>
-              <div className={styles["notification-user-time"]}>2:30 PM</div>
-            </div>
-          </div>
+          {notifications.map((notification: any) => (
+            <Notification {...notification} onClick={handleClick} />
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default Form;
+export default NotificationPopup;

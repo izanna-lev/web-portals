@@ -142,6 +142,12 @@ export const PAYMENT_STATUS = [
   { name: "Paid", value: 2 },
 ];
 
+export const NOTIFICATION = {
+  ADMIN: 1,
+  MESSAGE: 2,
+  ASSIGN_SPECIALIST: 5,
+};
+
 export const RESERVATION_TYPE = {
   ACCOMMODATION: 1,
   RESTAURANT: 2,
