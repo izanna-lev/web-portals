@@ -16,6 +16,7 @@ import { API } from "../../constants";
 import { Fetch } from "../../api/Fetch";
 import { UserIcon } from "../UserIcon";
 import { setSidebar } from "../../store/slices/appData";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   showUserData?: boolean;
@@ -39,6 +40,7 @@ const Header = ({ showUserData = true }: Props) => {
   const profileData = useAppSelector((state: ProfileData) => state.profile);
   const sidebar = useAppSelector((state) => state.appData.sidebarSmall);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!profileData._id && showUserData) dispatch(Fetch(API.PROFILE));
@@ -51,7 +53,9 @@ const Header = ({ showUserData = true }: Props) => {
           onClick={() => dispatch(setSidebar(!sidebar))}
           className={styles["header__menu--icon"]}
         />
-        <h1 className={styles["header-logo"]}>Onsite Travel</h1>
+        <h1 className={styles["header-logo"]} onClick={() => navigate("/")}>
+          Onsite Travel
+        </h1>
       </div>
 
       <div className={styles["header-right"]}>
