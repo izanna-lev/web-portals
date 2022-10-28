@@ -43,7 +43,9 @@ const ItineraryDetailsPage = () => {
   const [edit, setedit] = useState(null);
 
   const { formRef } = useAppSelector((state: any) => state.appData);
-  const { itineraryDetails } = useAppSelector((state: any) => state.itinerary);
+  const { itineraryDetails, channelRef } = useAppSelector(
+    (state: any) => state.itinerary
+  );
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -219,18 +221,7 @@ const ItineraryDetailsPage = () => {
               itineraryDetails.itineraryStatus === 4 ? (
                 <div
                   className="chat"
-                  onClick={() => {
-                    navigate(`/chat/${itineraryDetails.channelRef}`, {
-                      state: {
-                        id: itineraryDetails._id,
-                        name: itineraryDetails.name,
-                        email: itineraryDetails.email,
-                        phoneNumber: itineraryDetails.phoneNumber,
-                        permissions: itineraryDetails.permissions,
-                        image: itineraryDetails.image,
-                      },
-                    });
-                  }}
+                  onClick={() => navigate(`/chat/${channelRef}`)}
                 >
                   <BsChatRightDots />
                   <span>Chat</span>
