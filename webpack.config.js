@@ -49,7 +49,7 @@ module.exports = (env) => {
       ],
     },
 
-    // devtool: "source-map",
+    devtool: "source-map",
 
     // loaders
     module: {

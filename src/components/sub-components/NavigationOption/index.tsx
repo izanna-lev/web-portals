@@ -11,7 +11,13 @@ const NavigationOption = (name: string, Icon: string, url?: string) => (
     }
     title={name}
   >
-    <img src={Icon} alt={name} className={styles["sidebar-icon"]} />
+    <img
+      src={Icon}
+      alt={name}
+      className={styles["sidebar-icon"]}
+      width="22px"
+      height="22px"
+    />
     <span className={styles["sidebar-icon--name"]}>{name}</span>
     {name === "Chat" && (
       <div className={styles["sidebar-count"]}>
