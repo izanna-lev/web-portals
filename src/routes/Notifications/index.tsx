@@ -138,13 +138,14 @@ const Notifications = (props: any) => {
     <section className="content-container">
       <section className="content">
         <section className="content-top">
-          <div className="content-heading">Notifications</div>
+          <div className="content-heading">Send Notifications</div>
           <div className="notifications-main-div">
             <div className="notifications-message-div">
               <div className="notifications-message-heading"></div>
               <textarea
                 id="notificationText"
                 className="notifications-textarea"
+                placeholder="Type your message here."
                 autoFocus
               />
               <div className="notifications-message-heading">

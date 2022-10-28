@@ -190,8 +190,9 @@
 
 .chat-specialist {
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   gap: 6px;
+  padding: 12px 8px;
   background-color: $theme_color_blue;
   color: $theme_color_white;
 }
@@ -199,10 +200,17 @@
 .cancel-itinerary {
   display: flex;
   gap: 2px;
-  font-size: 12px;
-  color: $theme_color_blue;
+  font-size: 14px;
+  padding: 12px 8px;
+  color: red;
+  border: 1px solid red;
 }
 
+.cancel-itinerary:hover {
+  color: red !important;
+  background: $theme_color_white !important;
+
+}
 .cancelled-itinerary {
   pointer-events: none;
   background-color: $theme_color_4;
