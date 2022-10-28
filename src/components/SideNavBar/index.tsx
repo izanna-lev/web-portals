@@ -21,7 +21,7 @@ const SideNavBar = () => {
       )}
       {NavigationOption("Chat", ICON.CHAT_INACTIVE)}
       {NavigationOption(
-        "Cancel Request",
+        "Cancel Requests",
         ICON.CANCELLED_ITINERARIES_INACTIVE,
         "itineraries/cancelled"
       )}
