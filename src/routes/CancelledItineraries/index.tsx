@@ -129,7 +129,7 @@ const CancelItinerary = () => {
   return (
     <main className="content-container">
       <section className="content-top">
-        <h2 className="content-heading">Cancel requests</h2>
+        <h2 className="content-heading">Cancel Requests</h2>
       </section>
       {list.length
         ? Pagination({
