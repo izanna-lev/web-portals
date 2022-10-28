@@ -4,8 +4,8 @@
 .notification-popup {
   position: absolute;
   width: 400px;
-  top: 5.4rem;
-  right: 16.5rem;
+  top: 5.5rem;
+  right: 16.3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,12 +52,22 @@
   overflow: auto;
 }
 
-.notification-user-data {
-  display: grid;
-  height: 60px;
-  gap: 0.5rem;
-  grid-template-columns: max-content auto;
+.notification-wrapper {
   border-bottom: 1px solid $theme_color_blue;
+  padding: 0.25rem;
+
+  .notification-user-data {
+    display: grid;
+    height: 60px;
+    gap: 0.5rem;
+    grid-template-columns: max-content auto;
+    cursor: pointer;
+    transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &:hover {
+      background-color: $theme_color_light_blue;
+    }
+  }
 }
 
 .notification-image-container {

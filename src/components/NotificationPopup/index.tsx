@@ -1,19 +1,19 @@
-import styles from "./index.module.scss";
-import useComponentVisible from "../outsideClickHandler/index";
-import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Fetch } from "../../api/Fetch";
-import { API, IMAGE, NOTIFICATION } from "../../constants";
+import useComponentVisible from "../outsideClickHandler/index";
+import { API, NOTIFICATION } from "../../constants";
+import { useNavigate } from "react-router-dom";
 import { getFormattedTime } from "../../util";
 import { ICON } from "../../assets/index";
-import { useNavigate } from "react-router-dom";
+import styles from "./index.module.scss";
+import { Fetch } from "../../api/Fetch";
+import { useEffect } from "react";
+import { UserIcon } from "../UserIcon";
 
 type InputProps = {
   onClickOutside: Function;
 };
 
 type NotificationProps = {
-  channelRef?: string;
   sourceRef?: string;
   text: string;
   image: string;
@@ -23,31 +23,31 @@ type NotificationProps = {
   _id: string;
 };
 
-const Notification = (props: NotificationProps) => (
-  <div
-    className={styles["notification-user-data"]}
-    onClick={() => props.onClick(props)}
-    key={props._id}
-  >
-    <div className={styles["notification-image-container"]}>
-      <img
-        src={
-          props.type !== NOTIFICATION.MESSAGE
-            ? ICON.ADMIN
-            : `${IMAGE.SMALL}${props.image}`
-        }
-        className={styles["notification-user-image"]}
-        alt="profile"
-      />
-    </div>
-    <div className={styles["notification-user-info"]}>
-      <div className={styles["notification-user-message"]}>{props.text}</div>
-      <div className={styles["notification-user-time"]}>
-        {getFormattedTime(props.createdOn)}
+const Notification = (props: NotificationProps) => {
+  return (
+    <div className={styles["notification-wrapper"]} key={props._id}>
+      <div
+        className={styles["notification-user-data"]}
+        onClick={() => props.onClick(props)}
+      >
+        <div className={styles["notification-image-container"]}>
+          <UserIcon
+            image={props.type === NOTIFICATION.MESSAGE && props.image}
+            icon={props.type !== NOTIFICATION.MESSAGE && ICON.ADMIN}
+          />
+        </div>
+        <div className={styles["notification-user-info"]}>
+          <div className={styles["notification-user-message"]}>
+            {props.text}
+          </div>
+          <div className={styles["notification-user-time"]}>
+            {getFormattedTime(props.createdOn)}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const NotificationPopup = ({ onClickOutside }: InputProps) => {
   const { ref, isComponentVisible } = useComponentVisible(true);
@@ -56,11 +56,21 @@ const NotificationPopup = ({ onClickOutside }: InputProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleClick = (type: number, sourceRef: string) => {
-    if (type === NOTIFICATION.ASSIGN_SPECIALIST)
-      navigate(`itinerary/detail/${sourceRef}`);
-    else if (type === NOTIFICATION.MESSAGE) navigate(`chat/${sourceRef}`);
-    else console.log("null");
+  const handleClick = ({
+    type,
+    sourceRef,
+  }: {
+    type: number;
+    sourceRef: string;
+  }) => {
+    if (type === NOTIFICATION.ASSIGN_SPECIALIST) {
+      onClickOutside();
+      return navigate(`itinerary/detail/${sourceRef}`);
+    }
+    if (type === NOTIFICATION.MESSAGE) {
+      onClickOutside();
+      return navigate(`chat/${sourceRef}`);
+    }
   };
 
   useEffect(() => {
