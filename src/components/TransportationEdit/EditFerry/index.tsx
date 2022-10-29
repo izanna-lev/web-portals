@@ -297,7 +297,7 @@ const EditFerry = (props: props) => {
                   ref: specialistNoteRef,
                   name: "Specialist Note",
                   id: "specialist note",
-                  maxlength: 350,
+                  maxlength: 1000,
                   type: "text",
                 }}
               />

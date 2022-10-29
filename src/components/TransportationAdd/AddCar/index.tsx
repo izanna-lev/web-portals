@@ -24,11 +24,12 @@ const UserTicket = (
   setimageUrl: React.Dispatch<React.SetStateAction<string>>,
   dispatch: any
 ) => {
-  let newImageUrl = "";
+  const divId = `bg-img-${length}`;
+  const imgDiv = document.getElementById(divId);
+
   const handleImageChange = async (file: any) => {
     if (file[0]) {
-      newImageUrl = URL.createObjectURL(file[0]);
-      setBackground(newImageUrl, `bg-img-${length}`);
+      setBackground(URL.createObjectURL(file[0]), divId);
       const response = await dispatch(UploadImage(undefined, file[0]));
       saveData({ carImage: response.data });
     }
@@ -47,7 +48,7 @@ const UserTicket = (
       <div className={styles["form-left-details"]}>
         <div className={`${styles["form-heading"]}`}>Upload Car Image</div>
         <div style={{ display: "flex" }}>
-          <div className={styles["form-image"]} id={`bg-img-${length}`}>
+          <div className={styles["form-image"]} id={divId}>
             <input
               type="file"
               id={`${length}`}
@@ -71,7 +72,8 @@ const UserTicket = (
             className={styles["activity-image-popup"]}
             onClick={() => {
               setshowImage(true);
-              setimageUrl(newImageUrl);
+              if (imgDiv)
+                setimageUrl(imgDiv.style.backgroundImage.slice(5, -2));
             }}
           >
             <MdZoomOutMap />
@@ -270,7 +272,7 @@ const NewTransportationForm = (props: props) => {
                   ref: specialistNoteRef,
                   name: "Specialist Note",
                   id: "specialist note",
-                  maxlength: 350,
+                  maxlength: 1000,
                   type: "text",
                 }}
               />

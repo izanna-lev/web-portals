@@ -14,7 +14,7 @@
 
 .form-background {
   width: 60rem;
-  height: 45rem;
+  height: 38rem;
   border-radius: 0.75rem;
   background-color: $white;
   display: flex;
@@ -34,7 +34,7 @@
   background-color: $theme_color_light_blue_3x;
 }
 
-.form-image>.not-selected-preview {
+.form-image > .not-selected-preview {
   width: 80%;
   height: 70%;
   display: flex;
