@@ -279,7 +279,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
               ref: regulationsRef,
               name: "Specific Restriction and Regulation",
               id: "restriction",
-              maxlength: 350,
+              maxlength: 1000,
               type: "text",
             }}
           />
