@@ -34,33 +34,28 @@
       font-weight: 500;
     }
 
-    >img {
+    > img {
       width: 80%;
-      max-width: 500px;
+      max-width: 30rem;
       object-fit: contain;
     }
   }
 }
 
 .login-form {
-  padding: 28px;
+  padding: 1.75rem;
   width: 60%;
-  // box-shadow: 0.25rem  0.5rem 2rem 0.25rem  #e5f7ff;
-  backdrop-filter: blur(15.5px);
-  border-radius: 10px;
-  background: rgba(229, 247, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .heading {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 300;
   margin-bottom: 1.5rem;
 }
 
 .strong-heading {
   color: $theme_color_blue;
-  // font-size: 1.5rem;
+  // font-size: 2rem;
 }
 
 .label {
@@ -76,7 +71,7 @@
 
 .custom-field {
   width: 100%;
-  height: 52px;
+  height: 3rem;
   background-color: $theme_color_light_blue_3x;
   border: none;
   border-radius: 0.5rem;
@@ -104,9 +99,9 @@
 }
 
 .button-login {
-  margin-top: 52px;
+  margin-top: 3rem;
   width: 100%;
-  height: 52px;
+  height: 3.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,7 +113,7 @@
     align-items: center;
     margin: 0 auto;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     transition: all 1.5s ease-out;
     background-size: 120% auto;
     background-color: $theme_color_blue;
@@ -132,8 +127,6 @@
     }
   }
 }
-
-
 
 .signin-image {
   width: 100%;
