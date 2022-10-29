@@ -117,7 +117,7 @@ module.exports = (env) => {
       new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
       new CompressionPlugin({
         algorithm: "gzip",
-        test: /.js$|.css$/,
+        test: /.js$|.css$|.map$/,
       }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
