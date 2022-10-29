@@ -47,7 +47,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build GENERATE_SOURCEMAP=false",
-    "webpack": "webpack serve --env BRANCH=development API_URL=http://44.209.25.93:3000/api/ SOCKET_URL=http://44.209.25.93:3000/ S3_URL=https://app-onsite.s3.amazonaws.com/ --config ./webpack.config.dev.js",
+    "dev": "webpack serve --env BRANCH=development API_URL=http://44.209.25.93:3000/api/ SOCKET_URL=http://44.209.25.93:3000/ S3_URL=https://app-onsite.s3.amazonaws.com/ --config ./webpack.config.dev.js --open",
     "build-dev": "webpack --env BRANCH=development API_URL=http://44.209.25.93:3000/api/ SOCKET_URL=http://44.209.25.93:3000/ S3_URL=https://app-onsite.s3.amazonaws.com/",
     "build-stage": "webpack --env BRANCH=staging API_URL=44.208.65.177:3000/api/ SOCKET_URL=44.208.65.177:3000/ S3_URL=https://app-onsite.s3.amazonaws.com/"
   },

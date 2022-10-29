@@ -3,9 +3,9 @@
 @import "../../styles/configs/_ui.scss";
 
 .wrapper {
-  width: 380px;
+  width: 25rem;
   position: fixed;
-  top: 60px;
+  top: 3.5rem;
   right: 4%;
   overflow: hidden;
 }
@@ -17,19 +17,21 @@
   border-radius: 7px;
   display: grid;
   grid-template-columns: 1.3fr 6fr 0.5fr;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.08);
 }
 
 .success {
+  border: 1px solid #47d76444;
   border-left: 3px solid #47d764;
 }
 
 .error {
+  border: 1px solid #ff355a4f;
   border-left: 3px solid #ff355b;
 }
 
 .toast:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .outer-container,
@@ -38,7 +40,7 @@
 }
 
 .outer-container i {
-  font-size: 35px;
+  font-size: 2rem;
 }
 
 .successicon {
@@ -70,7 +72,7 @@
 .toast button {
   align-self: flex-start;
   background-color: transparent;
-  font-size: 20px;
+  font-size: 1.25rem;
   color: #656565;
   line-height: 0;
   cursor: pointer;
@@ -78,8 +80,8 @@
 }
 
 .fas {
-  width: 28px;
-  height: 28px;
+  width: 1.75rem;
+  height: 1.75rem;
   color: red;
 }
 
