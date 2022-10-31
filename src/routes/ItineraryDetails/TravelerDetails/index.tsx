@@ -5,7 +5,7 @@
 
 import { useAppSelector } from "../../../store/hooks";
 import { PLANNED_TRAVELLER } from "../../../constants";
-import moment from "moment";
+import dayjs from "dayjs";
 import "./index.scss";
 import { UserIcon } from "../../../components/UserIcon";
 
@@ -35,7 +35,7 @@ const DetailsPage = () => {
             <div className="key">Planned Date</div>
             <div className="value">
               {travellerDetails.plannedDate
-                ? moment(travellerDetails.plannedDate).format("DD-MM-YYYY")
+                ? dayjs(travellerDetails.plannedDate).format("DD-MM-YYYY")
                 : "NA"}
             </div>
           </div>

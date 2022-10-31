@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 import React, { useEffect, useRef, useState } from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { IoCloudUploadOutline } from "react-icons/io5";
@@ -193,7 +193,7 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
           name: "time",
           type: "time",
           default: data.dateTime
-            ? moment(new Date(data.dateTime).toISOString())
+            ? dayjs(new Date(data.dateTime).toISOString())
                 .format()
                 .slice(11, 16)
             : "",
@@ -206,9 +206,7 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
           name: "date",
           type: "date",
           default: data.dateTime
-            ? moment(new Date(data.dateTime).toISOString())
-                .format()
-                .slice(0, 10)
+            ? dayjs(new Date(data.dateTime).toISOString()).format().slice(0, 10)
             : "",
         }}
       />

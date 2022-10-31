@@ -1,4 +1,6 @@
-import moment from "moment";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import dayjs from "dayjs";
+dayjs.extend(localizedFormat);
 
 // For table serial numbers
 export const SerialNum = (limit: number, page: number, index: number) => {
@@ -23,7 +25,7 @@ export const setBackground = (image: string, id: string) => {
 export const getFormattedDate = (dateTimeString: string) => {
   if (dateTimeString) {
     const getUTCDate = new Date(dateTimeString).toISOString();
-    const formattedDate = moment(getUTCDate).format("D-MMM-YYYY");
+    const formattedDate = dayjs(getUTCDate).format("D-MMM-YYYY");
     return formattedDate;
   }
   return "NA";
@@ -33,7 +35,7 @@ export const getFormattedDate = (dateTimeString: string) => {
 export const getFormattedTime = (dateTimeString: string) => {
   if (dateTimeString) {
     const getUTCTime = new Date(dateTimeString).toISOString();
-    const formattedTime = moment(getUTCTime).format("LT");
+    const formattedTime = dayjs(getUTCTime).format("LT");
     return formattedTime;
   }
   return "NA";
