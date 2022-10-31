@@ -19,8 +19,12 @@ const serveRouter = express.Router();
 serveRouter.use(cors());
 
 // Function to check if compressed file exists
-const fileExists = (url) =>
-  fs.existsSync(path.join(clientDirPath, url + ".gz").split("?")[0]);
+const fileExists = (url) => {
+  let fileName;
+  if (url.includes("?")) fileName = url.split("?")[0] + ".gz";
+  else fileName = url + ".gz";
+  return fs.existsSync(path.join(clientDirPath, fileName));
+};
 
 // For each request for .js file return the compressed version .gz
 app.get("*.js", function (req, res, next) {

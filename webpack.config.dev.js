@@ -3,10 +3,9 @@
  * @author Shivender
  **/
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { EnvironmentPlugin } = require("webpack");
-const webpack = require("webpack");
+const { EnvironmentPlugin, ProvidePlugin } = require("webpack");
 const path = require("path");
 
 const APP_DIR = path.resolve(__dirname, "src");
@@ -51,6 +50,7 @@ module.exports = (env) => {
       compress: true,
       port: 3000,
       hot: true,
+      open: true,
     },
 
     // loaders
@@ -125,7 +125,8 @@ module.exports = (env) => {
     // plugins
     plugins: [
       new EnvironmentPlugin(env),
-      new webpack.ProvidePlugin({ process: "process/browser" }),
+      new ReactRefreshWebpackPlugin(),
+      new ProvidePlugin({ process: "process/browser" }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         favicon: "./public/favicon.png",
