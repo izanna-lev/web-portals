@@ -11,7 +11,7 @@ import { usePlacesWidget } from "react-google-autocomplete";
 import { API, GOOGLE_API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { Create } from "../../../api/Create";
-import moment from "moment";
+import dayjs from "dayjs";
 
 const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   const [selectedImage, setSelectedImage] = useState();
@@ -231,7 +231,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.checkInDateTime
-                    ? moment(new Date(data.checkInDateTime).toISOString())
+                    ? dayjs(new Date(data.checkInDateTime).toISOString())
                         .format()
                         .slice(0, 10)
                     : "",
@@ -245,7 +245,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.checkInDateTime
-                    ? moment(new Date(data.checkInDateTime).toISOString())
+                    ? dayjs(new Date(data.checkInDateTime).toISOString())
                         .format()
                         .slice(11, 16)
                     : "",
@@ -259,7 +259,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.checkInDateTime
-                    ? moment(new Date(data.checkOutDateTime).toISOString())
+                    ? dayjs(new Date(data.checkOutDateTime).toISOString())
                         .format()
                         .slice(0, 10)
                     : "",
@@ -273,7 +273,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.checkInDateTime
-                    ? moment(new Date(data.checkOutDateTime).toISOString())
+                    ? dayjs(new Date(data.checkOutDateTime).toISOString())
                         .format()
                         .slice(11, 16)
                     : "",

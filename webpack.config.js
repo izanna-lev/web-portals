@@ -1,5 +1,5 @@
 /**
- * Webpack config for React.
+ * Webpack config for React Production build.
  * @author Shivender
  **/
 

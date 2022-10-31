@@ -17,7 +17,7 @@ import { usePlacesWidget } from "react-google-autocomplete";
 import { Create } from "../../../api/Create";
 import { NewTicket } from "../../TransportationAdd/NewTicket";
 import { OldTicket } from "../OldTicket";
-import moment from "moment";
+import dayjs from "dayjs";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -247,7 +247,7 @@ const EditFlight = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.departDateTime
-                    ? moment(new Date(data.departDateTime).toISOString())
+                    ? dayjs(new Date(data.departDateTime).toISOString())
                         .format()
                         .slice(0, 10)
                     : "",
@@ -263,7 +263,7 @@ const EditFlight = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.departDateTime
-                    ? moment(new Date(data.departDateTime).toISOString())
+                    ? dayjs(new Date(data.departDateTime).toISOString())
                         .format()
                         .slice(11, 16)
                     : "",
@@ -287,7 +287,7 @@ const EditFlight = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.arrivalDateTime
-                    ? moment(new Date(data.arrivalDateTime).toISOString())
+                    ? dayjs(new Date(data.arrivalDateTime).toISOString())
                         .format()
                         .slice(11, 16)
                     : "",
