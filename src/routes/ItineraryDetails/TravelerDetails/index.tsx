@@ -59,9 +59,9 @@ const DetailsPage = () => {
               <div className="key">{name || "NA"}</div>
               <a
                 className="specialist-detail value"
-                href={`tel:${phoneNumber}`}
+                href={`tel:+${phoneNumber}`}
               >
-                {phoneNumber || "NA"}
+                +{phoneNumber || "NA"}
               </a>
             </div>
           </div>

@@ -83,7 +83,7 @@ const UserTicket = (
         <InputForm
           inputFields={{
             placeholder: "Steven Johns",
-            name: `Name of Driver`,
+            name: `Company Name`,
             id: "drivername",
             maxlength: 50,
             type: "text",

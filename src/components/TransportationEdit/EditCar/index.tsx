@@ -96,7 +96,7 @@ const UserTicket = (
         <InputForm
           inputFields={{
             default: data.driverName,
-            name: `Name of Driver`,
+            name: `Company Name`,
             id: "drivername",
             maxlength: 50,
             type: "text",
