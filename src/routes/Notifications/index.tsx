@@ -149,7 +149,7 @@ const Notifications = (props: any) => {
                 autoFocus
               />
               <div className="notifications-message-heading">
-                Note: Select users from right pane whom you want to send the
+                Note: Select travelers from right pane whom you want to send the
                 notification.
               </div>
               <button
