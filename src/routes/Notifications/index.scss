@@ -64,8 +64,8 @@
   flex-direction: column;
   border-radius: 5px;
   width: 450px;
-  margin-left: 40px;
-  margin-right: 40px;
+  // margin-left: 40px;
+  // margin-right: 40px;
   height: 700px;
 }
 
@@ -154,6 +154,15 @@
   align-items: center;
 }
 
+.container-right {
+  padding: 0 40px;
+
+  > div:first-of-type {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+}
+
 //     transition: all .50s ease-in-out;;
 //     animation: animName 0.4s;
 // }
@@ -212,5 +221,5 @@
 
 .select-all {
   display: flex;
-  gap:4px;
+  gap: 4px;
 }
