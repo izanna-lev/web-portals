@@ -149,7 +149,7 @@ const Notifications = (props: any) => {
                 autoFocus
               />
               <div className="notifications-message-heading">
-                Note: Select users from right pane who you want to send the
+                Note: Select users from right pane whom you want to send the
                 notification.
               </div>
               <button
@@ -160,34 +160,37 @@ const Notifications = (props: any) => {
                 Send
               </button>
             </div>
-            <div className="user-selection-main-div">
-              <div className="user-selection-header">
-                <div className="user-selection-left">
-                  <div>Users List</div>
-                  <div className="select-all">
-                    <input
-                      id={`checkbox-x`}
-                      type="checkbox"
-                      className="checkbox"
-                      onClick={() => handleSelect()}
-                      checked={selectedAll}
-                    />
-                    <div>Select All</div>
+            <div className="container-right">
+              <div>Select Travelers</div>
+              <div className="user-selection-main-div">
+                <div className="user-selection-header">
+                  <div className="user-selection-left">
+                    <div>Travelers List</div>
+                    <div className="select-all">
+                      <input
+                        id={`checkbox-x`}
+                        type="checkbox"
+                        className="checkbox"
+                        onClick={() => handleSelect()}
+                        checked={selectedAll}
+                      />
+                      <div>Select All</div>
+                    </div>
                   </div>
+                  <div
+                    title="Select all users"
+                    onClick={selectAll}
+                    className="user-selection-right"
+                  ></div>
+                  <div className="user-selection-right"></div>
                 </div>
-                <div
-                  title="Select all users"
-                  onClick={selectAll}
-                  className="user-selection-right"
-                ></div>
-                <div className="user-selection-right"></div>
-              </div>
 
-              <div className="user-selection-list">
-                {list.length &&
-                  list.map((user: any, index: number) =>
-                    User(user, index, selectOne)
-                  )}
+                <div className="user-selection-list">
+                  {list.length &&
+                    list.map((user: any, index: number) =>
+                      User(user, index, selectOne)
+                    )}
+                </div>
               </div>
             </div>
           </div>
