@@ -1,5 +1,5 @@
 /**
- * Webpack config for React.
+ * Webpack config for React Production build.
  * @author Shivender
  **/
 
@@ -7,8 +7,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const { EnvironmentPlugin } = require("webpack");
-const webpack = require("webpack");
+const { EnvironmentPlugin, ProvidePlugin } = require("webpack");
 const path = require("path");
 
 const APP_DIR = path.resolve(__dirname, "src");
@@ -113,7 +112,7 @@ module.exports = (env) => {
     // plugins
     plugins: [
       new EnvironmentPlugin(env),
-      new webpack.ProvidePlugin({ process: "process/browser" }),
+      new ProvidePlugin({ process: "process/browser" }),
       new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
       new CompressionPlugin({
         algorithm: "gzip",

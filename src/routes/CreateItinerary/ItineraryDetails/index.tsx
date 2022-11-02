@@ -15,7 +15,7 @@ import { IoImageOutline } from "react-icons/io5";
 import { Create } from "../../../api/Create";
 import { getRefValue, setBackground } from "../../../util";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
+import dayjs from "dayjs";
 import "./index.scss";
 
 const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
@@ -202,7 +202,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <InputForm
             inputFields={{
               default: data.fromDate
-                ? moment(new Date(data.fromDate).toISOString())
+                ? dayjs(new Date(data.fromDate).toISOString())
                     .format()
                     .slice(0, 10)
                 : "",
@@ -217,7 +217,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <InputForm
             inputFields={{
               default: data.toDate
-                ? moment(new Date(data.toDate).toISOString())
+                ? dayjs(new Date(data.toDate).toISOString())
                     .format()
                     .slice(0, 10)
                 : "",

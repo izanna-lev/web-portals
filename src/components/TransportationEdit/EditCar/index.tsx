@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { UploadImage } from "../../../api/uploadImage";
 import { setBackground } from "../../../util";
 import { Create } from "../../../api/Create";
-import moment from "moment";
+import dayjs from "dayjs";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -96,7 +96,7 @@ const UserTicket = (
         <InputForm
           inputFields={{
             default: data.driverName,
-            name: `Name of Driver`,
+            name: `Company Name`,
             id: "drivername",
             maxlength: 50,
             type: "text",
@@ -264,7 +264,7 @@ const EditCar = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.departDateTime
-                    ? moment(new Date(data.departDateTime).toISOString())
+                    ? dayjs(new Date(data.departDateTime).toISOString())
                         .format()
                         .slice(0, 10)
                     : "",
@@ -278,7 +278,7 @@ const EditCar = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.departDateTime
-                    ? moment(new Date(data.departDateTime).toISOString())
+                    ? dayjs(new Date(data.departDateTime).toISOString())
                         .format()
                         .slice(11, 16)
                     : "",

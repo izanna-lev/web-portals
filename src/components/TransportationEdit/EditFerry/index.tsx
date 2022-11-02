@@ -17,7 +17,7 @@ import { usePlacesWidget } from "react-google-autocomplete";
 import { NewTicket } from "../../TransportationAdd/NewTicket";
 import { OldTicket } from "../OldTicket";
 import { Create } from "../../../api/Create";
-import moment from "moment";
+import dayjs from "dayjs";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -238,7 +238,7 @@ const EditFerry = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.arrivalDateTime
-                    ? moment(new Date(data.arrivalDateTime).toISOString())
+                    ? dayjs(new Date(data.arrivalDateTime).toISOString())
                         .format()
                         .slice(0, 10)
                     : "",
@@ -254,7 +254,7 @@ const EditFerry = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.arrivalDateTime
-                    ? moment(new Date(data.arrivalDateTime).toISOString())
+                    ? dayjs(new Date(data.arrivalDateTime).toISOString())
                         .format()
                         .slice(11, 16)
                     : "",
@@ -279,7 +279,7 @@ const EditFerry = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.departDateTime
-                    ? moment(new Date(data.departDateTime).toISOString())
+                    ? dayjs(new Date(data.departDateTime).toISOString())
                         .format()
                         .slice(11, 16)
                     : "",
