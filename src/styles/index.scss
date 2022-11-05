@@ -56,12 +56,36 @@ h6 {
   padding: 0.25rem;
 }
 
+.color-blue {
+  color: $theme_color_blue;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.add-more-tickets {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 input,
 textarea,
 select {
   &:focus,
   &:focus-visible {
     outline: none;
+  }
+
+  &::placeholder {
+    font-family: $font-popins;
   }
 }
 
@@ -73,12 +97,4 @@ select {
   .AddItineraryPage {
     // max-height: 32rem !important;
   }
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.underline {
-  text-decoration: underline;
 }

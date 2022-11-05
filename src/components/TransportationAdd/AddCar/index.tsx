@@ -187,6 +187,8 @@ const NewTransportationForm = (props: props) => {
       transportationType: TRANSPORTATION_TYPE.CAR,
     };
 
+    if (!ticketsData.carImage) return alert("Please select an image!");
+
     dispatch(
       Create(API.ADD_CAR, data, false, "", API.TRANSPORTATION_DATA, {
         itineraryRef: _id,

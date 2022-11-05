@@ -2,6 +2,8 @@ import APP_LOGO from "./logo.png";
 import APP_LOGO_BACKGROUND from "./ic_login-background.png";
 import SIGNIN from "./signin.png";
 import ADMIN from "./admin.svg";
+import SHOW_PASSWORD from "./ic_show-password.svg";
+import HIDE_PASSWORD from "./ic_hide-password.svg";
 import USER_PLACEHOLDER from "./placeholder.png";
 
 import CHAT_ADD from "./action/ic_add.svg";
@@ -36,6 +38,8 @@ export const ICON: IconOptions = {
   ADMIN,
   SIGNIN,
   LOGOUT,
+  SHOW_PASSWORD,
+  HIDE_PASSWORD,
   USER_PLACEHOLDER,
 
   // APP LOGO & BANNER

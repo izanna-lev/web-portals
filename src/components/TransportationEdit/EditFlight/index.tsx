@@ -342,7 +342,7 @@ const EditFlight = (props: props) => {
             )}
           </div>
           <div
-            className={`${styles["add-more"]} ${styles["form-heading"]}`}
+            className={`add-more-tickets ${styles["form-heading"]}`}
             onClick={() => addMoreTickets()}
           >
             + Add More Users
