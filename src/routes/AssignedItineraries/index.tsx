@@ -111,7 +111,7 @@ const ItineraryPage = () => {
               dispatch(Fetch(API.ITINERARIES, {}, page - 1, limit)),
           })
         : null}
-      <section className="table-container">
+      <section className="table-container assigned-itinerary-container">
         <table className="itinerary-table table">
           {TableHead()}
           <tbody className="body-tr">

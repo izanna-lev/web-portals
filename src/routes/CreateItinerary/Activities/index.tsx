@@ -122,8 +122,10 @@ const ActivityDetails = ({ status }: { status?: number }) => {
                     <div>{getFormattedDate(element.dateTime)}</div>
                     <div>{element.location?.location}</div>
                     <div>{element.description}</div>
-                    <div className="add-activity-buttons">
-                      {status === 3 || status === 5 ? null : (
+                    {status === 3 || status === 5 ? (
+                      <div></div>
+                    ) : (
+                      <div className="add-activity-buttons">
                         <button
                           className="btn edit-button"
                           onClick={() => editActivity(element._id)}
@@ -131,15 +133,16 @@ const ActivityDetails = ({ status }: { status?: number }) => {
                           <FaRegEdit />
                           &nbsp;<span>Edit</span>
                         </button>
-                      )}
-                      <button
-                        className="btn delete-button"
-                        onClick={() => deleteReservation(element._id)}
-                      >
-                        <MdDeleteOutline />
-                        &nbsp;<span>Delete</span>
-                      </button>
-                    </div>
+
+                        <button
+                          className="btn delete-button"
+                          onClick={() => deleteReservation(element._id)}
+                        >
+                          <MdDeleteOutline />
+                          &nbsp;<span>Delete</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 );
               })

@@ -49,14 +49,6 @@
 //   overflow: auto;
 // }
 
-::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $light_blue !important;
-}
-
 .add-trip .day-blank {
   font-size: 0.75rem;
   margin-left: 0px;

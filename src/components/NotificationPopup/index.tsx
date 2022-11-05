@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import useComponentVisible from "../outsideClickHandler/index";
 import { API, NOTIFICATION } from "../../constants";
 import { useNavigate } from "react-router-dom";
-import { getFormattedTime } from "../../util";
+import { getFormattedDate, getFormattedTime } from "../../util";
 import { ICON } from "../../assets/index";
 import styles from "./index.module.scss";
 import { Fetch } from "../../api/Fetch";
@@ -41,7 +41,9 @@ const Notification = (props: NotificationProps) => {
             {props.text}
           </div>
           <div className={styles["notification-user-time"]}>
-            {getFormattedTime(props.createdOn)}
+            {`${getFormattedDate(props.createdOn)} ${getFormattedTime(
+              props.createdOn
+            )}`}
           </div>
         </div>
       </div>

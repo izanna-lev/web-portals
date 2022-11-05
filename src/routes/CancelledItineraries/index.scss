@@ -10,14 +10,6 @@
   overflow: auto;
 }
 
-::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $light_blue !important;
-}
-
 .dashboard {
   display: grid;
   align-items: center;
@@ -177,7 +169,7 @@
   align-items: center;
 }
 
-.specialist-actions>div {
+.specialist-actions > div {
   background-color: $theme_color_light_blue_2x;
   padding: 2px 8px;
   border-radius: 8px;
@@ -209,7 +201,6 @@
 .cancel-itinerary:hover {
   color: red !important;
   background: $theme_color_white !important;
-
 }
 .cancelled-itinerary {
   pointer-events: none;

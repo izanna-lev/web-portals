@@ -74,7 +74,7 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
 
   return (
     <>
-      {list.length
+      {/* {list.length
         ? Pagination({
             page,
             limit,
@@ -83,7 +83,7 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
             nextPage,
             previousPage,
           })
-        : null}
+        : null} */}
       <section className="itinerary-details-container">
         <div className={styles["AddFlightsPage"]}>
           <div className={styles["flightDetails-table"]}>
@@ -131,8 +131,10 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
                   <div>{getFormattedTime(element.checkOutDateTime)}</div>
                   <div>{getFormattedDate(element.checkOutDateTime)}</div>
                   <div>{element.description || "NA"}</div>
-                  <div className="add-activity-buttons">
-                    {status === 3 || status === 5 ? null : (
+                  {status === 3 || status === 5 ? (
+                    <div></div>
+                  ) : (
+                    <div className="add-activity-buttons">
                       <button
                         className="btn edit-button"
                         onClick={() => setEdit(element)}
@@ -140,15 +142,16 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
                         <FaRegEdit />
                         &nbsp;<span>Edit</span>
                       </button>
-                    )}
-                    <button
-                      className="btn delete-button"
-                      onClick={() => deleteReservation(element._id)}
-                    >
-                      <MdDeleteOutline />
-                      &nbsp;<span>Delete</span>
-                    </button>
-                  </div>
+
+                      <button
+                        className="btn delete-button"
+                        onClick={() => deleteReservation(element._id)}
+                      >
+                        <MdDeleteOutline />
+                        &nbsp;<span>Delete</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))
             ) : (
@@ -163,7 +166,7 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
       </section>
       {status !== 4 ? null : (
         <>
-          <span className={styles["add-more"]} onClick={() => setAddMore(true)}>
+          <span className="add-more-tickets" onClick={() => setAddMore(true)}>
             + Add Days
           </span>
           <div

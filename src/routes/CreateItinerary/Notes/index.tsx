@@ -63,7 +63,7 @@ const NotesDetails = ({ status }: { status?: number }) => {
 
   return (
     <>
-      {list.length
+      {/* {list.length
         ? Pagination({
             page,
             limit,
@@ -72,7 +72,7 @@ const NotesDetails = ({ status }: { status?: number }) => {
             nextPage,
             previousPage,
           })
-        : null}
+        : null} */}
       <section className="itinerary-details-container">
         <div className="AddNotesPage">
           <div className="add-notes">
@@ -99,8 +99,10 @@ const NotesDetails = ({ status }: { status?: number }) => {
                       />
                     </div>
                     <div>{element.description}</div>
-                    <div className="add-activity-buttons">
-                      {status === 3 || status === 5 ? null : (
+                    {status === 3 || status === 5 ? (
+                      <div></div>
+                    ) : (
+                      <div className="add-activity-buttons">
                         <button
                           className="btn edit-button"
                           onClick={() => editNote(element._id)}
@@ -108,15 +110,16 @@ const NotesDetails = ({ status }: { status?: number }) => {
                           <FaRegEdit />
                           &nbsp;<span>Edit</span>
                         </button>
-                      )}
-                      <button
-                        className="btn delete-button"
-                        onClick={() => deleteNote(element._id)}
-                      >
-                        <MdDeleteOutline />
-                        &nbsp;<span>Delete</span>
-                      </button>
-                    </div>
+
+                        <button
+                          className="btn delete-button"
+                          onClick={() => deleteNote(element._id)}
+                        >
+                          <MdDeleteOutline />
+                          &nbsp;<span>Delete</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 );
               })

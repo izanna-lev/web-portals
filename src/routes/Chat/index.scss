@@ -37,14 +37,6 @@
   flex-direction: column;
 }
 
-::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $light_blue !important;
-}
-
 .user-chat {
   height: 64px;
   display: grid;

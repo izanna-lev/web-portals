@@ -126,6 +126,8 @@ const NewTransportationForm = (props: props) => {
       transportationType: TRANSPORTATION_TYPE.TRAIN,
     };
 
+    if (!ticketsData[0].image) return alert("Please select an image!");
+
     dispatch(
       Create(API.ADD_TRAIN, data, false, "", API.TRANSPORTATION_DATA, {
         itineraryRef: _id,
@@ -249,7 +251,7 @@ const NewTransportationForm = (props: props) => {
             )}
           </div>
           <div
-            className={`${styles["add-more"]} ${styles["form-heading"]}`}
+            className={`add-more-tickets ${styles["form-heading"]}`}
             onClick={addMoreTickets}
           >
             + Add More Users

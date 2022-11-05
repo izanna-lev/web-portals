@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { BsChatRightDots } from "react-icons/bs";
 import dayjs from "dayjs";
 
-import { API,  } from "../../constants";
+import { API } from "../../constants";
 import { Modal } from "../../components/Portal";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -62,7 +62,9 @@ const TableRow = (
       <td>{dayjs(item.plannedDate).format("DD-MMM-YYYY")}</td>
       <td className="specialist-actions">
         <button
-          className={`btn view-button chat-specialist ${item.cancelled ? "cancelled-itinerary": ""} `}
+          className={`btn view-button chat-specialist ${
+            item.cancelled ? "cancelled-itinerary" : ""
+          } `}
           onClick={() => {
             navigate(`/chat/${item.channelRef}`, {
               state: {
@@ -80,7 +82,9 @@ const TableRow = (
           Chat
         </button>
         <button
-          className={`btn view-button cancel-itinerary ${item.cancelled ? "cancelled-itinerary": ""} `}
+          className={`btn view-button cancel-itinerary ${
+            item.cancelled ? "cancelled-itinerary" : ""
+          } `}
           onClick={() => popupUpdate(true, item._id)}
         >
           Cancel Itinerary
@@ -138,9 +142,13 @@ const CancelItinerary = () => {
             total,
             size,
             nextPage: () =>
-              dispatch(Fetch(API.ITINERARIES, {}, page + 1, limit)),
+              dispatch(
+                Fetch(API.ITINERARY_CANCEL_REQUESTS, {}, page + 1, limit)
+              ),
             previousPage: () =>
-              dispatch(Fetch(API.ITINERARIES, {}, page - 1, limit)),
+              dispatch(
+                Fetch(API.ITINERARY_CANCEL_REQUESTS, {}, page - 1, limit)
+              ),
           })
         : null}
       <section className="table-container">

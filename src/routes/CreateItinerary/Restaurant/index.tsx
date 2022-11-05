@@ -130,8 +130,10 @@ const RestaurantDetails = ({ status }: { status?: number }) => {
                   <div>{getFormattedTime(element.dateTime)}</div>
                   <div>{getFormattedDate(element.dateTime)}</div>
                   <div>{element.description || "NA"}</div>
-                  <div className="add-activity-buttons">
-                    {status === 3 || status === 5 ? null : (
+                  {status === 3 || status === 5 ? (
+                    <div></div>
+                  ) : (
+                    <div className="add-activity-buttons">
                       <button
                         className="btn edit-button"
                         onClick={() => setEdit(element)}
@@ -139,15 +141,16 @@ const RestaurantDetails = ({ status }: { status?: number }) => {
                         <FaRegEdit />
                         &nbsp;<span>Edit</span>
                       </button>
-                    )}
-                    <button
-                      className="btn delete-button"
-                      onClick={() => deleteReservation(element._id)}
-                    >
-                      <MdDeleteOutline />
-                      &nbsp;<span>Delete</span>
-                    </button>
-                  </div>
+
+                      <button
+                        className="btn delete-button"
+                        onClick={() => deleteReservation(element._id)}
+                      >
+                        <MdDeleteOutline />
+                        &nbsp;<span>Delete</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))
             ) : (
@@ -163,7 +166,7 @@ const RestaurantDetails = ({ status }: { status?: number }) => {
       {status !== 4 ? null : (
         <>
           <span
-            className={styles["add-more"]}
+            className="add-more-tickets"
             onClick={() => {
               setAddMore(true);
             }}

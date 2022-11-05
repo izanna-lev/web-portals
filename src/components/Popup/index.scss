@@ -12,7 +12,6 @@
   justify-content: center;
 }
 
-
 .popup-container {
   width: 30%;
   max-height: 40%;
@@ -23,7 +22,7 @@
   text-align: center;
   z-index: 20;
   display: flex;
-  gap: 16px;
+  gap: 1rem;
   flex-direction: column;
 }
 
@@ -33,7 +32,7 @@
 }
 
 .popup-text {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 300;
 }
 
@@ -42,6 +41,5 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-
+  gap: 1rem;
 }

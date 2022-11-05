@@ -1,6 +1,4 @@
-@import "../../styles/configs/_fonts.scss";
 @import "../../styles/configs/_colors.scss";
-@import "../../styles/configs/_ui.scss";
 
 .itenaryPage {
   height: calc(92vh - 1rem);
@@ -10,146 +8,10 @@
   overflow: auto;
 }
 
-::-webkit-scrollbar {
-  width: 0.25rem;
+.assigned-itinerary-container {
+  max-height: calc(100vh - 13rem);
+  margin-bottom: 0;
 }
-
-::-webkit-scrollbar-thumb {
-  background: $light_blue !important;
-}
-
-.dashboard {
-  display: grid;
-  align-items: center;
-}
-
-.heading {
-  font-size: x-large;
-  font-weight: 400;
-  display: grid;
-  align-items: center;
-  height: 60px;
-}
-
-// .pagination {
-//   align-items: center;
-//   height: 28px;
-//   font-size: 20px;
-//   text-align: end;
-//   display: grid;
-//   grid-template-columns: auto auto auto;
-//   gap: 0.75rem;
-//   justify-content: end;
-// }
-
-.left {
-  padding: 2px;
-  border-radius: 0.25rem;
-  background-color: $theme_color_light_blue_2x;
-}
-
-.right {
-  padding: 2px;
-  background-color: $theme_color_light_blue;
-  border-radius: 0.25rem;
-}
-
-// .itenary-list {
-//   margin-top: 0.75rem;
-//   overflow-y: auto;
-//   height: calc(92vh - 124px);
-//   display: flex;
-//   flex-direction: column;
-// }
-
-// .itenary-list thead {
-//   position: sticky;
-//   top: 0;
-//   height: 2.5rem;
-//   border-radius: 0.5rem;
-// }
-
-// table {
-//   border-collapse: collapse;
-//   width: 100%;
-//   overflow-y: auto;
-//   max-height: calc(92vh - 164px);
-// }
-
-// table th:first-child {
-//   border-radius: 0.5rem 0 0 0.5rem;
-// }
-
-// table th:last-child {
-//   border-radius: 0 0.5rem 0.5rem 0;
-// }
-
-// th:nth-child(1) {
-//   width: 5%;
-// }
-
-// th:nth-child(2) {
-//   width: 20%;
-// }
-
-// th:nth-child(3) {
-//   width: 10%;
-// }
-
-// th:nth-child(4) {
-//   width: 20%;
-// }
-
-// th:nth-child(5) {
-//   width: 15%;
-// }
-
-// th:nth-child(6) {
-//   width: 15%;
-// }
-
-// th:nth-child(7) {
-//   width: 15%;
-// }
-
-// .table-head {
-//   font-weight: 500;
-//   text-align: start;
-//   font-size: 0.95rem ;
-//   padding-left: 0.5rem;
-// }
-
-// .table-data-row {
-//   height: 68px;
-//   border-top: 2px solid $theme_color_light_blue_2x;
-// }
-
-// .table-data {
-//   padding-left: 0.5rem;
-//   font-size: 0.75rem;
-//   font-weight: 400;
-// }
-
-// .name {
-//   display: grid;
-//   grid-template-columns: 0.5fr 1.5fr;
-//   align-items: center;
-//   justify-items: center;
-//   height: 68px;
-// }
-
-// .table-user-image {
-//   width: 52px;
-//   height: 52px;
-//   align-self: center;
-//   justify-self: center;
-//   border-radius: 50%;
-// }
-
-// .table-user-name {
-//   justify-self: start;
-//   margin-left: 0.5rem;
-// }
 
 .table-data-status {
   display: flex;
@@ -160,3 +22,15 @@
   justify-content: center;
   background-color: $theme_color_light_blue_2x;
 }
+
+// .left {
+//   padding: 2px;
+//   border-radius: 0.25rem;
+//   background-color: $theme_color_light_blue_2x;
+// }
+
+// .right {
+//   padding: 2px;
+//   background-color: $theme_color_light_blue;
+//   border-radius: 0.25rem;
+// }
