@@ -21,7 +21,6 @@ import "./index.scss";
 const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   const [selectedImage, setSelectedImage] = useState();
   const [location, setLocation] = useState({ type: "" });
-  console.log(data, handleEditPopup);
 
   const nameRef = useRef();
   const emailRef = useRef();

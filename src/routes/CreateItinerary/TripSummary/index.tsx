@@ -26,7 +26,9 @@ const TripSummary = ({ status }: { status?: number }) => {
     days,
     trip: { list, page, limit, total, size },
   } = useAppSelector((state) => state.itinerary);
-  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
+  const { _id, itineraryStatus } = useAppSelector(
+    (state) => state.itinerary.itineraryDetails
+  );
   const { formRef } = useAppSelector((state) => state.appData);
   const { type } = useAppSelector((state) => state.apiMessage);
 
@@ -59,9 +61,12 @@ const TripSummary = ({ status }: { status?: number }) => {
   }, [type]);
 
   useEffect(() => {
-    fetchData(API.TRIP_LIST, 1, 10, Number(dayFilter));
-    fetchData(API.DAYS_LIST);
-  }, [fetchData, dayFilter]);
+    itineraryStatus === 4 && fetchData(API.DAYS_LIST);
+  }, [fetchData, itineraryStatus]);
+
+  useEffect(() => {
+    itineraryStatus === 4 && fetchData(API.TRIP_LIST, 1, 10, Number(dayFilter));
+  }, [fetchData, dayFilter, itineraryStatus]);
 
   const nextPage = () =>
     fetchData(API.TRIP_LIST, page + 1, limit, Number(dayFilter));
@@ -70,19 +75,21 @@ const TripSummary = ({ status }: { status?: number }) => {
 
   return (
     <>
-      <div className="days-dropdown">
-        <div className="feild-heading">Select Day</div>
-        <select
-          className="field-value"
-          onChange={(e) => setdayFilter(e.target.value)}
-        >
-          {days.list?.map((element: any, index: number) => (
-            <option value={element} key={index}>
-              Day {element}
-            </option>
-          ))}
-        </select>
-      </div>
+      {itineraryStatus === 4 ? (
+        <div className="days-dropdown">
+          <div className="feild-heading">Select Day</div>
+          <select
+            className="field-value"
+            onChange={(e) => setdayFilter(e.target.value)}
+          >
+            {days.list?.map((element: any, index: number) => (
+              <option value={element} key={index}>
+                Day {element}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : null}
 
       {list.length
         ? Pagination({
