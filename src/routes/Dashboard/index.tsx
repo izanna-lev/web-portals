@@ -43,8 +43,8 @@ const Stars = React.memo(({ dashboard }: any) => {
                 <linearGradient id={`grad${index}`}>
                   <stop offset="0%" stopColor="#fcca00" />
                   <stop offset={`${percentage * 100}%`} stopColor="#fcca00" />
-                  <stop offset={`${percentage * 100}%`} stopColor="#484848" />
-                  <stop offset="100%" stopColor="#484848" />
+                  <stop offset={`${percentage * 100}%`} stopColor="#dee2e6" />
+                  <stop offset="100%" stopColor="#dee2e6" />
                 </linearGradient>
               </defs>
               <path
