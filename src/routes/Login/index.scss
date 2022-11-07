@@ -69,8 +69,7 @@
     display: flex;
     align-items: center;
     border-radius: 0.5rem;
-    padding-left: 0.75rem;
-    background-color: $theme_color_light_blue_3x;
+    background-color: $gray-200;
 
     .input-container {
       flex: 1;
@@ -81,7 +80,9 @@
     width: 100%;
     border-radius: 0.5rem;
     height: 3rem;
+    padding: 0 0.75rem 0 0.75rem;
     border: none;
+    background: transparent;
 
     &:focus {
       outline: none;
@@ -92,7 +93,7 @@
     cursor: pointer;
     height: 3rem;
     display: flex;
-    padding-right: 1rem;
+    padding: 0 1rem;
 
     .input-icon {
       width: 1.5rem;
