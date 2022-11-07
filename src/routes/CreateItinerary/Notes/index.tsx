@@ -75,7 +75,7 @@ const NotesDetails = ({ status }: { status?: number }) => {
         : null} */}
       <section className="itinerary-details-container">
         <div className="AddNotesPage">
-          <div className="add-notes">
+          <div className="add-notes notes-grid itinerary-table-header">
             <div>Day</div>
             <div>Image</div>
             <div>Description</div>
@@ -89,7 +89,10 @@ const NotesDetails = ({ status }: { status?: number }) => {
                 return element.edit ? (
                   <AddEditNote handleAddEdit={editNote} data={element} />
                 ) : (
-                  <div className={`add-notes table-item`} key={index}>
+                  <div
+                    className={`add-notes table-item notes-grid itinerary-table-row`}
+                    key={index}
+                  >
                     <div>{element.day}</div>
                     <div>
                       <img
@@ -132,7 +135,7 @@ const NotesDetails = ({ status }: { status?: number }) => {
       {status !== 4 ? null : (
         <>
           <span
-            className="add-more"
+            className="add-more-tickets"
             onClick={() => {
               setAddMore(true);
             }}

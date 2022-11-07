@@ -52,8 +52,8 @@ const DetailsPage = () => {
             </div>
           </div>
         </div>
-        <div className="trip-details-heading">Assigned Specialist</div>
 
+        <div className="trip-details-heading">Assigned Specialist</div>
         <div className="trip-details-data">
           <div className="assigned-specialist">
             <UserIcon image={image} />

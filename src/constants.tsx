@@ -124,6 +124,7 @@ export const ITINERARY_STATUS: ItineraryOptions = {
   3: "Cancelled",
   4: "Pending",
   5: "Completed",
+  6: "Expired",
 };
 
 export const ITINERARY_SECTION = {

@@ -10,17 +10,18 @@
   flex-direction: column;
 }
 
+.table-grid {
+  display: grid;
+  grid-template-columns: 3rem 13rem 7rem 8rem 8rem 13rem 8rem 22rem 14rem;
+  align-items: center;
+}
+
 .flightDetails-table {
   min-width: 100rem;
   width: 100%;
-  min-height: 4.5rem;
-  background-color: $theme_color_blue;
-  color: $white;
-  display: grid;
+  min-height: 4rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  grid-template-columns: 3rem 13rem 7rem 8rem 8rem 13rem 8rem 22rem 14rem;
-  align-items: center;
 
   > div {
     padding: 0.25rem 0.5rem;
@@ -53,7 +54,7 @@
 }
 
 .table-item {
-  background-color: $gray-200;
+  background-color: $white;
   color: $dark;
   border-radius: 0;
   margin-top: 0.15rem;
