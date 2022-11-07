@@ -12,7 +12,7 @@ import ItineraryDetail from "./ItineraryDetail/index";
 import DetailsPage from "./TravelerDetails/index";
 import { Modal } from "../../components/Portal";
 import { ICON } from "../../assets/index";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { Create } from "../../api/Create";
 import { Fetch } from "../../api/Fetch";
@@ -41,7 +41,9 @@ const EditDetailsContainer = ({ children, setedit }: any) => {
 const ItineraryDetailsPage = () => {
   const [tabSelected, setTabSelected] = useState(ITINERARY_SECTION.TRAVELER);
   const [edit, setedit] = useState(null);
+  const [dayFilter, setdayFilter] = useState("1");
 
+  const { days } = useAppSelector((state) => state.itinerary);
   const { formRef } = useAppSelector((state: any) => state.appData);
   const { itineraryDetails, channelRef } = useAppSelector(
     (state: any) => state.itinerary
@@ -51,10 +53,33 @@ const ItineraryDetailsPage = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
 
+  const fetchData = useCallback(
+    (endpoint: string, page = 1, limit = 10, dayFilter = 1) =>
+      dispatch(
+        Fetch(
+          endpoint,
+          { itineraryRef: itineraryDetails._id, dayFilter },
+          page,
+          limit,
+          {}
+        )
+      ),
+    [itineraryDetails._id, dispatch]
+  );
+
   useEffect(() => {
     dispatch(Fetch(API.ITINERARY_DETAILS, { formRef: params.formRef }));
     dispatch(setFormRef(params.formRef));
   }, [params.formRef, dispatch]);
+
+  useEffect(() => {
+    if (tabSelected === ITINERARY_SECTION.SUMMARY) fetchData(API.DAYS_LIST);
+  }, [fetchData, tabSelected]);
+
+  useEffect(() => {
+    if (tabSelected === ITINERARY_SECTION.SUMMARY)
+      fetchData(API.TRIP_LIST, 1, 10, Number(dayFilter));
+  }, [fetchData, dayFilter, tabSelected]);
 
   const handleItineraryStatus = (status = "cancel") => {
     const endpoint =
@@ -94,6 +119,8 @@ const ItineraryDetailsPage = () => {
           </h2>
         </section>
 
+        {/* Itinerary Details > Default Tabs & Conditional Tabs */}
+
         <section
           className={`tab-group ${
             itineraryDetails.itineraryStatus === 4 ? "itinerary-pending" : ""
@@ -115,6 +142,9 @@ const ItineraryDetailsPage = () => {
           >
             Itinerary Details
           </div>
+
+          {/* Conditional Tabs > Only shown if Itinerary is not Pending */}
+
           {itineraryDetails.itineraryStatus !== 4 ? (
             <>
               <div
@@ -180,6 +210,8 @@ const ItineraryDetailsPage = () => {
         </section>
 
         <div className="status-chat">
+          {/* Itinerary Progress Status */}
+
           <img
             src={
               ICON[
@@ -198,8 +230,12 @@ const ItineraryDetailsPage = () => {
             </div>
           </div>
 
+          {/* Itinerary Details > All Buttons */}
+
           {tabSelected === ITINERARY_SECTION.TRAVELER ? (
             <div className="itinerary-buttons">
+              {/* Cancel itinerary Button */}
+
               {itineraryDetails.itineraryStatus === 2 ? (
                 <>
                   <div
@@ -217,6 +253,8 @@ const ItineraryDetailsPage = () => {
                 </>
               ) : null}
 
+              {/* Chat Button */}
+
               {itineraryDetails.itineraryStatus === 2 ? (
                 <div
                   className="chat"
@@ -228,6 +266,8 @@ const ItineraryDetailsPage = () => {
               ) : null}
             </div>
           ) : null}
+
+          {/* Edit Itinerary Details Button */}
 
           {tabSelected === ITINERARY_SECTION.ITINERARY &&
           itineraryDetails.itineraryStatus === 2 ? (
@@ -241,7 +281,28 @@ const ItineraryDetailsPage = () => {
               </div>
             </div>
           ) : null}
+
+          {/* Trip Summary Day Selector Button */}
+
+          {tabSelected === ITINERARY_SECTION.SUMMARY &&
+          itineraryDetails.itineraryStatus !== 4 ? (
+            <div className="days-dropdown">
+              <div className="feild-heading">Select Day</div>
+              <select
+                className="field-value"
+                onChange={(e) => setdayFilter(e.target.value)}
+              >
+                {days.list?.map((element: any, index: number) => (
+                  <option value={element} key={index}>
+                    Day {element}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : null}
         </div>
+
+        {/* Itinerary Detail Type Section */}
 
         {tabSelected === ITINERARY_SECTION.TRAVELER ? <DetailsPage /> : null}
         {tabSelected === ITINERARY_SECTION.ITINERARY ? (
@@ -266,6 +327,8 @@ const ItineraryDetailsPage = () => {
           <TripSummaryDetails {...itineraryProps} />
         ) : null}
       </main>
+
+      {/* Edit Itinerary Details Popup */}
 
       {edit ? (
         <Modal

@@ -16,7 +16,6 @@ const Toggle = ({ inputFields }: InputProps) => {
     inputFields.default ? true : false
   );
 
-  console.log(checked);
   return (
     <div className={styles["input-toggle-form"]}>
       <div className={styles["feild-heading"]}>{inputFields.name}</div>
