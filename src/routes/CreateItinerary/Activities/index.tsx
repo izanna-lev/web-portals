@@ -87,7 +87,7 @@ const ActivityDetails = ({ status }: { status?: number }) => {
         : null}
       <section className="itinerary-details-container">
         <div className="AddActivitiesPage">
-          <div className="add-activities">
+          <div className="add-activities activities-grid itinerary-table-header">
             <div>Day</div>
             <div>Image</div>
             <div>Title</div>
@@ -108,7 +108,10 @@ const ActivityDetails = ({ status }: { status?: number }) => {
                     data={element}
                   />
                 ) : (
-                  <div className={`add-activities table-item`} key={index}>
+                  <div
+                    className={`add-activities table-item itinerary-table-row activities-grid`}
+                    key={index}
+                  >
                     <div>{element.day}</div>
                     <div>
                       <img
@@ -155,7 +158,7 @@ const ActivityDetails = ({ status }: { status?: number }) => {
       {status !== 4 ? null : (
         <>
           <span
-            className="add-more"
+            className="add-more-tickets"
             onClick={() => {
               setAddMore(true);
             }}

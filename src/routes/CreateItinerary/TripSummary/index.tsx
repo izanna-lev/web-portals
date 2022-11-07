@@ -96,7 +96,7 @@ const TripSummary = ({ status }: { status?: number }) => {
         : null}
       <section className="itinerary-details-container">
         <div className="TripSummaryPage">
-          <div className="add-trip">
+          <div className="add-trip trip-grid itinerary-table-header">
             <div>Image</div>
             <div>Title</div>
             <div>Time</div>
@@ -104,27 +104,32 @@ const TripSummary = ({ status }: { status?: number }) => {
             <div>Description</div>
           </div>
 
-          <div className="forms">
-            {list.length ? (
-              list.map((element: any, index: number) => (
-                <div className={`add-trip table-item`} key={index}>
-                  <div>
-                    <img
-                      className="itineraryImage"
-                      src={`${IMAGE.SMALL}${element.image}`}
-                      alt={element.name}
-                    />
-                  </div>
-                  <div>{element.title}</div>
-                  <div>{element.dateTime ? getFormattedTime(element.dateTime): "NA"}</div>
-                  <div>{element.dateTime ? getFormattedDate(element.dateTime): "NA"}</div>
-                  <div>{element.description}</div>
+          {list.length ? (
+            list.map((element: any, index: number) => (
+              <div
+                className={`add-trip table-item trip-grid itinerary-table-row`}
+                key={index}
+              >
+                <div>
+                  <img
+                    className="itineraryImage"
+                    src={`${IMAGE.SMALL}${element.image}`}
+                    alt={element.name}
+                  />
                 </div>
-              ))
-            ) : (
-              <div className={`empty-table table-item`}>Nothing Added</div>
-            )}
-          </div>
+                <div>{element.title}</div>
+                <div>
+                  {element.dateTime ? getFormattedTime(element.dateTime) : "NA"}
+                </div>
+                <div>
+                  {element.dateTime ? getFormattedDate(element.dateTime) : "NA"}
+                </div>
+                <div>{element.description}</div>
+              </div>
+            ))
+          ) : (
+            <div className={`empty-table table-item`}>Nothing Added</div>
+          )}
         </div>
       </section>
 

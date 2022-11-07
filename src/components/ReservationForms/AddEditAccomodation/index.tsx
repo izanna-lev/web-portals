@@ -3,7 +3,6 @@ import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
 import PhoneInput from "react-phone-input-2";
-
 import "react-phone-input-2/lib/plain.css";
 import { useEffect, useRef, useState } from "react";
 import { compareDateRange, getRefValue, setBackground } from "../../../util";

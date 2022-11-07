@@ -86,7 +86,9 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
         : null} */}
       <section className="itinerary-details-container">
         <div className={styles["AddFlightsPage"]}>
-          <div className={styles["flightDetails-table"]}>
+          <div
+            className={`${styles["flightDetails-table"]} ${styles["table-grid"]} itinerary-table-header`}
+          >
             <div>Day</div>
             <div>Image</div>
             <div>Title</div>
@@ -100,68 +102,64 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
             <div>Action</div>
           </div>
 
-          <div className={styles["forms"]}>
-            {list.length ? (
-              list.map((element: any, index: number) => (
-                <div
-                  className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
-                  key={index}
-                >
-                  <div>{element.day || "NA"}</div>
-                  <div>
-                    <img
-                      className="itineraryImage"
-                      src={`${IMAGE.SMALL}${element.image}`}
-                      alt={element.name}
-                    />
-                  </div>
-                  <div>{element.name}</div>
-                  <div>{element.location.location || "NA"}</div>
-                  <div>
-                    {element.contactNumber ? (
-                      <a href={`tel:+${element.contactNumber}`}>
-                        +{element.contactNumber}
-                      </a>
-                    ) : (
-                      "NA"
-                    )}
-                  </div>
-                  <div>{getFormattedTime(element.checkInDateTime)}</div>
-                  <div>{getFormattedDate(element.checkInDateTime)}</div>
-                  <div>{getFormattedTime(element.checkOutDateTime)}</div>
-                  <div>{getFormattedDate(element.checkOutDateTime)}</div>
-                  <div>{element.description || "NA"}</div>
-                  {status === 3 || status === 5 ? (
-                    <div></div>
+          {list.length ? (
+            list.map((element: any, index: number) => (
+              <div
+                className={`${styles["flightDetails-table"]} ${styles["table-item"]} ${styles["table-grid"]} itinerary-table-row`}
+                key={index}
+              >
+                <div>{element.day || "NA"}</div>
+                <div>
+                  <img
+                    className="itineraryImage"
+                    src={`${IMAGE.SMALL}${element.image}`}
+                    alt={element.name}
+                  />
+                </div>
+                <div>{element.name}</div>
+                <div>{element.location.location || "NA"}</div>
+                <div>
+                  {element.contactNumber ? (
+                    <a href={`tel:+${element.contactNumber}`}>
+                      +{element.contactNumber}
+                    </a>
                   ) : (
-                    <div className="add-activity-buttons">
-                      <button
-                        className="btn edit-button"
-                        onClick={() => setEdit(element)}
-                      >
-                        <FaRegEdit />
-                        &nbsp;<span>Edit</span>
-                      </button>
-
-                      <button
-                        className="btn delete-button"
-                        onClick={() => deleteReservation(element._id)}
-                      >
-                        <MdDeleteOutline />
-                        &nbsp;<span>Delete</span>
-                      </button>
-                    </div>
+                    "NA"
                   )}
                 </div>
-              ))
-            ) : (
-              <div
-                className={`${styles["empty-table"]} ${styles["table-item"]}`}
-              >
-                Nothing Added
+                <div>{getFormattedTime(element.checkInDateTime)}</div>
+                <div>{getFormattedDate(element.checkInDateTime)}</div>
+                <div>{getFormattedTime(element.checkOutDateTime)}</div>
+                <div>{getFormattedDate(element.checkOutDateTime)}</div>
+                <div>{element.description || "NA"}</div>
+                {status === 3 || status === 5 ? (
+                  <div></div>
+                ) : (
+                  <div className="add-activity-buttons">
+                    <button
+                      className="btn edit-button"
+                      onClick={() => setEdit(element)}
+                    >
+                      <FaRegEdit />
+                      &nbsp;<span>Edit</span>
+                    </button>
+
+                    <button
+                      className="btn delete-button"
+                      onClick={() => deleteReservation(element._id)}
+                    >
+                      <MdDeleteOutline />
+                      &nbsp;<span>Delete</span>
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            ))
+          ) : (
+            <div className={`${styles["empty-table"]} ${styles["table-item"]}`}>
+              Nothing Added
+            </div>
+          )}
         </div>
       </section>
       {status !== 4 ? null : (
