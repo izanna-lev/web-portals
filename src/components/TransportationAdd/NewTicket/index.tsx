@@ -37,7 +37,7 @@ export const NewTicket = (
     >
       <div className="form-heading">Upload Ticket Image</div>
       <div style={{ display: "flex" }}>
-        <div className={styles["form-image"]} id={divId}>
+        <div className={styles["form-image"]}>
           <input
             type="file"
             id={inputId}
@@ -46,14 +46,11 @@ export const NewTicket = (
             onChange={(e) => handleImageChange(e.target.files, divId)}
             hidden
           />
-          <label
-            htmlFor={inputId}
-            className={styles["not-selected-preview"]}
-            id={`Ticket${length}`}
-          >
-            <IoCloudUploadOutline
+          <label htmlFor={inputId} id={`Ticket${length}`}>
+            <div
               className={styles["activity-image-placeholder"]}
-            />
+              id={divId}
+            ></div>
           </label>
         </div>
 
