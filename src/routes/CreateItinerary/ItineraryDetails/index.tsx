@@ -35,6 +35,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   const itineraryTypeRef = useRef();
 
   const { formRef } = useAppSelector((state) => state.appData);
+  const { itineraryDetails } = useAppSelector((state) => state.itinerary);
   const apiMessage = useAppSelector((state) => state.apiMessage);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -127,8 +128,9 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   };
 
   useEffect(() => {
-    if (apiMessage.type === "success") navigate("/itinerary/add/summary");
-  }, [apiMessage.type, navigate]);
+    if (apiMessage.type === "success" && itineraryDetails._id)
+      navigate("/itinerary/add/summary");
+  }, [apiMessage.type, navigate, itineraryDetails._id]);
 
   return (
     <section className="AddItineraryDetailsPage" id="formTop">
