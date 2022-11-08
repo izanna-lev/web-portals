@@ -122,7 +122,7 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
                 <div>
                   {element.contactNumber ? (
                     <a href={`tel:+${element.contactNumber}`}>
-                      +{element.contactNumber}
+                      {element.phoneCode}{`${element.phoneCode ? "-" : ""}`}{element.contactNumber}
                     </a>
                   ) : (
                     "NA"
