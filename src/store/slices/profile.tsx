@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { API } from "../../constants";
 
 interface Profile {
+  phoneCode: string;
   name: string;
   email: string;
   phoneNumber: string;
@@ -19,6 +20,7 @@ interface Profile {
 }
 
 const initialState: Profile = {
+  phoneCode: "",
   name: "",
   email: "",
   phoneNumber: "",

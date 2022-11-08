@@ -73,7 +73,7 @@ const ProfilePage = () => {
             {profileData.email}
           </a>
           <a href={`tel:+${profileData.phoneNumber}`} className="profile-text">
-            +{profileData.phoneNumber}
+          {profileData.phoneCode}{`${profileData.phoneCode ? "-" : "" }`}{profileData.phoneNumber}
           </a>
         </div>
       </section>
