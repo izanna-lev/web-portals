@@ -19,6 +19,7 @@ import AddEditRestaurant from "../../../components/ReservationForms/AddEditResta
 import { Fetch } from "../../../api/Fetch";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "../../../components/Pagination";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const RestaurantDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -169,7 +170,8 @@ const RestaurantDetails = ({ status }: { status?: number }) => {
               setAddMore(true);
             }}
           >
-            + Add Days
+            <AiOutlinePlus />
+            &nbsp;Add Days
           </span>
 
           <div

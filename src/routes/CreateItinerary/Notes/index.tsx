@@ -16,6 +16,7 @@ import { Fetch } from "../../../api/Fetch";
 import "./index.scss";
 import { EDIT_NOTES } from "../../../store/slices/itinerary";
 import { editListItem } from "../../../util";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const NotesDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -140,7 +141,8 @@ const NotesDetails = ({ status }: { status?: number }) => {
               setAddMore(true);
             }}
           >
-            + Add More
+            <AiOutlinePlus />
+            &nbsp;Add More
           </span>
           <div
             onClick={() => navigate("/itinerary/add/summary")}

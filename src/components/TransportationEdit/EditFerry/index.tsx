@@ -18,6 +18,7 @@ import { NewTicket } from "../../TransportationAdd/NewTicket";
 import { OldTicket } from "../OldTicket";
 import { Create } from "../../../api/Create";
 import dayjs from "dayjs";
+import { AiOutlinePlus } from "react-icons/ai";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -338,7 +339,8 @@ const EditFerry = (props: props) => {
             className={`add-more-tickets ${styles["form-heading"]}`}
             onClick={addMoreTickets}
           >
-            + Add More Users
+            <AiOutlinePlus />
+            &nbsp;Add More Users
           </div>
 
           <div className={styles["button-save"]}>

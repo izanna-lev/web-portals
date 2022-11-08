@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { Create } from "../../../api/Create";
 import { NewTicket } from "../NewTicket";
+import { AiOutlinePlus } from "react-icons/ai";
 
 interface props {
   handleAddPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -261,7 +262,8 @@ const NewTransportationForm = (props: props) => {
             className={`add-more-tickets ${styles["form-heading"]}`}
             onClick={addMoreTickets}
           >
-            + Add More Users
+            <AiOutlinePlus />
+            &nbsp;Add More Users
           </div>
 
           <div className={styles["button-save"]}>
