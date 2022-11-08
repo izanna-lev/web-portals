@@ -13,13 +13,12 @@
 }
 
 .form-background {
-  width: 60rem;
-  height: 50rem;
+  width: 70vw;
+  max-width: 60rem;
+  height: 98vh;
   border-radius: 0.75rem;
   background-color: $white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 1.5rem 0;
 }
 
 .form-image {
