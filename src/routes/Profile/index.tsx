@@ -72,8 +72,13 @@ const ProfilePage = () => {
           <a href={`mailto:${profileData.email}`} className="profile-text">
             {profileData.email}
           </a>
-          <a href={`tel:+${profileData.phoneNumber}`} className="profile-text">
-          {profileData.phoneCode}{`${profileData.phoneCode ? "-" : "" }`}{profileData.phoneNumber}
+          <a
+            href={`tel:${profileData.phoneCode}${profileData.phoneNumber}`}
+            className="profile-text"
+          >
+            {profileData.phoneCode}
+            {`${profileData.phoneCode ? "-" : ""}`}
+            {profileData.phoneNumber}
           </a>
         </div>
       </section>
