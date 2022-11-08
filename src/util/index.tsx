@@ -10,12 +10,13 @@ export const SerialNum = (limit: number, page: number, index: number) => {
 };
 
 // Set background image to an element
-export const setBackground = (image: string, id: string) => {
+export const setBackground = (image: string, id: string, size?: string) => {
   const imageElement = document.getElementById(id);
   if (imageElement) {
     imageElement.style.backgroundImage = `url(${image})`;
     imageElement.style.backgroundPosition = "center";
-    imageElement.style.backgroundSize = "100%";
+    imageElement.style.backgroundSize = size ? size : "100%";
+    imageElement.style.backgroundRepeat = "no-repeat";
     return 1;
   }
   return 0;
