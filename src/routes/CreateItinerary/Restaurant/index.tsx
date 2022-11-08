@@ -80,13 +80,13 @@ const RestaurantDetails = ({ status }: { status?: number }) => {
     <>
       {list.length
         ? Pagination({
-          page,
-          limit,
-          total,
-          size,
-          nextPage,
-          previousPage,
-        })
+            page,
+            limit,
+            total,
+            size,
+            nextPage,
+            previousPage,
+          })
         : null}
       <section className="itinerary-details-container">
         <div className={styles["AddFlightsPage"]}>
@@ -122,8 +122,12 @@ const RestaurantDetails = ({ status }: { status?: number }) => {
                 <div>{element.location.location || "NA"}</div>
                 <div>
                   {element.contactNumber ? (
-                    <a href={`tel:+${element.contactNumber}`}>
-                      {element.phoneCode}{`${element.phoneCode ? "-" : ""}`}{element.contactNumber}
+                    <a
+                      href={`tel:${element.phoneCode}${element.contactNumber}`}
+                    >
+                      {element.phoneCode}
+                      {`${element.phoneCode ? "-" : ""}`}
+                      {element.contactNumber}
                     </a>
                   ) : (
                     "NA"

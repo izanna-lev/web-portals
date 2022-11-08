@@ -49,8 +49,12 @@ const TableRow = (
       </td>
       <td>{item.userName}</td>
       <td>
-        {item.travellerEmail ? (
-          <a href={`tel:+${item.travellerEmail}`}>+{item.contactNumber}</a>
+        {item.contactNumber ? (
+          <a href={`tel:${item.phoneCode}${item.contactNumber}`}>
+            {item.phoneCode}
+            {`${item.phoneCode ? "-" : ""}`}
+            {item.contactNumber}
+          </a>
         ) : (
           "NA"
         )}
