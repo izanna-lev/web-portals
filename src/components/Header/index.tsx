@@ -12,11 +12,13 @@ import NotificationPopup from "../NotificationPopup";
 import Logout from "../Logout";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { API } from "../../constants";
+import { API, IMAGE } from "../../constants";
 import { Fetch } from "../../api/Fetch";
 import { UserIcon } from "../UserIcon";
 import { setSidebar } from "../../store/slices/appData";
 import { useNavigate } from "react-router-dom";
+import { setBackground } from "../../util";
+import { ICON } from "../../assets/index";
 
 type Props = {
   showUserData?: boolean;
@@ -45,6 +47,16 @@ const Header = ({ showUserData = true }: Props) => {
   useEffect(() => {
     if (!profileData._id && showUserData) dispatch(Fetch(API.PROFILE));
   }, [dispatch, profileData._id, showUserData]);
+
+  useEffect(() => {
+    setBackground(
+      profileData.image
+        ? `${IMAGE.AVERAGE}${profileData.image}`
+        : ICON.USER_PLACEHOLDER,
+      "header-profile-image",
+      "cover"
+    );
+  }, [profileData.image]);
 
   return (
     <header className={styles["header"]} id="navBar">
@@ -77,11 +89,10 @@ const Header = ({ showUserData = true }: Props) => {
 
         <div className={styles["user-data"]}>
           <div className={styles["image-container"]}>
-            <UserIcon
-              image={profileData.image}
-              width={"100%"}
-              height={"100%"}
-            />
+            <div
+              className={styles["header-image-wrapper"]}
+              id="header-profile-image"
+            ></div>
           </div>
           <div className={styles["user-info"]}>
             <div className={styles["user-welcome"]}>Welcome,</div>

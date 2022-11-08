@@ -37,6 +37,20 @@
     color: $theme_color_blue;
     cursor: default;
   }
+
+  .header-image-wrapper {
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    background: $gray-200;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      border-radius: 0 !important;
+    }
+  }
 }
 
 .notification {

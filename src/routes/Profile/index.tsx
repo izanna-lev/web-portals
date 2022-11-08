@@ -50,13 +50,10 @@ const ProfilePage = () => {
 
       <section className="profile">
         <div className="profile-image-container">
-          <div className="profile-image-wrapper" id="profile-image-wrapper">
-            {/* <UserIcon
-              image={profileData.image}
-              width={"100%"}
-              height={"100%"}
-            /> */}
-          </div>
+          <div
+            className="profile-image-wrapper"
+            id="profile-image-wrapper"
+          ></div>
           <div className="profile-edit-container">
             <input
               type="file"
