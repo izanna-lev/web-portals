@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import { Fetch } from "../../../api/Fetch";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const AccomodationDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -165,7 +166,8 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
       {status !== 4 ? null : (
         <>
           <span className="add-more-tickets" onClick={() => setAddMore(true)}>
-            + Add Days
+            <AiOutlinePlus />
+            &nbsp;Add Days
           </span>
           <div
             onClick={() => navigate("/itinerary/add/restaurant")}

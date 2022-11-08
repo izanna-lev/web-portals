@@ -20,6 +20,7 @@ import {
   getFormattedTime,
 } from "../../../util";
 import { EDIT_ACTIVITY } from "../../../store/slices/itinerary";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const ActivityDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -163,7 +164,8 @@ const ActivityDetails = ({ status }: { status?: number }) => {
               setAddMore(true);
             }}
           >
-            + Add More
+            <AiOutlinePlus />
+            &nbsp;Add More
           </span>
           <div
             onClick={() => navigate("/itinerary/add/note")}

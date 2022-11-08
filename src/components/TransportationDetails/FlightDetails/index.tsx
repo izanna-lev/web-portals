@@ -13,6 +13,7 @@ import { Pagination } from "../../Pagination";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const FlightDetails = (props: any) => {
   const {
@@ -108,7 +109,8 @@ const FlightDetails = (props: any) => {
               setAddMore(true);
             }}
           >
-            + Add Flight Details
+            <AiOutlinePlus />
+            &nbsp;Add Flight Details
           </span>
           <div onClick={() => nextTab(2)} className="continue-button">
             Continue

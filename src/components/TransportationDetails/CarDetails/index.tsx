@@ -13,6 +13,7 @@ import styles from "./index.module.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "../../Pagination";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const CarDetails = (props: any) => {
   const { deleteTransportation, nextPage, previousPage, car, status } = props;
@@ -96,7 +97,8 @@ const CarDetails = (props: any) => {
               setAddMore(true);
             }}
           >
-            + Add Car Details
+            <AiOutlinePlus />
+            &nbsp;Add Car Details
           </span>
 
           <div

@@ -13,6 +13,7 @@ import { Pagination } from "../../Pagination";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const FerryDetails = (props: any) => {
   const {
@@ -106,7 +107,8 @@ const FerryDetails = (props: any) => {
               setAddMore(true);
             }}
           >
-            + Add Ferry Details
+            <AiOutlinePlus />
+            &nbsp;Add Ferry Details
           </span>
           <div onClick={() => nextTab(4)} className="continue-button">
             Continue
