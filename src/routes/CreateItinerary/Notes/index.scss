@@ -69,14 +69,13 @@ input::-webkit-inner-spin-button {
 }
 
 .edit-background {
-  border: 2px solid $theme_color_blue;
+  border: 2px solid $gray-300;
   background-color: $white;
 }
 
 input:focus {
   outline: none;
-  border: 2px solid $theme_color_light_blue;
-  background-color: $white;
+  border: 2px solid $gray-200;
 }
 
 .fixed-background {
@@ -86,7 +85,7 @@ input:focus {
 
 .day-blank.image {
   justify-content: space-around;
-  background-color: $theme_color_light_blue_3x;
+  background-color: $gray-200;
 
   .not-selected-preview {
     width: 80%;
@@ -108,12 +107,18 @@ input:focus {
   border-radius: 0.5rem;
 }
 
-.activity-image-placeholder {
-  width: 20px;
-  height: 20px;
-  color: $theme_color_blue;
+.notes-upload {
+  .notes-image-placeholder {
+    width: 8rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    border: 0.5px solid black;
+    background-image: url("../../../assets/ic_upload-placeholder.svg");
+    background-position: center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
 }
-
 .add-more-error {
   font-size: 0.5rem;
   color: red;

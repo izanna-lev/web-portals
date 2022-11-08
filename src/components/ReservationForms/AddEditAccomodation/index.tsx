@@ -18,7 +18,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   const [phone, setPhone] = useState("");
   const [phoneCode, setPhoneCode] = useState("");
 
-  console.log(phoneCode)
+  console.log(phoneCode);
   const dispatch = useAppDispatch();
 
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
@@ -150,7 +150,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
           />
         </div>
         <form className="form-block" onSubmit={saveAccomodationDetails}>
-          <div className={styles["form-image"]} id="accomodationImage">
+          <div className={styles["form-image"]}>
             <input
               type="file"
               id="activity-upload"
@@ -159,13 +159,11 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               onChange={imageChange}
               hidden
             />
-            <label
-              htmlFor="activity-upload"
-              className={styles["not-selected-preview"]}
-            >
-              <IoCloudUploadOutline
+            <label htmlFor="activity-upload">
+              <div
                 className={styles["activity-image-placeholder"]}
-              />
+                id="accomodationImage"
+              ></div>
             </label>
           </div>
           <label htmlFor="activity-upload" className="bold underline">
@@ -215,11 +213,11 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                   autoFocus: true,
                 }}
                 onKeyDown={(val: any) => {
-                  setPhoneCode(val.target.value.split(" ")[0])
-                  setPhone(val.target.value.split(" ").slice(1).join(""))
+                  setPhoneCode(val.target.value.split(" ")[0]);
+                  setPhone(val.target.value.split(" ").slice(1).join(""));
                 }}
                 country="us"
-                value={phoneCode+phone}
+                value={phoneCode + phone}
                 specialLabel="Contact Number"
                 inputClass={`${styles["field-value"]}`}
                 containerClass={`${styles["input-tel"]}`}
