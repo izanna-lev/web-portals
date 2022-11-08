@@ -199,6 +199,12 @@ const EditFerry = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleEditPopup(false)}
+          />
+        </div>
         <form className="form-block" onSubmit={(e) => saveTrainDetails(e)}>
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
@@ -349,11 +355,6 @@ const EditFerry = (props: props) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleEditPopup(false)}
-        />
       </div>
       {showImage && imageUrl ? (
         <Modal
