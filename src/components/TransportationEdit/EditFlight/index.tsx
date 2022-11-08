@@ -199,6 +199,12 @@ const EditFlight = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleEditPopup(false)}
+          />
+        </div>
         <form className="form-block" onSubmit={(e) => saveFlightDetails(e)}>
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
@@ -356,11 +362,6 @@ const EditFlight = (props: props) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleEditPopup(false)}
-        />
       </div>
       {showImage && imageUrl ? (
         <Modal
