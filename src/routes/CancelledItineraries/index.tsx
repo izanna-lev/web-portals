@@ -59,7 +59,7 @@ const TableRow = (
         </div>
       </td>
       <td>{item.guests || 0}</td>
-      <td>{dayjs(item.plannedDate).format("DD-MMM-YYYY")}</td>
+      <td>{dayjs(item.assignedDate).format("DD-MMM-YYYY")}</td>
       <td className="specialist-actions">
         <button
           className={`btn view-button chat-specialist ${
@@ -87,7 +87,7 @@ const TableRow = (
           } `}
           onClick={() => popupUpdate(true, item._id)}
         >
-          Cancel Itinerary
+          {item.cancelled ? "Cancelled" : "Cancel Itinerary"}
         </button>
       </td>
     </tr>
