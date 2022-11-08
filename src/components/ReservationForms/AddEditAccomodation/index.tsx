@@ -143,6 +143,12 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleAddPopup()}
+          />
+        </div>
         <form className="form-block" onSubmit={saveAccomodationDetails}>
           <div className={styles["form-image"]} id="accomodationImage">
             <input
@@ -298,11 +304,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleAddPopup()}
-        />
       </div>
     </div>
   );

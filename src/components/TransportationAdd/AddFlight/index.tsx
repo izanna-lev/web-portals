@@ -142,6 +142,12 @@ const NewTransportationForm = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleAddPopup(false)}
+          />
+        </div>
         <form className="form-block" onSubmit={(e) => saveFlightDetails(e)}>
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
@@ -272,11 +278,6 @@ const NewTransportationForm = (props: props) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleAddPopup(false)}
-        />
       </div>
       {showImage && imageUrl ? (
         <Modal
