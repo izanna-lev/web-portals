@@ -3,7 +3,7 @@
  * @author Jagmohan Singh
  */
 
-import { API, GOOGLE_API, IMAGE, ITINERARY_TYPE } from "../../../constants";
+import { API, GOOGLE_API, IMAGE, ITINERARY_TYPE, ITINERARY_TYPE_MAP } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import InputForm from "../../../components/InputTypes/InputForm/index";
 import { usePlacesWidget } from "react-google-autocomplete";
@@ -94,6 +94,19 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
 
     if (location.type) {
       payload = { ...payload, location };
+    }
+    const dateDiff = (new Date(payload.toDate).valueOf() - new Date(payload.fromDate).valueOf()) / 36e5;
+
+    if (dateDiff < 0) {
+      alert("Invalid Date");
+      return;
+    }
+
+    if (payload.itineraryType == ITINERARY_TYPE_MAP.ONE_DAY ) {
+      if (dateDiff >= 48) {
+        alert("You can`t select more than one day in One Day itinerary type.");
+        return;
+      }
     }
 
     if (data.duration) {
