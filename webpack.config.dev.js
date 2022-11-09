@@ -11,7 +11,14 @@ const path = require("path");
 const APP_DIR = path.resolve(__dirname, "src");
 const BUILD_DIR = path.resolve(__dirname, "build");
 
-module.exports = (env) => {
+const defaultEnv = {
+  BRANCH: "development",
+  API_URL: "http://44.209.25.93:3000/api/",
+  SOCKET_URL: "http://44.209.25.93:3000/",
+  S3_URL: "https://app-onsite.s3.amazonaws.com/",
+};
+
+module.exports = (env = defaultEnv) => {
   return {
     mode: "development",
     entry: {
