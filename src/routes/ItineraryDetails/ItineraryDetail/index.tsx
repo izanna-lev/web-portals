@@ -12,7 +12,7 @@ import { ITINERARY_TYPE, PAYMENT_STATUS } from "../../../constants";
 
 const NoItinerary = ({ navigate }: any) => (
   <section className="itinerary-details">
-    <h2 className="itinerary-details-heading">Itinerary Details</h2>
+    <h2 className="itinerary-details-heading color-blue">Itinerary Details</h2>
     <div className="no-itenary">
       <div className="image-background">
         <IoImageOutline className="image" />
@@ -43,7 +43,9 @@ const AvailableItinerary = ({ navigate, data = {} }: any) => {
   return (
     <>
       <section className="itinerary-details">
-        <h2 className="itinerary-details-heading">Itinerary Details</h2>
+        <h2 className="itinerary-details-heading color-blue">
+          Itinerary Details
+        </h2>
         <div className="basic-itinerary-details">
           <div className="details-row">
             {detail("Title", data.name)}
@@ -82,7 +84,9 @@ const AvailableItinerary = ({ navigate, data = {} }: any) => {
         </div>
       </section>
       <section className="itinerary-details">
-        <div className="itinerary-details-heading">Additional Information</div>
+        <div className="itinerary-details-heading color-blue">
+          Additional Information
+        </div>
         <div className="additional-itinerary-details">
           <div className="details-row">
             {detail(

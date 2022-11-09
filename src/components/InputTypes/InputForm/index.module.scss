@@ -21,18 +21,14 @@
 .field-value {
   margin-top: 0.25rem;
   font-size: 0.8rem;
-  background-color: $theme_color_light_blue_3x !important;
+  background-color: $gray-200;
   border: none;
   border-radius: 0.5rem;
   padding: 0.95rem;
   color: $theme_color_3;
   text-overflow: ellipsis;
   height: 2.75rem;
-
-
 }
-
-
 
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px $theme_color_light_blue_3x inset !important;

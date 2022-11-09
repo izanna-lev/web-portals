@@ -18,6 +18,7 @@ import { Create } from "../../../api/Create";
 import { NewTicket } from "../../TransportationAdd/NewTicket";
 import { OldTicket } from "../OldTicket";
 import dayjs from "dayjs";
+import { AiOutlinePlus } from "react-icons/ai";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -198,6 +199,12 @@ const EditFlight = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleEditPopup(false)}
+          />
+        </div>
         <form className="form-block" onSubmit={(e) => saveFlightDetails(e)}>
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
@@ -342,10 +349,11 @@ const EditFlight = (props: props) => {
             )}
           </div>
           <div
-            className={`${styles["add-more"]} ${styles["form-heading"]}`}
+            className={`add-more-tickets ${styles["form-heading"]}`}
             onClick={() => addMoreTickets()}
           >
-            + Add More Users
+            <AiOutlinePlus />
+            &nbsp;Add More Users
           </div>
 
           <div className={styles["button-save"]}>
@@ -354,11 +362,6 @@ const EditFlight = (props: props) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleEditPopup(false)}
-        />
       </div>
       {showImage && imageUrl ? (
         <Modal

@@ -100,7 +100,10 @@ const AddEditNotes = ({ data = {}, handleAddEdit }: any) => {
   };
 
   return (
-    <form className="add-notes add-data table-item" onSubmit={saveNoteDetails}>
+    <form
+      className="add-notes add-data table-item notes-grid"
+      onSubmit={saveNoteDetails}
+    >
       <Input
         inputFields={{
           ref: dayRef,
@@ -111,7 +114,7 @@ const AddEditNotes = ({ data = {}, handleAddEdit }: any) => {
         }}
       />
       <div>
-        <div className="day-blank image itineraryImage" id="activity_image">
+        <div className="day-blank image itineraryImage">
           <input
             type="file"
             id="activity-upload"
@@ -120,11 +123,8 @@ const AddEditNotes = ({ data = {}, handleAddEdit }: any) => {
             onChange={(e) => imageChange(e)}
             hidden
           />
-          <label
-            htmlFor="activity-upload"
-            className={` ${defaultData.image ? "" : "not-selected-preview"}`}
-          >
-            <IoCloudUploadOutline className="activity-image-placeholder" />
+          <label htmlFor="activity-upload" className="notes-upload">
+            <div className="notes-image-placeholder" id="activity_image"></div>
           </label>
         </div>
       </div>

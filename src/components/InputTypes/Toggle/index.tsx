@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./index.module.scss";
 
 type InputProps = {
@@ -11,6 +12,10 @@ type InputProps = {
 };
 
 const Toggle = ({ inputFields }: InputProps) => {
+  const [checked, setchecked] = useState(() =>
+    inputFields.default ? true : false
+  );
+
   return (
     <div className={styles["input-toggle-form"]}>
       <div className={styles["feild-heading"]}>{inputFields.name}</div>
@@ -19,7 +24,10 @@ const Toggle = ({ inputFields }: InputProps) => {
         type={inputFields.type}
         ref={inputFields.ref}
         defaultChecked={inputFields.default}
-        className={styles["field-toggle-value"]}
+        className={`${styles["field-toggle-value"]} ${
+          checked && styles["toggle-checked"]
+        }`}
+        onChange={(e) => setchecked(e.target.checked)}
         required
       />
     </div>

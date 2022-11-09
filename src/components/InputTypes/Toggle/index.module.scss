@@ -12,7 +12,7 @@
 
 .feild-heading {
   margin-top: 0.5rem;
-  height: 20px;
+  height: 1.25rem;
   font-size: 0.9rem;
   padding: 0 0 0.5rem;
   // font-weight: 600;
@@ -22,20 +22,20 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 62px;
-  height: 2rem;
+  width: 3.9rem;
+  height: 1.9rem;
   display: inline-block;
   position: relative;
-  border-radius: 50px;
+  border-radius: 3rem;
   overflow: hidden;
   outline: none;
   border: none;
   cursor: pointer;
-  background-color: $theme_color_light_blue_3x;
+  background-color: $gray-200;
   transition: background-color ease 0.3s;
 
   &:focus {
-    background-color: $theme_color_light_blue_3x;
+    background-color: $gray-200;
     outline: none;
     border: none;
   }
@@ -46,22 +46,26 @@
   display: block;
   position: absolute;
   z-index: 2;
-  width: 28px;
-  height: 28px;
-  background: $theme_color_blue;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: $gray-600;
   left: 2px;
   top: 2px;
   border-radius: 50%;
-  font: 10px/28px Helvetica;
+  font: 0.65rem/1.75rem Helvetica;
   text-transform: uppercase;
   font-weight: bold;
   text-indent: -22px;
-  word-spacing: 37px;
+  word-spacing: 2.25rem;
   color: #fff;
   text-shadow: -1px -1px rgba(0, 0, 0, 0.15);
   white-space: nowrap;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
+}
+
+.toggle-checked:before {
+  background-color: $theme_color_blue;
 }
 
 // .field-toggle-value:checked {

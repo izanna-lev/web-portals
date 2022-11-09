@@ -26,7 +26,9 @@ const TripSummary = ({ status }: { status?: number }) => {
     days,
     trip: { list, page, limit, total, size },
   } = useAppSelector((state) => state.itinerary);
-  const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
+  const { _id, itineraryStatus } = useAppSelector(
+    (state) => state.itinerary.itineraryDetails
+  );
   const { formRef } = useAppSelector((state) => state.appData);
   const { type } = useAppSelector((state) => state.apiMessage);
 
@@ -59,9 +61,12 @@ const TripSummary = ({ status }: { status?: number }) => {
   }, [type]);
 
   useEffect(() => {
-    fetchData(API.TRIP_LIST, 1, 10, Number(dayFilter));
-    fetchData(API.DAYS_LIST);
-  }, [fetchData, dayFilter]);
+    itineraryStatus === 4 && fetchData(API.DAYS_LIST);
+  }, [fetchData, itineraryStatus]);
+
+  useEffect(() => {
+    itineraryStatus === 4 && fetchData(API.TRIP_LIST, 1, 10, Number(dayFilter));
+  }, [fetchData, dayFilter, itineraryStatus]);
 
   const nextPage = () =>
     fetchData(API.TRIP_LIST, page + 1, limit, Number(dayFilter));
@@ -70,19 +75,21 @@ const TripSummary = ({ status }: { status?: number }) => {
 
   return (
     <>
-      <div className="days-dropdown">
-        <div className="feild-heading">Select Day</div>
-        <select
-          className="field-value"
-          onChange={(e) => setdayFilter(e.target.value)}
-        >
-          {days.list?.map((element: any, index: number) => (
-            <option value={element} key={index}>
-              Day {element}
-            </option>
-          ))}
-        </select>
-      </div>
+      {itineraryStatus === 4 ? (
+        <div className="days-dropdown">
+          <div className="feild-heading">Select Day</div>
+          <select
+            className="field-value"
+            onChange={(e) => setdayFilter(e.target.value)}
+          >
+            {days.list?.map((element: any, index: number) => (
+              <option value={element} key={index}>
+                Day {element}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : null}
 
       {list.length
         ? Pagination({
@@ -96,7 +103,7 @@ const TripSummary = ({ status }: { status?: number }) => {
         : null}
       <section className="itinerary-details-container">
         <div className="TripSummaryPage">
-          <div className="add-trip">
+          <div className="add-trip trip-grid itinerary-table-header">
             <div>Image</div>
             <div>Title</div>
             <div>Time</div>
@@ -104,27 +111,32 @@ const TripSummary = ({ status }: { status?: number }) => {
             <div>Description</div>
           </div>
 
-          <div className="forms">
-            {list.length ? (
-              list.map((element: any, index: number) => (
-                <div className={`add-trip table-item`} key={index}>
-                  <div>
-                    <img
-                      className="itineraryImage"
-                      src={`${IMAGE.SMALL}${element.image}`}
-                      alt={element.name}
-                    />
-                  </div>
-                  <div>{element.title}</div>
-                  <div>{element.dateTime ? getFormattedTime(element.dateTime): "NA"}</div>
-                  <div>{element.dateTime ? getFormattedDate(element.dateTime): "NA"}</div>
-                  <div>{element.description}</div>
+          {list.length ? (
+            list.map((element: any, index: number) => (
+              <div
+                className={`add-trip table-item trip-grid itinerary-table-row`}
+                key={index}
+              >
+                <div>
+                  <img
+                    className="itineraryImage"
+                    src={`${IMAGE.SMALL}${element.image}`}
+                    alt={element.name}
+                  />
                 </div>
-              ))
-            ) : (
-              <div className={`empty-table table-item`}>Nothing Added</div>
-            )}
-          </div>
+                <div>{element.title}</div>
+                <div>
+                  {element.dateTime ? getFormattedTime(element.dateTime) : "NA"}
+                </div>
+                <div>
+                  {element.dateTime ? getFormattedDate(element.dateTime) : "NA"}
+                </div>
+                <div>{element.description}</div>
+              </div>
+            ))
+          ) : (
+            <div className={`empty-table table-item`}>Nothing Added</div>
+          )}
         </div>
       </section>
 

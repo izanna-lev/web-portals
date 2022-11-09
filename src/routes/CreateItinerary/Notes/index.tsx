@@ -16,6 +16,7 @@ import { Fetch } from "../../../api/Fetch";
 import "./index.scss";
 import { EDIT_NOTES } from "../../../store/slices/itinerary";
 import { editListItem } from "../../../util";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const NotesDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -63,7 +64,7 @@ const NotesDetails = ({ status }: { status?: number }) => {
 
   return (
     <>
-      {list.length
+      {/* {list.length
         ? Pagination({
             page,
             limit,
@@ -72,10 +73,10 @@ const NotesDetails = ({ status }: { status?: number }) => {
             nextPage,
             previousPage,
           })
-        : null}
+        : null} */}
       <section className="itinerary-details-container">
         <div className="AddNotesPage">
-          <div className="add-notes">
+          <div className="add-notes notes-grid itinerary-table-header">
             <div>Day</div>
             <div>Image</div>
             <div>Description</div>
@@ -89,7 +90,10 @@ const NotesDetails = ({ status }: { status?: number }) => {
                 return element.edit ? (
                   <AddEditNote handleAddEdit={editNote} data={element} />
                 ) : (
-                  <div className={`add-notes table-item`} key={index}>
+                  <div
+                    className={`add-notes table-item notes-grid itinerary-table-row`}
+                    key={index}
+                  >
                     <div>{element.day}</div>
                     <div>
                       <img
@@ -99,8 +103,10 @@ const NotesDetails = ({ status }: { status?: number }) => {
                       />
                     </div>
                     <div>{element.description}</div>
-                    <div className="add-activity-buttons">
-                      {status === 3 || status === 5 ? null : (
+                    {status === 3 || status === 5 ? (
+                      <div></div>
+                    ) : (
+                      <div className="add-activity-buttons">
                         <button
                           className="btn edit-button"
                           onClick={() => editNote(element._id)}
@@ -108,15 +114,16 @@ const NotesDetails = ({ status }: { status?: number }) => {
                           <FaRegEdit />
                           &nbsp;<span>Edit</span>
                         </button>
-                      )}
-                      <button
-                        className="btn delete-button"
-                        onClick={() => deleteNote(element._id)}
-                      >
-                        <MdDeleteOutline />
-                        &nbsp;<span>Delete</span>
-                      </button>
-                    </div>
+
+                        <button
+                          className="btn delete-button"
+                          onClick={() => deleteNote(element._id)}
+                        >
+                          <MdDeleteOutline />
+                          &nbsp;<span>Delete</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 );
               })
@@ -129,12 +136,13 @@ const NotesDetails = ({ status }: { status?: number }) => {
       {status !== 4 ? null : (
         <>
           <span
-            className="add-more"
+            className="add-more-tickets"
             onClick={() => {
               setAddMore(true);
             }}
           >
-            + Add More
+            <AiOutlinePlus />
+            &nbsp;Add More
           </span>
           <div
             onClick={() => navigate("/itinerary/add/summary")}

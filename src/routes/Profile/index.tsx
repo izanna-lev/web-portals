@@ -7,8 +7,11 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { UserIcon } from "../../components/UserIcon";
 import { FaRegEdit } from "react-icons/fa";
 import { Create } from "../../api/Create";
-import { API } from "../../constants";
+import { API, IMAGE } from "../../constants";
 import "./index.scss";
+import { useEffect } from "react";
+import { setBackground } from "../../util";
+import { ICON } from "../../assets/index";
 
 const ProfilePage = () => {
   const profileData = useAppSelector((state) => state.profile);
@@ -29,6 +32,16 @@ const ProfilePage = () => {
     }
   };
 
+  useEffect(() => {
+    setBackground(
+      profileData.image
+        ? `${IMAGE.AVERAGE}${profileData.image}`
+        : ICON.USER_PLACEHOLDER,
+      "profile-image-wrapper",
+      "cover"
+    );
+  }, [profileData.image]);
+
   return (
     <main className="content-container" id="profilePage">
       <section className="content-top">
@@ -37,11 +50,10 @@ const ProfilePage = () => {
 
       <section className="profile">
         <div className="profile-image-container">
-          <UserIcon
-            image={profileData.image}
-            width={"10rem"}
-            height={"10rem"}
-          />
+          <div
+            className="profile-image-wrapper"
+            id="profile-image-wrapper"
+          ></div>
           <div className="profile-edit-container">
             <input
               type="file"
@@ -60,8 +72,13 @@ const ProfilePage = () => {
           <a href={`mailto:${profileData.email}`} className="profile-text">
             {profileData.email}
           </a>
-          <a href={`tel:+${profileData.phoneNumber}`} className="profile-text">
-            +{profileData.phoneNumber}
+          <a
+            href={`tel:${profileData.phoneCode}${profileData.phoneNumber}`}
+            className="profile-text"
+          >
+            {profileData.phoneCode}
+            {`${profileData.phoneCode ? "-" : ""}`}
+            {profileData.phoneNumber}
           </a>
         </div>
       </section>

@@ -17,6 +17,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   const [selectedImage, setSelectedImage] = useState();
   const [location, setlocation] = useState({ type: "" });
   const [phone, setPhone] = useState("");
+  const [phoneCode, setPhoneCode] = useState("");
 
   const dispatch = useAppDispatch();
 
@@ -72,6 +73,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
     let payload: any;
     payload = {
       contactNumber: phone,
+      phoneCode,
       day: getRefValue(dayRef),
       name: getRefValue(nameRef),
       description: getRefValue(specialistNoteRef),
@@ -127,8 +129,14 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleAddPopup()}
+          />
+        </div>
         <form className="form-block" onSubmit={saveAccomodationDetails}>
-          <div className={styles["form-image"]} id="accomodationImage">
+          <div className={styles["form-image"]}>
             <input
               type="file"
               id="activity-upload"
@@ -137,13 +145,11 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               onChange={imageChange}
               hidden
             />
-            <label
-              htmlFor="activity-upload"
-              className={styles["not-selected-preview"]}
-            >
-              <IoCloudUploadOutline
+            <label htmlFor="activity-upload">
+              <div
                 className={styles["activity-image-placeholder"]}
-              />
+                id="accomodationImage"
+              ></div>
             </label>
           </div>
 
@@ -193,12 +199,15 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                   autoFocus: true,
                 }}
                 country="us"
-                value={phone}
+                onKeyDown={(val: any) => {
+                  setPhoneCode(val.target.value.split(" ")[0]);
+                  setPhone(val.target.value.split(" ").slice(1).join(""));
+                }}
+                value={phoneCode + phone}
                 specialLabel="Contact Number"
                 inputClass={`${styles["field-value"]}`}
                 containerClass={`${styles["input-tel"]}`}
                 buttonClass={`${styles["flag-dropdown"]}`}
-                onChange={(value) => setPhone(value)}
               />
             </div>
             <div className={styles["form-left-details"]}>
@@ -250,11 +259,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleAddPopup()}
-        />
       </div>
     </div>
   );

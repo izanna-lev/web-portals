@@ -144,7 +144,7 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
 
   return (
     <form
-      className="add-activities add-data table-item"
+      className="add-activities add-data table-item activities-grid"
       onSubmit={saveActivityDetails}
       key={data._id}
     >
@@ -159,7 +159,7 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
       />
 
       <div>
-        <div className="day-blank image itineraryImage" id="activity_image">
+        <div className="day-blank image itineraryImage">
           <input
             type="file"
             id="activity-upload"
@@ -168,11 +168,11 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
             onChange={(e) => imageChange(e)}
             hidden
           />
-          <label
-            htmlFor="activity-upload"
-            className={` ${defaultData.image ? "" : "not-selected-preview"}`}
-          >
-            <IoCloudUploadOutline className="activity-image-placeholder" />
+          <label htmlFor="activity-upload" className="activity-upload">
+            <div
+              className="activity-image-placeholder"
+              id="activity_image"
+            ></div>
           </label>
         </div>
       </div>

@@ -63,7 +63,7 @@ const UserTicket = (
       <div className={styles["form-left-details"]}>
         <div className={`${styles["form-heading"]}`}>Upload Car Image</div>
         <div style={{ display: "flex" }}>
-          <div className={styles["form-image"]} id={`bg-img-${length}`}>
+          <div className={styles["form-image"]}>
             <input
               type="file"
               id={`${length}`}
@@ -72,14 +72,11 @@ const UserTicket = (
               onChange={(e) => handleImageChange(e.target.files)}
               hidden
             />
-            <label
-              htmlFor={`${length}`}
-              className={styles["not-selected-preview"]}
-              id={`Ticket${length}`}
-            >
-              <IoCloudUploadOutline
+            <label htmlFor={`${length}`} id={`Ticket${length}`}>
+              <div
                 className={styles["activity-image-placeholder"]}
-              />
+                id={`bg-img-${length}`}
+              ></div>
             </label>
           </div>
 
@@ -232,6 +229,13 @@ const EditCar = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        \
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleEditPopup(false)}
+          />
+        </div>
         <form className="form-block" onSubmit={(e) => saveCarDetails(e)}>
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
@@ -337,11 +341,6 @@ const EditCar = (props: props) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleEditPopup(false)}
-        />
       </div>
       {showImage && imageUrl ? (
         <Modal

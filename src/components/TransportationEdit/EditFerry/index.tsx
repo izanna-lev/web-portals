@@ -18,6 +18,7 @@ import { NewTicket } from "../../TransportationAdd/NewTicket";
 import { OldTicket } from "../OldTicket";
 import { Create } from "../../../api/Create";
 import dayjs from "dayjs";
+import { AiOutlinePlus } from "react-icons/ai";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -198,6 +199,12 @@ const EditFerry = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleEditPopup(false)}
+          />
+        </div>
         <form className="form-block" onSubmit={(e) => saveTrainDetails(e)}>
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
@@ -335,10 +342,11 @@ const EditFerry = (props: props) => {
             )}
           </div>
           <div
-            className={`${styles["add-more"]} ${styles["form-heading"]}`}
+            className={`add-more-tickets ${styles["form-heading"]}`}
             onClick={addMoreTickets}
           >
-            + Add More Users
+            <AiOutlinePlus />
+            &nbsp;Add More Users
           </div>
 
           <div className={styles["button-save"]}>
@@ -347,11 +355,6 @@ const EditFerry = (props: props) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleEditPopup(false)}
-        />
       </div>
       {showImage && imageUrl ? (
         <Modal

@@ -6,11 +6,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-import {
-  ITINERARY_STATUS,
-  API,
-  PLANNED_TRAVELLER,
-} from "../../constants";
+import { ITINERARY_STATUS, API, PLANNED_TRAVELLER } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setFormRef } from "../../store/slices/appData";
 import { Pagination } from "../../components/Pagination";
@@ -23,10 +19,11 @@ const TableHead = () => (
   <thead className="table-head">
     <tr className="head-tr">
       <th>Sr.No.</th>
-      <th>Name</th>
+      <th>Location Planned</th>
       <th>User Name</th>
-      <th>Email</th>
+      <th>Contact Number</th>
       <th>Planned Date</th>
+      <th>No. of guests</th>
       <th className="custom-head">How much have you already planned?</th>
       <th>Status</th>
       <th>Actions</th>
@@ -52,13 +49,18 @@ const TableRow = (
       </td>
       <td>{item.userName}</td>
       <td>
-        {item.travellerEmail ? (
-          <a href={`mailto:${item.travellerEmail}`}>{item.travellerEmail}</a>
+        {item.contactNumber ? (
+          <a href={`tel:${item.phoneCode}${item.contactNumber}`}>
+            {item.phoneCode}
+            {`${item.phoneCode ? "-" : ""}`}
+            {item.contactNumber}
+          </a>
         ) : (
           "NA"
         )}
       </td>
       <td>{getFormattedDate(item.plannedDate)}</td>
+      <td>{item.travellers || 0}</td>
       <td>{PLANNED_TRAVELLER[item.plannedTraveller - 1 || 0].name}</td>
       <td>
         <div className="table-data-status">
@@ -113,7 +115,7 @@ const ItineraryPage = () => {
               dispatch(Fetch(API.ITINERARIES, {}, page - 1, limit)),
           })
         : null}
-      <section className="table-container">
+      <section className="table-container assigned-itinerary-container">
         <table className="itinerary-table table">
           {TableHead()}
           <tbody className="body-tr">

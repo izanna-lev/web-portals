@@ -21,7 +21,9 @@ const DetailsPage = () => {
   return (
     <>
       <div className="trip-details">
-        <div className="trip-details-heading">Trip Request Form Details</div>
+        <div className="trip-details-heading color-blue">
+          Trip Request Form Details
+        </div>
         <div className="trip-details-data">
           <div>
             <div className="key">Name</div>
@@ -50,8 +52,8 @@ const DetailsPage = () => {
             </div>
           </div>
         </div>
-        <div className="trip-details-heading">Assigned Specialist</div>
 
+        <div className="trip-details-heading">Assigned Specialist</div>
         <div className="trip-details-data">
           <div className="assigned-specialist">
             <UserIcon image={image} />
@@ -69,7 +71,7 @@ const DetailsPage = () => {
       </div>
 
       <div className="trip-details">
-        <div className="trip-details-heading">Traveler Details</div>
+        <div className="trip-details-heading color-blue">Traveler Details</div>
         <div className="trip-details-data">
           <div>
             <div className="key">Name</div>

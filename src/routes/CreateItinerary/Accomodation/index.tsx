@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import { Fetch } from "../../../api/Fetch";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const AccomodationDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -74,7 +75,7 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
 
   return (
     <>
-      {list.length
+      {/* {list.length
         ? Pagination({
             page,
             limit,
@@ -83,10 +84,12 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
             nextPage,
             previousPage,
           })
-        : null}
+        : null} */}
       <section className="itinerary-details-container">
         <div className={styles["AddFlightsPage"]}>
-          <div className={styles["flightDetails-table"]}>
+          <div
+            className={`${styles["flightDetails-table"]} ${styles["table-grid"]} itinerary-table-header`}
+          >
             <div>Day</div>
             <div>Image</div>
             <div>Title</div>
@@ -100,47 +103,52 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
             <div>Action</div>
           </div>
 
-          <div className={styles["forms"]}>
-            {list.length ? (
-              list.map((element: any, index: number) => (
-                <div
-                  className={`${styles["flightDetails-table"]} ${styles["table-item"]}`}
-                  key={index}
-                >
-                  <div>{element.day || "NA"}</div>
-                  <div>
-                    <img
-                      className="itineraryImage"
-                      src={`${IMAGE.SMALL}${element.image}`}
-                      alt={element.name}
-                    />
-                  </div>
-                  <div>{element.name}</div>
-                  <div>{element.location.location || "NA"}</div>
-                  <div>
-                    {element.contactNumber ? (
-                      <a href={`tel:+${element.contactNumber}`}>
-                        +{element.contactNumber}
-                      </a>
-                    ) : (
-                      "NA"
-                    )}
-                  </div>
-                  <div>{getFormattedTime(element.checkInDateTime)}</div>
-                  <div>{getFormattedDate(element.checkInDateTime)}</div>
-                  <div>{getFormattedTime(element.checkOutDateTime)}</div>
-                  <div>{getFormattedDate(element.checkOutDateTime)}</div>
-                  <div>{element.description || "NA"}</div>
+          {list.length ? (
+            list.map((element: any, index: number) => (
+              <div
+                className={`${styles["flightDetails-table"]} ${styles["table-item"]} ${styles["table-grid"]} itinerary-table-row`}
+                key={index}
+              >
+                <div>{element.day || "NA"}</div>
+                <div>
+                  <img
+                    className="itineraryImage"
+                    src={`${IMAGE.SMALL}${element.image}`}
+                    alt={element.name}
+                  />
+                </div>
+                <div>{element.name}</div>
+                <div>{element.location.location || "NA"}</div>
+                <div>
+                  {element.contactNumber ? (
+                    <a
+                      href={`tel:${element.phoneCode}${element.contactNumber}`}
+                    >
+                      {element.phoneCode}
+                      {`${element.phoneCode ? "-" : ""}`}
+                      {element.contactNumber}
+                    </a>
+                  ) : (
+                    "NA"
+                  )}
+                </div>
+                <div>{getFormattedTime(element.checkInDateTime)}</div>
+                <div>{getFormattedDate(element.checkInDateTime)}</div>
+                <div>{getFormattedTime(element.checkOutDateTime)}</div>
+                <div>{getFormattedDate(element.checkOutDateTime)}</div>
+                <div>{element.description || "NA"}</div>
+                {status === 3 || status === 5 ? (
+                  <div></div>
+                ) : (
                   <div className="add-activity-buttons">
-                    {status === 3 || status === 5 ? null : (
-                      <button
-                        className="btn edit-button"
-                        onClick={() => setEdit(element)}
-                      >
-                        <FaRegEdit />
-                        &nbsp;<span>Edit</span>
-                      </button>
-                    )}
+                    <button
+                      className="btn edit-button"
+                      onClick={() => setEdit(element)}
+                    >
+                      <FaRegEdit />
+                      &nbsp;<span>Edit</span>
+                    </button>
+
                     <button
                       className="btn delete-button"
                       onClick={() => deleteReservation(element._id)}
@@ -149,22 +157,21 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
                       &nbsp;<span>Delete</span>
                     </button>
                   </div>
-                </div>
-              ))
-            ) : (
-              <div
-                className={`${styles["empty-table"]} ${styles["table-item"]}`}
-              >
-                Nothing Added
+                )}
               </div>
-            )}
-          </div>
+            ))
+          ) : (
+            <div className={`${styles["empty-table"]} ${styles["table-item"]}`}>
+              Nothing Added
+            </div>
+          )}
         </div>
       </section>
       {status !== 4 ? null : (
         <>
-          <span className={styles["add-more"]} onClick={() => setAddMore(true)}>
-            + Add Days
+          <span className="add-more-tickets" onClick={() => setAddMore(true)}>
+            <AiOutlinePlus />
+            &nbsp;Add Days
           </span>
           <div
             onClick={() => navigate("/itinerary/add/restaurant")}

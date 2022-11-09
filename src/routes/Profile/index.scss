@@ -28,8 +28,23 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 10%;
+  justify-content: center;
   gap: 20px;
+  height: calc(100vh - 10.5rem);
+}
+
+.profile-image-wrapper {
+  min-width: 15rem;
+  min-height: 15rem;
+  display: flex;
+  align-items: center;
+  background: $gray-200;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    border-radius: 0 !important;
+  }
 }
 
 .profile-details {
@@ -55,17 +70,18 @@
 }
 
 .profile-image-container {
-  max-width: 10rem;
-  max-height: 10rem;
+  max-width: 15rem;
+  max-height: 15rem;
 }
 
 .profile-edit-container {
+  display: inline-block;
   padding: 0.5rem 0.4rem 0.4rem 0.6rem;
   background-color: $theme_color_blue;
   max-width: fit-content;
   border-radius: 0.5rem;
   position: relative;
-  left: 7rem;
+  left: 11rem;
   bottom: 3rem;
 }
 

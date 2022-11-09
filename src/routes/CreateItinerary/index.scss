@@ -24,7 +24,8 @@
   border-radius: 0.5rem;
   justify-self: center;
   grid-template-columns: repeat(7, 1fr);
-  background-color: $gray-200;
+  background: linear-gradient(115deg, #1acc6f33 0%, rgb(11 157 216 / 20%) 100%)
+    0% 0% no-repeat padding-box;
 }
 
 .form-request {
@@ -72,8 +73,8 @@
   text-align: center;
   align-self: center;
   justify-self: center;
-  font-weight: 400;
-  font-size: 0.8rem;
+  font-weight: 600;
+  font-size: 0.9rem;
   text-decoration: none;
 }
 
@@ -84,6 +85,10 @@
 }
 
 .tab-active {
-  color: $white;
-  background-color: $theme_color_blue;
+  background: linear-gradient(
+      165deg,
+      rgba(26, 204, 111, 0.5) 0%,
+      rgba(11, 157, 216, 0.25) 100%
+    )
+    0% 0% no-repeat padding-box;
 }

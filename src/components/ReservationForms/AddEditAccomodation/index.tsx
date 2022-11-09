@@ -3,7 +3,6 @@ import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
 import PhoneInput from "react-phone-input-2";
-
 import "react-phone-input-2/lib/plain.css";
 import { useEffect, useRef, useState } from "react";
 import { compareDateRange, getRefValue, setBackground } from "../../../util";
@@ -17,7 +16,9 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   const [selectedImage, setSelectedImage] = useState();
   const [location, setlocation] = useState({ type: "" });
   const [phone, setPhone] = useState("");
+  const [phoneCode, setPhoneCode] = useState("");
 
+  console.log(phoneCode);
   const dispatch = useAppDispatch();
 
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
@@ -75,6 +76,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
 
     payload = {
       contactNumber: phone,
+      phoneCode,
       day: getRefValue(dayRef),
       name: getRefValue(nameRef),
       description: getRefValue(specialistNoteRef),
@@ -141,8 +143,14 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleAddPopup()}
+          />
+        </div>
         <form className="form-block" onSubmit={saveAccomodationDetails}>
-          <div className={styles["form-image"]} id="accomodationImage">
+          <div className={styles["form-image"]}>
             <input
               type="file"
               id="activity-upload"
@@ -151,13 +159,11 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               onChange={imageChange}
               hidden
             />
-            <label
-              htmlFor="activity-upload"
-              className={styles["not-selected-preview"]}
-            >
-              <IoCloudUploadOutline
+            <label htmlFor="activity-upload">
+              <div
                 className={styles["activity-image-placeholder"]}
-              />
+                id="accomodationImage"
+              ></div>
             </label>
           </div>
           <label htmlFor="activity-upload" className="bold underline">
@@ -206,13 +212,16 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                   required: true,
                   autoFocus: true,
                 }}
+                onKeyDown={(val: any) => {
+                  setPhoneCode(val.target.value.split(" ")[0]);
+                  setPhone(val.target.value.split(" ").slice(1).join(""));
+                }}
                 country="us"
-                value={phone}
+                value={phoneCode + phone}
                 specialLabel="Contact Number"
                 inputClass={`${styles["field-value"]}`}
                 containerClass={`${styles["input-tel"]}`}
                 buttonClass={`${styles["flag-dropdown"]}`}
-                onChange={(value) => setPhone(value)}
               />
 
               <TextArea
@@ -293,11 +302,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleAddPopup()}
-        />
       </div>
     </div>
   );

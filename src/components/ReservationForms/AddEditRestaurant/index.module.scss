@@ -14,40 +14,31 @@
 
 .form-background {
   width: 60rem;
-  height: 38rem;
+  height: 43rem;
   border-radius: 0.75rem;
   background-color: $white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 1.5rem 0;
 }
 
 .form-image {
   margin-left: 0px;
-  width: 20%;
+  width: 12rem;
   display: flex;
   align-items: center;
-  padding: 0.25rem;
-  height: 15%;
-  border-radius: 0.5rem;
+  margin: 0.25rem;
+  height: 6rem;
   justify-content: space-around;
-  background-color: $theme_color_light_blue_3x;
-}
-
-.form-image > .not-selected-preview {
-  width: 80%;
-  height: 70%;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.5rem;
 }
 
 .activity-image-placeholder {
-  width: 40px;
-  height: 40px;
-  color: $theme_color_light_blue;
+  width: 12rem;
+  border-radius: 0.5rem;
+  height: 6rem;
+
+  background-image: url("../../../assets/ic_upload-placeholder.svg");
+  background-position: center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .form-required-feilds {
@@ -120,7 +111,7 @@
   .field-value {
     // margin-top: 0.25rem !important;
     font-size: 0.75rem !important;
-    background-color: $theme_color_light_blue_3x !important;
+    background-color: $gray-200 !important;
     border: none !important;
     border-radius: 0.5rem !important;
     padding: 0.95rem 0.95rem 0.95rem 60px !important;
@@ -132,7 +123,7 @@
 }
 
 .flag-dropdown {
-  border: 1px solid #bee3f4 !important;
+  border: 1px solid $gray-300 !important;
   border-radius: 5px !important;
 }
 

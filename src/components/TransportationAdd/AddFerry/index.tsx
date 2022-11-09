@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { Create } from "../../../api/Create";
 import { NewTicket } from "../NewTicket";
+import { AiOutlinePlus } from "react-icons/ai";
 
 interface props {
   handleAddPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -126,6 +127,8 @@ const NewTransportationForm = (props: props) => {
       transportationType: TRANSPORTATION_TYPE.FERRY,
     };
 
+    if (!ticketsData[0].image) return alert("Please select an image!");
+
     dispatch(
       Create(API.ADD_TRAIN, data, false, "", API.TRANSPORTATION_DATA, {
         itineraryRef: _id,
@@ -139,6 +142,12 @@ const NewTransportationForm = (props: props) => {
   return (
     <div className={styles["add-itinerary-data-form"]}>
       <div className={styles["form-background"]}>
+        <div className="form-cross">
+          <IoCloseOutline
+            className={styles["cross"]}
+            onClick={() => handleAddPopup(false)}
+          />
+        </div>
         <form className="form-block" onSubmit={(e) => saveFerryDetails(e)}>
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
@@ -249,10 +258,11 @@ const NewTransportationForm = (props: props) => {
             )}
           </div>
           <div
-            className={`${styles["add-more"]} ${styles["form-heading"]}`}
+            className={`add-more-tickets ${styles["form-heading"]}`}
             onClick={addMoreTickets}
           >
-            + Add More Users
+            <AiOutlinePlus />
+            &nbsp;Add More Users
           </div>
 
           <div className={styles["button-save"]}>
@@ -261,11 +271,6 @@ const NewTransportationForm = (props: props) => {
             </button>
           </div>
         </form>
-
-        <IoCloseOutline
-          className={styles["cross"]}
-          onClick={() => handleAddPopup(false)}
-        />
       </div>
       {showImage && imageUrl ? (
         <Modal
