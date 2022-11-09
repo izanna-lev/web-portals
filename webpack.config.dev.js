@@ -18,7 +18,7 @@ const defaultEnv = {
   S3_URL: "https://app-onsite.s3.amazonaws.com/",
 };
 
-module.exports = (env = defaultEnv) => {
+module.exports = (env) => {
   return {
     mode: "development",
     entry: {
@@ -131,7 +131,7 @@ module.exports = (env = defaultEnv) => {
 
     // plugins
     plugins: [
-      new EnvironmentPlugin(env),
+      new EnvironmentPlugin(defaultEnv),
       new ReactRefreshWebpackPlugin(),
       new ProvidePlugin({ process: "process/browser" }),
       new HtmlWebpackPlugin({
