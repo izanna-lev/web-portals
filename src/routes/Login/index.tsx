@@ -2,7 +2,7 @@
  * @desc this is the login component of the application.
  * @author Jagmohan Singh
  */
-import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
