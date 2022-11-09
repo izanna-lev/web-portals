@@ -29,7 +29,7 @@ const DetailsPage = () => {
             <div className="key">Name</div>
             <div className="value">
               <UserIcon image={itineraryDetails.image} />
-              <span>{itineraryDetails.location?.location || "NA"}</span>
+              <span>{itineraryDetails.location || "NA"}</span>
             </div>
           </div>
 
