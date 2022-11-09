@@ -10,8 +10,8 @@ export const SOCKET_URL = process.env.SOCKET_URL || "";
 const S3_URL = process.env.S3_URL;
 
 // const SERVER_TYPE = "development/";
-// export const API_URL = "http://44.209.25.93:3000/api/";
-// export const SOCKET_URL = "http://44.209.25.93:3000/";
+// export const API_URL = "http://localhost:3001/api/";
+// export const SOCKET_URL = "http://localhost:3001/";
 // const S3_URL = "https://app-onsite.s3.amazonaws.com/";
 
 // Custom Environment Variables
@@ -182,6 +182,12 @@ export const ITINERARY_TYPE = [
   { name: "Domestic Trip", value: 2 },
   { name: "International Trip", value: 3 },
 ];
+
+export const ITINERARY_TYPE_MAP = {
+  ONE_DAY: 1,
+  DOMESTIC_TRIP: 2,
+  INTERNATIONAL_TRIP: 3,
+};
 
 export const PLANNED_TRAVELLER = [
   { name: "I haven't even started", value: 1 },
