@@ -129,7 +129,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
 
   useEffect(() => {
     if (apiMessage.type === "success" && itineraryDetails._id)
-      navigate("/itinerary/add/summary");
+      navigate("/itinerary/add/transportation");
   }, [apiMessage.type, navigate, itineraryDetails._id]);
 
   return (
