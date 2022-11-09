@@ -6,7 +6,7 @@ const AddEditNotes = ({ navigate, location }: any) => {
   return (
     <section className={`${styles["popup-container"]}`}>
       <div className={`${styles["popup"]}`}>
-        <h2 className={`${styles["popup-heading"]}`}>Itinerary Submitted</h2>
+        <h3 className={`${styles["popup-heading"]}`}>Itinerary Submitted</h3>
         <p className={`${styles["popup-text"]}`}>
           Your Itinerary has been submitted successfully.
         </p>

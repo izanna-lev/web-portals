@@ -14,7 +14,7 @@ const DetailsPage = () => {
     (state: any) => state.itinerary
   );
 
-  const { name, phoneNumber, image } = useAppSelector(
+  const { name, phoneNumber, image, phoneCode } = useAppSelector(
     (state: any) => state.profile
   );
 
@@ -59,12 +59,15 @@ const DetailsPage = () => {
             <UserIcon image={image} />
             <div className="specialist-details">
               <div className="key">{name || "NA"}</div>
-              <a
-                className="specialist-detail value"
-                href={`tel:+${phoneNumber}`}
-              >
-                +{phoneNumber || "NA"}
-              </a>
+              {phoneNumber ? (
+                <a href={`tel:${phoneCode}${phoneNumber}`}>
+                  {phoneCode}
+                  {`${phoneCode ? "-" : ""}`}
+                  {phoneNumber}
+                </a>
+              ) : (
+                "NA"
+              )}
             </div>
           </div>
         </div>
