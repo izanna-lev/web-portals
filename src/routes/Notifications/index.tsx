@@ -6,6 +6,7 @@ import { Fetch } from "../../api/Fetch";
 import { setApiMessage } from "../../store/slices/apiMessage";
 import { Create } from "../../api/Create";
 import { ICON } from "../../assets/index";
+import { IoImageOutline } from "react-icons/io5";
 
 const User = (
   user: any,
@@ -23,15 +24,24 @@ const User = (
           selectOne(user._id);
         }}
       />
-      <img
-        className="user-selection-img"
-        src={`${IMAGE.SMALL}${user.image}`}
-        alt={user.name}
-        onError={(e: any) => {
-          e.target.src = ICON.USER_PLACEHOLDER;
-        }}
-        loading="lazy"
-      />
+      {user.image ? (
+        <img
+          className={`${user.image ? "user-selection-img" : "user-dummy-img"} `}
+          src={`${
+            user.image ? IMAGE.SMALL + user.image : ICON.USER_PLACEHOLDER
+          } `}
+          alt={user.name}
+          onError={(e: any) => {
+            e.target.src = ICON.USER_PLACEHOLDER;
+          }}
+          loading="lazy"
+        />
+      ) : (
+        <div className="user-selection-img-dummy">
+          {" "}
+          <IoImageOutline className="dummy-image" />
+        </div>
+      )}
       <div className="user-selection-info">
         <div className="user-selection-name">{user.name}</div>
         <div className="user-selection-email">{user.email}</div>
