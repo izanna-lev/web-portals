@@ -236,7 +236,8 @@ const ItineraryDetailsPage = () => {
             <div className="itinerary-buttons">
               {/* Cancel itinerary Button */}
 
-              {itineraryDetails.itineraryStatus === 2 ? (
+              {itineraryDetails.itineraryStatus === 2 ||
+              itineraryDetails.itineraryStatus === 1 ? (
                 <>
                   <div
                     className="btn view-button"
@@ -255,7 +256,8 @@ const ItineraryDetailsPage = () => {
 
               {/* Chat Button */}
 
-              {itineraryDetails.itineraryStatus === 2 ? (
+              {itineraryDetails.itineraryStatus === 2 ||
+              itineraryDetails.itineraryStatus === 1 ? (
                 <div
                   className="chat"
                   onClick={() => navigate(`/chat/${channelRef}`)}
@@ -270,8 +272,7 @@ const ItineraryDetailsPage = () => {
           {/* Edit Itinerary Details Button */}
 
           {tabSelected === ITINERARY_SECTION.ITINERARY &&
-          (itineraryDetails.itineraryStatus === 2 ||
-            itineraryDetails.itineraryStatus === 1) ? (
+          itineraryDetails.itineraryStatus === 2 ? (
             <div className="itinerary-buttons">
               <div
                 className="btn view-button"
