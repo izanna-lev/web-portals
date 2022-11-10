@@ -138,3 +138,19 @@
   display: flex;
   gap: 4px;
 }
+
+
+.user-selection-img-dummy {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $gray-100;
+}
+
+.dummy-image {
+  color: $gray-500;
+}
