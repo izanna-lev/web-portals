@@ -11,7 +11,6 @@ import { getFormattedDate } from "../../../util";
 import { ITINERARY_TYPE, PAYMENT_STATUS } from "../../../constants";
 
 const NoItinerary = ({ navigate, access }: any) => (
-
   <section className="itinerary-details">
     <h2 className="itinerary-details-heading color-blue">Itinerary Details</h2>
     <div className="no-itenary">
@@ -20,10 +19,12 @@ const NoItinerary = ({ navigate, access }: any) => (
       </div>
       <div className="itinerary-heading">No Itinerary Created</div>
 
-      {access.createItinerary &&
-        <>      <div className="itinerary-text">
-          Please create itinerary for the user below.
-        </div>
+      {access.createItinerary && (
+        <>
+          {" "}
+          <div className="itinerary-text">
+            Please create itinerary for the user below.
+          </div>
           <div
             className="create-itinerary-btn"
             onClick={() => {
@@ -31,14 +32,14 @@ const NoItinerary = ({ navigate, access }: any) => (
             }}
           >
             Create Itinerary
-          </div></>
-      }
+          </div>
+        </>
+      )}
     </div>
   </section>
 );
 
 const AvailableItinerary = ({ navigate, data = {} }: any) => {
-
   const detail = (title: string, value: string) => (
     <div className="detail-item">
       <h3 className="item-name">{title}</h3>
@@ -84,7 +85,7 @@ const AvailableItinerary = ({ navigate, data = {} }: any) => {
           <div className="details-row height-max">
             {detail("Specialist Note", data.specialistNote)}
             {detail("Email", data.email)}
-            {detail("Location", data.location?.location)}
+            {detail("Location", data.location)}
           </div>
         </div>
       </section>

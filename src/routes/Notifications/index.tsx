@@ -5,6 +5,7 @@ import "./index.scss";
 import { Fetch } from "../../api/Fetch";
 import { setApiMessage } from "../../store/slices/apiMessage";
 import { Create } from "../../api/Create";
+import { ICON } from "../../assets/index";
 
 const User = (
   user: any,
@@ -26,8 +27,8 @@ const User = (
         className="user-selection-img"
         src={`${IMAGE.SMALL}${user.image}`}
         alt={user.name}
-        onError={(e) => {
-          // e.target.src = ICON.USER_PLACEHOLDER;
+        onError={(e: any) => {
+          e.target.src = ICON.USER_PLACEHOLDER;
         }}
         loading="lazy"
       />
