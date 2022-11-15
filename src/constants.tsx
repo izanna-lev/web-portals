@@ -175,12 +175,14 @@ export const FERRY_CLASS = [
 export const FLIGHT_CLASS = [
   { name: "Business", value: 1 },
   { name: "Economy", value: 2 },
+  { name: "First Class", value: 3 },
 ];
 
 export const ITINERARY_TYPE = [
   { name: "One Day", value: 1 },
   { name: "Domestic Trip", value: 2 },
   { name: "International Trip", value: 3 },
+  // { name: "First Class", value: 3 },
 ];
 
 export const ITINERARY_TYPE_MAP = {

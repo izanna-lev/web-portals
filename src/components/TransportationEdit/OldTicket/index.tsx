@@ -94,7 +94,7 @@ export const OldTicket = (
         inputFields={{
           default: data.name,
           placeholder: "Steven Johns",
-          name: `User ${length + 1} Name`,
+          name: `Traveler ${length + 1} Name`,
           id: `user${length}`,
           maxlength: 50,
           type: "text",

@@ -127,7 +127,7 @@ const NewTransportationForm = (props: props) => {
       transportationType: TRANSPORTATION_TYPE.FERRY,
     };
 
-    if (!ticketsData[0].image) return alert("Please select an image!");
+    // if (!ticketsData[0].image) return alert("Please select an image!");
 
     dispatch(
       Create(API.ADD_TRAIN, data, false, "", API.TRANSPORTATION_DATA, {
@@ -262,7 +262,7 @@ const NewTransportationForm = (props: props) => {
             onClick={addMoreTickets}
           >
             <AiOutlinePlus />
-            &nbsp;Add More Users
+            &nbsp;Add More Travelers
           </div>
 
           <div className={styles["button-save"]}>
