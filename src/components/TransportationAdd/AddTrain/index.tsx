@@ -127,7 +127,7 @@ const NewTransportationForm = (props: props) => {
       transportationType: TRANSPORTATION_TYPE.TRAIN,
     };
 
-    if (!ticketsData[0].image) return alert("Please select an image!");
+    // if (!ticketsData[0].image) return alert("Please select an image!");
 
     dispatch(
       Create(API.ADD_TRAIN, data, false, "", API.TRANSPORTATION_DATA, {

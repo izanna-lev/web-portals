@@ -127,7 +127,7 @@ const NewTransportationForm = (props: props) => {
       itineraryRef: _id,
     };
 
-    if (!ticketsData[0].image) return alert("Please select an image!");
+    // if (!ticketsData[0].image) return alert("Please select an image!");
 
     dispatch(
       Create(API.ADD_FLIGHT, data, false, null, API.TRANSPORTATION_DATA, {

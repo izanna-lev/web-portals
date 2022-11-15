@@ -92,7 +92,7 @@ const UserTicket = (
         <InputForm
           inputFields={{
             placeholder: "3",
-            name: `No of users travelling`,
+            name: `No of travelers`,
             id: "usersTravelling",
             maxlength: 4,
             type: "number",
@@ -184,7 +184,7 @@ const NewTransportationForm = (props: props) => {
       transportationType: TRANSPORTATION_TYPE.CAR,
     };
 
-    if (!ticketsData.carImage) return alert("Please select an image!");
+    // if (!ticketsData.carImage) return alert("Please select an image!");
 
     dispatch(
       Create(API.ADD_CAR, data, false, "", API.TRANSPORTATION_DATA, {
