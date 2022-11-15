@@ -105,7 +105,7 @@ const UserTicket = (
         <InputForm
           inputFields={{
             default: data.noOfTravellers,
-            name: `No of users travelling`,
+            name: `No of travelers`,
             id: "usersTravelling",
             maxlength: 4,
             type: "number",

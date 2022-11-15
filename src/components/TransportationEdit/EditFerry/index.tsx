@@ -346,7 +346,7 @@ const EditFerry = (props: props) => {
             onClick={addMoreTickets}
           >
             <AiOutlinePlus />
-            &nbsp;Add More Users
+            &nbsp;Add More Travelers
           </div>
 
           <div className={styles["button-save"]}>

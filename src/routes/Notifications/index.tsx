@@ -113,7 +113,7 @@ const Notifications = (props: any) => {
       dispatch(
         setApiMessage({
           type: "error",
-          message: "Please select some users to send notifications to!",
+          message: "Please select some travelers to send notifications to!",
         })
       );
       return;
@@ -190,7 +190,7 @@ const Notifications = (props: any) => {
                   </div>
                 </div>
                 <div
-                  title="Select all users"
+                  title="Select all travelers"
                   onClick={selectAll}
                   className="user-selection-right"
                 ></div>
