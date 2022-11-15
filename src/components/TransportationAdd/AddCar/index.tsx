@@ -1,4 +1,4 @@
-import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 import { MdZoomOutMap } from "react-icons/md";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";

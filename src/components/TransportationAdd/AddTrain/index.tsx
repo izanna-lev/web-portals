@@ -8,7 +8,7 @@ import React, { useState, useRef } from "react";
 import Dropdown from "../../InputTypes/Dropdown";
 import {
   API,
-  FLIGHT_CLASS,
+  TRAIN_CLASS,
   GOOGLE_API,
   TRANSPORTATION_TYPE,
 } from "../../../constants";
@@ -169,7 +169,7 @@ const NewTransportationForm = (props: props) => {
 
               <Dropdown
                 name="Train Class"
-                inputFields={FLIGHT_CLASS}
+                inputFields={TRAIN_CLASS}
                 refe={trainClassRef}
               />
 
