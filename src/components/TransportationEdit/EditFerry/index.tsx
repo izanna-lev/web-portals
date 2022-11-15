@@ -8,7 +8,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Dropdown from "../../InputTypes/Dropdown";
 import {
   API,
-  FLIGHT_CLASS,
+  FERRY_CLASS,
   GOOGLE_API,
   TRANSPORTATION_TYPE,
 } from "../../../constants";
@@ -226,7 +226,7 @@ const EditFerry = (props: props) => {
 
               <Dropdown
                 name="Ferry Class"
-                inputFields={FLIGHT_CLASS}
+                inputFields={FERRY_CLASS}
                 refe={trainClassRef}
                 checkedVal={data.trainClass}
               />

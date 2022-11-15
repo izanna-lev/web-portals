@@ -39,8 +39,8 @@ const UserTicket = (
   };
 
   useEffect(() => {
-    handleChangeBackground(`${IMAGE.AVERAGE}${data.carImage}`);
-  }, []);
+    data.carImage && handleChangeBackground(`${IMAGE.AVERAGE}${data.carImage}`);
+  }, [data.carImage]);
 
   const handleImageChange = async (file: any) => {
     if (file[0]) {
