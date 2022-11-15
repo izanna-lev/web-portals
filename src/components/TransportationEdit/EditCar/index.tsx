@@ -321,7 +321,7 @@ const EditCar = (props: props) => {
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
           >
-            User Car Details
+            Traveler Car Details
           </div>
           <div className={styles["form-required-feilds"]}>
             {UserTicket(
