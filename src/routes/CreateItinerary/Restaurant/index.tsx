@@ -166,26 +166,27 @@ const RestaurantDetails = ({ status }: { status?: number }) => {
           )}
         </div>
       </section>
-      {status !== 4 ? null : (
-        <>
-          <span
-            className="add-more-tickets"
-            onClick={() => {
-              setAddMore(true);
-            }}
-          >
-            <AiOutlinePlus />
-            &nbsp;Add Days
-          </span>
+      {status === 1 || status === 2 || status === 4 ? (
+        <span
+          className="add-more-tickets"
+          onClick={() => {
+            setAddMore(true);
+          }}
+        >
+          <AiOutlinePlus />
+          &nbsp;Add Days
+        </span>
+      ) : null}
 
-          <div
-            onClick={() => navigate("/itinerary/add/activity")}
-            className="continue-button"
-          >
-            Continue
-          </div>
-        </>
-      )}
+      {status === 4 ? (
+        <div
+          onClick={() => navigate("/itinerary/add/activity")}
+          className="continue-button"
+        >
+          Continue
+        </div>
+      ) : null}
+
       {addMore ? (
         <Modal
           modal={<AddEditRestaurant handleAddPopup={setAddMore} />}

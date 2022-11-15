@@ -101,22 +101,24 @@ const FlightDetails = (props: any) => {
           </div>
         )}
       </section>
-      {status === 4 ? (
-        <>
-          <span
-            className="add-more-tickets"
-            onClick={() => {
-              setAddMore(true);
-            }}
-          >
-            <AiOutlinePlus />
-            &nbsp;Add Flight Details
-          </span>
-          <div onClick={() => nextTab(2)} className="continue-button">
-            Continue
-          </div>
-        </>
+      {status === 1 || status === 2 || status === 4 ? (
+        <span
+          className="add-more-tickets"
+          onClick={() => {
+            setAddMore(true);
+          }}
+        >
+          <AiOutlinePlus />
+          &nbsp;Add Flight Details
+        </span>
       ) : null}
+
+      {status === 4 ? (
+        <div onClick={() => nextTab(2)} className="continue-button">
+          Continue
+        </div>
+      ) : null}
+
       {addMore ? (
         <Modal
           modal={<NewFlight handleAddPopup={setAddMore} />}

@@ -89,26 +89,27 @@ const CarDetails = (props: any) => {
           </div>
         )}
       </section>
-      {status === 4 ? (
-        <>
-          <span
-            className="add-more-tickets"
-            onClick={() => {
-              setAddMore(true);
-            }}
-          >
-            <AiOutlinePlus />
-            &nbsp;Add Car Details
-          </span>
-
-          <div
-            onClick={() => navigate("/itinerary/add/accomodation")}
-            className="continue-button"
-          >
-            Continue
-          </div>
-        </>
+      {status === 1 || status === 2 || status === 4 ? (
+        <span
+          className="add-more-tickets"
+          onClick={() => {
+            setAddMore(true);
+          }}
+        >
+          <AiOutlinePlus />
+          &nbsp;Add Car Details
+        </span>
       ) : null}
+
+      {status === 4 ? (
+        <div
+          onClick={() => navigate("/itinerary/add/accomodation")}
+          className="continue-button"
+        >
+          Continue
+        </div>
+      ) : null}
+
       {addMore ? (
         <Modal
           modal={<NewCar handleAddPopup={setAddMore} />}
