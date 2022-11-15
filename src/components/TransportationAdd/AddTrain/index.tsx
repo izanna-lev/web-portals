@@ -243,7 +243,7 @@ const NewTransportationForm = (props: props) => {
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
           >
-            User Train Details
+            Traveler Train Details
           </div>
           <div className={styles["form-required-feilds"]}>
             {ticketsData.map((element: any, index: number) =>
