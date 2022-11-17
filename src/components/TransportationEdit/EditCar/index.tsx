@@ -39,8 +39,8 @@ const UserTicket = (
   };
 
   useEffect(() => {
-    handleChangeBackground(`${IMAGE.AVERAGE}${data.carImage}`);
-  }, []);
+    data.carImage && handleChangeBackground(`${IMAGE.AVERAGE}${data.carImage}`);
+  }, [data.carImage]);
 
   const handleImageChange = async (file: any) => {
     if (file[0]) {
@@ -105,7 +105,7 @@ const UserTicket = (
         <InputForm
           inputFields={{
             default: data.noOfTravellers,
-            name: `No of users travelling`,
+            name: `No of travelers`,
             id: "usersTravelling",
             maxlength: 4,
             type: "number",
@@ -321,7 +321,7 @@ const EditCar = (props: props) => {
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
           >
-            User Car Details
+            Traveler Car Details
           </div>
           <div className={styles["form-required-feilds"]}>
             {UserTicket(

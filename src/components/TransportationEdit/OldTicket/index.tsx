@@ -46,18 +46,10 @@ export const OldTicket = (
   };
 
   return (
-    <div
-      className={styles["form-left-details"]}
-      key={length}
-      id={`oldticket${length}`}
-    >
+    <div className={styles["form-left-details"]} key={length}>
       <div className="form-heading">Upload Ticket Image</div>
       <div style={{ display: "flex" }}>
-        <div
-          className={styles["form-image"]}
-          id={`old-bg-img-${length}`}
-          ref={newImageRef}
-        >
+        <div className={styles["form-image"]}>
           <input
             type="file"
             id={`old${length}`}
@@ -68,14 +60,12 @@ export const OldTicket = (
             }
             hidden
           />
-          <label
-            htmlFor={`old${length}`}
-            className={styles["not-selected-preview"]}
-            id={`Ticket${length}`}
-          >
-            <IoCloudUploadOutline
-              className={styles["activity-image-default"]}
-            />
+          <label htmlFor={`old${length}`} id={`Ticket${length}`}>
+            <div
+              className={styles["activity-image-placeholder"]}
+              id={`old-bg-img-${length}`}
+              ref={newImageRef}
+            ></div>
           </label>
         </div>
 
@@ -94,7 +84,7 @@ export const OldTicket = (
         inputFields={{
           default: data.name,
           placeholder: "Steven Johns",
-          name: `User ${length + 1} Name`,
+          name: `Traveler ${length + 1} Name`,
           id: `user${length}`,
           maxlength: 50,
           type: "text",

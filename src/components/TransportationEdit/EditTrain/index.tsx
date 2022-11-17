@@ -9,7 +9,7 @@ import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
 import {
   API,
-  FLIGHT_CLASS,
+  TRAIN_CLASS,
   GOOGLE_API,
   TRANSPORTATION_TYPE,
 } from "../../../constants";
@@ -226,7 +226,7 @@ const EditTrain = (props: props) => {
 
               <Dropdown
                 name="Train Class"
-                inputFields={FLIGHT_CLASS}
+                inputFields={TRAIN_CLASS}
                 refe={trainClassRef}
                 checkedVal={data.trainClass}
               />
@@ -313,7 +313,7 @@ const EditTrain = (props: props) => {
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
           >
-            User Train Details
+            Traveler Train Details
           </div>
           <div className={styles["form-required-feilds"]}>
             {data.tickets.map((element: any, index: number) =>
@@ -346,7 +346,7 @@ const EditTrain = (props: props) => {
             onClick={addMoreTickets}
           >
             <AiOutlinePlus />
-            &nbsp;Add More Users
+            &nbsp;Add More Travelers
           </div>
 
           <div className={styles["button-save"]}>

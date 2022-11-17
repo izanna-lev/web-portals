@@ -320,7 +320,7 @@ const EditFlight = (props: props) => {
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
           >
-            User Flight Details
+            Traveler Flight Details
           </div>
           <div className={styles["form-required-feilds"]}>
             {data.tickets.map((element: any, index: number) =>
@@ -353,7 +353,7 @@ const EditFlight = (props: props) => {
             onClick={() => addMoreTickets()}
           >
             <AiOutlinePlus />
-            &nbsp;Add More Users
+            &nbsp;Add More Travelers
           </div>
 
           <div className={styles["button-save"]}>

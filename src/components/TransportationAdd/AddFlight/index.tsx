@@ -127,7 +127,7 @@ const NewTransportationForm = (props: props) => {
       itineraryRef: _id,
     };
 
-    if (!ticketsData[0].image) return alert("Please select an image!");
+    // if (!ticketsData[0].image) return alert("Please select an image!");
 
     dispatch(
       Create(API.ADD_FLIGHT, data, false, null, API.TRANSPORTATION_DATA, {
@@ -250,7 +250,7 @@ const NewTransportationForm = (props: props) => {
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
           >
-            User Flight Details
+            Traveler Flight Details
           </div>
           <div className={styles["form-required-feilds"]}>
             {ticketsData.map((element: any, index: number) =>
@@ -269,7 +269,7 @@ const NewTransportationForm = (props: props) => {
             onClick={addMoreTickets}
           >
             <AiOutlinePlus />
-            &nbsp;Add More Users
+            &nbsp;Add More Travelers
           </div>
 
           <div className={styles["button-save"]}>

@@ -9,7 +9,7 @@
   margin: 0.25rem 0;
   border-radius: 0.5rem;
   justify-content: space-around;
-  background-color: $theme_color_light_blue_3x;
+  // background-color: $theme_color_light_blue_3x;
 }
 
 .not-selected-preview {
@@ -23,9 +23,14 @@
 }
 
 .activity-image-placeholder {
-  width: 30px;
-  height: 30px;
-  color: $theme_color_light_blue;
+  width: 8rem;
+  height: 4.3rem;
+  border-radius: 0.5rem;
+
+  background-image: url("../../../assets/ic_upload-placeholder.svg");
+  background-position: center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .activity-image-popup {

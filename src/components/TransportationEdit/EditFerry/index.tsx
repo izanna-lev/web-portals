@@ -8,7 +8,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Dropdown from "../../InputTypes/Dropdown";
 import {
   API,
-  FLIGHT_CLASS,
+  FERRY_CLASS,
   GOOGLE_API,
   TRANSPORTATION_TYPE,
 } from "../../../constants";
@@ -226,7 +226,7 @@ const EditFerry = (props: props) => {
 
               <Dropdown
                 name="Ferry Class"
-                inputFields={FLIGHT_CLASS}
+                inputFields={FERRY_CLASS}
                 refe={trainClassRef}
                 checkedVal={data.trainClass}
               />
@@ -313,7 +313,7 @@ const EditFerry = (props: props) => {
           <div
             className={`${styles["form-heading"]} ${styles["bold"]} feild-heading`}
           >
-            User Ferry Details
+            Traveler Ferry Details
           </div>
           <div className={styles["form-required-feilds"]}>
             {data.tickets.map((element: any, index: number) =>
@@ -346,7 +346,7 @@ const EditFerry = (props: props) => {
             onClick={addMoreTickets}
           >
             <AiOutlinePlus />
-            &nbsp;Add More Users
+            &nbsp;Add More Travelers
           </div>
 
           <div className={styles["button-save"]}>
