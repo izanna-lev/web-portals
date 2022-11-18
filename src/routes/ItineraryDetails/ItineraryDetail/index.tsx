@@ -23,7 +23,7 @@ const NoItinerary = ({ navigate, access }: any) => (
         <>
           {" "}
           <div className="itinerary-text">
-            Please create itinerary for the user below.
+            Please create itinerary for the traveler below.
           </div>
           <div
             className="create-itinerary-btn"

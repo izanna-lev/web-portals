@@ -92,7 +92,7 @@ const UserTicket = (
         <InputForm
           inputFields={{
             placeholder: "3",
-            name: `No of travelers`,
+            name: `No. of Travelers`,
             id: "usersTravelling",
             maxlength: 4,
             type: "number",
