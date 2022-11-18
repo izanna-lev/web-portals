@@ -257,7 +257,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
 
           <InputForm
             inputFields={{
-              default: data.location?.location,
+              default: data.location,
               placeholder: "Cebu City, Canada",
               ref: ref,
               name: "Location",
