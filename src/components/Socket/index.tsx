@@ -7,7 +7,7 @@ import { SOCKET_URL } from "../../constants";
 const Socket = () => {
   const dispatch = useAppDispatch();
   const profileData = useAppSelector((state) => state.profile);
-  const socketData = useAppSelector((state) => state.socket);
+  const socketData = useAppSelector((state) => state.socket.socket);
 
   useEffect(() => {
     const socketIO = io(SOCKET_URL, {
@@ -31,10 +31,10 @@ const Socket = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (socketData?.socket?.id && profileData._id) {
-      socketData.socket.emit("subscribe_user", { userRef: profileData._id });
+    if (socketData?.id && profileData._id) {
+      socketData.emit("subscribe_user", { userRef: profileData._id });
     }
-  }, [socketData?.socket, profileData._id]);
+  }, [socketData, profileData._id]);
 
   return null;
 };

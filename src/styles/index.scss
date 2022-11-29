@@ -107,8 +107,16 @@ select {
   html {
     font-size: 14px;
   }
+}
 
-  .AddItineraryPage {
-    // max-height: 32rem !important;
+@media (max-width: 1024px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 11px;
   }
 }

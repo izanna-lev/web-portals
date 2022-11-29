@@ -33,6 +33,8 @@ export const uploadImage = (
         messageType: payload.messageType,
         type: 2, //specialist
       });
+
+      return response.data;
     } catch (err: any) {
       dispatch(
         setApiMessage({
