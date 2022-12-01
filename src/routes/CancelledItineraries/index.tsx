@@ -85,7 +85,7 @@ const TableRow = (
           className={`btn view-button cancel-itinerary ${
             item.cancelled ? "cancelled-itinerary" : ""
           } `}
-          onClick={() => popupUpdate(true, item._id)}
+          onClick={() => popupUpdate(true, item.itineraryRef)}
         >
           {item.cancelled ? "Cancelled" : "Cancel Itinerary"}
         </button>
