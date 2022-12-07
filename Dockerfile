@@ -17,7 +17,7 @@ RUN apt-get install nano
 # RUN npm rebuild bcrypt --build-from-source
 
 RUN npm install
-RUN npm install pm2 -g
+RUN npm install pm2 express -g
 
 # bundle app ADD source
 COPY server.js ./

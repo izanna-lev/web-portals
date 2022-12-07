@@ -63,7 +63,7 @@ jobs:
             GOOGLE_PLACES_KEY="${{ secrets.GOOGLE_PLACES_KEY }}"
 
           echo "Installing dependencies"
-          npm install --legacy-peer-deps
+          npm install
 
           echo "Triggering Build"
           webpack --env BRANCH="${GITHUB_REF##*/}" API_URL="$SERVER" S3_URL="$S3_URL" SOCKET_URL="$SOCKET_URL"
