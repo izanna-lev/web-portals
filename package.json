@@ -35,6 +35,7 @@
     "eslint": "^8.24.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
     "process": "^0.11.10",
     "react-refresh": "^0.14.0",
     "redux-logger": "^3.0.6",
@@ -48,7 +49,7 @@
   },
   "scripts": {
     "start": "webpack serve --config ./webpack.config.dev.js",
-    "build": "webpack --env BRANCH=development API_URL=http://44.209.25.93:3000/api/ SOCKET_URL=http://44.209.25.93:3000/ S3_URL=https://app-onsite.s3.amazonaws.com/",
+    "build": "webpack",
     "build-stage": "webpack --env BRANCH=staging API_URL=44.208.65.177:3000/api/ SOCKET_URL=44.208.65.177:3000/ S3_URL=https://app-onsite.s3.amazonaws.com/"
   },
   "eslintConfig": {
