@@ -90,7 +90,7 @@ const ItineraryPage = () => {
   );
 
   useEffect(() => {
-    dispatch(Fetch(API.ITINERARIES, {}, 1, 10));
+    dispatch(Fetch(API.ITINERARIES, {}, page, limit));
   }, [dispatch]);
 
   const itineraryDetailsPage = (item: any) => {
