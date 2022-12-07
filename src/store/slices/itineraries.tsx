@@ -33,7 +33,7 @@ interface ItinerariesState {
 const initialState: ItinerariesState = {
   list: [],
   hasMore: false,
-  page: 0,
+  page: 1,
   size: 0,
   total: 0,
   limit: 10,
