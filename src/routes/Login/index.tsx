@@ -65,7 +65,6 @@ const Login = () => {
                   autoFocus
                   autoComplete="email"
                   required
-                  defaultValue={localStorage.getItem("user") || ""}
                 />
               </div>
             </div>
@@ -83,7 +82,6 @@ const Login = () => {
                   type={passVisibleStatus ? "text" : "password"}
                   placeholder="XXXXXXXXXXXX"
                   className="custom-field"
-                  autoFocus
                   autoComplete="password"
                   required
                 />

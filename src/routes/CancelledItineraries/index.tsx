@@ -85,7 +85,7 @@ const TableRow = (
           className={`btn view-button cancel-itinerary ${
             item.cancelled ? "cancelled-itinerary" : ""
           } `}
-          onClick={() => popupUpdate(true, item._id)}
+          onClick={() => popupUpdate(true, item.itineraryRef)}
         >
           {item.cancelled ? "Cancelled" : "Cancel Itinerary"}
         </button>
@@ -127,7 +127,7 @@ const CancelItinerary = () => {
   };
 
   useEffect(() => {
-    dispatch(Fetch(API.ITINERARY_CANCEL_REQUESTS, {}, 1, 10));
+    dispatch(Fetch(API.ITINERARY_CANCEL_REQUESTS, {}, page, 10));
   }, [dispatch]);
 
   return (

@@ -45,7 +45,12 @@ const Header = ({ showUserData = true }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!profileData._id && showUserData) dispatch(Fetch(API.PROFILE));
+    if (!profileData._id && showUserData)
+      dispatch(
+        Fetch(API.PROFILE, {
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        })
+      );
   }, [dispatch, profileData._id, showUserData]);
 
   useEffect(() => {

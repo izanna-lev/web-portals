@@ -11,31 +11,32 @@ import { IMAGE } from "../../constants";
 import "./index.scss";
 import { chatList } from "../../store/Actions/chat";
 import dayjs from "dayjs";
+import { UserIcon } from "../../components/UserIcon";
 
 const ChatPage = () => {
-  const navigate = useNavigate();
-  const listInnerRef = useRef(null);
+  const { page, limit, size, total, data } = useAppSelector(
+    (state) => state.chatList
+  );
 
-  const chatData = useAppSelector((state) => state.chatList);
-  const { page, limit, size, total, data } = chatData;
+  const listInnerRef = useRef(null);
   const dispatch = useAppDispatch();
-  console.log("chatData---------->", chatData);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(chatList());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (page === 1 && data.length) {
-      const path = `/chat/${data[0].channelRef}`;
-      navigate(path);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (page === 1 && data.length) {
+  //     const path = `/chat/${data[0].channelRef}`;
+  //     navigate(path);
+  //   }
+  // }, [data, navigate, page]);
 
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-      console.log(scrollTop, scrollHeight, clientHeight);
+      // console.log(scrollTop, scrollHeight, clientHeight);
       if (scrollTop + clientHeight === scrollHeight) {
         // This will be triggered after hitting the last element.
         // API call should be made here while implementing pagination.
@@ -62,11 +63,12 @@ const ChatPage = () => {
                 }}
               >
                 <div className="image-view">
-                  <img
-                    className="chat-user-image"
-                    src={IMAGE.SMALL + element.otherUser.image}
-                    alt="d"
+                  <UserIcon
+                    image={element.otherUser.image}
+                    width={"2.5rem"}
+                    height={"2.5rem"}
                   />
+
                   {element.unseenMessages > 0 && (
                     <div className="unseen-messages"></div>
                   )}
@@ -74,7 +76,7 @@ const ChatPage = () => {
                 <div className="user-chat-data">
                   <div className="user-chat-name">{element.otherUser.name}</div>
                   <div className="user-chat-time">
-                    {dayjs(element.message?.createdOn).format("HH:mm")}
+                    {dayjs(element.message?.createdOn).format("hh:mm A")}
                   </div>
                   <div className="user-chat-message">
                     {element.message?.message || ""}
@@ -85,7 +87,7 @@ const ChatPage = () => {
           })}
         </ul>
       </div>
-      {data.length && <MessagesPage />}
+      {data.length ? <MessagesPage /> : null}
     </section>
   );
 };
