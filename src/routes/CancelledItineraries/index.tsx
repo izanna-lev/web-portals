@@ -127,7 +127,7 @@ const CancelItinerary = () => {
   };
 
   useEffect(() => {
-    dispatch(Fetch(API.ITINERARY_CANCEL_REQUESTS, {}, 1, 10));
+    dispatch(Fetch(API.ITINERARY_CANCEL_REQUESTS, {}, page, 10));
   }, [dispatch]);
 
   return (

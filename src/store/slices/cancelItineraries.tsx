@@ -26,7 +26,7 @@ interface CancelItineraryRequests {
 const initialState: CancelItineraryRequests = {
   list: [],
   hasMore: false,
-  page: 0,
+  page: 1,
   size: 0,
   total: 0,
   limit: 10,
