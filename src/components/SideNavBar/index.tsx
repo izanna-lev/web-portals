@@ -6,6 +6,7 @@ import styles from "./index.module.scss";
 const SideNavBar = () => {
   const { access } = useAppSelector((state) => state.profile);
   const sidebar = useAppSelector((state) => state.appData.sidebarSmall);
+  const { totalUnseenChats } = useAppSelector((state) => state.chatList);
 
   return (
     <nav
@@ -14,12 +15,15 @@ const SideNavBar = () => {
       }`}
     >
       {NavigationOption("Dashboard", ICON.DASHBOARD_INACTIVE)}
+
       {NavigationOption(
         "Assigned Itineraries",
         ICON.ITINERARIES_INACTIVE,
         "itinerary"
       )}
-      {NavigationOption("Chat", ICON.CHAT_INACTIVE)}
+
+      {NavigationOption("Chat", ICON.CHAT_INACTIVE, null, totalUnseenChats)}
+
       {NavigationOption(
         "Cancel Requests",
         ICON.CANCELLED_ITINERARIES_INACTIVE,
