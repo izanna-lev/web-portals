@@ -19,6 +19,7 @@ import { setSidebar } from "../../store/slices/appData";
 import { useNavigate } from "react-router-dom";
 import { setBackground } from "../../util";
 import { ICON } from "../../assets/index";
+import { chatList } from "../../store/Actions/chat";
 
 type Props = {
   showUserData?: boolean;
@@ -43,6 +44,10 @@ const Header = ({ showUserData = true }: Props) => {
   const sidebar = useAppSelector((state) => state.appData.sidebarSmall);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(chatList());
+  }, [dispatch]);
 
   useEffect(() => {
     if (!profileData._id && showUserData)

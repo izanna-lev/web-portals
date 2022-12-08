@@ -3,7 +3,12 @@ import styles from "./index.module.scss";
 
 const NavURL = (url: string) => `/${url.replace(" ", "").toLowerCase()}`;
 
-const NavigationOption = (name: string, Icon: string, url?: string) => (
+const NavigationOption = (
+  name: string,
+  Icon: string,
+  url?: string | null,
+  numofUnseenChats?: number
+) => (
   <NavLink
     to={NavURL(url || name)}
     className={({ isActive }) =>
@@ -19,11 +24,11 @@ const NavigationOption = (name: string, Icon: string, url?: string) => (
       height="22px"
     />
     <span className={styles["sidebar-icon--name"]}>{name}</span>
-    {name === "Chat" && (
+    {name === "Chat" && numofUnseenChats ? (
       <div className={styles["sidebar-count"]}>
-        <span className={styles["sidebar-count-view"]}>5</span>
+        <span className={styles["sidebar-count-view"]}>{numofUnseenChats}</span>
       </div>
-    )}
+    ) : null}
   </NavLink>
 );
 
