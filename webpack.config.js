@@ -118,7 +118,7 @@ module.exports = (env) => {
 
     // plugins
     plugins: [
-      new EnvironmentPlugin(defaultEnv),
+      new EnvironmentPlugin(env),
       new ProvidePlugin({ process: "process/browser" }),
       new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
       new CompressionPlugin({
