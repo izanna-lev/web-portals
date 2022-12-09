@@ -19,19 +19,20 @@ interface messageListObject {
 }
 
 interface MessageList {
-  data: {
-    messages: messageListObject[];
-    itinerary: {
-      location: {
-        location: string;
-      };
-      name: string;
-      otherUserName: string;
-      image: string;
-      fromDate: string;
-      userImage: string;
+  messages: messageListObject[];
+  itinerary: {
+    location: {
+      location: string;
     };
+    name: string;
+    otherUserName: string;
+    image: string;
+    fromDate: string;
+    userImage: string;
+    blockedByTraveller: boolean;
+    itineraryStatus: number;
   };
+
   hasMore: boolean;
   page: number;
   size: number;
@@ -40,19 +41,20 @@ interface MessageList {
 }
 
 const initialState: MessageList = {
-  data: {
-    messages: [],
-    itinerary: {
-      location: {
-        location: "",
-      },
-      name: "",
-      image: "",
-      fromDate: "",
-      otherUserName: "",
-      userImage: "",
+  messages: [],
+  itinerary: {
+    location: {
+      location: "",
     },
+    name: "",
+    image: "",
+    fromDate: "",
+    otherUserName: "",
+    userImage: "",
+    blockedByTraveller: false,
+    itineraryStatus: 1,
   },
+
   hasMore: false,
   page: 0,
   size: 0,
@@ -65,8 +67,7 @@ const messageList = createSlice({
   initialState,
   reducers: {
     getMessages: (state: MessageList, action: { payload: MessageList }) => {
-      console.log("messageList--->", action.payload);
-      Object.assign(state, action.payload);
+      return action.payload;
     },
   },
 });
