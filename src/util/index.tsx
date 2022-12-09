@@ -42,7 +42,7 @@ export const getFormattedTime = (dateTimeString: string) => {
   return "NA";
 };
 
-// Compare two dates
+// Compare two date-time ranges
 export const compareDateRange = (fromDateTime: string, toDateTime: string) => {
   if (fromDateTime && toDateTime) {
     const startDateTime = new Date(fromDateTime);
@@ -51,6 +51,23 @@ export const compareDateRange = (fromDateTime: string, toDateTime: string) => {
       return 0;
     }
     return 1;
+  }
+  return 0;
+};
+
+// Compare two absolute dates
+export const compareAbsoluteDates = (dateTime: string) => {
+  if (dateTime) {
+    const currentDate = new Date();
+    const oldDate = new Date(dateTime);
+
+    if (currentDate.getMonth() === oldDate.getMonth()) {
+      if (currentDate.getDate() === oldDate.getDate()) {
+        return 1;
+      }
+      return 0;
+    }
+    return 0;
   }
   return 0;
 };

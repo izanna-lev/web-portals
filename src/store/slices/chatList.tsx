@@ -14,6 +14,7 @@ interface chatListObject {
     message: string;
     userRef: string;
     createdOn: string;
+    messageType: number;
   };
   createdOn: string;
   updatedOn: string;

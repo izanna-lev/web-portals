@@ -14,7 +14,12 @@ import { BsPlus } from "react-icons/bs";
 import "./index.scss";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import { IMAGE, TYPE_OF_MESSAGE, USER_TYPE } from "../../../constants";
+import {
+  IMAGE,
+  ITINERARY_STATUS,
+  TYPE_OF_MESSAGE,
+  USER_TYPE,
+} from "../../../constants";
 import { UserIcon } from "../../../components/UserIcon";
 import NoChatActive from "../NoChatActive";
 
@@ -23,7 +28,9 @@ const MessagePage = () => {
   const [message, setMessage] = useState("");
   const [noChatActive, setNoChatActive] = useState(true);
 
-  const messageData = useAppSelector((state) => state.messageList);
+  const { messages: messageData, itinerary: itineraryData } = useAppSelector(
+    (state) => state.messageList
+  );
   const profileData = useAppSelector((state) => state.profile);
   const show = useAppSelector((state) => state.loader.active);
   const socketData = useAppSelector((state) => state.socket.socket);
@@ -33,11 +40,11 @@ const MessagePage = () => {
   const { channelId } = useParams();
 
   useEffect(() => {
-    if (channelId) {
-      newMessage(messageData.data.messages);
+    if (channelId && messageData) {
+      newMessage(messageData);
       setNoChatActive(false);
     }
-  }, [messageData.data.messages, channelId]);
+  }, [messageData, channelId]);
 
   useEffect(() => {
     if (socketData.id && channelId && profileData._id) {
@@ -117,34 +124,32 @@ const MessagePage = () => {
         <NoChatActive />
       ) : (
         <>
-          {messageData.data ? (
+          {messageData ? (
             <>
               <div className="user-data">
                 <UserIcon
-                  image={messageData.data.itinerary.userImage}
+                  image={itineraryData.userImage}
                   width={"2.5rem"}
                   height={"2.5rem"}
                 />
 
                 <div className="chat-user-name">
-                  {messageData.data.itinerary.otherUserName}
+                  {itineraryData.otherUserName}
                 </div>
               </div>
 
               <div className="chat-itinerary-details">
                 <UserIcon
-                  image={messageData.data.itinerary.image}
+                  image={itineraryData.image}
                   width={"2.5rem"}
                   height={"2.5rem"}
                 />
                 <div className="itinerary-data">
                   <div className="chat-itinerary-text date">
-                    {dayjs(messageData.data.itinerary.fromDate).format(
-                      "DD-MMM-YYYY"
-                    )}
+                    {dayjs(itineraryData.fromDate).format("DD-MMM-YYYY")}
                   </div>
                   <div className="chat-itinerary-text">
-                    {messageData.data.itinerary.location.location}
+                    {itineraryData.location.location}
                   </div>
                 </div>
                 {show && <LoginSpinner position="relative" />}
@@ -186,32 +191,41 @@ const MessagePage = () => {
             })}
           </ul>
 
-          <div className="socket">
-            <div className="add-icon">
-              <input
-                type="file"
-                id="upload"
-                onChange={imageChange}
-                accept="image/*"
-                hidden
-              />
-              <label htmlFor="upload">
-                <BsPlus className="img" />
-              </label>
+          {itineraryData.blockedByTraveller ||
+          itineraryData.itineraryStatus === 3 ||
+          itineraryData.itineraryStatus === 5 ||
+          itineraryData.itineraryStatus === 6 ? (
+            <div className="messages-disabled">
+              Note: You can not chat with the Traveler.
             </div>
-            <div
-              contentEditable="true"
-              className="socket-input"
-              onInput={(e) => setMessage(e.currentTarget.textContent || "")}
-              onKeyPress={(e) => handleKeyPress(e, "")}
-            />
-            <div className="send-icon">
-              <IoSend
-                onClick={(e) => handleKeyPress(e, "Enter")}
-                className="send-img"
+          ) : (
+            <div className="socket">
+              <div className="add-icon">
+                <input
+                  type="file"
+                  id="upload"
+                  onChange={imageChange}
+                  accept="image/*"
+                  hidden
+                />
+                <label htmlFor="upload">
+                  <BsPlus className="img" />
+                </label>
+              </div>
+              <div
+                contentEditable="true"
+                className="socket-input"
+                onInput={(e) => setMessage(e.currentTarget.textContent || "")}
+                onKeyPress={(e) => handleKeyPress(e, "")}
               />
+              <div className="send-icon">
+                <IoSend
+                  onClick={(e) => handleKeyPress(e, "Enter")}
+                  className="send-img"
+                />
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </section>

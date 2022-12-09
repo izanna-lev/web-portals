@@ -175,6 +175,14 @@
   outline: 0;
 }
 
+.messages-disabled {
+  height: 5rem;
+  padding: 1rem;
+  background-color: $theme_color_light_blue_2x;
+  display: flex;
+  align-items: center;
+}
+
 // input {
 //   font-size: 0.95rem;
 //   color: $theme_color_dark_grey;
