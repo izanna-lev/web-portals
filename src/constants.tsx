@@ -203,6 +203,7 @@ export const PLANNED_TRAVELLER = [
 export const TYPE_OF_MESSAGE = {
   TEXT: 1,
   IMAGE: 2,
+  LINK: 3,
 };
 
 export const USER_TYPE = {

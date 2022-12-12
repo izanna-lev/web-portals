@@ -22,11 +22,15 @@ import {
 } from "../../../constants";
 import { UserIcon } from "../../../components/UserIcon";
 import NoChatActive from "../NoChatActive";
+import { ICON } from "../../../assets/index";
+import useComponentVisible from "../../../components/outsideClickHandler";
 
 const MessagePage = () => {
   const [messages, newMessage] = useState<any>([]);
   const [message, setMessage] = useState("");
   const [noChatActive, setNoChatActive] = useState(true);
+  const [messageType, setmessageType] = useState(false);
+  const [messageLink, setmessageLink] = useState(false);
 
   const { messages: messageData, itinerary: itineraryData } = useAppSelector(
     (state) => state.messageList
@@ -39,10 +43,13 @@ const MessagePage = () => {
   const listInnerRef = useRef(null);
   const { channelId } = useParams();
 
+  const div = document.getElementById("input-message");
+
   useEffect(() => {
     if (channelId && messageData) {
       newMessage(messageData);
       setNoChatActive(false);
+      div?.focus();
     }
   }, [messageData, channelId]);
 
@@ -82,6 +89,7 @@ const MessagePage = () => {
           type: USER_TYPE.SPECIALIST,
         })
       );
+      setmessageType(false);
 
       socketData.emit("message", {
         channelRef: channelId,
@@ -111,10 +119,11 @@ const MessagePage = () => {
         channelRef: channelId,
         message,
         id: profileData._id,
-        messageType: TYPE_OF_MESSAGE.TEXT,
+        messageType: messageLink ? TYPE_OF_MESSAGE.LINK : TYPE_OF_MESSAGE.TEXT,
         type: USER_TYPE.SPECIALIST,
       });
       document.getElementsByClassName("socket-input")[0].innerHTML = "";
+      if (messageLink) setmessageLink(false);
     }
   };
 
@@ -179,6 +188,17 @@ const MessagePage = () => {
                   >
                     {element.messageType === TYPE_OF_MESSAGE.IMAGE ? (
                       <Image imageUrl={IMAGE.AVERAGE + element.message} />
+                    ) : element.messageType === TYPE_OF_MESSAGE.LINK ? (
+                      <a
+                        href={
+                          element.message.includes("http")
+                            ? element.message
+                            : `https://${element.message}`
+                        }
+                        target="_blank"
+                      >
+                        {element.message}
+                      </a>
                     ) : (
                       element.message
                     )}
@@ -200,21 +220,49 @@ const MessagePage = () => {
             </div>
           ) : (
             <div className="socket">
-              <div className="add-icon">
-                <input
-                  type="file"
-                  id="upload"
-                  onChange={imageChange}
-                  accept="image/*"
-                  hidden
-                />
-                <label htmlFor="upload">
-                  <BsPlus className="img" />
-                </label>
+              <div
+                className="add-icon"
+                onClick={() => setmessageType((prev) => !prev)}
+              >
+                <BsPlus className="img" />
               </div>
+              {messageType ? (
+                <div className="message-type-popup">
+                  <div className="message-type-wrapper">
+                    <input
+                      type="file"
+                      id="upload"
+                      onChange={imageChange}
+                      accept="image/*"
+                      hidden
+                    />
+                    <label htmlFor="upload" className="message-type-container">
+                      <img src={ICON.MESSAGE_IMAGE} alt="picture" />
+                      <span> Upload Image</span>
+                    </label>
+                  </div>
+                  <hr />
+                  <div className="message-type-wrapper">
+                    <div
+                      className="message-type-container"
+                      onClick={() => {
+                        setmessageLink((prev) => !prev);
+                        div?.focus();
+                        setmessageType(false);
+                      }}
+                    >
+                      <img src={ICON.MESSAGE_LINK} alt="link" />
+                      <span> Add Link</span>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
               <div
                 contentEditable="true"
-                className="socket-input"
+                className={`${
+                  messageLink ? "socket-input-link" : ""
+                } socket-input`}
+                id="input-message"
                 onInput={(e) => setMessage(e.currentTarget.textContent || "")}
                 onKeyPress={(e) => handleKeyPress(e, "")}
               />
