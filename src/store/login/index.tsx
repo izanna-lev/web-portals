@@ -12,9 +12,13 @@ import { setProfile } from "../slices/profile";
 export const login = ({
   email,
   password,
+  fcmToken,
+  device,
 }: {
   email: string;
   password: string;
+  fcmToken: string;
+  device: string;
 }): ThunkAction<void, RootState, unknown, AnyAction> => {
   return async (
     dispatch: (arg0: { payload: any; type: string }) => void,
@@ -25,6 +29,8 @@ export const login = ({
       const response = await axios.post(API.LOGIN, {
         email,
         password,
+        fcmToken,
+        device,
       });
       dispatch(setLoader(false));
       if (response.data.code !== 100) throw new Error(response.data.message);

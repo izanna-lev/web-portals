@@ -12,8 +12,13 @@ import { login } from "../../store/login";
 import { ICON } from "../../assets/index";
 import "./index.scss";
 
+import { FIREBASE_VAPID_KEY } from "../../constants";
+import { getToken } from "firebase/messaging";
+import { messaging } from "../../services/firebase";
+
 const Login = () => {
   const [passVisibleStatus, setPassVisibleStatus] = useState(false);
+  const [fcmToken, setFcmToken] = useState("");
   const accessToken = useAppSelector((state) => state.login.accessToken);
   const loaderActive = useAppSelector((state) => state.loader.active);
   const dispatch = useAppDispatch();
@@ -32,9 +37,30 @@ const Login = () => {
         email: (document.getElementById("email") as HTMLInputElement).value,
         password: (document.getElementById("password") as HTMLInputElement)
           .value,
+        fcmToken,
+        device: "web",
       })
     );
   };
+
+  const requestNotificationPermission = () => {
+    Notification.requestPermission().then(async (permission) => {
+      if (permission === "granted") {
+        const messageToken = await getToken(messaging, {
+          vapidKey: FIREBASE_VAPID_KEY,
+        });
+        console.log(messageToken);
+        setFcmToken(messageToken);
+      } else
+        alert(
+          "Notification permission denied, you will not receive any notifications."
+        );
+    });
+  };
+
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
 
   return (
     <section className="loginPage" id="loginPage">

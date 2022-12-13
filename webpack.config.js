@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const { EnvironmentPlugin, ProvidePlugin } = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 const APP_DIR = path.resolve(__dirname, "src");
@@ -18,6 +19,18 @@ const defaultEnv = {
   API_URL: "http://44.209.25.93:3000/api/",
   SOCKET_URL: "http://44.209.25.93:3000/",
   S3_URL: "https://app-onsite.s3.amazonaws.com/",
+
+  // Firebase Configuration Keys
+
+  FIREBASE_API_KEY: "AIzaSyDysxPbJS2KStgi-o1jjirSnOXtSeXG2X8",
+  FIREBASE_AUTH_DOMAIN: "onsite-travel.firebaseapp.com",
+  FIREBASE_PROJECT_ID: "onsite-travel",
+  FIREBASE_STORAGE_BUCKET: "onsite-travel.appspot.com",
+  FIREBASE_MESSAGING_SENDER_ID: "757245140014",
+  FIREBASE_APP_ID: "1:757245140014:web:6141547c58931e23a593bf",
+  FIREBASE_MEASUREMENT_ID: "G-X1RMPLGFVY",
+  FIREBASE_VAPID_KEY:
+    "BBtb1OIBx9b9WDEsf_Kul9_5vWDCeLguyDImUuDIy6Vhj_PTV2g2_oMTDmmGigVR8vrz9nZEOzLQAhKv1BON2dE",
 };
 
 module.exports = (env) => {
@@ -118,8 +131,16 @@ module.exports = (env) => {
 
     // plugins
     plugins: [
-      new EnvironmentPlugin(env),
+      new EnvironmentPlugin(defaultEnv),
       new ProvidePlugin({ process: "process/browser" }),
+      new CopyPlugin({
+        patterns: [
+          {
+            from: `./public/firebase-messaging-sw.js`,
+            to: BUILD_DIR,
+          },
+        ],
+      }),
       new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
       new CompressionPlugin({
         algorithm: "gzip",
