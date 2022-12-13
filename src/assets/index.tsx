@@ -1,5 +1,7 @@
 import APP_LOGO from "./logo.png";
 import APP_LOGO_BACKGROUND from "./ic_login-background.png";
+import MESSAGE_IMAGE from "./ic_image-upload.svg";
+import MESSAGE_LINK from "./ic_link.svg";
 import SIGNIN from "./signin.png";
 import ADMIN from "./admin.svg";
 import SHOW_PASSWORD from "./ic_show-password.svg";
@@ -49,6 +51,9 @@ export const ICON: IconOptions = {
   // APP LOGO & BANNER
   APP_LOGO,
   APP_LOGO_BACKGROUND,
+
+  MESSAGE_IMAGE,
+  MESSAGE_LINK,
 
   // CHAT SCREEN ICONS
   CHAT_SEND,
