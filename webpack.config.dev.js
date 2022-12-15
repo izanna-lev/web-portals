@@ -150,8 +150,8 @@ module.exports = (env) => {
       new CopyPlugin({
         patterns: [
           {
-            from: `./public/firebase-messaging-sw.js`,
-            to: BUILD_DIR,
+            from: `./firebase-messaging-sw.js`,
+            to: `${BUILD_DIR}/firebase-messaging-sw.js`,
           },
         ],
       }),
