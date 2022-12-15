@@ -15,6 +15,21 @@ const Account = () => {
       navigate("/login", { replace: true });
   }, [navigate]);
 
+  useEffect(() => {
+    const requestNotificationPermission = () => {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          return;
+        } else
+          alert(
+            "Notification permission denied, you will not receive any notifications."
+          );
+      });
+    };
+
+    requestNotificationPermission();
+  }, []);
+
   return (
     <>
       <div className={styles["page"]}>

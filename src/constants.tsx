@@ -5,17 +5,45 @@
 // Global Environment Variables
 
 const SERVER_TYPE = `${process.env.BRANCH}/`;
-export const API_URL = process.env.API_URL || "";
-export const SOCKET_URL = process.env.SOCKET_URL || "";
+export const SOCKET_URL = process.env.SERVER || "";
+export const API_URL = `${process.env.SERVER}api/` || "";
 const S3_URL = process.env.S3_URL;
 
-// const SERVER_TYPE = "development/";
-// export const API_URL = "http://localhost:3001/api/";
-// export const SOCKET_URL = "http://localhost:3001/";
-// const S3_URL = "https://app-onsite.s3.amazonaws.com/";
+// Firebase config for push notifications
+
+export const FIREBASE_CONFIG = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+};
+
+export const FIREBASE_VAPID_KEY = process.env.FIREBASE_VAPID_KEY;
+
+// export const BRANCH = "development";
+// export const API_URL = "http://44.209.25.93:3000/api/";
+// export const SOCKET_URL = "http://44.209.25.93:3000/";
+// export const S3_URL = "https://app-onsite.s3.amazonaws.com/";
+// export const FIREBASE_CONFIG = {
+//   // Firebase Configuration Keys
+
+//   apiKey: "AIzaSyDysxPbJS2KStgi-o1jjirSnOXtSeXG2X8",
+//   authDomain: "onsite-travel.firebaseapp.com",
+//   projectId: "onsite-travel",
+//   storageBucket: "onsite-travel.appspot.com",
+//   messagingSenderId: "757245140014",
+//   appId: "1:757245140014:web:6141547c58931e23a593bf",
+//   measurementId: "G-X1RMPLGFVY",
+// };
+// export const FIREBASE_VAPID_KEY =
+//   "BBtb1OIBx9b9WDEsf_Kul9_5vWDCeLguyDImUuDIy6Vhj_PTV2g2_oMTDmmGigVR8vrz9nZEOzLQAhKv1BON2dE";
 
 // Custom Environment Variables
 
+// const IMAGE_URL = `${S3_URL}${BRANCH}images/`;
 const IMAGE_URL = `${S3_URL}${SERVER_TYPE}images/`;
 
 // Google Places Api Key
