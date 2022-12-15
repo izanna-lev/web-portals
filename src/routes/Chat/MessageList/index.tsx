@@ -14,16 +14,11 @@ import { BsPlus } from "react-icons/bs";
 import "./index.scss";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import {
-  IMAGE,
-  ITINERARY_STATUS,
-  TYPE_OF_MESSAGE,
-  USER_TYPE,
-} from "../../../constants";
+import { IMAGE, TYPE_OF_MESSAGE, USER_TYPE } from "../../../constants";
 import { UserIcon } from "../../../components/UserIcon";
 import NoChatActive from "../NoChatActive";
 import { ICON } from "../../../assets/index";
-import useComponentVisible from "../../../components/outsideClickHandler";
+import Socket from "../../../services/socket";
 
 const MessagePage = () => {
   const [messages, newMessage] = useState<any>([]);
@@ -51,11 +46,11 @@ const MessagePage = () => {
       setNoChatActive(false);
       div?.focus();
     }
-  }, [messageData, channelId]);
+  }, [messageData, channelId, div]);
 
   useEffect(() => {
     if (socketData.id && channelId && profileData._id) {
-      socketData.emit("subscribe_channel", {
+      Socket.subscribeChannel({
         channelRef: channelId,
         id: profileData._id,
       });
@@ -76,6 +71,8 @@ const MessagePage = () => {
     ]);
   });
 
+  
+
   const imageChange = async (e: any) => {
     if (e.target.files && e.target.files.length > 0) {
       // console.log(e.target.files[0]);
@@ -89,9 +86,10 @@ const MessagePage = () => {
           type: USER_TYPE.SPECIALIST,
         })
       );
+
       setmessageType(false);
 
-      socketData.emit("message", {
+      Socket.sendMessage({
         channelRef: channelId,
         message: resp.data,
         id: profileData._id,
@@ -115,13 +113,14 @@ const MessagePage = () => {
 
   const handleKeyPress = (event: any, key: string) => {
     if ((event.key === "Enter" || key === "Enter") && message) {
-      socketData.emit("message", {
+      Socket.sendMessage({
         channelRef: channelId,
         message,
         id: profileData._id,
         messageType: messageLink ? TYPE_OF_MESSAGE.LINK : TYPE_OF_MESSAGE.TEXT,
         type: USER_TYPE.SPECIALIST,
       });
+
       document.getElementsByClassName("socket-input")[0].innerHTML = "";
       if (messageLink) setmessageLink(false);
     }
@@ -196,6 +195,7 @@ const MessagePage = () => {
                             : `https://${element.message}`
                         }
                         target="_blank"
+                        rel="noreferrer"
                       >
                         {element.message}
                       </a>
@@ -237,7 +237,7 @@ const MessagePage = () => {
                       hidden
                     />
                     <label htmlFor="upload" className="message-type-container">
-                      <img src={ICON.MESSAGE_IMAGE} alt="picture" />
+                      <img src={ICON.MESSAGE_IMAGE} alt="upload" />
                       <span> Upload Image</span>
                     </label>
                   </div>

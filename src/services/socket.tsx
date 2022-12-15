@@ -1,32 +1,19 @@
-import io from "socket.io-client";
-import { API_URL } from "../constants";
+import { socket } from "../components/Socket";
 
-export const socket = io(API_URL, {
-  transports: ["websocket"],
-  reconnectionDelayMax: 10000,
-  auth: {
-    token: localStorage.getItem("accessToken"),
-  },
-});
-
-socket.on("connect", () => {
-  console.log("server connededededcted", socket.id);
-});
-
-socket.on("disconnect", () => console.log("server disconnected"));
-
-export default class Socket {
-  constructor() {
-    console.log("constructor>>>>>>>");
-  }
-
-  static sendMessage(data: any) {
+const Socket = {
+  sendMessage(data: {
+    channelRef?: string;
+    message: string;
+    id: string;
+    messageType: number;
+    type: number;
+  }) {
     socket.emit("message", data);
-  }
+  },
 
-  static subscribeChannel(data: any) {
-    console.log("subscribe_channel>>>>>>>");
-
+  subscribeChannel(data: { channelRef: string; id: string }) {
     socket.emit("subscribe_channel", data);
-  }
-}
+  },
+};
+
+export default Socket;
