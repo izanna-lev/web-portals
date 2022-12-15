@@ -13,7 +13,7 @@ import { ICON } from "../../assets/index";
 import "./index.scss";
 
 import { FIREBASE_VAPID_KEY } from "../../constants";
-import { getToken } from "firebase/messaging";
+import { getToken, isSupported } from "firebase/messaging";
 import { messaging } from "../../services/firebase";
 
 const Login = () => {
@@ -45,7 +45,8 @@ const Login = () => {
 
   const requestNotificationPermission = () => {
     Notification.requestPermission().then(async (permission) => {
-      if (permission === "granted") {
+      const support = await isSupported();
+      if (permission === "granted" && support) {
         const messageToken = await getToken(messaging, {
           vapidKey: FIREBASE_VAPID_KEY,
         });
