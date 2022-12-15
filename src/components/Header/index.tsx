@@ -14,7 +14,6 @@ import Logout from "../Logout";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { API, IMAGE } from "../../constants";
 import { Fetch } from "../../api/Fetch";
-import { UserIcon } from "../UserIcon";
 import { setSidebar } from "../../store/slices/appData";
 import { useNavigate } from "react-router-dom";
 import { setBackground } from "../../util";
