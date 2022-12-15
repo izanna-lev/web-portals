@@ -3,37 +3,24 @@
  * @author Jagmohan Singh
  */
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
+import { useRef } from "react";
 
-import MessagesPage from "./MessageList/index";
-import "./index.scss";
-import { chatList } from "../../store/Actions/chat";
-import dayjs from "dayjs";
 import { UserIcon } from "../../components/UserIcon";
 import { compareAbsoluteDates } from "../../util";
+import MessagesPage from "./MessageList/index";
+import dayjs from "dayjs";
+import "./index.scss";
 
 const ChatPage = () => {
-  const { page, limit, size, total, data } = useAppSelector(
-    (state) => state.chatList
-  );
   const { totalUnseenChats } = useAppSelector((state) => state.chatList);
+  const { data } = useAppSelector((state) => state.chatList);
 
   const listInnerRef = useRef(null);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { channelId } = useParams();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(chatList());
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (page === 1 && data.length) {
-  //     const path = `/chat/${data[0].channelRef}`;
-  //     navigate(path);
-  //   }
-  // }, [data, navigate, page]);
+ 
 
   const onScroll = () => {
     if (listInnerRef.current) {

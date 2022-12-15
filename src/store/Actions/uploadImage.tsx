@@ -26,14 +26,6 @@ export const uploadImage = (
       // console.log(response)
       if (response.data.code !== 100) throw new Error(response.data.message);
 
-      Socket.sendMessage({
-        channelRef: payload.channelRef,
-        message: response.data.data,
-        id: payload.id,
-        messageType: payload.messageType,
-        type: 2, //specialist
-      });
-
       return response.data;
     } catch (err: any) {
       dispatch(
