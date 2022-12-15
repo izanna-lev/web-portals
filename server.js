@@ -28,7 +28,6 @@ const fileExists = (url) => {
 
 // For each request for .js file return the compressed version .gz
 app.get("*.js", function (req, res, next) {
-  console.log(req.url);
   try {
     // Check if .gz file exists
     if (fileExists(req.url)) {
