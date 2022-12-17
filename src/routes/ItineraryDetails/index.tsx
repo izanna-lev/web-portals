@@ -256,8 +256,9 @@ const ItineraryDetailsPage = () => {
 
               {/* Chat Button */}
 
-              {itineraryDetails.itineraryStatus === 2 ||
-              itineraryDetails.itineraryStatus === 1 ? (
+              {itineraryDetails.itineraryStatus !== 3 &&
+              itineraryDetails.itineraryStatus !== 5 &&
+              itineraryDetails.itineraryStatus !== 6 ? (
                 <div
                   className="chat"
                   onClick={() => navigate(`/chat/${channelRef}`)}
