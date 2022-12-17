@@ -18,12 +18,17 @@ const Account = () => {
   useEffect(() => {
     const requestNotificationPermission = () => {
       Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          return;
-        } else
-          alert(
-            "Notification permission denied, you will not receive any notifications."
-          );
+        if (permission === "granted") sessionStorage.setItem("fcm", "true");
+        else {
+          if (sessionStorage.getItem("fcm"))
+            return sessionStorage.setItem("fcm", "false");
+          else {
+            sessionStorage.setItem("fcm", "false");
+            alert(
+              "Notification permission denied, you will not receive any notifications."
+            );
+          }
+        }
       });
     };
 
