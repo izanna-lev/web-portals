@@ -50,12 +50,18 @@ const Login = () => {
         const messageToken = await getToken(messaging, {
           vapidKey: FIREBASE_VAPID_KEY,
         });
-        console.log(messageToken);
+        sessionStorage.setItem("fcm", "true");
         setFcmToken(messageToken);
-      } else
-        alert(
-          "Notification permission denied, you will not receive any notifications."
-        );
+      } else {
+        if (sessionStorage.getItem("fcm"))
+          return sessionStorage.setItem("fcm", "false");
+        else {
+          sessionStorage.setItem("fcm", "false");
+          alert(
+            "Notification permission denied, you will not receive any notifications."
+          );
+        }
+      }
     });
   };
 
