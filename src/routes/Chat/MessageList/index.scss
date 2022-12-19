@@ -66,9 +66,21 @@
   gap: 0.25rem;
   flex-direction: column;
   align-self: flex-end;
+  align-items: flex-end;
+}
+
+.message-sender-wrapper {
+  .message-sender-name {
+    font-size: 0.75rem;
+    background-color: $theme_color_light_blue;
+    width: fit-content;
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+  }
 }
 
 .other-user-container {
+  align-items: flex-start;
   align-self: flex-start;
 }
 

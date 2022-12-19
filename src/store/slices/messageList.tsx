@@ -21,9 +21,8 @@ interface messageListObject {
 interface MessageList {
   messages: messageListObject[];
   itinerary: {
-    location: {
-      location: string;
-    };
+    location: string;
+
     name: string;
     otherUserName: string;
     image: string;
@@ -43,9 +42,8 @@ interface MessageList {
 const initialState: MessageList = {
   messages: [],
   itinerary: {
-    location: {
-      location: "",
-    },
+    location: "",
+
     name: "",
     image: "",
     fromDate: "",

@@ -20,8 +20,6 @@ const ChatPage = () => {
   const { channelId } = useParams();
   const navigate = useNavigate();
 
- 
-
   const onScroll = () => {
     if (listInnerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;

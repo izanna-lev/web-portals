@@ -38,6 +38,10 @@ const DetailsPage = () => {
             <div className="value">
               {travellerDetails.plannedDate
                 ? dayjs(travellerDetails.plannedDate).format("DD-MM-YYYY")
+                : "NA"}{" "}
+              |{" "}
+              {travellerDetails.endDate
+                ? dayjs(travellerDetails.endDate).format("DD-MM-YYYY")
                 : "NA"}
             </div>
           </div>
