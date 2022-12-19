@@ -14,6 +14,11 @@ const Socket = {
   subscribeChannel(data: { channelRef: string; id: string }) {
     socket.emit("subscribe_channel", data);
   },
+
+  chatRead(data: { channelRef: string; id: string }) {
+    console.log(data, socket);
+    socket.emit("click", data);
+  },
 };
 
 export default Socket;
