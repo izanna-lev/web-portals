@@ -51,13 +51,10 @@ jobs:
 
           if $development; then
             SERVER="${{ secrets.DEVELOPMENT_URL }}"
-            SOCKET_URL="${{ secrets.DEVELOPMENT_SOCKET_URL }}"
           elif $staging; then
             SERVER="${{ secrets.STAGING_URL }}"
-            SOCKET_URL="${{ secrets.STAGING_SOCKET_URL }}"
           elif $production; then
             SERVER="${{ secrets.PRODUCTION_URL }}"
-            SOCKET_URL="${{ secrets.PRODUCTION_SOCKET_URL }}"
           fi
             S3_URL="${{ secrets.S3_URL }}"
             GOOGLE_PLACES_KEY="${{ secrets.GOOGLE_PLACES_KEY }}"
