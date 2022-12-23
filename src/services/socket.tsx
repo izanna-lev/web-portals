@@ -16,7 +16,6 @@ const Socket = {
   },
 
   chatRead(data: { channelRef: string; id: string }) {
-    console.log(data, socket);
     socket.emit("click", data);
   },
 };
