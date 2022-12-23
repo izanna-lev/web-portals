@@ -23,32 +23,11 @@ export const FIREBASE_CONFIG = {
 
 export const FIREBASE_VAPID_KEY = process.env.FIREBASE_VAPID_KEY;
 
-// export const BRANCH = "development";
-// export const API_URL = "http://44.209.25.93:3000/api/";
-// export const SOCKET_URL = "http://44.209.25.93:3000/";
-// export const S3_URL = "https://app-onsite.s3.amazonaws.com/";
-// export const FIREBASE_CONFIG = {
-//   // Firebase Configuration Keys
-
-//   apiKey: "AIzaSyDysxPbJS2KStgi-o1jjirSnOXtSeXG2X8",
-//   authDomain: "onsite-travel.firebaseapp.com",
-//   projectId: "onsite-travel",
-//   storageBucket: "onsite-travel.appspot.com",
-//   messagingSenderId: "757245140014",
-//   appId: "1:757245140014:web:6141547c58931e23a593bf",
-//   measurementId: "G-X1RMPLGFVY",
-// };
-// export const FIREBASE_VAPID_KEY =
-//   "BBtb1OIBx9b9WDEsf_Kul9_5vWDCeLguyDImUuDIy6Vhj_PTV2g2_oMTDmmGigVR8vrz9nZEOzLQAhKv1BON2dE";
-
-// Custom Environment Variables
-
-// const IMAGE_URL = `${S3_URL}${BRANCH}images/`;
 const IMAGE_URL = `${S3_URL}${SERVER_TYPE}images/`;
 
 // Google Places Api Key
 
-export const GOOGLE_API = "AIzaSyByy1LrT-5ZQ642PzXM4m_WCQ-fS6GO-9s";
+export const GOOGLE_API = process.env.GOOGLE_API;
 
 // Available Image Quality Prefixes
 
