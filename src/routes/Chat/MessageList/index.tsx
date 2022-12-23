@@ -19,6 +19,7 @@ import { UserIcon } from "../../../components/UserIcon";
 import NoChatActive from "../NoChatActive";
 import { ICON } from "../../../assets/index";
 import Socket from "../../../services/socket";
+import { compareAbsoluteDates } from "../../../util";
 
 const MessagePage = () => {
   const [messages, newMessage] = useState<any>([]);
@@ -218,7 +219,11 @@ const MessagePage = () => {
                     )}
                   </div>
                   <div className="message-date">
-                    {dayjs(element.createdOn).format("hh:mm A")}
+                    {element.createdOn
+                      ? compareAbsoluteDates(element.createdOn)
+                        ? dayjs(element.createdOn).format("hh:mm A")
+                        : dayjs(element.createdOn).format("DD-MMM-YYYY hh:mm A")
+                      : null}
                   </div>
                 </li>
               );
