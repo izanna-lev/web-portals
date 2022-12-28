@@ -5,7 +5,7 @@
 // Global Environment Variables
 
 const SERVER_TYPE = `${process.env.BRANCH}/`;
-export const SOCKET_URL = process.env.SERVER || "";
+export const SOCKET_URL = process.env.SOCKET_URL || process.env.SERVER || "";
 export const API_URL = `${process.env.SERVER}api/` || "";
 const S3_URL = process.env.S3_URL;
 
