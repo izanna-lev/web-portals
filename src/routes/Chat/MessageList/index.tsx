@@ -64,16 +64,17 @@ const MessagePage = () => {
     }
   }, [channelId, profileData._id, dispatch, socketData]);
 
-  socketData.on("message", (data: any) => {
-    newMessage([
-      {
-        userRef: data.userId,
-        createdOn: new Date(),
-        ...data,
-      },
-      ...messages,
-    ]);
-  });
+  if (socketData)
+    socketData.on("message", (data: any) => {
+      newMessage([
+        {
+          userRef: data.userId,
+          createdOn: new Date(),
+          ...data,
+        },
+        ...messages,
+      ]);
+    });
 
   const imageChange = async (e: any) => {
     if (e.target.files && e.target.files.length > 0) {
