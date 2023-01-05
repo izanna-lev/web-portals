@@ -24,7 +24,7 @@ const Socket = () => {
 
   if (socketData)
     socketData.on("chatList", (data: any) => {
-      dispatch(getChat(data))
+      dispatch(getChat(data));
     });
 
   useEffect(() => {
