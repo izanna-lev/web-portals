@@ -27,6 +27,11 @@ const Transportation = loadable(
   () => import("./CreateItinerary/Transportation")
 );
 
+const CheckAuth = ({ children }: any) => {
+  if (localStorage.getItem("accessToken")) return children;
+  return <Navigate to="login" />;
+};
+
 const ProtectedRoute = ({ children, check }: any) => {
   if (check) return children;
   return <Navigate to="dashboard" />;
@@ -38,7 +43,14 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Account />}>
+      <Route
+        path="/"
+        element={
+          <CheckAuth>
+            <Account />
+          </CheckAuth>
+        }
+      >
         <Route index element={<Navigate to="dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="itinerary" element={<Itinerary />}>
