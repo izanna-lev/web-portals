@@ -3,24 +3,24 @@
  * @author Jagmohan Singh
  */
 
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getToken, isSupported } from "firebase/messaging";
+import LoginSpinner from "../../components/LoginSpinner";
+import { FIREBASE_VAPID_KEY } from "../../constants";
+import { messaging } from "../../services/firebase";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import LoginSpinner from "../../components/LoginSpinner";
-import { login } from "../../store/login";
 import { ICON } from "../../assets/index";
+import { login } from "../../store/login";
 import "./index.scss";
-
-import { FIREBASE_VAPID_KEY } from "../../constants";
-import { getToken, isSupported } from "firebase/messaging";
-import { messaging } from "../../services/firebase";
 
 const Login = () => {
   const [passVisibleStatus, setPassVisibleStatus] = useState(false);
   const [fcmToken, setFcmToken] = useState("");
+
   const accessToken = useAppSelector((state) => state.login.accessToken);
   const loaderActive = useAppSelector((state) => state.loader.active);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
