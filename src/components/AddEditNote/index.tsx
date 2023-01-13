@@ -43,6 +43,9 @@ const AddEditNotes = ({ data = {}, handleAddEdit }: any) => {
   const [selectedImage, setSelectedImage] = useState();
 
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
+
+  const apiMessage = useAppSelector((state) => state.apiMessage);
+
   const dispatch = useAppDispatch();
 
   const dayRef = useRef();
@@ -96,8 +99,17 @@ const AddEditNotes = ({ data = {}, handleAddEdit }: any) => {
         })
       );
     }
-    handleAddEdit(false);
+    false;
   };
+
+  useEffect(() => {
+    if (
+      apiMessage.message === "Note Added Successfully!" ||
+      apiMessage.message === "Note Edited Successfully!"
+    ) {
+      handleAddEdit(false);
+    }
+  }, [apiMessage]);
 
   return (
     <form

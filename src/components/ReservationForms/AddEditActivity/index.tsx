@@ -48,6 +48,8 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
 
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
+  const apiMessage = useAppSelector((state) => state.apiMessage);
+
   const dayRef = useRef();
   const noteRef = useRef();
   const titleRef = useRef();
@@ -139,8 +141,16 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
         )
       );
     }
-    handleAddEdit(false);
   };
+
+  useEffect(() => {
+    if (
+      apiMessage.message === "Activity added successfully!" ||
+      apiMessage.message === "Activity edited successfully!"
+    ) {
+      handleAddEdit(false);
+    }
+  }, [apiMessage]);
 
   return (
     <form

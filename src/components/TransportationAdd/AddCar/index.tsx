@@ -5,7 +5,7 @@ import TextArea from "../../InputTypes/TextArea/index";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
 import ImagePopup from "../../sub-components/ImagePopup";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { API, GOOGLE_API, TRANSPORTATION_TYPE } from "../../../constants";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -117,6 +117,9 @@ const NewTransportationForm = (props: props) => {
 
   const dispatch = useAppDispatch();
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
+
+  const apiMessage = useAppSelector((state) => state.apiMessage);
+
   const dayRef = useRef();
   const pickupTimeRef = useRef();
   const pickupDateRef = useRef();
@@ -192,9 +195,13 @@ const NewTransportationForm = (props: props) => {
         transportationType: TRANSPORTATION_TYPE.CAR,
       })
     );
-
-    handleAddPopup(false);
   };
+
+  useEffect(() => {
+    if (apiMessage.message === "Car Added Successfully!") {
+      handleAddPopup(false);
+    }
+  }, [apiMessage]);
 
   const handleImagePopup = () => setshowImage(false);
 
