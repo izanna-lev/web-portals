@@ -4,7 +4,7 @@ import TextArea from "../../InputTypes/TextArea/index";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
 import ImagePopup from "../../sub-components/ImagePopup";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Dropdown from "../../InputTypes/Dropdown";
 import {
   API,
@@ -34,6 +34,8 @@ const NewTransportationForm = (props: props) => {
 
   const { handleAddPopup } = props;
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
+
+  const apiMessage = useAppSelector((state) => state.apiMessage);
 
   const dayRef = useRef();
   const airlineRef = useRef();
@@ -135,9 +137,13 @@ const NewTransportationForm = (props: props) => {
         transportationType: TRANSPORTATION_TYPE.FLIGHT,
       })
     );
-
-    handleAddPopup(false);
   };
+
+  useEffect(() => {
+    if (apiMessage.message === "Flight Added Successfully!") {
+      handleAddPopup(false);
+    }
+  }, [apiMessage]);
 
   return (
     <div className={styles["add-itinerary-data-form"]}>

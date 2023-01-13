@@ -41,6 +41,7 @@ const EditFerry = (props: props) => {
   const { handleEditPopup, data } = props;
 
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
+  const apiMessage = useAppSelector((state) => state.apiMessage);
 
   const dayRef = useRef();
   const trainClassRef = useRef();
@@ -192,9 +193,13 @@ const EditFerry = (props: props) => {
         transportationType: TRANSPORTATION_TYPE.FERRY,
       })
     );
-
-    handleEditPopup(false);
   };
+
+  useEffect(() => {
+    if (apiMessage.message === "Ferry Edited Successfully!") {
+      handleEditPopup(false);
+    }
+  }, [apiMessage]);
 
   return (
     <div className={styles["add-itinerary-data-form"]}>
