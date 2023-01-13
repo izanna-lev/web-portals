@@ -99,7 +99,6 @@ const AddEditNotes = ({ data = {}, handleAddEdit }: any) => {
         })
       );
     }
-    false;
   };
 
   useEffect(() => {
