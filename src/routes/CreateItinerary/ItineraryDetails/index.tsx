@@ -51,11 +51,11 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
     onPlaceSelected: (place) => checkPlace(place),
   });
 
-  // useEffect(() => {
-  // if (data.duration)
-  //   setBackground(`${IMAGE.SMALL}${data.image}`, "itineraryImage");
-  // document.getElementById("itineraryDetailPage")?.scrollTo(0, 0);
-  // }, [data]);
+  useEffect(() => {
+    if (data.duration)
+      setBackground(`${IMAGE.SMALL}${data.image}`, "itineraryImage");
+    document.getElementById("itineraryDetailPage")?.scrollTo(0, 0);
+  }, [data]);
 
   const imageChange = (e: any) => {
     if (e.target.files && e.target.files.length > 0) {

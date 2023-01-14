@@ -23,6 +23,8 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
 
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
+  const apiMessage = useAppSelector((state) => state.apiMessage);
+
   const dayRef = useRef();
   const nameRef = useRef();
   const reservationTimeRef = useRef();
@@ -123,8 +125,16 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
         )
       );
     }
-    handleAddPopup(false);
   };
+
+  useEffect(() => {
+    if (
+      apiMessage.message === "Restaurant added successfully!" ||
+      apiMessage.message === "Restaurant edited successfully!"
+    ) {
+      handleAddPopup(false);
+    }
+  }, [apiMessage]);
 
   return (
     <div className={styles["add-itinerary-data-form"]}>

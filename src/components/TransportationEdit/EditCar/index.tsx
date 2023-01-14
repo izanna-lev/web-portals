@@ -131,6 +131,8 @@ const EditCar = (props: props) => {
   const dispatch = useAppDispatch();
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
 
+  const apiMessage = useAppSelector((state) => state.apiMessage);
+
   const dayRef = useRef();
   const pickupTimeRef = useRef();
   const pickupDateRef = useRef();
@@ -220,9 +222,13 @@ const EditCar = (props: props) => {
         transportationType: TRANSPORTATION_TYPE.CAR,
       })
     );
-
-    handleEditPopup(false);
   };
+
+  useEffect(() => {
+    if (apiMessage.message === "Car Edited Successfully!") {
+      handleEditPopup(false);
+    }
+  }, [apiMessage]);
 
   const handleImagePopup = () => setshowImage(false);
 

@@ -41,6 +41,7 @@ const EditFlight = (props: props) => {
   const { handleEditPopup, data } = props;
 
   const { _id } = useAppSelector((state) => state.itinerary.itineraryDetails);
+  const apiMessage = useAppSelector((state) => state.apiMessage);
 
   const specialistNoteRef = useRef();
   const flightClassRef = useRef();
@@ -192,9 +193,13 @@ const EditFlight = (props: props) => {
         transportationType: TRANSPORTATION_TYPE.FLIGHT,
       })
     );
-
-    handleEditPopup(false);
   };
+
+  useEffect(() => {
+    if (apiMessage.message === "Flight Edited Successfully!") {
+      handleEditPopup(false);
+    }
+  }, [apiMessage]);
 
   return (
     <div className={styles["add-itinerary-data-form"]}>
