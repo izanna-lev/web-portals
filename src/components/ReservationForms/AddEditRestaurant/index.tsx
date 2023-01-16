@@ -207,7 +207,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                 inputProps={{
                   name: "contact number",
                   required: true,
-                  autoFocus: true,
                 }}
                 country="us"
                 onChange={(value, country, e) => {
