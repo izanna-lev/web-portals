@@ -1,17 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { API } from "../../constants";
 
-const initialState = { list: [] };
+const initialState = { list: [], totalUnread: false };
 
 const MyNotifications = createSlice({
   name: "MyNotifications",
   initialState,
-  reducers: {},
+  reducers: {
+    getNotifications: (state, { payload }: { payload: any }) => {
+      return payload.data;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(API.NOTIFICATION_LIST, (state, action: any) => {
-      Object.assign(state, { list: [...action.payload] });
+      return action.payload;
     });
   },
 });
+
+export const { getNotifications } = MyNotifications.actions;
 
 export default MyNotifications.reducer;

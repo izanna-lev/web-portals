@@ -56,6 +56,19 @@
 .notification {
   margin: auto 1rem;
   max-width: 3rem;
+
+  .notification-icon-wrapper {
+    position: relative;
+    .notification-unread {
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: $theme_color_blue;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 80%;
+      left: 70%;
+    }
+  }
 }
 
 .notification-icon {

@@ -1,13 +1,15 @@
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import useComponentVisible from "../outsideClickHandler/index";
-import { API, NOTIFICATION } from "../../constants";
+import { NOTIFICATION } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { getFormattedDate, getFormattedTime } from "../../util";
 import { ICON } from "../../assets/index";
 import styles from "./index.module.scss";
-import { Fetch } from "../../api/Fetch";
+
 import { useEffect } from "react";
 import { UserIcon } from "../UserIcon";
+import Socket from "../../services/socket";
+import { socket } from "../Socket";
 
 type InputProps = {
   onClickOutside: Function;
@@ -21,6 +23,7 @@ type NotificationProps = {
   type: number;
   onClick: Function;
   _id: string;
+  seen: boolean;
 };
 
 const Notification = (props: NotificationProps) => {
@@ -35,6 +38,9 @@ const Notification = (props: NotificationProps) => {
             image={props.type === NOTIFICATION.MESSAGE && props.image}
             icon={props.type !== NOTIFICATION.MESSAGE && ICON.ADMIN}
           />
+          {!props.seen ? (
+            <div className={styles["notification-unread"]}></div>
+          ) : null}
         </div>
         <div className={styles["notification-user-info"]}>
           <div className={styles["notification-user-message"]}>
@@ -55,16 +61,24 @@ const NotificationPopup = ({ onClickOutside }: InputProps) => {
   const { ref, isComponentVisible } = useComponentVisible(true);
 
   const notifications = useAppSelector((state) => state.notifications.list);
-  const dispatch = useAppDispatch();
+
+  const myProfile = useAppSelector((state) => state.profile);
+
   const navigate = useNavigate();
 
   const handleClick = ({
     type,
     sourceRef,
+    _id,
   }: {
     type: number;
     sourceRef: string;
+    _id: string;
   }) => {
+    if (socket.connected) {
+      Socket.notificationRead({ notificationRef: _id, id: myProfile._id });
+    }
+
     if (type === NOTIFICATION.ASSIGN_SPECIALIST) {
       onClickOutside();
       return navigate(`itinerary/detail/${sourceRef}`);
@@ -74,10 +88,6 @@ const NotificationPopup = ({ onClickOutside }: InputProps) => {
       return navigate(`chat/${sourceRef}`);
     }
   };
-
-  useEffect(() => {
-    dispatch(Fetch(API.NOTIFICATION_LIST, {}, 1, 1000000));
-  }, [dispatch]);
 
   useEffect(() => {
     if (!isComponentVisible) onClickOutside();
@@ -92,8 +102,8 @@ const NotificationPopup = ({ onClickOutside }: InputProps) => {
       <div className={`${styles.box} ${styles.arrow}`}>
         <div className={styles["notification-heading"]}>Notifications</div>
         <div className={styles["list-container"]}>
-          {notifications.map((notification: any) => (
-            <Notification {...notification} onClick={handleClick} />
+          {notifications.map((notification: any, index: number) => (
+            <Notification key={index} {...notification} onClick={handleClick} />
           ))}
         </div>
       </div>

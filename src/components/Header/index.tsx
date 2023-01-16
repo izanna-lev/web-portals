@@ -39,13 +39,19 @@ type ProfileData = {
 const Header = ({ showUserData = true }: Props) => {
   const [notificationvisibility, setNotificationvisibility] = useState(false);
   const [logoutVisibility, setLogoutVisibility] = useState(false);
-  const profileData = useAppSelector((state: ProfileData) => state.profile);
-  const sidebar = useAppSelector((state) => state.appData.sidebarSmall);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const profileData = useAppSelector((state: ProfileData) => state.profile);
+
+  const sidebar = useAppSelector((state) => state.appData.sidebarSmall);
+
+  const { totalUnread } = useAppSelector((state) => state.notifications);
+
   useEffect(() => {
     dispatch(chatList());
+    dispatch(Fetch(API.NOTIFICATION_LIST, {}, 1, 15));
   }, [dispatch]);
 
   useEffect(() => {
@@ -81,11 +87,14 @@ const Header = ({ showUserData = true }: Props) => {
 
       <div className={styles["header-right"]}>
         <div className={styles["notification"]}>
-          <div>
+          <div className={styles["notification-icon-wrapper"]}>
             <IoIosNotificationsOutline
               className={styles["notification-icon"]}
               onClick={() => setNotificationvisibility(!notificationvisibility)}
             />
+            {totalUnread ? (
+              <div className={styles["notification-unread"]}></div>
+            ) : null}
           </div>
           {notificationvisibility && (
             <NotificationPopup

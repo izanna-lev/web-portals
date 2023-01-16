@@ -18,6 +18,10 @@ const Socket = {
   chatRead(data: { channelRef: string; id: string }) {
     socket.emit("click", data);
   },
+
+  notificationRead(data: { notificationRef: string; id: string }) {
+    socket.emit("read", data);
+  },
 };
 
 export default Socket;
