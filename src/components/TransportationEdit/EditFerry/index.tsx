@@ -62,11 +62,13 @@ const EditFerry = (props: props) => {
   const DepartLocation = usePlacesWidget({
     apiKey: GOOGLE_API,
     onPlaceSelected: (place) => checkPlace("depart", place),
+    options: { types: [] },
   });
 
   const ArrivalLocation = usePlacesWidget({
     apiKey: GOOGLE_API,
     onPlaceSelected: (place) => checkPlace("arrival", place),
+    options: { types: [] },
   });
 
   const checkPlace = (type: string, place: any) => {

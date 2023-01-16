@@ -73,6 +73,7 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
   const locationRef = usePlacesWidget({
     apiKey: GOOGLE_API,
     onPlaceSelected: (place: any) => checkPlace(place),
+    options: { types: [] },
   });
 
   const checkPlace = (place: any) => {
