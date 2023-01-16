@@ -51,6 +51,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   const AccomodationLocation = usePlacesWidget({
     apiKey: GOOGLE_API,
     onPlaceSelected: (place) => checkPlace(place),
+    options: { types: [] },
   });
 
   const checkPlace = (place: any) => {

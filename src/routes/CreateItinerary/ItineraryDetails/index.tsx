@@ -49,6 +49,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   const { ref } = usePlacesWidget({
     apiKey: GOOGLE_API,
     onPlaceSelected: (place) => checkPlace(place),
+    options: { types: [] },
   });
 
   useEffect(() => {
