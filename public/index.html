@@ -37,7 +37,6 @@
     <title>Onsite Travels</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="overlay-root"></div>
     <div id="root"></div>
     <script>
@@ -53,7 +52,10 @@
           .catch(function (err) {
             console.log("Service worker registration failed, error:", err);
           });
+      } else {
+        console.log("No service-worker on this browser");
       }
     </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
   </body>
 </html>
