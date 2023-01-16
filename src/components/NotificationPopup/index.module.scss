@@ -75,6 +75,17 @@
   height: 44px;
   align-self: center;
   margin-left: 0.75rem;
+  position: relative;
+
+  .notification-unread {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: $gray-600;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 80%;
+    left: 70%;
+  }
 }
 
 .notification-user-image {

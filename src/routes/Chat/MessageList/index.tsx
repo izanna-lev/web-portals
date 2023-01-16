@@ -20,6 +20,7 @@ import NoChatActive from "../NoChatActive";
 import { ICON } from "../../../assets/index";
 import Socket from "../../../services/socket";
 import { compareAbsoluteDates } from "../../../util";
+import { socket } from "../../../components/Socket";
 
 const MessagePage = () => {
   const [messages, newMessage] = useState<any>([]);
@@ -33,7 +34,6 @@ const MessagePage = () => {
   );
   const profileData = useAppSelector((state) => state.profile);
   const show = useAppSelector((state) => state.loader.active);
-  const socketData = useAppSelector((state) => state.socket.socket);
 
   const dispatch = useAppDispatch();
   const listInnerRef = useRef(null);
@@ -50,7 +50,7 @@ const MessagePage = () => {
   }, [messageData, channelId, div]);
 
   useEffect(() => {
-    if (socketData.id && channelId && profileData._id) {
+    if (socket.connected && channelId && profileData._id) {
       Socket.subscribeChannel({
         channelRef: channelId,
         id: profileData._id,
@@ -62,10 +62,10 @@ const MessagePage = () => {
 
       dispatch(messageList(channelId));
     }
-  }, [channelId, profileData._id, dispatch, socketData]);
+  }, [channelId, profileData._id, dispatch, socket.connected]);
 
-  if (socketData)
-    socketData.on("message", (data: any) => {
+  if (socket.connected)
+    socket.on("message", (data: any) => {
       newMessage([
         {
           userRef: data.userId,
