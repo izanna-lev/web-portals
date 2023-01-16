@@ -42,13 +42,9 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-
           [ "${GITHUB_REF##*/}" == "development" ] && development=true || development=false
-
           [ "${GITHUB_REF##*/}" == "staging" ] && staging=true || staging=false
-
           [ "${GITHUB_REF##*/}" == "production" ] && production=true || production=false
-
           if $development; then
             SERVER="${{ secrets.DEVELOPMENT_URL }}"
           elif $staging; then
@@ -66,21 +62,13 @@ jobs:
             FIREBASE_APP_ID="${{ secrets.FIREBASE_APP_ID }}"
             FIREBASE_MEASUREMENT_ID="${{ secrets.FIREBASE_MEASUREMENT_ID }}"
             FIREBASE_VAPID_KEY="${{ secrets.FIREBASE_VAPID_KEY }}"
-            SOCKET_URL="${{ secrets.SOCKET_URL }}"
-
           echo "Installing dependencies"
           npm install
-
           echo "Triggering Build"
-          webpack --env BRANCH="${GITHUB_REF##*/}" SERVER="$SERVER" S3_URL="$S3_URL" FIREBASE_API_KEY="$FIREBASE_API_KEY" FIREBASE_AUTH_DOMAIN="$FIREBASE_AUTH_DOMAIN" FIREBASE_PROJECT_ID="$FIREBASE_PROJECT_ID" FIREBASE_MEASUREMENT_ID="$FIREBASE_MEASUREMENT_ID" FIREBASE_STORAGE_BUCKET="$FIREBASE_STORAGE_BUCKET" FIREBASE_MESSAGING_SENDER_ID="$FIREBASE_MESSAGING_SENDER_ID" FIREBASE_APP_ID="$FIREBASE_APP_ID" FIREBASE_VAPID_KEY="$FIREBASE_VAPID_KEY" GOOGLE_API="$GOOGLE_PLACES_KEY" SOCKET_URL="$SOCKET_URL"
-
+          webpack --env BRANCH="${GITHUB_REF##*/}" SERVER="$SERVER" S3_URL="$S3_URL" FIREBASE_API_KEY="$FIREBASE_API_KEY" FIREBASE_AUTH_DOMAIN="$FIREBASE_AUTH_DOMAIN" FIREBASE_PROJECT_ID="$FIREBASE_PROJECT_ID" FIREBASE_MEASUREMENT_ID="$FIREBASE_MEASUREMENT_ID" FIREBASE_STORAGE_BUCKET="$FIREBASE_STORAGE_BUCKET" FIREBASE_MESSAGING_SENDER_ID="$FIREBASE_MESSAGING_SENDER_ID" FIREBASE_APP_ID="$FIREBASE_APP_ID" FIREBASE_VAPID_KEY="$FIREBASE_VAPID_KEY" GOOGLE_API="$GOOGLE_PLACES_KEY"
           echo "Build Completed"
-
           docker build -t $ECR_REGISTRY/web:${GITHUB_REF##*/} .
           docker push $ECR_REGISTRY/web:${GITHUB_REF##*/}
-
           echo "::set-output name=image::$ECR_REGISTRY/web:${GITHUB_REF##*/}"
-
           aws ecs update-service --cluster ${GITHUB_REF##*/} --task-definition web-${GITHUB_REF##*/} --service web --force-new-deployment
-
           aws ecr list-images --repository-name web --query 'imageIds[?type(imageTag)!=`string`].[imageDigest]' --output text | while read line; do aws ecr batch-delete-image --repository-name web --image-ids imageDigest=$line; done
