@@ -9,7 +9,7 @@ export { default as login } from "./login";
 export { default as profile } from "./profile";
 export { default as chatList } from "./chatList";
 export { default as messageList } from "./messageList";
-export { default as socket } from "./socket";
+// export { default as socket } from "./socket";
 export { default as cancelItineraryList } from "./cancelItineraries";
 export { default as NotificationUserList } from "./notification";
 export { default as myNotifications } from "./myNotifications";

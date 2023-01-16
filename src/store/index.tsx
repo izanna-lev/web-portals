@@ -19,7 +19,7 @@ export const store = configureStore({
     notifications: reducers.myNotifications,
     notificationUserList: reducers.NotificationUserList,
     profile: reducers.profile,
-    socket: reducers.socket,
+    // socket: reducers.socket,
   },
 
   devTools: process.env.NODE_ENV !== "production",

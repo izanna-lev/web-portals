@@ -5,7 +5,7 @@ interface Socket {
 }
 
 const initialState: Socket = {
-    socket: "",
+  socket: {},
 };
 
 const socket = createSlice({
