@@ -180,7 +180,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <InputForm
             inputFields={{
               default: data.name,
-              placeholder: "Steven Johns",
               ref: nameRef,
               name: "Name",
               id: "name",
@@ -191,7 +190,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <InputForm
             inputFields={{
               default: data.email,
-              placeholder: "example@mail.com",
               ref: emailRef,
               name: "Email",
               id: "email",
@@ -208,7 +206,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <InputForm
             inputFields={{
               default: data.price,
-              placeholder: "$250",
               ref: priceRef,
               name: "Itinerary Price",
               id: "price",
@@ -224,7 +221,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
                     .format()
                     .slice(0, 10)
                 : "",
-              placeholder: "",
               ref: fromDateRef,
               name: "From Date",
               id: "from_date",
@@ -239,7 +235,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
                     .format()
                     .slice(0, 10)
                 : "",
-              placeholder: "",
               ref: toDateRef,
               name: "To Date",
               id: "to_date",
@@ -259,7 +254,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <InputForm
             inputFields={{
               default: data.location,
-              placeholder: "Cebu City, Canada",
+              placeholder: "",
               ref: ref,
               name: "Location",
               id: "location",
@@ -270,7 +265,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <InputForm
             inputFields={{
               default: data.rooms,
-              placeholder: "1",
               ref: roomsRef,
               name: "No. of Rooms allotted",
               id: "rooms",
@@ -282,7 +276,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <TextArea
             inputFields={{
               default: data.specialistNote,
-              placeholder: "Lorem Ipsum",
               ref: noteRef,
               name: "Specialist Note",
               id: "note",
@@ -293,7 +286,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
           <TextArea
             inputFields={{
               default: data.specificRestrictionsAndRegulations,
-              placeholder: "Lorem ipsum",
               ref: regulationsRef,
               name: "Specific Restriction and Regulation",
               id: "restriction",

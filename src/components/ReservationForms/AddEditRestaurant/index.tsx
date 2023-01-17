@@ -173,7 +173,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                 inputFields={{
                   default: data.day,
                   ref: dayRef,
-                  placeholder: "1",
                   name: "Day",
                   id: "day",
                   maxlength: 30,
@@ -184,7 +183,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                 inputFields={{
                   default: data.name,
                   ref: nameRef,
-                  placeholder: "Radisson Blu Hotel",
                   name: "Name",
                   id: "name",
                   maxlength: 30,
@@ -194,7 +192,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.location?.location,
-                  placeholder: "Cebu City, Phillipines",
+                  placeholder: "",
                   name: "Location",
                   id: "location",
                   maxlength: 360,
@@ -256,7 +254,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                 inputFields={{
                   default: data.description,
                   ref: specialistNoteRef,
-                  placeholder: "Lorem ipsum",
                   name: "Description",
                   id: "description",
                   maxlength: 1000,

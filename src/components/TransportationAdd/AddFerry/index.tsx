@@ -165,7 +165,6 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  placeholder: "1",
                   ref: dayRef,
                   name: "Day",
                   id: "day",
@@ -182,7 +181,7 @@ const NewTransportationForm = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  placeholder: "Canada",
+                  placeholder: "",
                   ref: ArrivalLocation.ref,
                   name: "Arrival Station",
                   id: "arrival",
@@ -193,7 +192,6 @@ const NewTransportationForm = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  placeholder: "",
                   ref: arrivalDateRef,
                   name: "Arrival Date",
                   id: "date",
@@ -205,7 +203,6 @@ const NewTransportationForm = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  placeholder: "",
                   ref: arrivalTimeRef,
                   name: "Arrival Time",
                   id: "time",
@@ -216,7 +213,7 @@ const NewTransportationForm = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  placeholder: "Phillippines",
+                  placeholder: "",
                   ref: DepartLocation.ref,
                   name: "Depart Station",
                   id: "depart",
@@ -226,7 +223,6 @@ const NewTransportationForm = (props: props) => {
               />
               <InputForm
                 inputFields={{
-                  placeholder: "",
                   ref: departTimeRef,
                   name: "Depart Time",
                   id: "time",
@@ -237,7 +233,6 @@ const NewTransportationForm = (props: props) => {
 
               <TextArea
                 inputFields={{
-                  placeholder: "Lorem Ipsum",
                   ref: specialistNoteRef,
                   name: "Specialist Note",
                   id: "specialist note",
@@ -297,5 +292,3 @@ const NewTransportationForm = (props: props) => {
 };
 
 export default NewTransportationForm;
-
-// className={styles[{` ${activityChangedData?.[index]?.image ? "" : "not-selected-preview"}`}

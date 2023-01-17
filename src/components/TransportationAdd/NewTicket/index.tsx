@@ -67,7 +67,6 @@ export const NewTicket = (
       </div>
       <InputForm
         inputFields={{
-          placeholder: "Steven Johns",
           name: `Traveler ${length + 1} Name`,
           id: `user${length}`,
           maxlength: 50,
