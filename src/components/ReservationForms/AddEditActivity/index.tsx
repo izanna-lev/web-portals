@@ -226,6 +226,7 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
         inputFields={{
           ref: locationRef.ref,
           name: "location",
+          placeholder: "",
           maxlength: 365,
           type: "text",
           default: defaultData.location?.location,
