@@ -120,3 +120,16 @@ select {
     font-size: 11px;
   }
 }
+
+// Date time default placeholder transparent
+
+input[type="date"],
+input[type="time"] {
+  &:focus::-webkit-datetime-edit {
+    color: black !important;
+  }
+
+  &:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+  }
+}
