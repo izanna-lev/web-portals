@@ -266,7 +266,7 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
             inputFields={{
               default: data.rooms,
               ref: roomsRef,
-              name: "No. of Rooms allotted",
+              name: "No. of People",
               id: "rooms",
               maxlength: 3,
               type: "number",
