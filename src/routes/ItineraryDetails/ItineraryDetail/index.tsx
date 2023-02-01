@@ -56,14 +56,14 @@ const AvailableItinerary = ({ navigate, data = {} }: any) => {
           <div className="details-row">
             {detail("Title", data.name)}
             {detail("Price", `$${data.price}`)}
-            {detail("No. Of Days", data.duration)}
+            {detail("No. of Days", data.duration)}
             {detail(
-              "Date Of Trip",
+              "Date of Trip",
               `${getFormattedDate(data.fromDate)} | ${getFormattedDate(
                 data.toDate
               )}`
             )}
-            {detail("No. Of People", data.guests)}
+            {detail("No. of People", data.guests)}
           </div>
           <div className="details-row">
             {detail(
