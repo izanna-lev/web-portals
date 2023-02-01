@@ -8,6 +8,7 @@ type InputProps = {
     id: string;
     ref?: any;
     default?: any;
+    required?: boolean;
   };
 };
 
@@ -28,7 +29,7 @@ const Toggle = ({ inputFields }: InputProps) => {
           checked && styles["toggle-checked"]
         }`}
         onChange={(e) => setchecked(e.target.checked)}
-        required
+        required={inputFields.required}
       />
     </div>
   );
