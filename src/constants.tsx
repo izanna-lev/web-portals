@@ -186,6 +186,7 @@ export const FLIGHT_CLASS = [
 ];
 
 export const ITINERARY_TYPE = [
+  { name: "None", value: 0 },
   { name: "One Day", value: 1 },
   { name: "Domestic Trip", value: 2 },
   { name: "International Trip", value: 3 },
