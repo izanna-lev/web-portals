@@ -83,13 +83,14 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
 
   const saveItinerary = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const geRefChecked = (ref: any) => ref.current.checked;
     let payload;
 
     payload = {
       itineraryEmail: getRefValue(emailRef),
       fromDate: new Date(getRefValue(fromDateRef)).toISOString(),
-      isDrivingLicense: getRefValue(drivingRef) === "on",
-      isPassport: getRefValue(passportRef) === "on",
+      isDrivingLicense: geRefChecked(drivingRef) === "on",
+      isPassport: geRefChecked(passportRef) === "on",
       itineraryType: getRefValue(itineraryTypeRef),
       name: getRefValue(nameRef),
       price: getRefValue(priceRef),
