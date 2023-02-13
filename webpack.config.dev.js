@@ -16,7 +16,7 @@ const defaultEnv = {
   BRANCH: "development",
   S3_URL: "https://app-onsite.s3.amazonaws.com/",
   SERVER: "https://developmentapi.onsiteplanning.com/",
-  GOOGLE_API: "AIzaSyByy1LrT-5ZQ642PzXM4m_WCQ-fS6GO-9s",
+  GOOGLE_API: "AIzaSyAOO-vhn-vejr178fuNVujksicv8nsTGfQ",
 
   // Firebase Configuration Keys
 
