@@ -100,3 +100,15 @@ export const editListItem = (
 
 // Get value of ref
 export const getRefValue = (ref: any) => ref.current.value;
+
+// Truncate any string
+export const truncateString = (
+  str: string,
+  length: number,
+  endingString: string = ""
+) => {
+  const newStr =
+    str.length > length ? `${str.substring(0, length)}${endingString}` : str;
+
+  return newStr;
+};
