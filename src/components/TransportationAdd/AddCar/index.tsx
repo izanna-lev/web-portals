@@ -1,17 +1,17 @@
-import { IoCloseOutline } from "react-icons/io5";
-import { MdZoomOutMap } from "react-icons/md";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import GooglePlacesInput from "../../InputTypes/GooglePlacesInput";
+import { API, TRANSPORTATION_TYPE } from "../../../constants";
+import React, { useState, useRef, useEffect } from "react";
+import ImagePopup from "../../sub-components/ImagePopup";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
+import { UploadImage } from "../../../api/uploadImage";
+import { IoCloseOutline } from "react-icons/io5";
+import { setBackground } from "../../../util";
+import { MdZoomOutMap } from "react-icons/md";
+import { Create } from "../../../api/Create";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
-import ImagePopup from "../../sub-components/ImagePopup";
-import React, { useState, useRef, useEffect } from "react";
-import { usePlacesWidget } from "react-google-autocomplete";
-import { API, GOOGLE_API, TRANSPORTATION_TYPE } from "../../../constants";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { UploadImage } from "../../../api/uploadImage";
-import { setBackground } from "../../../util";
-import { Create } from "../../../api/Create";
 
 interface props {
   handleAddPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -123,35 +123,6 @@ const NewTransportationForm = (props: props) => {
   const pickupDateRef = useRef();
   const specialistNoteRef = useRef();
 
-  const DepartLocation = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place) => checkPlace("depart", place),
-    options: { types: [] },
-  });
-
-  const ArrivalLocation = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place) => checkPlace("arrival", place),
-    options: { types: [] },
-  });
-
-  const checkPlace = (type: string, place: any) => {
-    const {
-      formatted_address,
-      geometry: {
-        location: { lat, lng },
-      },
-    } = place;
-
-    const newLocationObj = {
-      location: formatted_address,
-      type: "Point",
-      coordinates: [Math.abs(lng()), Math.abs(lat())],
-    };
-    if (type === "depart") setDepart(newLocationObj);
-    else setArrival(newLocationObj);
-  };
-
   const saveUserTicketsData = ({
     carImage,
     driverName,
@@ -233,15 +204,9 @@ const NewTransportationForm = (props: props) => {
                   type: "number",
                 }}
               />
-              <InputForm
-                inputFields={{
-                  placeholder: "",
-                  ref: DepartLocation.ref,
-                  name: "Pickup Location",
-                  id: "pickupLocation",
-                  maxlength: 70,
-                  type: "text",
-                }}
+              <GooglePlacesInput
+                name="Pickup Location"
+                setLocation={setDepart}
               />
 
               <InputForm
@@ -264,15 +229,9 @@ const NewTransportationForm = (props: props) => {
               />
             </div>
             <div className={styles["form-left-details"]}>
-              <InputForm
-                inputFields={{
-                  placeholder: "",
-                  ref: ArrivalLocation.ref,
-                  name: "Dropoff Location",
-                  id: "dropoffLocation",
-                  maxlength: 70,
-                  type: "text",
-                }}
+              <GooglePlacesInput
+                name="Dropoff Location"
+                setLocation={setArrival}
               />
 
               <TextArea

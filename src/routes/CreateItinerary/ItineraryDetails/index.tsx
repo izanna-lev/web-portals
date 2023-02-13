@@ -4,23 +4,21 @@
  */
 
 import {
-  API,
-  GOOGLE_API,
-  IMAGE,
-  ITINERARY_TYPE,
   ITINERARY_TYPE_MAP,
+  ITINERARY_TYPE,
+  IMAGE,
+  API,
 } from "../../../constants";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import GooglePlacesInput from "../../../components/InputTypes/GooglePlacesInput";
 import InputForm from "../../../components/InputTypes/InputForm/index";
-import { usePlacesWidget } from "react-google-autocomplete";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import Dropdown from "../../../components/InputTypes/Dropdown/index";
 import TextArea from "../../../components/InputTypes/TextArea/index";
 import Toggle from "../../../components/InputTypes/Toggle/index";
-import { useEffect, useRef, useState } from "react";
-import { IoImageOutline } from "react-icons/io5";
-import { Create } from "../../../api/Create";
 import { getRefValue, setBackground } from "../../../util";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Create } from "../../../api/Create";
 import dayjs from "dayjs";
 import "./index.scss";
 
@@ -46,12 +44,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { ref } = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place) => checkPlace(place),
-    options: { types: [] },
-  });
-
   useEffect(() => {
     if (data.duration)
       setBackground(`${IMAGE.SMALL}${data.image}`, "itineraryImage");
@@ -63,22 +55,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
       setSelectedImage(e.target.files[0]);
       setBackground(URL.createObjectURL(e.target.files[0]), "itineraryImage");
     }
-  };
-
-  const checkPlace = (place: any) => {
-    const {
-      formatted_address,
-      geometry: {
-        location: { lat, lng },
-      },
-    } = place;
-
-    const newLocationObj = {
-      location: formatted_address,
-      type: "Point",
-      coordinates: [Math.abs(lng()), Math.abs(lat())],
-    };
-    setLocation(newLocationObj);
   };
 
   const saveItinerary = (e: React.FormEvent<HTMLFormElement>) => {
@@ -252,17 +228,12 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
         <div className="add-itinerary-details">
           <div className="feild-heading">Itinerary Details</div>
 
-          <InputForm
-            inputFields={{
-              default: data.location,
-              placeholder: "",
-              ref: ref,
-              name: "Location",
-              id: "location",
-              maxlength: 9999,
-              type: "text",
-            }}
+          <GooglePlacesInput
+            name="Location"
+            setLocation={setLocation}
+            defaultValue={data.location}
           />
+
           <InputForm
             inputFields={{
               default: data.rooms,

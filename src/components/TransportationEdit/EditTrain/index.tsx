@@ -1,24 +1,19 @@
-import { usePlacesWidget } from "react-google-autocomplete";
+import { API, TRAIN_CLASS, TRANSPORTATION_TYPE } from "../../../constants";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import GooglePlacesInput from "../../InputTypes/GooglePlacesInput";
+import { NewTicket } from "../../TransportationAdd/NewTicket";
 import React, { useState, useEffect, useRef } from "react";
 import ImagePopup from "../../sub-components/ImagePopup";
 import InputForm from "../../InputTypes/InputForm";
 import TextArea from "../../InputTypes/TextArea";
 import { IoCloseOutline } from "react-icons/io5";
 import Dropdown from "../../InputTypes/Dropdown";
+import { AiOutlinePlus } from "react-icons/ai";
+import { Create } from "../../../api/Create";
+import { OldTicket } from "../OldTicket";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
-import {
-  API,
-  TRAIN_CLASS,
-  GOOGLE_API,
-  TRANSPORTATION_TYPE,
-} from "../../../constants";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { NewTicket } from "../../TransportationAdd/NewTicket";
-import { OldTicket } from "../OldTicket";
-import { Create } from "../../../api/Create";
 import dayjs from "dayjs";
-import { AiOutlinePlus } from "react-icons/ai";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -59,36 +54,6 @@ const EditTrain = (props: props) => {
       setOldTicketsData([...oldTickets]);
     }
   }, [data]);
-
-  const DepartLocation = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place) => checkPlace("depart", place),
-    options: { types: [] },
-  });
-
-  const ArrivalLocation = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place) => checkPlace("arrival", place),
-    options: { types: [] },
-  });
-
-  const checkPlace = (type: string, place: any) => {
-    const {
-      formatted_address,
-
-      geometry: {
-        location: { lat, lng },
-      },
-    } = place;
-
-    const newLocationObj = {
-      location: formatted_address,
-      type: "Point",
-      coordinates: [Math.abs(lng()), Math.abs(lat())],
-    };
-    if (type === "depart") setDepart(newLocationObj);
-    else setArrival(newLocationObj);
-  };
 
   const modifyTicket = (id: string) => {
     if (id) {
@@ -239,15 +204,10 @@ const EditTrain = (props: props) => {
                 checkedVal={data.trainClass}
               />
 
-              <InputForm
-                inputFields={{
-                  default: data.arrival,
-                  ref: ArrivalLocation.ref,
-                  name: "Arrival Station",
-                  id: "arrival",
-                  maxlength: 70,
-                  type: "text",
-                }}
+              <GooglePlacesInput
+                name="Arrival Station"
+                setLocation={setArrival}
+                defaultValue={data.arrival}
               />
 
               <InputForm
@@ -281,16 +241,12 @@ const EditTrain = (props: props) => {
                 }}
               />
 
-              <InputForm
-                inputFields={{
-                  default: data.depart,
-                  ref: DepartLocation.ref,
-                  name: "Depart Station",
-                  id: "depart",
-                  maxlength: 360,
-                  type: "text",
-                }}
+              <GooglePlacesInput
+                name="Depart Station"
+                setLocation={setDepart}
+                defaultValue={data.depart}
               />
+
               <InputForm
                 inputFields={{
                   default: data.departDateTime

@@ -1,16 +1,15 @@
-import styles from "./index.module.scss";
-import { IoCloudUploadOutline, IoCloseOutline } from "react-icons/io5";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import GooglePlacesInput from "../../InputTypes/GooglePlacesInput";
+import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
+import { getRefValue, setBackground } from "../../../util";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
-import PhoneInput from "react-phone-input-2";
-
-import "react-phone-input-2/lib/plain.css";
 import { useEffect, useRef, useState } from "react";
-import { getRefValue, setBackground } from "../../../util";
-import { usePlacesWidget } from "react-google-autocomplete";
-import { API, GOOGLE_API, IMAGE, RESERVATION_TYPE } from "../../../constants";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { IoCloseOutline } from "react-icons/io5";
 import { Create } from "../../../api/Create";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/plain.css";
+import styles from "./index.module.scss";
 import dayjs from "dayjs";
 
 const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
@@ -46,28 +45,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
         "accomodationImage"
       );
     }
-  };
-
-  const AccomodationLocation = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place) => checkPlace(place),
-    options: { types: [] },
-  });
-
-  const checkPlace = (place: any) => {
-    const {
-      formatted_address,
-      geometry: {
-        location: { lat, lng },
-      },
-    } = place;
-
-    const newLocationObj = {
-      location: formatted_address,
-      type: "Point",
-      coordinates: [Math.abs(lng()), Math.abs(lat())],
-    };
-    setlocation(newLocationObj);
   };
 
   const saveAccomodationDetails = (e: any) => {
@@ -189,17 +166,13 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
                   type: "text",
                 }}
               />
-              <InputForm
-                inputFields={{
-                  default: data.location?.location,
-                  placeholder: "",
-                  name: "Location",
-                  id: "location",
-                  maxlength: 360,
-                  type: "text",
-                  ref: AccomodationLocation.ref,
-                }}
+
+              <GooglePlacesInput
+                name="Location"
+                setLocation={setlocation}
+                defaultValue={data.location?.location}
               />
+
               <div className={`${styles["field-heading"]}`}>Contact Number</div>
               <PhoneInput
                 inputProps={{

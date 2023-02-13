@@ -1,22 +1,17 @@
-import { IoCloseOutline } from "react-icons/io5";
+import { API, FLIGHT_CLASS, TRANSPORTATION_TYPE } from "../../../constants";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import GooglePlacesInput from "../../InputTypes/GooglePlacesInput";
+import React, { useState, useRef, useEffect } from "react";
+import ImagePopup from "../../sub-components/ImagePopup";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
-import styles from "./index.module.scss";
-import { Modal } from "../../Portal";
-import ImagePopup from "../../sub-components/ImagePopup";
-import React, { useState, useRef, useEffect } from "react";
 import Dropdown from "../../InputTypes/Dropdown";
-import {
-  API,
-  FLIGHT_CLASS,
-  GOOGLE_API,
-  TRANSPORTATION_TYPE,
-} from "../../../constants";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { usePlacesWidget } from "react-google-autocomplete";
+import { IoCloseOutline } from "react-icons/io5";
+import { AiOutlinePlus } from "react-icons/ai";
 import { Create } from "../../../api/Create";
 import { NewTicket } from "../NewTicket";
-import { AiOutlinePlus } from "react-icons/ai";
+import styles from "./index.module.scss";
+import { Modal } from "../../Portal";
 
 interface props {
   handleAddPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -44,36 +39,6 @@ const NewTransportationForm = (props: props) => {
   const departTimeRef = useRef();
   const arrivalTimeRef = useRef();
   const specialistNoteRef = useRef();
-
-  const DepartLocation = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place) => checkPlace("depart", place),
-    options: { types: [] },
-  });
-
-  const ArrivalLocation = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place) => checkPlace("arrival", place),
-    options: { types: [] },
-  });
-
-  const checkPlace = (type: string, place: any) => {
-    const {
-      formatted_address,
-
-      geometry: {
-        location: { lat, lng },
-      },
-    } = place;
-
-    const newLocationObj = {
-      location: formatted_address,
-      type: "Point",
-      coordinates: [Math.abs(lng()), Math.abs(lat())],
-    };
-    if (type === "depart") setDepart(newLocationObj);
-    else setArrival(newLocationObj);
-  };
 
   const removeUserTicket = (id: string, index: number) => {
     const elementToRemove = document.getElementById(
@@ -188,16 +153,8 @@ const NewTransportationForm = (props: props) => {
                 inputFields={FLIGHT_CLASS}
                 refe={flightClassRef}
               />
-              <InputForm
-                inputFields={{
-                  placeholder: "",
-                  ref: DepartLocation.ref,
-                  name: "Depart",
-                  id: "depart",
-                  maxlength: 360,
-                  type: "text",
-                }}
-              />
+
+              <GooglePlacesInput name="Depart" setLocation={setDepart} />
 
               <InputForm
                 inputFields={{
@@ -219,16 +176,9 @@ const NewTransportationForm = (props: props) => {
                   type: "time",
                 }}
               />
-              <InputForm
-                inputFields={{
-                  placeholder: "",
-                  ref: ArrivalLocation.ref,
-                  name: "Arrival",
-                  id: "arrival",
-                  maxlength: 70,
-                  type: "text",
-                }}
-              />
+
+              <GooglePlacesInput name="Arrival" setLocation={setArrival} />
+
               <InputForm
                 inputFields={{
                   ref: arrivalTimeRef,

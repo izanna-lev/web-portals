@@ -1,11 +1,10 @@
-import dayjs from "dayjs";
-import React, { useEffect, useRef, useState } from "react";
-import { usePlacesWidget } from "react-google-autocomplete";
-import { IoCloudUploadOutline } from "react-icons/io5";
-import { Create } from "../../../api/Create";
-import { API, GOOGLE_API, IMAGE, RESERVATION_TYPE } from "../../../constants";
+import { ActivityPlacesInput } from "../../InputTypes/GooglePlacesInput";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import { getRefValue, setBackground } from "../../../util";
+import { useEffect, useRef, useState } from "react";
+import { Create } from "../../../api/Create";
+import dayjs from "dayjs";
 
 type InputProps = {
   inputFields: {
@@ -68,28 +67,6 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
       setSelectedImage(e.target.files[0]);
       setBackground(URL.createObjectURL(e.target.files[0]), "activity_image");
     }
-  };
-
-  const locationRef = usePlacesWidget({
-    apiKey: GOOGLE_API,
-    onPlaceSelected: (place: any) => checkPlace(place),
-    options: { types: [] },
-  });
-
-  const checkPlace = (place: any) => {
-    const {
-      formatted_address,
-      geometry: {
-        location: { lat, lng },
-      },
-    } = place;
-
-    const newLocationObj = {
-      location: formatted_address,
-      type: "Point",
-      coordinates: [Math.abs(lng()), Math.abs(lat())],
-    };
-    setlocation(newLocationObj);
   };
 
   const saveActivityDetails = (e: any) => {
@@ -222,15 +199,9 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
         }}
       />
 
-      <Input
-        inputFields={{
-          ref: locationRef.ref,
-          name: "location",
-          placeholder: "",
-          maxlength: 365,
-          type: "text",
-          default: defaultData.location?.location,
-        }}
+      <ActivityPlacesInput
+        setLocation={setlocation}
+        defaultValue={defaultData.location?.location}
       />
 
       <Input
