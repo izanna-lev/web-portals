@@ -1,0 +1,85 @@
+@import "../../../styles/configs/colors";
+
+// Styles for Google Places Input Component
+
+.predictions-wrapper {
+  position: relative;
+
+  .all-places-predictions {
+    z-index: 2;
+    width: 100%;
+    overflow: auto;
+    max-height: 12rem;
+    position: absolute;
+    margin-top: 0.25rem;
+    border-radius: 0.5rem;
+    background-color: $gray-400;
+
+    &::-webkit-scrollbar-thumb {
+      background-image: none;
+      background-color: $gray-500;
+    }
+
+    .prediction-place {
+      display: flex;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      margin-bottom: 0.25rem;
+
+      &:hover {
+        background-color: $gray-200;
+      }
+
+      .location-pin {
+        width: 0.8rem;
+        margin: 0 0.5rem 0 0;
+      }
+
+      .location-name {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+// Styles for Activity Places Input Component
+
+.activity-location-wrapper {
+  z-index: 2;
+  position: relative;
+
+  .all-places-predictions {
+    position: absolute;
+    background-color: $gray-400;
+    width: 20rem;
+    margin-top: 0.25rem;
+    overflow: auto;
+    max-height: 12rem;
+    border-radius: 0.5rem;
+
+    &::-webkit-scrollbar-thumb {
+      background-image: none;
+      background-color: $gray-500;
+    }
+
+    .prediction-place {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin-bottom: 0.25rem;
+      display: flex;
+
+      &:hover {
+        background-color: $gray-200;
+      }
+
+      .location-pin {
+        width: 0.8rem;
+        margin: 0 0.5rem 0 0;
+      }
+
+      .location-name {
+        font-size: 1rem;
+      }
+    }
+  }
+}

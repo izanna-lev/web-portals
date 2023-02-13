@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 type InputProps = {
   inputFields: {
     name: string;
-    maxlength: number;
+    maxlength?: number;
     type: string;
     id: string;
     placeholder?: string;
