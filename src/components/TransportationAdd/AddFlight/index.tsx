@@ -82,15 +82,15 @@ const NewTransportationForm = (props: props) => {
     const data = {
       day: getInputValue(dayRef),
       flightClass: getInputValue(flightClassRef),
-      departDateTime: new Date(
-        `${getInputValue(departDateRef)}T${getInputValue(departTimeRef)}`
-      ).toISOString(),
+      departDateTime: `${getInputValue(departDateRef)}T${getInputValue(
+        departTimeRef
+      )}:00.000Z`,
       airline: getInputValue(airlineRef),
       depart,
       arrival,
-      arrivalDateTime: new Date(
-        `${getInputValue(departDateRef)}T${getInputValue(arrivalTimeRef)}`
-      ).toISOString(),
+      arrivalDateTime: `${getInputValue(departDateRef)}T${getInputValue(
+        arrivalTimeRef
+      )}:00.000Z`,
       specialistNote: getInputValue(specialistNoteRef),
       userDetails: ticketsData,
       itineraryRef: _id,

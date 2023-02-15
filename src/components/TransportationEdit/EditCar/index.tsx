@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { API, IMAGE, TRANSPORTATION_TYPE } from "../../../constants";
+import GooglePlacesInput from "../../InputTypes/GooglePlacesInput";
 import React, { useState, useEffect, useRef } from "react";
 import ImagePopup from "../../sub-components/ImagePopup";
 import InputForm from "../../InputTypes/InputForm/index";
@@ -11,8 +12,6 @@ import { setBackground } from "../../../util";
 import { Create } from "../../../api/Create";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
-import dayjs from "dayjs";
-import GooglePlacesInput from "../../InputTypes/GooglePlacesInput";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -167,11 +166,10 @@ const EditCar = (props: props) => {
 
     payload = {
       day: getInputValue(dayRef),
-      departDateTime: new Date(
-        `${getInputValue(pickupDateRef)}T${getInputValue(pickupTimeRef)}`
-      ).toISOString(),
+      departDateTime: `${getInputValue(pickupDateRef)}T${getInputValue(
+        pickupTimeRef
+      )}:00.000Z`,
       specialistNote: getInputValue(specialistNoteRef),
-
       userCarDetails: ticketsData,
       transportationRef: data._id,
     };
@@ -197,7 +195,6 @@ const EditCar = (props: props) => {
       handleEditPopup(false);
     }
   }, [apiMessage]);
-
   const handleImagePopup = () => setshowImage(false);
 
   return (
@@ -237,9 +234,7 @@ const EditCar = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.departDateTime
-                    ? dayjs(new Date(data.departDateTime).toISOString())
-                        .format()
-                        .slice(0, 10)
+                    ? data.departDateTime.slice(0, 10)
                     : "",
                   ref: pickupDateRef,
                   name: "Pickup Date",
@@ -251,9 +246,7 @@ const EditCar = (props: props) => {
               <InputForm
                 inputFields={{
                   default: data.departDateTime
-                    ? dayjs(new Date(data.departDateTime).toISOString())
-                        .format()
-                        .slice(11, 16)
+                    ? data.departDateTime.slice(11, 16)
                     : "",
                   ref: pickupTimeRef,
                   name: "Pickup Time",

@@ -85,12 +85,12 @@ const NewTransportationForm = (props: props) => {
       arrival: arrival,
       specialistNote: getInputValue(specialistNoteRef),
       userDetails: ticketsData,
-      departDateTime: new Date(
-        `${getInputValue(arrivalDateRef)}T${getInputValue(departTimeRef)}`
-      ).toISOString(),
-      arrivalDateTime: new Date(
-        `${getInputValue(arrivalDateRef)}T${getInputValue(arrivalTimeRef)}`
-      ).toISOString(),
+      departDateTime: `${getInputValue(arrivalDateRef)}T${getInputValue(
+        departTimeRef
+      )}:00.000Z`,
+      arrivalDateTime: `${getInputValue(arrivalDateRef)}T${getInputValue(
+        arrivalTimeRef
+      )}:00.000Z`,
       itineraryRef: _id,
       transportationType: TRANSPORTATION_TYPE.TRAIN,
     };
@@ -246,5 +246,3 @@ const NewTransportationForm = (props: props) => {
 };
 
 export default NewTransportationForm;
-
-// className={styles[{` ${activityChangedData?.[index]?.image ? "" : "not-selected-preview"}`}

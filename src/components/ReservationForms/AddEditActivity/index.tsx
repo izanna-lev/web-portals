@@ -4,7 +4,6 @@ import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import { getRefValue, setBackground } from "../../../util";
 import { useEffect, useRef, useState } from "react";
 import { Create } from "../../../api/Create";
-import dayjs from "dayjs";
 
 type InputProps = {
   inputFields: {
@@ -78,9 +77,9 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
       day: getRefValue(dayRef),
       name: getRefValue(titleRef),
       description: getRefValue(noteRef),
-      reservationDateTime: new Date(
-        `${getRefValue(dateRef)}T${getRefValue(timeRef)}`
-      ).toISOString(),
+      reservationDateTime: `${getRefValue(dateRef)}T${getRefValue(
+        timeRef
+      )}:00.000Z`,
     };
 
     if (location.type) payload = { ...payload, location };
@@ -180,10 +179,8 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
           ref: timeRef,
           name: "time",
           type: "time",
-          default: data.dateTime
-            ? dayjs(new Date(data.dateTime).toISOString())
-                .format()
-                .slice(11, 16)
+          default: defaultData.dateTime
+            ? defaultData.dateTime.slice(11, 16)
             : "",
         }}
       />
@@ -193,8 +190,8 @@ const AddEditActivity = ({ data = { key: "awdwa" }, handleAddEdit }: any) => {
           ref: dateRef,
           name: "date",
           type: "date",
-          default: data.dateTime
-            ? dayjs(new Date(data.dateTime).toISOString()).format().slice(0, 10)
+          default: defaultData.dateTime
+            ? defaultData.dateTime.slice(0, 10)
             : "",
         }}
       />

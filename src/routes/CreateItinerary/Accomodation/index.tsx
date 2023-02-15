@@ -1,22 +1,16 @@
-/**
- * @desc this is the login component of the application.
- * @author Jagmohan Singh
- */
-
 import AddEditAccomodation from "../../../components/ReservationForms/AddEditAccomodation";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { getFormattedDate, getFormattedTime } from "../../../util";
 import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
-import { Pagination } from "../../../components/Pagination";
+// import { Pagination } from "../../../components/Pagination";
 import { DeleteEntity } from "../../../api/Delete";
 import { Modal } from "../../../components/Portal";
 import { MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import { Fetch } from "../../../api/Fetch";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
-import { AiOutlinePlus } from "react-icons/ai";
 
 const AccomodationDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -29,27 +23,27 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
 
   useEffect(() => {
     dispatch(
-      Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, 1, 10, {
+      Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, 1, 10000, {
         reservationType: RESERVATION_TYPE.ACCOMMODATION,
       })
     );
   }, [dispatch, _id]);
 
-  const nextPage = () =>
-    dispatch(
-      Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, page + 1, limit, {
-        reservationType: RESERVATION_TYPE.ACCOMMODATION,
-      })
-    );
+  // const nextPage = () =>
+  //   dispatch(
+  //     Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, page + 1, limit, {
+  //       reservationType: RESERVATION_TYPE.ACCOMMODATION,
+  //     })
+  //   );
 
-  const previousPage = () =>
-    dispatch(
-      Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, page - 1, limit, {
-        reservationType: RESERVATION_TYPE.ACCOMMODATION,
-      })
-    );
+  // const previousPage = () =>
+  //   dispatch(
+  //     Fetch(API.RESERVATION_LIST, { itineraryRef: _id }, page - 1, limit, {
+  //       reservationType: RESERVATION_TYPE.ACCOMMODATION,
+  //     })
+  //   );
 
-  const { list, page, limit, total, size } = useAppSelector(
+  const { list, page, limit } = useAppSelector(
     (state) => state.itinerary.accomodation
   );
 
@@ -132,10 +126,10 @@ const AccomodationDetails = ({ status }: { status?: number }) => {
                     "NA"
                   )}
                 </div>
-                <div>{getFormattedTime(element.checkInDateTime)}</div>
-                <div>{getFormattedDate(element.checkInDateTime)}</div>
-                <div>{getFormattedTime(element.checkOutDateTime)}</div>
-                <div>{getFormattedDate(element.checkOutDateTime)}</div>
+                <div>{element.checkInTime}</div>
+                <div>{element.checkInDate}</div>
+                <div>{element.checkOutTime}</div>
+                <div>{element.checkOutDate}</div>
                 <div>{element.description || "NA"}</div>
                 {status === 3 || status === 5 ? (
                   <div></div>

@@ -1,21 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable array-callback-return */
-/**
- * @desc this is the login component of the application.
- * @author Jagmohan Singh
- */
-
-import { getFormattedDate, getFormattedTime } from "../../../util";
 import EditTrain from "../../TransportationEdit/EditTrain";
 import NewTrain from "../../TransportationAdd/AddTrain";
 import { Modal } from "../../../components/Portal";
 import { TRAIN_CLASS } from "../../../constants";
 import { MdDeleteOutline } from "react-icons/md";
+import { AiOutlinePlus } from "react-icons/ai";
 import { Pagination } from "../../Pagination";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
 
 const TrainDetails = (props: any) => {
   const {
@@ -67,10 +59,10 @@ const TrainDetails = (props: any) => {
               <div>{element.day || "NA"}</div>
               <div>{element.arrival || "NA"}</div>
               <div>{TRAIN_CLASS[element.trainClass - 1 || 0].name}</div>
-              <div>{getFormattedDate(element.arrivalDateTime)}</div>
-              <div>{getFormattedTime(element.arrivalDateTime)}</div>
+              <div>{element.arrivalDate}</div>
+              <div>{element.arrivalTime}</div>
               <div>{element.depart || "NA"}</div>
-              <div>{getFormattedTime(element.departDateTime)}</div>
+              <div>{element.departTime}</div>
               <div>{element.specialistNote || "NA"}</div>
               {status === 3 || status === 5 ? (
                 <div></div>

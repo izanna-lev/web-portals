@@ -1,25 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable array-callback-return */
-/**
- * @desc this is the login component of the application.
- * @author Jagmohan Singh
- */
-
-import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
+import AddEditRestaurant from "../../../components/ReservationForms/AddEditRestaurant";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { getFormattedDate, getFormattedTime } from "../../../util";
-
+import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
+import { Pagination } from "../../../components/Pagination";
 import { DeleteEntity } from "../../../api/Delete";
 import { Modal } from "../../../components/Portal";
 import { MdDeleteOutline } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
-import styles from "./index.module.scss";
-import { useState, useEffect } from "react";
-import AddEditRestaurant from "../../../components/ReservationForms/AddEditRestaurant";
-import { Fetch } from "../../../api/Fetch";
 import { useNavigate } from "react-router-dom";
-import { Pagination } from "../../../components/Pagination";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useState, useEffect } from "react";
+import { FaRegEdit } from "react-icons/fa";
+import { Fetch } from "../../../api/Fetch";
+import styles from "./index.module.scss";
 
 const RestaurantDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -133,8 +124,8 @@ const RestaurantDetails = ({ status }: { status?: number }) => {
                     "NA"
                   )}
                 </div>
-                <div>{getFormattedTime(element.dateTime)}</div>
-                <div>{getFormattedDate(element.dateTime)}</div>
+                <div>{element.time}</div>
+                <div>{element.date}</div>
                 <div>{element.description || "NA"}</div>
                 {status === 3 || status === 5 ? (
                   <div></div>

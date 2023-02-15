@@ -1,19 +1,13 @@
-/**
- * @desc this is the login component of the application.
- * @author Jagmohan Singh
- */
-
-import { getFormattedDate, getFormattedTime } from "../../../util";
 import EditCar from "../../TransportationEdit/EditCar";
 import NewCar from "../../TransportationAdd/AddCar";
 import { Modal } from "../../../components/Portal";
 import { MdDeleteOutline } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
+import { Pagination } from "../../Pagination";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Pagination } from "../../Pagination";
-import { AiOutlinePlus } from "react-icons/ai";
 
 const CarDetails = (props: any) => {
   const { deleteTransportation, nextPage, previousPage, car, status } = props;
@@ -56,8 +50,8 @@ const CarDetails = (props: any) => {
             >
               <div>{element.day || "NA"}</div>
               <div>{element.depart || "NA"}</div>
-              <div>{getFormattedDate(element.departDateTime)}</div>
-              <div>{getFormattedTime(element.departDateTime)}</div>
+              <div>{element.departDate}</div>
+              <div>{element.departTime}</div>
               <div>{element.arrival || "NA"}</div>
               <div>{element.specialistNote || "NA"}</div>
               {status === 3 || status === 5 ? (

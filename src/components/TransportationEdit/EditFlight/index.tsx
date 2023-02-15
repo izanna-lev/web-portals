@@ -13,7 +13,6 @@ import { Create } from "../../../api/Create";
 import { OldTicket } from "../OldTicket";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
-import dayjs from "dayjs";
 
 interface props {
   handleEditPopup: React.Dispatch<React.SetStateAction<any>>;
@@ -134,13 +133,13 @@ const EditFlight = (props: props) => {
     payload = {
       day: getInputValue(dayRef),
       flightClass: getInputValue(flightClassRef),
-      departDateTime: new Date(
-        `${getInputValue(departDateRef)}T${getInputValue(departTimeRef)}`
-      ).toISOString(),
+      departDateTime: `${getInputValue(departDateRef)}T${getInputValue(
+        departTimeRef
+      )}:00.000Z`,
       airline: getInputValue(airlineRef),
-      arrivalDateTime: new Date(
-        `${getInputValue(departDateRef)}T${getInputValue(arrivalTimeRef)}`
-      ).toISOString(),
+      arrivalDateTime: `${getInputValue(departDateRef)}T${getInputValue(
+        arrivalTimeRef
+      )}:00.000Z`,
       specialistNote: getInputValue(specialistNoteRef),
       userDetails: [...newTicketsData, ...ticketsEdited],
       deleteUserDetails,
@@ -222,11 +221,7 @@ const EditFlight = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  default: data.departDateTime
-                    ? dayjs(new Date(data.departDateTime).toISOString())
-                        .format()
-                        .slice(0, 10)
-                    : "",
+                  default: data.departDateTime.slice(0, 10),
                   ref: departDateRef,
                   name: "Depart Date",
                   id: "date",
@@ -238,11 +233,7 @@ const EditFlight = (props: props) => {
             <div className={styles["form-left-details"]}>
               <InputForm
                 inputFields={{
-                  default: data.departDateTime
-                    ? dayjs(new Date(data.departDateTime).toISOString())
-                        .format()
-                        .slice(11, 16)
-                    : "",
+                  default: data.departDateTime.slice(11, 16),
                   ref: departTimeRef,
                   name: "Depart Time",
                   id: "time",
@@ -259,11 +250,7 @@ const EditFlight = (props: props) => {
 
               <InputForm
                 inputFields={{
-                  default: data.arrivalDateTime
-                    ? dayjs(new Date(data.arrivalDateTime).toISOString())
-                        .format()
-                        .slice(11, 16)
-                    : "",
+                  default: data.arrivalDateTime.slice(11, 16),
                   ref: arrivalTimeRef,
                   name: "Arrival Time",
                   id: "time",

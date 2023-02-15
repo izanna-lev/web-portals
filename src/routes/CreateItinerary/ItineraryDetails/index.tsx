@@ -4,10 +4,10 @@
  */
 
 import {
-  ITINERARY_TYPE_MAP,
-  ITINERARY_TYPE,
-  IMAGE,
   API,
+  IMAGE,
+  ITINERARY_TYPE,
+  ITINERARY_TYPE_MAP,
 } from "../../../constants";
 import GooglePlacesInput from "../../../components/InputTypes/GooglePlacesInput";
 import InputForm from "../../../components/InputTypes/InputForm/index";
@@ -47,7 +47,6 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
   useEffect(() => {
     if (data.duration)
       setBackground(`${IMAGE.SMALL}${data.image}`, "itineraryImage");
-    document.getElementById("itineraryDetailPage")?.scrollTo(0, 0);
   }, [data]);
 
   const imageChange = (e: any) => {
@@ -59,21 +58,21 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
 
   const saveItinerary = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const geRefChecked = (ref: any) => ref.current.checked;
+    const getRefChecked = (ref: any) => ref.current.checked;
     let payload;
 
     payload = {
       itineraryEmail: getRefValue(emailRef),
-      fromDate: new Date(getRefValue(fromDateRef)).toISOString(),
-      isDrivingLicense: geRefChecked(drivingRef) === "on",
-      isPassport: geRefChecked(passportRef) === "on",
+      fromDate: `${getRefValue(fromDateRef)}T00:00:00.000Z`,
+      isDrivingLicense: getRefChecked(drivingRef) === "on",
+      isPassport: getRefChecked(passportRef) === "on",
       itineraryType: getRefValue(itineraryTypeRef),
       name: getRefValue(nameRef),
       price: getRefValue(priceRef),
       rooms: getRefValue(roomsRef),
       specialistNote: getRefValue(noteRef),
       specificRestrictionsAndRegulations: getRefValue(regulationsRef),
-      toDate: new Date(getRefValue(toDateRef)).toISOString(),
+      toDate: `${getRefValue(toDateRef)}T00:00:00.000Z`,
     };
 
     if (location.type) {
@@ -193,29 +192,21 @@ const AddItineraryPage = ({ handleEditPopup, data = {} }: any) => {
 
           <InputForm
             inputFields={{
-              default: data.fromDate
-                ? dayjs(new Date(data.fromDate).toISOString())
-                    .format()
-                    .slice(0, 10)
+              default: data.fromDateFormat
+                ? data.fromDateFormat.slice(0, 10)
                 : "",
               ref: fromDateRef,
               name: "From Date",
               id: "from_date",
-              maxlength: 350,
               type: "date",
             }}
           />
           <InputForm
             inputFields={{
-              default: data.toDate
-                ? dayjs(new Date(data.toDate).toISOString())
-                    .format()
-                    .slice(0, 10)
-                : "",
+              default: data.toDateFormat ? data.toDateFormat.slice(0, 10) : "",
               ref: toDateRef,
               name: "To Date",
               id: "to_date",
-              maxlength: 350,
               type: "date",
             }}
           />

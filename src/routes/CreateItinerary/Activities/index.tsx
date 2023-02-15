@@ -1,26 +1,17 @@
-/**
- * @desc this is the login component of the application.
- * @author Jagmohan Singh
- */
-
 import AddEditActivity from "../../../components/ReservationForms/AddEditActivity";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
+import { EDIT_ACTIVITY } from "../../../store/slices/itinerary";
 import { Pagination } from "../../../components/Pagination";
+import { useCallback, useEffect, useState } from "react";
 import { DeleteEntity } from "../../../api/Delete";
 import { MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { editListItem } from "../../../util";
 import { Fetch } from "../../../api/Fetch";
 import { FaRegEdit } from "react-icons/fa";
 import "./index.scss";
-import {
-  editListItem,
-  getFormattedDate,
-  getFormattedTime,
-} from "../../../util";
-import { EDIT_ACTIVITY } from "../../../store/slices/itinerary";
-import { AiOutlinePlus } from "react-icons/ai";
 
 const ActivityDetails = ({ status }: { status?: number }) => {
   const [addMore, setAddMore] = useState(false);
@@ -122,8 +113,8 @@ const ActivityDetails = ({ status }: { status?: number }) => {
                       />
                     </div>
                     <div>{element.name}</div>
-                    <div>{getFormattedTime(element.dateTime)}</div>
-                    <div>{getFormattedDate(element.dateTime)}</div>
+                    <div>{element.time}</div>
+                    <div>{element.date}</div>
                     <div>{element.location?.location}</div>
                     <div>{element.description}</div>
                     {status === 3 || status === 5 ? (

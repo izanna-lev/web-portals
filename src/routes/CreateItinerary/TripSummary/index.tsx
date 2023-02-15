@@ -4,21 +4,21 @@
  */
 
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { getFormattedDate, getFormattedTime } from "../../../util";
 import SubmitPopup from "../../../components/SubmitItnineraryPopup";
 import { Pagination } from "../../../components/Pagination";
 import { useCallback, useEffect, useState } from "react";
+import { Modal } from "../../../components/Portal";
 import { API, IMAGE } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { Create } from "../../../api/Create";
 import { Fetch } from "../../../api/Fetch";
 import "./index.scss";
-import { Modal } from "../../../components/Portal";
 
 const TripSummary = ({ status }: { status?: number }) => {
-  const [dayFilter, setdayFilter] = useState("1");
-  const [submitPopup, setSubmitPopup] = useState(false);
   const [isItinerarySubmitted, setisItinerarySubmitted] = useState(false);
+  const [submitPopup, setSubmitPopup] = useState(false);
+  const [dayFilter, setdayFilter] = useState("1");
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -26,9 +26,11 @@ const TripSummary = ({ status }: { status?: number }) => {
     days,
     trip: { list, page, limit, total, size },
   } = useAppSelector((state) => state.itinerary);
+
   const { _id, itineraryStatus } = useAppSelector(
     (state) => state.itinerary.itineraryDetails
   );
+
   const { formRef } = useAppSelector((state) => state.appData);
   const { type } = useAppSelector((state) => state.apiMessage);
 
@@ -125,12 +127,8 @@ const TripSummary = ({ status }: { status?: number }) => {
                   />
                 </div>
                 <div>{element.title}</div>
-                <div>
-                  {element.dateTime ? getFormattedTime(element.dateTime) : "NA"}
-                </div>
-                <div>
-                  {element.dateTime ? getFormattedDate(element.dateTime) : "NA"}
-                </div>
+                <div>{element.time || "NA"}</div>
+                <div>{element.date || "NA"}</div>
                 <div>{element.description}</div>
               </div>
             ))

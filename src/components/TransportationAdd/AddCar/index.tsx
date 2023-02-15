@@ -2,13 +2,13 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import GooglePlacesInput from "../../InputTypes/GooglePlacesInput";
 import { API, TRANSPORTATION_TYPE } from "../../../constants";
 import React, { useState, useRef, useEffect } from "react";
-import ImagePopup from "../../sub-components/ImagePopup";
 import InputForm from "../../InputTypes/InputForm/index";
+import ImagePopup from "../../sub-components/ImagePopup";
 import TextArea from "../../InputTypes/TextArea/index";
 import { UploadImage } from "../../../api/uploadImage";
 import { IoCloseOutline } from "react-icons/io5";
-import { setBackground } from "../../../util";
 import { MdZoomOutMap } from "react-icons/md";
+import { setBackground } from "../../../util";
 import { Create } from "../../../api/Create";
 import styles from "./index.module.scss";
 import { Modal } from "../../Portal";
@@ -147,9 +147,9 @@ const NewTransportationForm = (props: props) => {
 
     const data = {
       day: getInputValue(dayRef),
-      departDateTime: new Date(
-        `${getInputValue(pickupDateRef)}T${getInputValue(pickupTimeRef)}`
-      ).toISOString(),
+      departDateTime: `${getInputValue(pickupDateRef)}T${getInputValue(
+        pickupTimeRef
+      )}:00.000Z`,
       depart,
       arrival,
       specialistNote: getInputValue(specialistNoteRef),
@@ -204,6 +204,7 @@ const NewTransportationForm = (props: props) => {
                   type: "number",
                 }}
               />
+
               <GooglePlacesInput
                 name="Pickup Location"
                 setLocation={setDepart}

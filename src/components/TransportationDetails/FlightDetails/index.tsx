@@ -1,19 +1,13 @@
-/**
- * @desc this is the login component of the application.
- * @author Jagmohan Singh
- */
-
-import { getFormattedDate, getFormattedTime } from "../../../util";
 import EditFlight from "../../TransportationEdit/EditFlight";
 import NewFlight from "../../TransportationAdd/AddFlight";
 import { Modal } from "../../../components/Portal";
 import { FLIGHT_CLASS } from "../../../constants";
 import { MdDeleteOutline } from "react-icons/md";
+import { AiOutlinePlus } from "react-icons/ai";
 import { Pagination } from "../../Pagination";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
 
 const FlightDetails = (props: any) => {
   const {
@@ -67,10 +61,10 @@ const FlightDetails = (props: any) => {
               <div>{element.airline || "NA"}</div>
               <div>{FLIGHT_CLASS[element.flightClass - 1 || 0].name}</div>
               <div>{element.depart || "NA"}</div>
-              <div>{getFormattedDate(element.departDateTime)}</div>
-              <div>{getFormattedTime(element.departDateTime)}</div>
+              <div>{element.departDate}</div>
+              <div>{element.departTime}</div>
               <div>{element.arrival || "NA"}</div>
-              <div>{getFormattedTime(element.arrivalDateTime)}</div>
+              <div>{element.arrivalTime}</div>
               <div>{element.specialistNote || "NA"}</div>
               {status === 3 || status === 5 ? (
                 <div></div>

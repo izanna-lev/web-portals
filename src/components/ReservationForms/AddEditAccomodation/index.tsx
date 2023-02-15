@@ -1,7 +1,7 @@
 import { compareDateRange, getRefValue, setBackground } from "../../../util";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import GooglePlacesInput from "../../InputTypes/GooglePlacesInput";
+import { API, IMAGE, RESERVATION_TYPE } from "../../../constants";
 import InputForm from "../../InputTypes/InputForm/index";
 import TextArea from "../../InputTypes/TextArea/index";
 import { useEffect, useRef, useState } from "react";
@@ -10,7 +10,6 @@ import { Create } from "../../../api/Create";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/plain.css";
 import styles from "./index.module.scss";
-import dayjs from "dayjs";
 
 const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
   const [selectedImage, setSelectedImage] = useState();
@@ -60,12 +59,12 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
       day: getRefValue(dayRef),
       name: getRefValue(nameRef),
       description: getRefValue(specialistNoteRef),
-      checkInDateTime: new Date(
-        `${getRefValue(checkInDateRef)}T${getRefValue(checkInTimeRef)}`
-      ).toISOString(),
-      checkOutDateTime: new Date(
-        `${getRefValue(checkOutDateRef)}T${getRefValue(checkOutTimeRef)}`
-      ).toISOString(),
+      checkInDateTime: `${getRefValue(checkInDateRef)}T${getRefValue(
+        checkInTimeRef
+      )}:00.000Z`,
+      checkOutDateTime: `${getRefValue(checkOutDateRef)}T${getRefValue(
+        checkOutTimeRef
+      )}:00.000Z`,
     };
 
     const dateComparison = compareDateRange(
@@ -127,8 +126,6 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
       handleAddPopup(false);
     }
   }, [apiMessage]);
-
-  console.log({ phoneCode, phone });
 
   return (
     <div className={styles["add-itinerary-data-form"]}>
@@ -225,9 +222,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.checkInDateTime
-                    ? dayjs(new Date(data.checkInDateTime).toISOString())
-                        .format()
-                        .slice(0, 10)
+                    ? data.checkInDateTime.slice(0, 10)
                     : "",
                   ref: checkInDateRef,
                   name: "Check In Date",
@@ -239,9 +234,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.checkInDateTime
-                    ? dayjs(new Date(data.checkInDateTime).toISOString())
-                        .format()
-                        .slice(11, 16)
+                    ? data.checkInDateTime.slice(11, 16)
                     : "",
                   ref: checkInTimeRef,
                   name: "Check In Time",
@@ -253,9 +246,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.checkInDateTime
-                    ? dayjs(new Date(data.checkOutDateTime).toISOString())
-                        .format()
-                        .slice(0, 10)
+                    ? data.checkOutDateTime.slice(0, 10)
                     : "",
                   ref: checkOutDateRef,
                   name: "Check Out Date",
@@ -267,9 +258,7 @@ const AddAccomodation = ({ handleAddPopup, data = {} }: any) => {
               <InputForm
                 inputFields={{
                   default: data.checkInDateTime
-                    ? dayjs(new Date(data.checkOutDateTime).toISOString())
-                        .format()
-                        .slice(11, 16)
+                    ? data.checkOutDateTime.slice(11, 16)
                     : "",
                   ref: checkOutTimeRef,
                   name: "Check Out Time",
