@@ -15,6 +15,7 @@ export const store = configureStore({
     itinerary: reducers.itinerary,
     loader: reducers.loader,
     login: reducers.login,
+    notificationTemplates: reducers.notificationTemplates,
     messageList: reducers.messageList,
     notifications: reducers.myNotifications,
     notificationUserList: reducers.NotificationUserList,

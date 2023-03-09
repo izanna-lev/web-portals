@@ -7,6 +7,7 @@ import { setApiMessage } from "../../store/slices/apiMessage";
 import { Create } from "../../api/Create";
 import { ICON } from "../../assets/index";
 import { IoImageOutline } from "react-icons/io5";
+import NotificationTemplate from "../../components/NotificationTemplate";
 
 const User = (
   user: any,
@@ -20,9 +21,7 @@ const User = (
         type="checkbox"
         className="checkbox"
         defaultChecked={selectedUsers.includes(user._id)}
-        onChange={() => {
-          selectOne(user._id);
-        }}
+        onChange={() => selectOne(user._id)}
       />
       {user.image ? (
         <img
@@ -52,25 +51,20 @@ const User = (
 
 let selectedUsers: any[] = [];
 
-const Notifications = (props: any) => {
+const Notifications = () => {
   const [selectedAll, setSelectedAll] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const { templates } = useAppSelector((state) => state.notificationTemplates);
+  const { list } = useAppSelector((state) => state.notificationUserList);
+  const apiMessage = useAppSelector((state) => state.apiMessage);
+
   const dispatch = useAppDispatch();
-  const { page, limit, size, total, list } = useAppSelector(
-    (state) => state.notificationUserList
-  );
 
   useEffect(() => {
     setSelectedAll(false);
-    dispatch(
-      Fetch(
-        API.TRAVELLER_LIST,
-        {
-          notificationList: true,
-        },
-        1,
-        10000000
-      )
-    );
+    dispatch(Fetch(API.TRAVELLER_LIST, { notificationList: true }, 1, 10000));
+    dispatch(Fetch(API.LIST_TEMPLATE));
     unselectAll();
   }, []);
 
@@ -100,50 +94,48 @@ const Notifications = (props: any) => {
   };
 
   const selectOne = (id: any) => {
-    if (selectedUsers.indexOf(id) > -1) {
-      setSelectedAll(false);
+    if (selectedUsers.indexOf(id) > -1)
       selectedUsers.splice(selectedUsers.indexOf(id), 1);
-    } else {
-      selectedUsers.push(id);
-    }
+    else selectedUsers.push(id);
+
+    if (selectedUsers.length === list.length) setSelectedAll(true);
+    else setSelectedAll(false);
   };
 
   const sendNotifications = () => {
-    if (!selectedUsers.length && !selectedAll) {
-      dispatch(
+    if (!selectedUsers.length && !selectedAll)
+      return dispatch(
         setApiMessage({
           type: "error",
           message: "Please select some travelers to send notifications to!",
         })
       );
-      return;
-    }
-    if (
-      !(document.getElementById("notificationText") as HTMLInputElement).value
-    ) {
-      dispatch(
+
+    if (!message)
+      return dispatch(
         setApiMessage({
           type: "error",
           message: "Notification message cannot be empty!",
         })
       );
-      return;
-    }
 
     dispatch(
-      Create(
-        API.BROADCAST,
-        {
-          message: (
-            document.getElementById("notificationText") as HTMLInputElement
-          ).value,
-          selectedAll,
-          userIds: selectedAll ? [] : selectedUsers,
-        },
-        false
-      )
+      Create(API.BROADCAST, {
+        message,
+        selectedAll,
+        userIds: selectedAll ? [] : selectedUsers,
+      })
     );
   };
+
+  useEffect(() => {
+    const { type } = apiMessage;
+    if (type === "success") {
+      setMessage("");
+      unselectAll();
+      setSelectedAll(false);
+    }
+  }, [apiMessage]);
 
   return (
     <section className="content-container">
@@ -155,10 +147,12 @@ const Notifications = (props: any) => {
           <div className="notifications-message-div">
             <div className="notifications-message-heading"></div>
             <textarea
+              autoFocus
+              value={message}
               id="notificationText"
               className="notifications-textarea"
-              placeholder="Type your message here."
-              autoFocus
+              placeholder="Type your message here or select one below."
+              onChange={(e) => setMessage(e.target.value)}
             />
             <div className="notifications-message-heading">
               Note: Select travelers from right pane whom you want to send the
@@ -171,6 +165,10 @@ const Notifications = (props: any) => {
             >
               Send
             </button>
+            <NotificationTemplate
+              setmessage={setMessage}
+              templates={templates}
+            />
           </div>
           <div className="container-right">
             <div>Select Travelers</div>
@@ -178,30 +176,29 @@ const Notifications = (props: any) => {
               <div className="user-selection-header">
                 <div className="user-selection-left">
                   <div>Travelers List</div>
-                  <div className="select-all">
+                  <div
+                    className="select-all"
+                    title="Select all travelers"
+                    onClick={handleSelect}
+                  >
                     <input
-                      id={`checkbox-x`}
+                      id="checkbox-x"
                       type="checkbox"
                       className="checkbox"
-                      onClick={() => handleSelect()}
+                      onChange={handleSelect}
                       checked={selectedAll}
                     />
-                    <div>Select All</div>
+                    <span>Select All</span>
                   </div>
                 </div>
-                <div
-                  title="Select all travelers"
-                  onClick={selectAll}
-                  className="user-selection-right"
-                ></div>
+                <div className="user-selection-right"></div>
                 <div className="user-selection-right"></div>
               </div>
 
               <div className="user-selection-list">
-                {list.length &&
-                  list.map((user: any, index: number) =>
-                    User(user, index, selectOne)
-                  )}
+                {list.map((user: any, index: number) =>
+                  User(user, index, selectOne)
+                )}
               </div>
             </div>
           </div>

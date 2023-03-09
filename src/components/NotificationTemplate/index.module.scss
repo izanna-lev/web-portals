@@ -1,0 +1,42 @@
+@import "../../styles/configs/colors";
+
+.notification-template-conatiner {
+  margin-top: 1.25rem;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  height: 45%;
+  // max-height: fit-content;
+
+  .template {
+    &-heading {
+      // font-weight: 500;
+      margin: 0.5rem 0;
+      font-size: 1.25rem;
+      padding: 0.5rem;
+    }
+
+    &-wrapper {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      overflow: auto;
+      padding: 0.5rem;
+      max-height: calc(100% - 5rem);
+    }
+
+    &-text {
+      background-color: $gray-300;
+      width: fit-content;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      width: 20rem;
+      max-width: 49%;
+
+      &:hover {
+        background-color: $gray-200;
+      }
+    }
+  }
+}

@@ -12,4 +12,5 @@ export { default as messageList } from "./messageList";
 // export { default as socket } from "./socket";
 export { default as cancelItineraryList } from "./cancelItineraries";
 export { default as NotificationUserList } from "./notification";
+export { default as notificationTemplates } from "./notificationTemplates";
 export { default as myNotifications } from "./myNotifications";

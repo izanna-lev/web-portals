@@ -117,6 +117,7 @@ export const API = {
   TRAVELLER_LIST: `${API_URL}specialist/travellerList`,
   NOTIFICATION_LIST: `${API_URL}notification/specialistList`,
   BROADCAST: `${API_URL}specialist/broadcast`,
+  LIST_TEMPLATE: `${API_URL}specialist/template`,
 };
 
 // Custom Constants
