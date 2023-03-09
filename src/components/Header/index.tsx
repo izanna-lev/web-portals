@@ -80,9 +80,14 @@ const Header = ({ showUserData = true }: Props) => {
           onClick={() => dispatch(setSidebar(!sidebar))}
           className={styles["header__menu--icon"]}
         />
-        <h1 className={styles["header-logo"]} onClick={() => navigate("/")}>
-          Onsite Travel
-        </h1>
+
+        <img
+          alt="Onsite"
+          src={ICON.APP_LOGO}
+          className={styles["header-logo"]}
+          loading="lazy"
+          onClick={() => navigate("/dashboard")}
+        />
       </div>
 
       <div className={styles["header-right"]}>
