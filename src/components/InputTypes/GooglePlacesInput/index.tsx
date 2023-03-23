@@ -88,7 +88,7 @@ const GooglePlacesInput = (props: GooglePlacesInputProps) => {
             const newLocationObj = {
               location: place.description,
               type: "Point",
-              coordinates: [Math.abs(lng()), Math.abs(lat())],
+              coordinates: [lng(), lat()],
             };
 
             // Set the object to the passed setState from other components
@@ -181,7 +181,7 @@ export const ActivityPlacesInput = (props: GooglePlacesInputProps) => {
             const newLocationObj = {
               location: place.description,
               type: "Point",
-              coordinates: [Math.abs(lng()), Math.abs(lat())],
+              coordinates: [lng(), lat()],
             };
 
             // Set the object to the passed setState from other components
