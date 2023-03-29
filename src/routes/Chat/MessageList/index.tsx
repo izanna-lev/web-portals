@@ -157,7 +157,7 @@ const MessagePage = () => {
                 />
                 <div className="itinerary-data">
                   <div className="chat-itinerary-text date">
-                    {dayjs(itineraryData.fromDate).format("DD-MMM-YYYY")}
+                    {itineraryData.fromDate}
                   </div>
                   <div className="chat-itinerary-text">
                     {itineraryData.location}
