@@ -3,7 +3,7 @@
  * @author Shivender
  **/
 
-// const CompressionPlugin = require("compression-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -142,10 +142,10 @@ module.exports = (env) => {
         ],
       }),
       new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
-      // new CompressionPlugin({
-      //   algorithm: "gzip",
-      //   test: /.js$|.css$|.map$/,
-      // }),
+      new CompressionPlugin({
+        algorithm: "gzip",
+        test: /.js$|.css$|.map$/,
+      }),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
         favicon: "./public/favicon.png",
